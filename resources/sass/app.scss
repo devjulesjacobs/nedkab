@@ -13,10 +13,10 @@
 @import 'variables';
 
 // Vue Components
-@import 'components/components';
+@import '../js/components/components';
 
 // Vue Views
-@import 'views/views';
+@import '../js/views/views';
 
 
 .btn-primary {
