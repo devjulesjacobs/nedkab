@@ -1,19 +1,20 @@
 <template>
     <div class="state-app">
-        <div :class="{'container': authenticated}">
-            <Navbar></Navbar>
+        <Navbar></Navbar>
             <router-view />
-        </div>
+        <BottomNav></BottomNav>
     </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import Navbar from "./components/Navbar.vue";
+import BottomNav from "./components/BottomNav/BottomNav";
 
 export default {
     components: {
         Navbar,
+        BottomNav
     },
     computed: {
         ...mapGetters({
