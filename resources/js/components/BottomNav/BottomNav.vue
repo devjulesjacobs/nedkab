@@ -38,7 +38,7 @@ export default {
                 {
                     to: 'Account',
                     title: 'Account',
-                    icon: 'home'
+                    icon: 'person'
                 }
             ]
         }

@@ -1,19 +1,16 @@
 <template>
     <div class="state-app">
-        <Navbar></Navbar>
-            <router-view />
+        <router-view />
         <BottomNav></BottomNav>
     </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import Navbar from "./components/Navbar.vue";
 import BottomNav from "./components/BottomNav/BottomNav";
 
 export default {
     components: {
-        Navbar,
         BottomNav
     },
     computed: {
