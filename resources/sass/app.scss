@@ -1,0 +1,33 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+// Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Variables
+@import 'variables';
+
+// Vue Components
+@import 'components/components';
+
+// Vue Views
+@import 'views/views';
+
+
+.btn-primary {
+    color: #fff;
+    background-color: purple;
+    border-color: purple;
+
+    &:hover {
+        color: #fff;
+        background-color: rgb(80, 0, 80);
+        border-color: rgb(80, 0, 80);
+    }
+}
+
