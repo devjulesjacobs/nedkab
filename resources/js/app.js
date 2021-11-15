@@ -2,12 +2,6 @@ require("./bootstrap");
 import Vue from "vue";
 import router from "./router";
 import store from "./store/index";
-import axios from "axios";
-
-axios.defaults.withCredentials = true;
-// axios.defaults.baseURL = "appdevelopment.app";
-
-Vue.config.productionTip = false;
 
 Vue.component("App", require("./App.vue").default);
 
