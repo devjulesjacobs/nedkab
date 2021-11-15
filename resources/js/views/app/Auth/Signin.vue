@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import Login from "../../components/auth/Login.vue";
-import Register from "../../components/auth/Register.vue";
-import ResetPassword from "../../components/auth/ResetPassword.vue";
+import Login from "../../../components/app/Auth/Login.vue";
+import Register from "../../../components/app/Auth/Register.vue";
+import ResetPassword from "../../../components/app/Auth/ResetPassword.vue";
 
 import axios from "axios";
 import { mapActions } from "vuex";

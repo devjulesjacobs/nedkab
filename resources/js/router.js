@@ -1,46 +1,46 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from './views/Home/Home.vue'
-import Signin from './views/Auth/Signin.vue'
-import Cables from "./views/Cables/Cables";
-import Emballage from "./views/Emballage/Emballage";
-import Cpr from "./views/Cpr/Cpr";
-import Account from './views/Account/Account.vue'
+import Home from './views/app/Home/Home.vue'
+import Signin from './views/app/Auth/Signin.vue'
+import Cables from "./views/app/Cables/Cables";
+import Emballage from "./views/app/Emballage/Emballage";
+import Cpr from "./views/app/Cpr/Cpr";
+import Account from './views/app/Account/Account.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/signin',
+        path: '/app/signin',
         name: 'Signin',
         component: Signin
     },
     {
-        path: '/',
+        path: '/app',
         name: 'Home',
         component: Home,
         meta: { requiresAuth: true }
     },
     {
-        path: '/cables',
+        path: '/app/cables',
         name: 'Cables',
         component: Cables,
         meta: { requiresAuth: true }
     },
     {
-        path: '/emballage',
+        path: '/app/emballage',
         name: 'Emballage',
         component: Emballage,
         meta: { requiresAuth: true }
     },
     {
-        path: '/cpr',
+        path: '/app/cpr',
         name: 'Cpr',
         component: Cpr,
         meta: { requiresAuth: true }
     },
     {
-        path: '/account',
+        path: '/app/account',
         name: 'Account',
         component: Account,
         meta: { requiresAuth: true }

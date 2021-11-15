@@ -3,8 +3,6 @@ import Vue from "vue";
 import router from "./router";
 import store from "./store/app";
 
-Vue.component("App", require("./views/app/App.vue").default);
-
 store.dispatch("auth/me").then(() => {
 
     router.beforeEach((to, from, next) => {
