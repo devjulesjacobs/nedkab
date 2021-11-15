@@ -5,7 +5,7 @@ import store from "./store/app";
 
 Vue.component("App", require("./views/app/App.vue").default);
 
-store.dispatch("auth/me").then(() => {
+store.dispatch("auth/setValues").then(() => {
 
     router.beforeEach((to, from, next) => {
         if (to.matched.some((record) => record.meta.requiresAuth)) {

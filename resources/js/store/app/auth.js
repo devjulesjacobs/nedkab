@@ -15,7 +15,7 @@ export default {
 
         user(state) {
             return state.user;
-        },
+        }
     },
 
     mutations: {
@@ -27,32 +27,32 @@ export default {
             state.user = value;
         },
     },
-    
+
     actions: {
-        async signIn({ dispatch }, credentials) {
+        async login({ dispatch }, credentials) {
             await axios.get("/sanctum/csrf-cookie");
             await axios.post("/login", credentials);
 
-            return dispatch("me");
+            return dispatch("setValues");
         },
 
-        async signOut({ dispatch }) {
+        async logout({ dispatch }) {
             await axios.post("/logout");
 
-            return dispatch("me");
+            return dispatch("setValues");
         },
 
-        me({ commit }) {
+        setValues({ commit }) {
             return axios
                 .get("/api/user")
-                .then((response) => {
-                    commit("SET_AUTHENTICATED", true);
-                    commit("SET_USER", response.data);
-                })
-                .catch(() => {
-                    commit("SET_AUTHENTICATED", false);
-                    commit("SET_USER", null);
-                });
+                    .then((response) => {
+                        commit("SET_AUTHENTICATED", true);
+                        commit("SET_USER", response.data);
+                    })
+                    .catch(() => {
+                        commit("SET_AUTHENTICATED", false);
+                        commit("SET_USER", null);
+                    });
         },
     },
 };

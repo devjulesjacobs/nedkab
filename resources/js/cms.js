@@ -1,14 +1,16 @@
 require("./bootstrap");
 import Vue from "vue";
 import router from "./router";
-import store from "./store/app";
+import store from "./store/cms";
 
-store.dispatch("auth/me").then(() => {
+Vue.component("Cms", require("./views/cms/Cms.vue").default);
+
+store.dispatch("cms/setValues").then(() => {
 
     router.beforeEach((to, from, next) => {
         if (to.matched.some((record) => record.meta.requiresAuth)) {
 
-            if (!store.getters['auth/authenticated']) {
+            if (!store.getters['cms/authenticated']) {
                 next({ name: 'Signin' });
             } else {
                 next();

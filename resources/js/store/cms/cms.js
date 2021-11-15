@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
     namespaced: true,
 
-    empireStateBuilding: {
+    state: {
         authenticated: false,
         user: null,
     },
@@ -15,7 +15,7 @@ export default {
 
         user(state) {
             return state.user;
-        },
+        }
     },
 
     mutations: {
@@ -29,20 +29,20 @@ export default {
     },
 
     actions: {
-        async signIn({ dispatch }, credentials) {
+        async login({ dispatch }, credentials) {
             await axios.get("/sanctum/csrf-cookie");
             await axios.post("/login", credentials);
 
-            return dispatch("me");
+            return dispatch("setValues");
         },
 
-        async signOut({ dispatch }) {
+        async logout({ dispatch }) {
             await axios.post("/logout");
 
-            return dispatch("me");
+            return dispatch("setValues");
         },
 
-        me({ commit }) {
+        setValues({ commit }) {
             return axios
                 .get("/api/user")
                 .then((response) => {

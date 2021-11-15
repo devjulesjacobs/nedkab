@@ -27,11 +27,11 @@ export default {
     },
     methods: {
         ...mapActions({
-            signOutAction: "auth/signOut",
+            logout: "auth/logout",
         }),
 
         async signOut() {
-            await this.signOutAction();
+            await this.logout();
 
             this.$router.replace({ name: "Signin" });
         },

@@ -23,7 +23,7 @@
 <body>
 
 <div id="app">
-    <h1 class="px-5 py-5 text-3xl font-bold">CMS</h1>
+    <Cms></Cms>
 </div>
 
 <script src="{{ asset('js/cms.js') }}"></script>
