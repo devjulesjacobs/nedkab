@@ -3,7 +3,7 @@
     "short_name": "Nedkab PWA",
     "icons": [
         {
-            "src": "/img/system/recipe-book.png",
+            "src": "/img/pwa/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         }

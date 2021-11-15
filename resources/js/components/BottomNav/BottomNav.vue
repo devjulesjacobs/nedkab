@@ -1,7 +1,7 @@
 <template>
     <div class="BottomNav">
         <div class="flex">
-            <router-link v-for="item in navItems" key="item.to" :to="{ name: item.to }" class="nav-item block flex-auto text-center">
+            <router-link v-for="item in navItems" :key="item.to" :to="{ name: item.to }" class="nav-item block flex-auto text-center">
                 <div class="icon material-icons">{{ item.icon }}</div>
                 <div class="title">{{ item.title }}</div>
             </router-link>

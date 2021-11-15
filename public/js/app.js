@@ -38827,7 +38827,7 @@ var render = function () {
         return _c(
           "router-link",
           {
-            key: "item.to",
+            key: item.to,
             staticClass: "nav-item block flex-auto text-center",
             attrs: { to: { name: item.to } },
           },

@@ -17,4 +17,8 @@ Route::get('/{any?}', function () {
     return view('app');
 });
 
+//Route::get('/{any?}', function () {
+//    return view('app.index');
+//})->where('any', '.*?');
+
 Auth::routes();
