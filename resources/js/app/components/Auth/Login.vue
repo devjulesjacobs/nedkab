@@ -68,7 +68,7 @@ export default {
     data() {
         return {
             form: {
-                email: "jules@gmail.com",
+                email: "jules.jacobs@email.com",
                 password: "password",
             },
         };
@@ -76,11 +76,11 @@ export default {
 
     methods: {
         ...mapActions({
-            signIn: "auth/signIn",
+            login: "auth/login",
         }),
 
         async submit() {
-            await this.signIn(this.form);
+            await this.login(this.form);
 
             this.$router.replace({ name: "Home" });
         },

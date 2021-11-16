@@ -1,19 +1,19 @@
 {
-    "name": "Nedkba PWA",
-    "short_name": "Nedkab PWA",
+    "name": "Nedkbab",
+    "short_name": "Nedkab",
     "icons": [
         {
-            "src": "/img/system/recipe-book.png",
+            "src": "/img/pwa/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         }
     ],
-    "start_url": "/",
+    "start_url": "/app",
     "scope": ".",
     "display": "standalone",
     "background_color": "#fff",
     "theme_color": "#000",
-    "description": "You favorite recipe app",
+    "description": "Nedkab App",
     "dir": "ltr",
     "lang": "en-US"
 }
