@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from './views/app/Home/Home'
-import Signin from './views/app/Auth/Signin'
-import Cables from "./views/app/Cables/Cables";
-import Emballage from "./views/app/Emballage/Emballage";
-import Cpr from "./views/app/Cpr/Cpr";
-import Account from './views/app/Account/Account'
-
-import Dashboard from './views/cms/Dashboard/Dashboard.vue'
-import CmsSignin from './views/cms/Auth/Signin.vue'
+import Home from './views/Home/Home'
+import Signin from './views/Auth/Signin'
+import Cables from "./views/Cables/Cables";
+import Emballage from "./views/Emballage/Emballage";
+import Cpr from "./views/Cpr/Cpr";
+import Account from './views/Account/Account'
 
 Vue.use(VueRouter)
 
@@ -48,18 +45,7 @@ const routes = [
         name: 'Account',
         component: Account,
         meta: { requiresAuth: true }
-    },
-
-    {
-        path: '/cms',
-        name: 'Dashboard',
-        component: Dashboard
-    },
-    {
-        path: '/cms/signin',
-        name: 'CmsSignin',
-        component: CmsSignin
-    },
+    }
 ]
 
 const router = new VueRouter({

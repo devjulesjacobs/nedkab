@@ -7,7 +7,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import BottomNav from "../../components/app/BottomNav/BottomNav";
+import BottomNav from "../components/BottomNav/BottomNav";
 
 export default {
     name: "App",

@@ -1,17 +1,17 @@
-require("./bootstrap");
+require("../bootstrap");
 import Vue from "vue";
 import router from "./router";
-import store from "./store/cms";
+import store from "./store";
 
-Vue.component("Cms", require("./views/cms/Cms.vue").default);
+Vue.component("Cms", require("./views/Cms.vue").default);
 
 store.dispatch("cms/setValues").then(() => {
 
     router.beforeEach((to, from, next) => {
-        if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (to.matched.some((record) => record.meta.requiresAdmin)) {
 
             if (!store.getters['cms/authenticated']) {
-                next({ name: 'Signin' });
+                next({ name: 'CmsSignin' });
             } else {
                 next();
             }

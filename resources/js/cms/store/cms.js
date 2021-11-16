@@ -4,34 +4,34 @@ export default {
     namespaced: true,
 
     state: {
-        authenticated: false,
-        user: null,
+        adminsAuthenticated: false,
+        admin: null,
     },
 
     getters: {
         authenticated(state) {
-            return state.authenticated;
+            return state.adminsAuthenticated;
         },
 
-        user(state) {
-            return state.user;
+        admin(state) {
+            return state.admin;
         }
     },
 
     mutations: {
         SET_AUTHENTICATED(state, value) {
-            state.authenticated = value;
+            state.adminsAuthenticated = value;
         },
 
         SET_USER(state, value) {
-            state.user = value;
+            state.admin = value;
         },
     },
 
     actions: {
         async login({ dispatch }, credentials) {
             await axios.get("/sanctum/csrf-cookie");
-            await axios.post("/login", credentials);
+            await axios.post("/api/cms/login", credentials);
 
             return dispatch("setValues");
         },

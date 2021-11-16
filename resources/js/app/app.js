@@ -1,9 +1,9 @@
-require("./bootstrap");
+require("../bootstrap");
 import Vue from "vue";
 import router from "./router";
-import store from "./store/app";
+import store from "./store";
 
-Vue.component("App", require("./views/app/App.vue").default);
+Vue.component("App", require("./views/App.vue").default);
 
 store.dispatch("auth/setValues").then(() => {
 
