@@ -2,17 +2,20 @@
     <div class="state-app">
         <router-view />
         <BottomNav v-if="authenticated"></BottomNav>
+        <LoadingScreen></LoadingScreen>
     </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import BottomNav from "../components/BottomNav/BottomNav";
+import BottomNav from "./components/BottomNav/BottomNav";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 
 export default {
     name: "App",
     components: {
-        BottomNav
+        BottomNav,
+        LoadingScreen
     },
     computed: {
         ...mapGetters({

@@ -12,36 +12,36 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/app/signin',
+        path: '/signin',
         name: 'Signin',
         component: Signin
     },
     {
-        path: '/app',
+        path: '',
         name: 'Home',
         component: Home,
         meta: { requiresAuth: true }
     },
     {
-        path: '/app/cables',
+        path: '/cables',
         name: 'Cables',
         component: Cables,
         meta: { requiresAuth: true }
     },
     {
-        path: '/app/emballage',
+        path: '/emballage',
         name: 'Emballage',
         component: Emballage,
         meta: { requiresAuth: true }
     },
     {
-        path: '/app/cpr',
+        path: '/cpr',
         name: 'Cpr',
         component: Cpr,
         meta: { requiresAuth: true }
     },
     {
-        path: '/app/account',
+        path: '/account',
         name: 'Account',
         component: Account,
         meta: { requiresAuth: true }

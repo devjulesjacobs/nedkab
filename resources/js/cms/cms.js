@@ -3,7 +3,7 @@ import Vue from "vue";
 import router from "./router";
 import store from "./store";
 
-Vue.component("Cms", require("./views/Cms.vue").default);
+Vue.component("Cms", require("./Cms.vue").default);
 
 store.dispatch("cms/setValues").then(() => {
 

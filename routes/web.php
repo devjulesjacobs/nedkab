@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Route;
 //    return view('app');
 //});
 
-Route::get('app/{any?}', function () {
-    return view('app.index');
-})->where('any', '.*?');
 
 Route::get('cms/{any?}', function () {
     return view('cms.index');
+})->where('any', '.*?');
+
+Route::get('/{any?}', function () {
+    return view('app.index');
 })->where('any', '.*?');
 
 Auth::routes();
