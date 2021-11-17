@@ -11,10 +11,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        App\User::create([
-            'name' => 'Jules Jacobs',
-            'email' => 'jules@gmail.com',
-            'password' => bcrypt('12345678')
-        ]);
+        $users = [
+            [ 'name' => 'Jules Jacobs', 'email' => 'julesjacobs@gmail.com', 'password' => bcrypt('password')],
+            [ 'name' => 'Admin User', 'email' => 'admin@gmail.com', 'password' => bcrypt('password'), 'type' => 'admin'],
+            [ 'name' => 'App User', 'email' => 'app@gmail.com', 'password' => bcrypt('password')]
+        ];
+
+        foreach($users as $user) {
+            App\User::create($user);
+        }
     }
 }
