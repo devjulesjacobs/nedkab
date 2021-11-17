@@ -33,13 +33,31 @@ export default {
             await axios.get("/sanctum/csrf-cookie");
             await axios.post("/api/cms/login", credentials);
 
-            return dispatch("setValues");
+            return dispatch("setValuesAdmin");
         },
 
         async logout({ dispatch }) {
             await axios.post("/logout");
 
-            return dispatch("setValues");
+            return dispatch("setValuesAdmin");
+        },
+
+        setValuesAdmin({ commit }) {
+            return axios
+                .get("/api/user")
+                .then((response) => {
+                    if(response.data.type === "admin") {
+                        commit("SET_AUTHENTICATED", true);
+                        commit("SET_USER", response.data);
+                    } else {
+                        commit("SET_AUTHENTICATED", false);
+                        commit("SET_USER", null);
+                    }
+                })
+                .catch(() => {
+                    commit("SET_AUTHENTICATED", false);
+                    commit("SET_USER", null);
+                });
         },
 
         setValues({ commit }) {

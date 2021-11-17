@@ -80,7 +80,7 @@ export default {
     data() {
         return {
             form: {
-                email: "jules@gmail.com",
+                email: "admin@gmail.com",
                 password: "password",
             }
         }
@@ -90,15 +90,14 @@ export default {
     components: {},
 
     methods: {
-        async submit() {
-            await axios.post('/api/cms/login', this.form)
+        ...mapActions({
+            login: "cms/login",
+        }),
 
-            console.log('2, finished')
-            await axios.get('/api/user')
-                .then((res) => {
-                    this.$router.push({ name: 'Dashboard' })
-                })
-            console.log('3, finished')
+        async submit() {
+            await this.login(this.form);
+
+            this.$router.replace({ name: "Dashboard" });
         }
     }
 }

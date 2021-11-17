@@ -5,7 +5,7 @@ import store from "./store";
 
 Vue.component("Cms", require("./Cms.vue").default);
 
-store.dispatch("cms/setValues").then(() => {
+store.dispatch("cms/setValuesAdmin").then(() => {
 
     router.beforeEach((to, from, next) => {
         if (to.matched.some((record) => record.meta.requiresAdmin)) {

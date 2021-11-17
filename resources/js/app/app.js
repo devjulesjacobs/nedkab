@@ -5,13 +5,13 @@ import store from "./store";
 
 Vue.component("App", require("./App.vue").default);
 
-store.dispatch("auth/setValues").then(() => {
+store.dispatch("auth/setValuesUser").then(() => {
 
     router.beforeEach((to, from, next) => {
         if (to.matched.some((record) => record.meta.requiresAuth)) {
 
             if (!store.getters['auth/authenticated']) {
-                next({ name: 'Signin' });
+                next({ path: 'Signin' });
             } else {
                 next();
             }
