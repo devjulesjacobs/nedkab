@@ -12,11 +12,14 @@ import {mapGetters} from "vuex";
 export default {
     name: "Cms",
     components: {},
+    mounted() {
+
+    },
     computed: {
-        // ...mapGetters({
-        //     authenticated: "auth/authenticated",
-        //     user: "auth/user",
-        // }),
+        ...mapGetters({
+            authenticated: "auth/authenticated",
+            user: "auth/user",
+        }),
     },
 };
 </script>

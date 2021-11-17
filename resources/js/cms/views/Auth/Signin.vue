@@ -86,11 +86,6 @@ export default {
         }
     },
     mounted() {
-        axios.defaults.headers.common["Authorization"] = "";
-        // axios.get('/api/user')
-        //     .then((res) => {
-        //         console.log(res);
-        //     })
     },
     components: {},
 
