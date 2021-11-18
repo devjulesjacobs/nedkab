@@ -70,13 +70,21 @@
     bottom: 0;
     width: 0;
     height: 0;
-    top: 100px;
-    background: #fff;
+    top: 0;
+    background: rgba(40, 40, 40, 0.65);
     padding: 20px;
-    border-radius: 10px 10px 0 0;
     opacity: 0;
-    transition: opacity, top 4s ease-out;
+    transition: opacity .25s ease-out;
     z-index: 999999999999999999999999;
+
+    .detail-header {
+        height: 25px;
+    }
+
+    .news-post {
+        margin-top: 100px;
+        transition: margin-top 0.5s cubic-bezier(0.42, 0, 0, 0.87)
+    }
 
     &.show {
         top: 0;
@@ -84,6 +92,11 @@
         opacity: 1;
         width: auto;
         height: auto;
-        transition: opacity, top 0.4s ease;
+        transition: opacity, top .25s ease;
+
+        .news-post {
+            margin-top: 0;
+            transition: margin-top .5s ease-in-out;
+        }
     }
 }

@@ -2,6 +2,7 @@ require("../bootstrap");
 import Vue from "vue";
 import router from "./router";
 import store from "./store";
+import 'animate.css';
 
 Vue.component("App", require("./App.vue").default);
 

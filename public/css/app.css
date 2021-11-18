@@ -32035,13 +32035,21 @@ video {
   bottom: 0;
   width: 0;
   height: 0;
-  top: 100px;
-  background: #fff;
+  top: 0;
+  background: rgba(40, 40, 40, 0.65);
   padding: 20px;
-  border-radius: 10px 10px 0 0;
   opacity: 0;
-  transition: opacity, top 4s ease-out;
+  transition: opacity 0.25s ease-out;
   z-index: 1000000000000000300000000;
+}
+
+.news-feed-detail .detail-header {
+  height: 25px;
+}
+
+.news-feed-detail .news-post {
+  margin-top: 100px;
+  transition: margin-top 0.5s cubic-bezier(0.42, 0, 0, 0.87);
 }
 
 .news-feed-detail.show {
@@ -32050,7 +32058,12 @@ video {
   opacity: 1;
   width: auto;
   height: auto;
-  transition: opacity, top 0.4s ease;
+  transition: opacity, top 0.25s ease;
+}
+
+.news-feed-detail.show .news-post {
+  margin-top: 0;
+  transition: margin-top 0.5s ease-in-out;
 }
 
 body {
