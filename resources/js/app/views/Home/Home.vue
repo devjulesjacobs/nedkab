@@ -20,6 +20,10 @@ export default {
 
     components:{},
 
+    mounted() {
+        window.LoadingScreen('hide');
+    },
+
     computed: {
         ...mapGetters({
             authenticated: "auth/authenticated",

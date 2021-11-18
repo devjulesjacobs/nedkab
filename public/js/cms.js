@@ -55520,6 +55520,20 @@ axios.defaults.withCredentials = true; // axios.defaults.baseURL = "appdevelopme
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+window.LoadingScreen = function (set) {
+  var LoadingScreen = $('#LoadingScreen');
+
+  switch (set) {
+    case 'show':
+      LoadingScreen.addClass('show');
+      break;
+
+    case 'hide':
+      LoadingScreen.removeClass('show');
+      break;
+  }
+};
+
 /***/ }),
 
 /***/ "./resources/js/cms/Cms.vue":

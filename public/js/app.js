@@ -2063,15 +2063,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                window.LoadingScreen('show');
+                _context.next = 3;
                 return _this.login(_this.form);
 
-              case 2:
+              case 3:
                 _this.$router.replace({
                   name: "Home"
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -2182,6 +2183,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2571,6 +2580,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   components: {},
+  mounted: function mounted() {
+    window.LoadingScreen('hide');
+  },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     authenticated: "auth/authenticated",
     user: "auth/user"
@@ -39243,9 +39255,24 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "LoadingScreen" } })
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "LoadingScreen" } }, [
+      _c("div", { staticClass: "holder" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card__text" }, [
+            _vm._v("\n                Loading\n            "),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -57664,6 +57691,20 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 axios.defaults.withCredentials = true; // axios.defaults.baseURL = "appdevelopment.app";
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+window.LoadingScreen = function (set) {
+  var LoadingScreen = $('#LoadingScreen');
+
+  switch (set) {
+    case 'show':
+      LoadingScreen.addClass('show');
+      break;
+
+    case 'hide':
+      LoadingScreen.removeClass('show');
+      break;
+  }
+};
 
 /***/ }),
 

@@ -1,4 +1,4 @@
-<template>
+    <template>
     <form @submit.prevent="submit" method="POST" class="space-y-6">
         <div>
             <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
@@ -80,6 +80,7 @@ export default {
         }),
 
         async submit() {
+            window.LoadingScreen('show');
             await this.login(this.form);
 
             this.$router.replace({ name: "Home" });
