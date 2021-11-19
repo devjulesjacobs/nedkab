@@ -99,18 +99,29 @@
 <script>
 export default {
     name: "NewsFeed",
+    data() {
+        return {
+            posts: []
+        }
+    },
 
     mounted() {
     },
 
     methods: {
-      showDetail() {
-          $('.news-feed-detail').addClass('show');
-      },
+        fetchPosts() {
+            axios.get('/api/posts')
+                .then((res) => { console.log(res) })
+                .catch((e) => { console.log('Error:', e) })
+        },
 
-      closeNewsDetail() {
-          $('.news-feed-detail').removeClass('show');
-      }
+        showDetail() {
+            $('.news-feed-detail').addClass('show');
+        },
+
+        closeNewsDetail() {
+            $('.news-feed-detail').removeClass('show');
+        }
     }
 }
 </script>

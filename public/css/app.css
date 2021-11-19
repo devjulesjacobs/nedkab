@@ -32066,6 +32066,38 @@ video {
   transition: margin-top 0.5s ease-in-out;
 }
 
+#InstallationScreen .installation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+
+#InstallationScreen .installation-popup .popup-overlay {
+  background: black;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+}
+
+#InstallationScreen .installation-popup .popup-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85vw;
+  height: 200px;
+  background: white;
+  border-radius: 7px;
+  padding: 15px;
+}
+
+#InstallationScreen .installation-popup.apple {
+  display: block;
+}
+
 body {
   background-color: #fafbfe !important;
 }
