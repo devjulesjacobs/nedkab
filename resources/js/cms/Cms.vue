@@ -23,7 +23,7 @@
           <body class="h-full">
           ```
         -->
-        <div>
+        <div v-if="authenticated">
             <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
             <div class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
                 <!--
@@ -253,15 +253,17 @@
                         </div>
                     </div>
                 </div>
-
-                <main class="flex-1">
-                    <div class="py-6">
-                        <div class="mx-auto px-6">
-                            <router-view />
-                        </div>
-                    </div>
-                </main>
             </div>
+        </div>
+
+        <div class="flex flex-col flex-1" :class="{ 'md:pl-64': authenticated }">
+            <main class="flex-1">
+                <div class="py-6">
+                    <div class="mx-auto px-6">
+                        <router-view />
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 </template>
