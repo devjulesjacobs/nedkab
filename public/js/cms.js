@@ -2339,12 +2339,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39838,7 +39832,7 @@ var render = function () {
                   "button",
                   {
                     staticClass:
-                      "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                      "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
                     attrs: { type: "submit" },
                   },
                   [
@@ -39894,10 +39888,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("img", {
         staticClass: "mx-auto h-12 w-auto",
-        attrs: {
-          src: "https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg",
-          alt: "Workflow",
-        },
+        attrs: { src: "/img/system/company-logo.png", alt: "Workflow" },
       }),
       _vm._v(" "),
       _c(
@@ -39911,22 +39902,6 @@ var staticRenderFns = [
           ),
         ]
       ),
-      _vm._v(" "),
-      _c("p", { staticClass: "mt-2 text-center text-sm text-gray-600" }, [
-        _vm._v("\n                    Or\n                    "),
-        _c(
-          "a",
-          {
-            staticClass: "font-medium text-indigo-600 hover:text-indigo-500",
-            attrs: { href: "#" },
-          },
-          [
-            _vm._v(
-              "\n                        start your 14-day free trial\n                    "
-            ),
-          ]
-        ),
-      ]),
     ])
   },
   function () {
@@ -39959,7 +39934,7 @@ var staticRenderFns = [
         _c(
           "a",
           {
-            staticClass: "font-medium text-indigo-600 hover:text-indigo-500",
+            staticClass: "font-medium text-blue-700 hover:text-blue-600",
             attrs: { href: "#" },
           },
           [
