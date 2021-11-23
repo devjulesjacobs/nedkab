@@ -5,13 +5,13 @@ import store from "./store";
 
 Vue.component("Cms", require("./Cms.vue").default);
 
-store.dispatch("cms/setValuesAdmin").then(() => {
+store.dispatch("cms/setValues").then(() => {
 
     router.beforeEach((to, from, next) => {
         if (to.matched.some((record) => record.meta.requiresAdmin)) {
 
             if (!store.getters['cms/authenticated']) {
-                next({ name: 'CmsSignin' });
+                next({ name: 'Signin' });
             } else {
                 next();
             }

@@ -6,7 +6,7 @@
             Logout
         </button>
 
-        <router-link :to="{ name: 'CmsSignin' }" class="mt-3 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <router-link :to="{ name: 'Signin' }" class="mt-3 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Login page
         </router-link>
     </div>
@@ -26,7 +26,7 @@ export default {
         async signOut() {
             await this.logout();
 
-            this.$router.replace({ name: "CmsSignin" });
+            this.$router.replace({ name: "Signin" });
         },
     },
 }

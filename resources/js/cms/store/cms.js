@@ -4,13 +4,13 @@ export default {
     namespaced: true,
 
     state: {
-        adminsAuthenticated: false,
+        authenticated: false,
         admin: null,
     },
 
     getters: {
         authenticated(state) {
-            return state.adminsAuthenticated;
+            return state.authenticated;
         },
 
         admin(state) {
@@ -20,7 +20,7 @@ export default {
 
     mutations: {
         SET_AUTHENTICATED(state, value) {
-            state.adminsAuthenticated = value;
+            state.authenticated = value;
         },
 
         SET_USER(state, value) {
@@ -33,16 +33,16 @@ export default {
             await axios.get("/sanctum/csrf-cookie");
             await axios.post("/api/cms/login", credentials);
 
-            return dispatch("setValuesAdmin");
+            return dispatch("setValues");
         },
 
         async logout({ dispatch }) {
             await axios.post("/logout");
 
-            return dispatch("setValuesAdmin");
+            return dispatch("setValues");
         },
 
-        setValuesAdmin({ commit }) {
+        setValues({ commit }) {
             return axios
                 .get("/api/user")
                 .then((response) => {
@@ -53,19 +53,6 @@ export default {
                         commit("SET_AUTHENTICATED", false);
                         commit("SET_USER", null);
                     }
-                })
-                .catch(() => {
-                    commit("SET_AUTHENTICATED", false);
-                    commit("SET_USER", null);
-                });
-        },
-
-        setValues({ commit }) {
-            return axios
-                .get("/api/user")
-                .then((response) => {
-                    commit("SET_AUTHENTICATED", true);
-                    commit("SET_USER", response.data);
                 })
                 .catch(() => {
                     commit("SET_AUTHENTICATED", false);
