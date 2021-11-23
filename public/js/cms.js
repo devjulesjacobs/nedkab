@@ -2494,8 +2494,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Posts"
+  name: "Posts",
+  data: function data() {
+    return {
+      views: {
+        create: true
+      }
+    };
+  }
 });
 
 /***/ }),
@@ -40068,22 +40107,132 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "Posts" } }, [
+    _c(
+      "h1",
+      {
+        staticClass:
+          "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-5",
+      },
+      [_vm._v("Posts")]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass:
+          "inline-flex items-center pr-4 pl-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mb-5",
+        attrs: { type: "button" },
+      },
+      [
+        _c(
+          "svg",
+          {
+            staticClass: "h-4 w-4 mr-1",
+            attrs: {
+              xmlns: "http://www.w3.org/2000/svg",
+              fill: "none",
+              viewBox: "0 0 24 24",
+              stroke: "currentColor",
+            },
+          },
+          [
+            _c("path", {
+              attrs: {
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                "stroke-width": "2",
+                d: "M12 4v16m8-8H4",
+              },
+            }),
+          ]
+        ),
+        _vm._v("\n        Nieuwe Post\n    "),
+      ]
+    ),
+    _vm._v(" "),
+    _vm.views.create
+      ? _c("div", [
+          _c("div", { staticClass: "sm:col-span-6" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block text-sm font-medium text-gray-700",
+                attrs: { for: "cover-photo" },
+              },
+              [_vm._v("\n                Cover photo\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md",
+              },
+              [
+                _c("div", { staticClass: "space-y-1 text-center" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "mx-auto h-12 w-12 text-gray-400",
+                      attrs: {
+                        stroke: "currentColor",
+                        fill: "none",
+                        viewBox: "0 0 48 48",
+                        "aria-hidden": "true",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d: "M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02",
+                          "stroke-width": "2",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-xs text-gray-500" }, [
+                    _vm._v(
+                      "\n                        PNG, JPG, GIF up to 10MB\n                    "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+        ])
+      : _vm._e(),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "Posts" } }, [
+    return _c("div", { staticClass: "flex text-sm text-gray-600" }, [
       _c(
-        "h1",
+        "label",
         {
           staticClass:
-            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900",
+            "relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500",
+          attrs: { for: "file-upload" },
         },
-        [_vm._v("Posts")]
+        [
+          _c("span", [_vm._v("Upload a file")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "sr-only",
+            attrs: { id: "file-upload", name: "file-upload", type: "file" },
+          }),
+        ]
       ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pl-1" }, [_vm._v("or drag and drop")]),
     ])
   },
 ]
