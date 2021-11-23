@@ -1,5 +1,7 @@
 <template>
-    <div id="Team">Team</div>
+    <div id="Team">
+        <h1 class="text-3xl page-title leading-8 font-bold tracking-tight text-gray-900">Team</h1>
+    </div>
 </template>
 
 <script>

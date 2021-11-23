@@ -2513,6 +2513,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Team"
 });
@@ -39970,10 +39972,15 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "p-5" },
     [
-      _c("span", { staticClass: "font-bold" }, [_vm._v("Dashboard")]),
-      _c("br"),
+      _c(
+        "h1",
+        {
+          staticClass:
+            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900",
+        },
+        [_vm._v("Dashboard")]
+      ),
       _vm._v(" "),
       _c(
         "button",
@@ -40021,11 +40028,25 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "Emballage" } }, [
-    _vm._v("\n    Emballage\n"),
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "Emballage" } }, [
+      _c(
+        "h1",
+        {
+          staticClass:
+            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900",
+        },
+        [_vm._v("Emballage")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -40059,7 +40080,7 @@ var staticRenderFns = [
         "h1",
         {
           staticClass:
-            "text-3xl page-title leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl",
+            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900",
         },
         [_vm._v("Posts")]
       ),
@@ -40087,9 +40108,25 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "Team" } }, [_vm._v("Team")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "Team" } }, [
+      _c(
+        "h1",
+        {
+          staticClass:
+            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900",
+        },
+        [_vm._v("Team")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
