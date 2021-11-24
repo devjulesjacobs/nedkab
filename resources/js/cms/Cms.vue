@@ -287,7 +287,7 @@ export default {
     computed: {
         ...mapGetters({
             authenticated: "cms/authenticated",
-            user: "cms/user",
+            user: "cms/admin",
         }),
     },
     methods: {

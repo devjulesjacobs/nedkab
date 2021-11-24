@@ -2219,7 +2219,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {},
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
     authenticated: "cms/authenticated",
-    user: "cms/user"
+    user: "cms/admin"
   })),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])({
     logout: "cms/logout"
@@ -2656,6 +2656,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Posts",
@@ -2706,6 +2733,51 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -40592,19 +40664,10 @@ var render = function () {
     { attrs: { id: "Posts" } },
     [
       _c(
-        "h1",
-        {
-          staticClass:
-            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-5",
-        },
-        [_vm._v("Posts")]
-      ),
-      _vm._v(" "),
-      _c(
         "button",
         {
           staticClass:
-            "inline-flex items-center pr-4 pl-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mb-5",
+            "float-right mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 bg-blue-theme",
           attrs: { type: "button" },
           on: {
             click: function ($event) {
@@ -40613,86 +40676,147 @@ var render = function () {
           },
         },
         [
+          _vm._v("\n        Nieuwe Post\n        "),
           _c(
             "svg",
             {
-              staticClass: "h-4 w-4 mr-1",
+              staticClass: "h-5 w-5 ml-2",
               attrs: {
                 xmlns: "http://www.w3.org/2000/svg",
-                fill: "none",
-                viewBox: "0 0 24 24",
-                stroke: "currentColor",
+                viewBox: "0 0 20 20",
+                fill: "currentColor",
               },
             },
             [
               _c("path", {
                 attrs: {
-                  "stroke-linecap": "round",
-                  "stroke-linejoin": "round",
-                  "stroke-width": "2",
-                  d: "M12 4v16m8-8H4",
+                  "fill-rule": "evenodd",
+                  d: "M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z",
+                  "clip-rule": "evenodd",
                 },
               }),
             ]
           ),
-          _vm._v("\n        Nieuwe Post\n    "),
         ]
       ),
       _vm._v(" "),
-      _vm._l(_vm.posts, function (post) {
-        return _c(
-          "div",
-          {
-            key: post.id,
-            staticClass: "sm:flex mb-3",
-            on: {
-              click: function ($event) {
-                return _vm.getPost(post.id)
-              },
-            },
-          },
-          [
-            _c("div", { staticClass: "mb-4 flex-shrink-0 sm:mb-0 sm:mr-4" }, [
-              _c(
-                "svg",
-                {
-                  staticClass:
-                    "h-16 w-16 border border-gray-300 bg-white text-gray-300",
-                  attrs: {
-                    preserveAspectRatio: "none",
-                    stroke: "currentColor",
-                    fill: "none",
-                    viewBox: "0 0 200 200",
-                    "aria-hidden": "true",
-                  },
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      "vector-effect": "non-scaling-stroke",
-                      "stroke-width": "1",
-                      d: "M0 0l200 200M0 200L200 0",
-                    },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _c("h4", { staticClass: "text-lg font-bold" }, [
-                _vm._v(_vm._s(post.title)),
-              ]),
-              _vm._v(" "),
-              _c("p", {
-                staticClass: "mt-1",
-                domProps: { innerHTML: _vm._s(post.body) },
-              }),
-            ]),
-          ]
-        )
-      }),
+      _c(
+        "h1",
+        {
+          staticClass:
+            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-5",
+        },
+        [_vm._v("Posts")]
+      ),
       _vm._v(" "),
-      _c("pre", [_vm._v("        " + _vm._s(_vm.currentPost) + "\n    ")]),
+      _c("div", [
+        _c(
+          "h1",
+          {
+            staticClass:
+              "text-2xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-3",
+          },
+          [_vm._v("Recent toegevoegd")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "relative" }, [
+          _c("div", { staticClass: "relative" }, [
+            _c(
+              "div",
+              { staticClass: "mx-auto grid gap-5 grid-cols-4" },
+              _vm._l(_vm.posts, function (post) {
+                return _c(
+                  "div",
+                  {
+                    key: post.id,
+                    staticClass:
+                      "flex flex-col rounded-lg shadow-lg overflow-hidden",
+                  },
+                  [
+                    _c("div", { staticClass: "flex-shrink-0" }, [
+                      _c("img", {
+                        staticClass: "h-48 w-full object-cover",
+                        attrs: {
+                          src: "/img/posts/" + post.image,
+                          alt: "post.title",
+                        },
+                      }),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-1 bg-white p-6 flex flex-col justify-between",
+                      },
+                      [
+                        _c("div", { staticClass: "flex-1" }, [
+                          _vm._m(0, true),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            { staticClass: "block mt-2", attrs: { href: "#" } },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "text-xl font-semibold text-gray-900",
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(post.title) +
+                                      "\n                                    "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "mt-3 text-base text-gray-500" },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(post.body) +
+                                      "\n                                    "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mt-6 flex items-center" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.getPost(post.id)
+                                },
+                              },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    Bewerken\n                                "
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("ModalPostCreate", {
         directives: [
@@ -40713,10 +40837,23 @@ var render = function () {
         },
       }),
     ],
-    2
+    1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-sm font-medium text-blue-800" }, [
+      _c("a", { staticClass: "hover:underline", attrs: { href: "#" } }, [
+        _vm._v(
+          "\n                                        Nieuws\n                                    "
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -40738,21 +40875,161 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "Team" } }, [
+    _c(
+      "h1",
+      {
+        staticClass:
+          "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-5",
+      },
+      [_vm._v("Team")]
+    ),
+    _vm._v(" "),
+    _c(
+      "ul",
+      {
+        staticClass:
+          "grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+        attrs: { role: "list" },
+      },
+      [
+        _c(
+          "li",
+          {
+            staticClass:
+              "col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200",
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "div",
+                { staticClass: "-mt-px flex divide-x divide-gray-200" },
+                [
+                  _c("div", { staticClass: "w-0 flex-1 flex" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500",
+                        attrs: { href: "mailto:janecooper@example.com" },
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-5 h-5 text-gray-400",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20",
+                              fill: "currentColor",
+                              "aria-hidden": "true",
+                            },
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d: "M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d: "M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z",
+                              },
+                            }),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "ml-3" }, [_vm._v("Email")]),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "-ml-px w-0 flex-1 flex" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500",
+                        attrs: { href: "tel:+1-202-555-0170" },
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-5 h-5 text-gray-400",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20",
+                              fill: "currentColor",
+                              "aria-hidden": "true",
+                            },
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d: "M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z",
+                              },
+                            }),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "ml-3" }, [_vm._v("Bel")]),
+                      ]
+                    ),
+                  ]),
+                ]
+              ),
+            ]),
+          ]
+        ),
+      ]
+    ),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "Team" } }, [
-      _c(
-        "h1",
-        {
-          staticClass:
-            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900",
+    return _c("div", { staticClass: "flex-1 flex flex-col p-8" }, [
+      _c("img", {
+        staticClass: "w-32 h-32 flex-shrink-0 mx-auto rounded-full",
+        attrs: {
+          src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+          alt: "",
         },
-        [_vm._v("Team")]
+      }),
+      _vm._v(" "),
+      _c("h3", { staticClass: "mt-6 text-gray-900 text-sm font-medium" }, [
+        _vm._v("Jane Cooper"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "dl",
+        { staticClass: "mt-1 flex-grow flex flex-col justify-between" },
+        [
+          _c("dt", { staticClass: "sr-only" }, [_vm._v("Title")]),
+          _vm._v(" "),
+          _c("dd", { staticClass: "text-gray-500 text-sm" }, [
+            _vm._v("Marketing medewerker"),
+          ]),
+          _vm._v(" "),
+          _c("dt", { staticClass: "sr-only" }, [_vm._v("Role")]),
+          _vm._v(" "),
+          _c("dd", { staticClass: "mt-3" }, [
+            _c(
+              "span",
+              {
+                staticClass:
+                  "px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full",
+              },
+              [_vm._v("Admin")]
+            ),
+          ]),
+        ]
       ),
     ])
   },
