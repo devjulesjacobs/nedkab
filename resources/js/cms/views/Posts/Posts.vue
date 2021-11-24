@@ -9,12 +9,25 @@
             Nieuwe Post
         </button>
 
-        <div>
-            {{ posts }}
+        <div class="sm:flex mb-3" v-for="post in posts" :key="post.id" @click="getPost(post.id)">
+            <div class="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
+                <svg class="h-16 w-16 border border-gray-300 bg-white text-gray-300" preserveAspectRatio="none" stroke="currentColor" fill="none" viewBox="0 0 200 200" aria-hidden="true">
+                    <path vector-effect="non-scaling-stroke" stroke-width="1" d="M0 0l200 200M0 200L200 0" />
+                </svg>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold">{{ post.title }}</h4>
+                <p class="mt-1" v-html="post.body"></p>
+            </div>
         </div>
+
+        <pre>
+            {{ currentPost }}
+        </pre>
 
         <ModalPostCreate v-show="modals.showModalCreate"
                          v-model="modals.showModalCreate"
+                         @refreshPostsList="getPosts"
                          @hideModal="hideModalCreate" />
     </div>
 </template>
@@ -30,6 +43,7 @@ export default {
                 showModalCreate: false
             },
             posts: [],
+            currentPost: []
         }
     },
     mounted() {
@@ -43,6 +57,11 @@ export default {
         getPosts() {
             axios.get('/api/posts')
             .then((res) => { this.posts = res.data });
+        },
+
+        getPost(id) {
+            axios.get('/api/post/'+id)
+            .then((res) => { this.currentPost = res.data })
         }
     },
     components: {

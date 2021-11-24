@@ -2209,6 +2209,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Cms",
   components: {},
+  data: function data() {
+    return {
+      views: {
+        miniMenu: false
+      }
+    };
+  },
   mounted: function mounted() {},
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
     authenticated: "cms/authenticated",
@@ -2240,6 +2247,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }, _callee);
       }))();
+    },
+    toggleMiniMenu: function toggleMiniMenu() {
+      this.views.miniMenu ? this.views.miniMenu = false : this.views.miniMenu = true;
     }
   })
 });
@@ -2293,12 +2303,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ModalPostCreate",
   data: function data() {
-    return {};
+    return {
+      form: {
+        create: {
+          title: null,
+          body: null,
+          image: null
+        }
+      },
+      currentPost: []
+    };
   },
+  mounted: function mounted() {},
   methods: {
+    createPost: function createPost() {
+      var app = this;
+      axios.post('/api/posts', this.form.create).then(function (res) {
+        app.$emit('refreshPostsList');
+        app.$emit('hideModal');
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     updateValue: function updateValue() {
       this.$emit('hideModal');
     }
@@ -2567,6 +2639,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Posts",
@@ -2574,13 +2663,31 @@ __webpack_require__.r(__webpack_exports__);
     return {
       modals: {
         showModalCreate: false
-      }
+      },
+      posts: [],
+      currentPost: []
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.getPosts();
+  },
   methods: {
     hideModalCreate: function hideModalCreate() {
       this.modals.showModalCreate = false;
+    },
+    getPosts: function getPosts() {
+      var _this = this;
+
+      axios.get('/api/posts').then(function (res) {
+        _this.posts = res.data;
+      });
+    },
+    getPost: function getPost(id) {
+      var _this2 = this;
+
+      axios.get('/api/post/' + id).then(function (res) {
+        _this2.currentPost = res.data;
+      });
     }
   },
   components: {
@@ -39077,7 +39184,7 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
                             attrs: { href: "#" },
                           },
                           [
@@ -39115,7 +39222,7 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
                             attrs: { href: "#" },
                           },
                           [
@@ -39153,7 +39260,7 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
                             attrs: { href: "#" },
                           },
                           [
@@ -39191,7 +39298,7 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
                             attrs: { href: "#" },
                           },
                           [
@@ -39229,7 +39336,7 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md",
                             attrs: { href: "#" },
                           },
                           [
@@ -39300,7 +39407,7 @@ var render = function () {
                           "router-link",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                             attrs: { to: { name: "Dashboard" } },
                           },
                           [
@@ -39338,7 +39445,7 @@ var render = function () {
                           "router-link",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                             attrs: { to: { name: "Posts" } },
                           },
                           [
@@ -39375,7 +39482,7 @@ var render = function () {
                           "router-link",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                             attrs: { to: { name: "Emballage" } },
                           },
                           [
@@ -39412,7 +39519,7 @@ var render = function () {
                           "router-link",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                             attrs: { to: { name: "Team" } },
                           },
                           [
@@ -39449,7 +39556,7 @@ var render = function () {
                           "a",
                           {
                             staticClass:
-                              "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                              "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                             on: { click: _vm.signOut },
                           },
                           [
@@ -39648,11 +39755,47 @@ var render = function () {
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "ml-3 relative" }, [
-                      _vm._m(2),
+                      _c("div", [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                            attrs: {
+                              type: "button",
+                              id: "user-menu-button",
+                              "aria-expanded": "false",
+                              "aria-haspopup": "true",
+                            },
+                            on: { click: _vm.toggleMiniMenu },
+                          },
+                          [
+                            _c("span", { staticClass: "sr-only" }, [
+                              _vm._v("Open user menu"),
+                            ]),
+                            _vm._v(" "),
+                            _c("img", {
+                              staticClass: "h-8 w-8 rounded-full",
+                              attrs: {
+                                src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+                                alt: "",
+                              },
+                            }),
+                          ]
+                        ),
+                      ]),
                       _vm._v(" "),
                       _c(
                         "div",
                         {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.views.miniMenu,
+                              expression: "views.miniMenu",
+                            },
+                          ],
                           staticClass:
                             "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none",
                           attrs: {
@@ -39667,7 +39810,7 @@ var render = function () {
                             "a",
                             {
                               staticClass:
-                                "block px-4 py-2 text-sm text-gray-700",
+                                "block px-4 py-2 text-sm text-gray-700 hover:text-blue-700",
                               attrs: {
                                 href: "#",
                                 role: "menuitem",
@@ -39682,7 +39825,7 @@ var render = function () {
                             "a",
                             {
                               staticClass:
-                                "block px-4 py-2 text-sm text-gray-700",
+                                "block px-4 py-2 text-sm text-gray-700 hover:text-blue-700",
                               attrs: {
                                 href: "#",
                                 role: "menuitem",
@@ -39697,7 +39840,7 @@ var render = function () {
                             "button",
                             {
                               staticClass:
-                                "block px-4 py-2 text-sm text-gray-700",
+                                "block px-4 py-2 text-sm text-gray-700 hover:text-blue-700",
                               attrs: {
                                 type: "button",
                                 role: "menuitem",
@@ -39756,37 +39899,6 @@ var staticRenderFns = [
         staticClass: "h-8 w-auto",
         attrs: { src: "/img/system/company-logo.png", alt: "Workflow" },
       }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          staticClass:
-            "max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-          attrs: {
-            type: "button",
-            id: "user-menu-button",
-            "aria-expanded": "false",
-            "aria-haspopup": "true",
-          },
-        },
-        [
-          _c("span", { staticClass: "sr-only" }, [_vm._v("Open user menu")]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "h-8 w-8 rounded-full",
-            attrs: {
-              src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-              alt: "",
-            },
-          }),
-        ]
-      ),
     ])
   },
 ]
@@ -39859,7 +39971,7 @@ var render = function () {
                           "h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll",
                       },
                       [
-                        _c("div", { staticClass: "px-4 sm:px-6" }, [
+                        _c("div", { staticClass: "px-6 mb-6" }, [
                           _c(
                             "div",
                             { staticClass: "flex items-start justify-between" },
@@ -39926,9 +40038,174 @@ var render = function () {
                           ),
                         ]),
                         _vm._v(" "),
-                        _c("div", {
-                          staticClass: "mt-6 relative flex-1 px-4 sm:px-6",
-                        }),
+                        _c("form", { attrs: { method: "post" } }, [
+                          _c("div", { staticClass: "px-6 mb-6" }, [
+                            _c("div", { staticClass: "sm:col-span-3" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-sm font-medium text-gray-700",
+                                  attrs: { for: "first-name" },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        Titel\n                                    "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mt-1" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.create.title,
+                                      expression: "form.create.title",
+                                    },
+                                  ],
+                                  staticClass:
+                                    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                  attrs: { type: "text", required: "" },
+                                  domProps: { value: _vm.form.create.title },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form.create,
+                                        "title",
+                                        $event.target.value
+                                      )
+                                    },
+                                  },
+                                }),
+                              ]),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "px-6 mb-6" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "block text-sm font-medium text-gray-700",
+                                attrs: { for: "about" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    Body\n                                "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mt-1" }, [
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.create.body,
+                                    expression: "form.create.body",
+                                  },
+                                ],
+                                staticClass:
+                                  "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md",
+                                attrs: { rows: "6" },
+                                domProps: { value: _vm.form.create.body },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form.create,
+                                      "body",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              { staticClass: "mt-2 text-sm text-gray-500" },
+                              [_vm._v("Schrijf hier je nieuwe post.")]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "px-6 mb-6" }, [
+                            _c("div", { staticClass: "sm:col-span-3" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-sm font-medium text-gray-700",
+                                  attrs: { for: "first-name" },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        Image\n                                    "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mt-1" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.create.image,
+                                      expression: "form.create.image",
+                                    },
+                                  ],
+                                  staticClass:
+                                    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.form.create.image },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form.create,
+                                        "image",
+                                        $event.target.value
+                                      )
+                                    },
+                                  },
+                                }),
+                              ]),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "px-6" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function ($event) {
+                                    $event.preventDefault()
+                                    return _vm.createPost.apply(null, arguments)
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    Aanmaken\n                                "
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]),
                       ]
                     ),
                   ]),
@@ -40362,6 +40639,61 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
+      _vm._l(_vm.posts, function (post) {
+        return _c(
+          "div",
+          {
+            key: post.id,
+            staticClass: "sm:flex mb-3",
+            on: {
+              click: function ($event) {
+                return _vm.getPost(post.id)
+              },
+            },
+          },
+          [
+            _c("div", { staticClass: "mb-4 flex-shrink-0 sm:mb-0 sm:mr-4" }, [
+              _c(
+                "svg",
+                {
+                  staticClass:
+                    "h-16 w-16 border border-gray-300 bg-white text-gray-300",
+                  attrs: {
+                    preserveAspectRatio: "none",
+                    stroke: "currentColor",
+                    fill: "none",
+                    viewBox: "0 0 200 200",
+                    "aria-hidden": "true",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      "vector-effect": "non-scaling-stroke",
+                      "stroke-width": "1",
+                      d: "M0 0l200 200M0 200L200 0",
+                    },
+                  }),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("h4", { staticClass: "text-lg font-bold" }, [
+                _vm._v(_vm._s(post.title)),
+              ]),
+              _vm._v(" "),
+              _c("p", {
+                staticClass: "mt-1",
+                domProps: { innerHTML: _vm._s(post.body) },
+              }),
+            ]),
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c("pre", [_vm._v("        " + _vm._s(_vm.currentPost) + "\n    ")]),
+      _vm._v(" "),
       _c("ModalPostCreate", {
         directives: [
           {
@@ -40371,7 +40703,7 @@ var render = function () {
             expression: "modals.showModalCreate",
           },
         ],
-        on: { hideModal: _vm.hideModalCreate },
+        on: { refreshPostsList: _vm.getPosts, hideModal: _vm.hideModalCreate },
         model: {
           value: _vm.modals.showModalCreate,
           callback: function ($$v) {
@@ -40381,7 +40713,7 @@ var render = function () {
         },
       }),
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
