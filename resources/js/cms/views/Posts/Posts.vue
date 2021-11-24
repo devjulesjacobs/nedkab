@@ -9,6 +9,10 @@
             Nieuwe Post
         </button>
 
+        <div>
+            {{ posts }}
+        </div>
+
         <ModalPostCreate v-show="modals.showModalCreate"
                          v-model="modals.showModalCreate"
                          @hideModal="hideModalCreate" />
@@ -24,14 +28,21 @@ export default {
         return {
             modals: {
                 showModalCreate: false
-            }
+            },
+            posts: [],
         }
     },
     mounted() {
+        this.getPosts();
     },
     methods: {
         hideModalCreate() {
             this.modals.showModalCreate = false;
+        },
+
+        getPosts() {
+            axios.get('/api/posts')
+            .then((res) => { this.posts = res.data });
         }
     },
     components: {
