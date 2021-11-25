@@ -2345,7 +2345,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ModalPostCreate",
   data: function data() {
@@ -2364,7 +2363,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     createPost: function createPost() {
       var app = this;
-      axios.post('/api/posts', this.form.create).then(function (res) {
+      var imagefile = document.querySelector('#image-create');
+      var formData = new FormData();
+      formData.append('title', this.form.create.title);
+      formData.append('body', this.form.create.body);
+      formData.append("image", imagefile.files[0]);
+      axios.post('/api/posts', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (res) {
         app.$emit('refreshPostsList');
         app.$emit('hideModal');
       })["catch"](function (err) {
@@ -40110,135 +40118,91 @@ var render = function () {
                           ),
                         ]),
                         _vm._v(" "),
-                        _c("form", { attrs: { method: "post" } }, [
-                          _c("div", { staticClass: "px-6 mb-6" }, [
-                            _c("div", { staticClass: "sm:col-span-3" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass:
-                                    "block text-sm font-medium text-gray-700",
-                                  attrs: { for: "first-name" },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        Titel\n                                    "
-                                  ),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mt-1" }, [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.create.title,
-                                      expression: "form.create.title",
-                                    },
-                                  ],
-                                  staticClass:
-                                    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-                                  attrs: { type: "text", required: "" },
-                                  domProps: { value: _vm.form.create.title },
-                                  on: {
-                                    input: function ($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form.create,
-                                        "title",
-                                        $event.target.value
-                                      )
-                                    },
-                                  },
-                                }),
-                              ]),
-                            ]),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "px-6 mb-6" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "block text-sm font-medium text-gray-700",
-                                attrs: { for: "about" },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    Body\n                                "
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mt-1" }, [
-                              _c("textarea", {
-                                directives: [
+                        _c(
+                          "form",
+                          {
+                            attrs: {
+                              method: "post",
+                              enctype: "multipart/form-data",
+                            },
+                          },
+                          [
+                            _c("div", { staticClass: "px-6 mb-6" }, [
+                              _c("div", { staticClass: "sm:col-span-3" }, [
+                                _c(
+                                  "label",
                                   {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.create.body,
-                                    expression: "form.create.body",
+                                    staticClass:
+                                      "block text-sm font-medium text-gray-700",
+                                    attrs: { for: "first-name" },
                                   },
-                                ],
-                                staticClass:
-                                  "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md",
-                                attrs: { rows: "6" },
-                                domProps: { value: _vm.form.create.body },
-                                on: {
-                                  input: function ($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form.create,
-                                      "body",
-                                      $event.target.value
-                                    )
-                                  },
-                                },
-                              }),
+                                  [
+                                    _vm._v(
+                                      "\n                                        Titel\n                                    "
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mt-1" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.create.title,
+                                        expression: "form.create.title",
+                                      },
+                                    ],
+                                    staticClass:
+                                      "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                    attrs: { type: "text", required: "" },
+                                    domProps: { value: _vm.form.create.title },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form.create,
+                                          "title",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
+                                ]),
+                              ]),
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "p",
-                              { staticClass: "mt-2 text-sm text-gray-500" },
-                              [_vm._v("Schrijf hier je nieuwe post.")]
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "px-6 mb-6" }, [
-                            _c("div", { staticClass: "sm:col-span-3" }, [
+                            _c("div", { staticClass: "px-6 mb-6" }, [
                               _c(
                                 "label",
                                 {
                                   staticClass:
                                     "block text-sm font-medium text-gray-700",
-                                  attrs: { for: "first-name" },
+                                  attrs: { for: "about" },
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        Image\n                                    "
+                                    "\n                                    Body\n                                "
                                   ),
                                 ]
                               ),
                               _vm._v(" "),
                               _c("div", { staticClass: "mt-1" }, [
-                                _c("input", {
+                                _c("textarea", {
                                   directives: [
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.form.create.image,
-                                      expression: "form.create.image",
+                                      value: _vm.form.create.body,
+                                      expression: "form.create.body",
                                     },
                                   ],
                                   staticClass:
-                                    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-                                  attrs: { type: "text" },
-                                  domProps: { value: _vm.form.create.image },
+                                    "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md",
+                                  attrs: { rows: "6" },
+                                  domProps: { value: _vm.form.create.body },
                                   on: {
                                     input: function ($event) {
                                       if ($event.target.composing) {
@@ -40246,38 +40210,49 @@ var render = function () {
                                       }
                                       _vm.$set(
                                         _vm.form.create,
-                                        "image",
+                                        "body",
                                         $event.target.value
                                       )
                                     },
                                   },
                                 }),
                               ]),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "mt-2 text-sm text-gray-500" },
+                                [_vm._v("Schrijf hier je nieuwe post.")]
+                              ),
                             ]),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "px-6" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function ($event) {
-                                    $event.preventDefault()
-                                    return _vm.createPost.apply(null, arguments)
+                            _vm._v(" "),
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "px-6" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.createPost.apply(
+                                        null,
+                                        arguments
+                                      )
+                                    },
                                   },
                                 },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    Aanmaken\n                                "
-                                ),
-                              ]
-                            ),
-                          ]),
-                        ]),
+                                [
+                                  _vm._v(
+                                    "\n                                    Aanmaken\n                                "
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]
+                        ),
                       ]
                     ),
                   ]),
@@ -40290,7 +40265,40 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "px-6 mb-6" }, [
+      _c("div", { staticClass: "sm:col-span-3" }, [
+        _c(
+          "label",
+          {
+            staticClass: "block text-sm font-medium text-gray-700",
+            attrs: { for: "first-name" },
+          },
+          [
+            _vm._v(
+              "\n                                        Image\n                                    "
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-1" }, [
+          _c("input", {
+            attrs: {
+              type: "file",
+              id: "image-create",
+              name: "image",
+              accept: "image/png, image/jpeg",
+            },
+          }),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -58454,7 +58462,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\projects\app-nedkab\resources\js\cms\cms.js */"./resources/js/cms/cms.js");
+module.exports = __webpack_require__(/*! D:\development\app-nedkab\resources\js\cms\cms.js */"./resources/js/cms/cms.js");
 
 
 /***/ })

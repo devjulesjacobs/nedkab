@@ -59300,8 +59300,8 @@ window.LoadingScreen = function (set) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\projects\app-nedkab\resources\js\app\app.js */"./resources/js/app/app.js");
-module.exports = __webpack_require__(/*! C:\projects\app-nedkab\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\development\app-nedkab\resources\js\app\app.js */"./resources/js/app/app.js");
+module.exports = __webpack_require__(/*! D:\development\app-nedkab\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

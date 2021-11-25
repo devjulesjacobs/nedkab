@@ -29,7 +29,7 @@
                                 </div>
                             </div>
 
-                            <form method="post">
+                            <form method="post" enctype="multipart/form-data">
                                 <div class="px-6 mb-6">
                                     <div class="sm:col-span-3">
                                         <label for="first-name" class="block text-sm font-medium text-gray-700">
@@ -57,8 +57,7 @@
                                             Image
                                         </label>
                                         <div class="mt-1">
-                                            <input v-model="form.create.image" type="text"
-                                                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input type="file" id="image-create" name="image" accept="image/png, image/jpeg" />
                                         </div>
                                     </div>
                                 </div>
@@ -95,13 +94,24 @@ export default {
         }
     },
     mounted() {
-        
+
     },
     methods: {
         createPost() {
             let app = this;
 
-            axios.post('/api/posts', this.form.create)
+            let imagefile = document.querySelector('#image-create');
+
+            let formData = new FormData;
+            formData.append('title', this.form.create.title);
+            formData.append('body', this.form.create.body);
+            formData.append("image", imagefile.files[0]);
+
+            axios.post('/api/posts', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
                 .then((res) => {
                     app.$emit('refreshPostsList');
                     app.$emit('hideModal');
