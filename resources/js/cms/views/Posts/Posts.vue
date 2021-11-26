@@ -102,15 +102,8 @@ export default {
         setEditPost(id) {
             axios.get('/api/post/'+id)
                 .then((res) => {
-                    this.editFaq = res.data;
+                    this.editPost = res.data;
                     this.showSlide('edit');
-                })
-        },
-
-        getPost(id) {
-            axios.get('/api/post/' + id)
-                .then((res) => {
-                    this.currentPost = res.data
                 })
         },
 

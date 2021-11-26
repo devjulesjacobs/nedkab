@@ -54,24 +54,56 @@ class PostController extends Controller
     protected function show(Request $request, $id) {
         $post = Post::find($id);
 
-        return response()->json([
-            'message' => 'Post found',
-            'data' => $post
-        ], 201);
+        return response()->json($post, 201);
     }
 
     protected function update(Request $request, $id) {
-
-        $data = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'nullable|string|max:255',
             'body' => 'nullable',
             'image' => 'nullable'
         ]);
 
+        if($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
         $post = Post::find($id);
 
+        if(isset($_FILES['image'])) {
+            switch($_FILES['image']['type']) {
+                case 'image/png': $extension = '.png'; break;
+                case 'image/jpeg': $extension = '.jpg'; break;
+                default: return response()->json(['message' => 'No image found or not the right filetype.'], 404);
+            }
+
+            $img = Image::make($request->file('image'));
+            $img->fit( 500, 300);
+
+            $old_image = public_path('img/posts/').$post->image;
+            if(file_exists($old_image)) {
+                unlink($old_image);
+            }
+
+            $path = public_path("img/posts/"); // set your own directory name there
+            $filename = time().'-post'.$extension; // get your own filename here
+
+            $img->save($path.$filename);
+        }
+
         if($post) {
-            $post->update($data);
+            if(isset($_FILES['image'])) {
+                $post->update([
+                    'title' => $request->title,
+                    'body' => $request->body,
+                    'image' => $filename
+                ]);
+            } else {
+                $post->update([
+                    'title' => $request->title,
+                    'body' => $request->body
+                ]);
+            }
 
             return response()->json([
                 'message' => 'Post updated.',
