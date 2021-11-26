@@ -2256,10 +2256,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2346,7 +2346,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ModalPostCreate",
+  name: "SlidePost",
   data: function data() {
     return {
       form: {
@@ -2362,7 +2362,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     createPost: function createPost() {
-      var app = this;
+      var _this = this;
+
       var imagefile = document.querySelector('#image-create');
       var formData = new FormData();
       formData.append('title', this.form.create.title);
@@ -2373,14 +2374,35 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (res) {
-        app.$emit('refreshPostsList');
-        app.$emit('hideModal');
+        _this.$emit('refresh');
+
+        _this.$emit('hide');
       })["catch"](function (err) {
         console.log(err);
       });
     },
-    updateValue: function updateValue() {
-      this.$emit('hideModal');
+    updatePost: function updatePost(id) {
+      var _this2 = this;
+
+      axios.patch('/api/post/' + id, this.editPost).then(function (res) {
+        _this2.$emit('refresh');
+
+        _this2.$emit('hide');
+      });
+    },
+    hideSlide: function hideSlide() {
+      this.$emit('hide');
+    }
+  },
+  props: {
+    views: {
+      create: false,
+      edit: false
+    },
+    editPost: {
+      title: null,
+      body: null,
+      image: null
     }
   }
 });
@@ -2629,7 +2651,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_ModalPostCreate_ModalPostCreate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ModalPostCreate/ModalPostCreate */ "./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue");
+/* harmony import */ var _components_SlidePost_SlidePost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/SlidePost/SlidePost */ "./resources/js/cms/components/SlidePost/SlidePost.vue");
+//
 //
 //
 //
@@ -2696,19 +2719,29 @@ __webpack_require__.r(__webpack_exports__);
   name: "Posts",
   data: function data() {
     return {
-      modals: {
-        showModalCreate: false
+      slide: {
+        show: false,
+        views: {
+          create: false,
+          edit: false
+        }
       },
       posts: [],
-      currentPost: []
+      editPost: []
     };
   },
   mounted: function mounted() {
     this.getPosts();
   },
   methods: {
-    hideModalCreate: function hideModalCreate() {
-      this.modals.showModalCreate = false;
+    showSlide: function showSlide(type) {
+      // Set defaults
+      this.slide.views.create = false;
+      this.slide.views.edit = false; // Set show
+
+      this.slide.views[type] = true; // Show slide
+
+      this.slide.show = true;
     },
     getPosts: function getPosts() {
       var _this = this;
@@ -2717,16 +2750,28 @@ __webpack_require__.r(__webpack_exports__);
         _this.posts = res.data;
       });
     },
-    getPost: function getPost(id) {
+    setEditPost: function setEditPost(id) {
       var _this2 = this;
 
       axios.get('/api/post/' + id).then(function (res) {
-        _this2.currentPost = res.data;
+        _this2.editFaq = res.data;
+
+        _this2.showSlide('edit');
       });
+    },
+    getPost: function getPost(id) {
+      var _this3 = this;
+
+      axios.get('/api/post/' + id).then(function (res) {
+        _this3.currentPost = res.data;
+      });
+    },
+    hideSlide: function hideSlide() {
+      this.slide.show = false;
     }
   },
   components: {
-    ModalPostCreate: _components_ModalPostCreate_ModalPostCreate__WEBPACK_IMPORTED_MODULE_0__["default"]
+    SlidePost: _components_SlidePost_SlidePost__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -39988,10 +40033,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -40006,14 +40051,6 @@ var render = function () {
   return _c(
     "div",
     {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.value,
-          expression: "value",
-        },
-      ],
       staticClass: "fixed inset-0 overflow-hidden z-50",
       attrs: {
         "aria-labelledby": "slide-over-title",
@@ -40080,7 +40117,7 @@ var render = function () {
                                       staticClass:
                                         "bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
                                       attrs: { type: "button" },
-                                      on: { click: _vm.updateValue },
+                                      on: { click: _vm.hideSlide },
                                     },
                                     [
                                       _c("span", { staticClass: "sr-only" }, [
@@ -40679,7 +40716,7 @@ var render = function () {
           attrs: { type: "button" },
           on: {
             click: function ($event) {
-              _vm.modals.showModalCreate = true
+              return _vm.showSlide("create")
             },
           },
         },
@@ -40804,7 +40841,7 @@ var render = function () {
                               attrs: { type: "button" },
                               on: {
                                 click: function ($event) {
-                                  return _vm.getPost(post.id)
+                                  return _vm.setEditPost(post.id)
                                 },
                               },
                             },
@@ -40826,22 +40863,21 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("ModalPostCreate", {
+      _c("SlidePost", {
         directives: [
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.modals.showModalCreate,
-            expression: "modals.showModalCreate",
+            value: _vm.slide.show,
+            expression: "slide.show",
           },
         ],
-        on: { refreshPostsList: _vm.getPosts, hideModal: _vm.hideModalCreate },
-        model: {
-          value: _vm.modals.showModalCreate,
-          callback: function ($$v) {
-            _vm.$set(_vm.modals, "showModalCreate", $$v)
+        attrs: { views: _vm.slide.views, editPost: _vm.editPost },
+        on: {
+          refresh: _vm.getPosts,
+          hide: function ($event) {
+            return _vm.hideSlide()
           },
-          expression: "modals.showModalCreate",
         },
       }),
     ],
@@ -57839,17 +57875,17 @@ _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch("cms/setValues").then(fu
 
 /***/ }),
 
-/***/ "./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue":
-/*!*************************************************************************!*\
-  !*** ./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue ***!
-  \*************************************************************************/
+/***/ "./resources/js/cms/components/SlidePost/SlidePost.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/cms/components/SlidePost/SlidePost.vue ***!
+  \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ModalPostCreate_vue_vue_type_template_id_3abb9464_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true& */ "./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true&");
-/* harmony import */ var _ModalPostCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalPostCreate.vue?vue&type=script&lang=js& */ "./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SlidePost_vue_vue_type_template_id_3090e1c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true& */ "./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true&");
+/* harmony import */ var _SlidePost_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SlidePost.vue?vue&type=script&lang=js& */ "./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -57859,50 +57895,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ModalPostCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ModalPostCreate_vue_vue_type_template_id_3abb9464_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ModalPostCreate_vue_vue_type_template_id_3abb9464_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SlidePost_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SlidePost_vue_vue_type_template_id_3090e1c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SlidePost_vue_vue_type_template_id_3090e1c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "3abb9464",
+  "3090e1c4",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue"
+component.options.__file = "resources/js/cms/components/SlidePost/SlidePost.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalPostCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalPostCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalPostCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SlidePost_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./SlidePost.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SlidePost_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true&":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true& ***!
-  \********************************************************************************************************************/
+/***/ "./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true& ***!
+  \********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalPostCreate_vue_vue_type_template_id_3abb9464_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/ModalPostCreate/ModalPostCreate.vue?vue&type=template&id=3abb9464&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalPostCreate_vue_vue_type_template_id_3abb9464_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SlidePost_vue_vue_type_template_id_3090e1c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/cms/components/SlidePost/SlidePost.vue?vue&type=template&id=3090e1c4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SlidePost_vue_vue_type_template_id_3090e1c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalPostCreate_vue_vue_type_template_id_3abb9464_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SlidePost_vue_vue_type_template_id_3090e1c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -58462,7 +58498,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\development\app-nedkab\resources\js\cms\cms.js */"./resources/js/cms/cms.js");
+module.exports = __webpack_require__(/*! C:\projects\app-nedkab\resources\js\cms\cms.js */"./resources/js/cms/cms.js");
 
 
 /***/ })

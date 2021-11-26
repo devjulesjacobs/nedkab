@@ -1,6 +1,6 @@
 <template>
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <div v-show="value" class="fixed inset-0 overflow-hidden z-50" aria-labelledby="slide-over-title" role="dialog"
+    <div class="fixed inset-0 overflow-hidden z-50" aria-labelledby="slide-over-title" role="dialog"
          aria-modal="true">
         <div class="absolute inset-0 overflow-hidden bg-gray-500 bg-opacity-75 transition-opacity">
             <!-- Background overlay, show/hide based on slide-over state. -->
@@ -15,7 +15,7 @@
                                         Nieuwe Post
                                     </h2>
                                     <div class="ml-3 h-7 flex items-center">
-                                        <button @click="updateValue" type="button"
+                                        <button @click="hideSlide" type="button"
                                                 class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             <span class="sr-only">Close panel</span>
                                             <!-- Heroicon name: outline/x -->
@@ -80,7 +80,7 @@
 
 <script>
 export default {
-    name: "ModalPostCreate",
+    name: "SlidePost",
     data() {
         return {
             form: {
@@ -98,8 +98,6 @@ export default {
     },
     methods: {
         createPost() {
-            let app = this;
-
             let imagefile = document.querySelector('#image-create');
 
             let formData = new FormData;
@@ -113,17 +111,34 @@ export default {
                 }
             })
                 .then((res) => {
-                    app.$emit('refreshPostsList');
-                    app.$emit('hideModal');
-                }).catch((err) => {
-                console.log(err);
-            })
+                    this.$emit('refresh');
+                    this.$emit('hide');
+                }).catch((err) => { console.log(err) })
         },
 
-        updateValue: function () {
-            this.$emit('hideModal');
+        updatePost(id) {
+            axios.patch('/api/post/'+id, this.editPost)
+                .then((res) => {
+                    this.$emit('refresh');
+                    this.$emit('hide');
+                })
+        },
+
+        hideSlide: function () {
+            this.$emit('hide');
         },
     },
+    props: {
+        views: {
+            create: false,
+            edit: false
+        },
+        editPost: {
+            title: null,
+            body: null,
+            image: null
+        }
+    }
 }
 </script>
 

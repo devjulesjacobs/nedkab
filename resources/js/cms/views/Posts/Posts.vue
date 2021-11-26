@@ -1,7 +1,7 @@
 <template>
     <div id="Posts">
 
-        <button @click="modals.showModalCreate = true"  type="button" class="float-right mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 bg-blue-theme">
+        <button @click="showSlide('create')"  type="button" class="float-right mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 bg-blue-theme">
             Nieuwe Post
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
@@ -40,7 +40,7 @@
                                     </a>
                                 </div>
                                 <div class="mt-6 flex items-center">
-                                    <button @click="getPost(post.id)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <button @click="setEditPost(post.id)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                         Bewerken
                                     </button>
                                 </div>
@@ -52,33 +52,44 @@
 
         </div>
 
-        <ModalPostCreate v-show="modals.showModalCreate"
-                         v-model="modals.showModalCreate"
-                         @refreshPostsList="getPosts"
-                         @hideModal="hideModalCreate"/>
+        <SlidePost v-show="slide.show"
+                    :views="slide.views"
+                    :editPost="editPost"
+                    @refresh="getPosts"
+                    @hide="hideSlide()" />
     </div>
 </template>
 
 <script>
-import ModalPostCreate from "../../components/ModalPostCreate/ModalPostCreate";
+import SlidePost from "../../components/SlidePost/SlidePost";
 
 export default {
     name: "Posts",
     data() {
         return {
-            modals: {
-                showModalCreate: false
+            slide: {
+                show: false,
+                views: {
+                    create: false,
+                    edit: false
+                }
             },
             posts: [],
-            currentPost: []
+            editPost: []
         }
     },
     mounted() {
         this.getPosts();
     },
     methods: {
-        hideModalCreate() {
-            this.modals.showModalCreate = false;
+        showSlide(type) {
+            // Set defaults
+            this.slide.views.create = false;
+            this.slide.views.edit = false;
+            // Set show
+            this.slide.views[type] = true;
+            // Show slide
+            this.slide.show = true;
         },
 
         getPosts() {
@@ -88,15 +99,25 @@ export default {
                 });
         },
 
+        setEditPost(id) {
+            axios.get('/api/post/'+id)
+                .then((res) => {
+                    this.editFaq = res.data;
+                    this.showSlide('edit');
+                })
+        },
+
         getPost(id) {
             axios.get('/api/post/' + id)
                 .then((res) => {
                     this.currentPost = res.data
                 })
-        }
+        },
+
+        hideSlide() { this.slide.show = false }
     },
     components: {
-        ModalPostCreate
+        SlidePost
     },
 }
 </script>
