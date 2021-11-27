@@ -6,7 +6,7 @@
                 <!-- Background overlay, show/hide based on slide-over state. -->
                 <div class="absolute inset-0" aria-hidden="true">
                     <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16">
-                        <div v-if="show" class="w-screen max-w-2xl">
+                        <div v-if="show" class="w-screen max-w-2xl sx:max-w-full">
                             <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
                                 <div class="px-6 mb-6">
                                     <div class="flex items-start justify-between">

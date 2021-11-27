@@ -25,7 +25,8 @@
         -->
         <div v-if="authenticated">
             <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-            <div class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
+            <transition name="slide-fade-to-right">
+                <div v-if="views.mobileNav" class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
                 <!--
                   Off-canvas menu overlay, show/hide based on off-canvas menu state.
 
@@ -36,7 +37,7 @@
                     From: "opacity-100"
                     To: "opacity-0"
                 -->
-                <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
+                <div @click="toggleMobileNav" class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
 
                 <!--
                   Off-canvas menu, show/hide based on off-canvas menu state.
@@ -60,7 +61,7 @@
                         To: "opacity-0"
                     -->
                     <div class="absolute top-0 right-0 -mr-12 pt-2">
-                        <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <button @click="toggleMobileNav" type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                             <span class="sr-only">Close sidebar</span>
                             <!-- Heroicon name: outline/x -->
                             <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -134,7 +135,7 @@
                     <!-- Dummy element to force sidebar to shrink to fit close icon -->
                 </div>
             </div>
-
+            </transition>
             <!-- Static sidebar for desktop -->
             <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
                 <!-- Sidebar component, swap this element with another sidebar if you like -->
@@ -189,9 +190,10 @@
                     </div>
                 </div>
             </div>
+
             <div class="md:pl-64 flex flex-col flex-1">
                 <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
-                    <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
+                    <button @click="toggleMobileNav" type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
                         <span class="sr-only">Open sidebar</span>
                         <!-- Heroicon name: outline/menu-alt-2 -->
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -241,14 +243,16 @@
                                     From: "transform opacity-100 scale-100"
                                     To: "transform opacity-0 scale-95"
                                 -->
-                                <div v-show="views.miniMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                    <!-- Active: "bg-gray-100", Not Active: "" -->
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                                <transition name="slide-fade">
+                                    <div v-show="views.miniMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                        <!-- Active: "bg-gray-100", Not Active: "" -->
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
 
-                                    <button @click="signOut" type="button" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
-                                </div>
+                                        <button @click="signOut" type="button" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
+                                    </div>
+                                </transition>
                             </div>
                         </div>
                     </div>
@@ -277,7 +281,8 @@ export default {
     data() {
         return {
             views: {
-                miniMenu: false
+                miniMenu: false,
+                mobileNav: false
             }
         }
     },
@@ -303,6 +308,10 @@ export default {
 
         toggleMiniMenu() {
             (this.views.miniMenu) ? this.views.miniMenu = false : this.views.miniMenu = true;
+        },
+
+        toggleMobileNav() {
+            this.views.mobileNav = !this.views.mobileNav;
         }
     },
 };

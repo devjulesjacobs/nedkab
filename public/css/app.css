@@ -32119,6 +32119,19 @@ video {
   opacity: 0;
 }
 
+.slide-fade-to-right-enter-active {
+  transition: all 0.25s ease;
+}
+
+.slide-fade-to-right-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-to-right-enter, .slide-fade-to-right-leave-to {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
 .truncate-2-lines {
   max-height: 3.6em;
   /* double the size of line-height */

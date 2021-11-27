@@ -15,37 +15,36 @@
             <!-- This example requires Tailwind CSS v2.0+ -->
             <div class="relative">
                 <div class="relative">
-                    <div class="mx-auto grid gap-5 grid-cols-4">
-
+                    <div class="mx-auto grid gap-5 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
                         <div v-for="post in posts" :key="post.id" class="flex flex-col rounded-lg shadow-lg overflow-hidden">
-                            <div class="flex-shrink-0">
-                                <img class="h-48 w-full object-cover"
-                                     :src="'/img/posts/'+post.image"
-                                     alt="post.title">
-                            </div>
-                            <div class="flex-1 bg-white p-6 flex flex-col justify-between">
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-blue-800">
-                                        <a href="#" class="hover:underline">
-                                            Nieuws
+                                <div class="flex-shrink-0">
+                                    <img class="h-48 w-full object-cover"
+                                         :src="'/img/posts/'+post.image"
+                                         alt="post.title">
+                                </div>
+                                <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-blue-800">
+                                            <a href="#" class="hover:underline">
+                                                Nieuws
+                                            </a>
+                                        </p>
+                                        <a href="#" class="block mt-2">
+                                            <p class="text-xl font-semibold text-gray-900">
+                                                {{ post.title }}
+                                            </p>
+                                            <p class="mt-3 text-base text-gray-500 truncate">
+                                                {{ post.body }}
+                                            </p>
                                         </a>
-                                    </p>
-                                    <a href="#" class="block mt-2">
-                                        <p class="text-xl font-semibold text-gray-900">
-                                            {{ post.title }}
-                                        </p>
-                                        <p class="mt-3 text-base text-gray-500 truncate">
-                                            {{ post.body }}
-                                        </p>
-                                    </a>
-                                </div>
-                                <div class="mt-6 flex items-center">
-                                    <button @click="setEditPost(post.id)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                        Bewerken
-                                    </button>
+                                    </div>
+                                    <div class="mt-6 flex items-center">
+                                        <button @click="setEditPost(post.id)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-blue-600 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                            Bewerken
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
