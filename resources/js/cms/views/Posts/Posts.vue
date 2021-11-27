@@ -34,7 +34,7 @@
                                         <p class="text-xl font-semibold text-gray-900">
                                             {{ post.title }}
                                         </p>
-                                        <p class="mt-3 text-base text-gray-500">
+                                        <p class="mt-3 text-base text-gray-500 truncate">
                                             {{ post.body }}
                                         </p>
                                     </a>
@@ -52,11 +52,11 @@
 
         </div>
 
-        <SlidePost v-show="slide.show"
-                    :views="slide.views"
-                    :editPost="editPost"
-                    @refresh="getPosts"
-                    @hide="hideSlide()" />
+            <SlidePost :show="slide.show"
+                       :views="slide.views"
+                       :editPost="editPost"
+                       @refresh="getPosts"
+                       @hide="hideSlide()" />
     </div>
 </template>
 

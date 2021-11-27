@@ -2383,31 +2383,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SlidePost",
   data: function data() {
@@ -2477,7 +2452,8 @@ __webpack_require__.r(__webpack_exports__);
       title: null,
       body: null,
       image: null
-    }
+    },
+    show: false
   }
 });
 
@@ -40115,557 +40091,604 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "fixed inset-0 overflow-hidden z-50",
-      attrs: {
-        "aria-labelledby": "slide-over-title",
-        role: "dialog",
-        "aria-modal": "true",
-      },
-    },
-    [
-      _c(
-        "div",
-        {
-          staticClass:
-            "absolute inset-0 overflow-hidden bg-gray-500 bg-opacity-75 transition-opacity",
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "absolute inset-0",
-              attrs: { "aria-hidden": "true" },
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "fixed inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16",
-                },
-                [
-                  _vm.views.create
-                    ? _c("div", { staticClass: "w-screen max-w-2xl" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll",
-                          },
-                          [
-                            _c("div", { staticClass: "px-6 mb-6" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex items-start justify-between",
-                                },
-                                [
-                                  _c(
-                                    "h2",
-                                    {
-                                      staticClass:
-                                        "text-lg font-medium text-gray-900",
-                                      attrs: { id: "slide-over-title" },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Nieuwe Post\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "ml-3 h-7 flex items-center",
-                                    },
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                          attrs: { type: "button" },
-                                          on: { click: _vm.hideSlide },
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("Close panel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "svg",
-                                            {
-                                              staticClass: "h-6 w-6",
-                                              attrs: {
-                                                xmlns:
-                                                  "http://www.w3.org/2000/svg",
-                                                fill: "none",
-                                                viewBox: "0 0 24 24",
-                                                stroke: "currentColor",
-                                                "aria-hidden": "true",
-                                              },
-                                            },
-                                            [
-                                              _c("path", {
-                                                attrs: {
-                                                  "stroke-linecap": "round",
-                                                  "stroke-linejoin": "round",
-                                                  "stroke-width": "2",
-                                                  d: "M6 18L18 6M6 6l12 12",
-                                                },
-                                              }),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "form",
-                              {
-                                attrs: {
-                                  method: "post",
-                                  enctype: "multipart/form-data",
-                                },
-                              },
-                              [
-                                _c("div", { staticClass: "px-6 mb-6" }, [
-                                  _c("div", { staticClass: "sm:col-span-3" }, [
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass:
-                                          "block text-sm font-medium text-gray-700",
-                                        attrs: { for: "first-name" },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Titel\n                                    "
-                                        ),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-1" }, [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.form.create.title,
-                                            expression: "form.create.title",
-                                          },
-                                        ],
-                                        staticClass:
-                                          "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-                                        attrs: { type: "text", required: "" },
-                                        domProps: {
-                                          value: _vm.form.create.title,
-                                        },
-                                        on: {
-                                          input: function ($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.form.create,
-                                              "title",
-                                              $event.target.value
-                                            )
-                                          },
-                                        },
-                                      }),
-                                    ]),
-                                  ]),
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "px-6 mb-6" }, [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass:
-                                        "block text-sm font-medium text-gray-700",
-                                      attrs: { for: "about" },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Body\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "mt-1" }, [
-                                    _c("textarea", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.create.body,
-                                          expression: "form.create.body",
-                                        },
-                                      ],
-                                      staticClass:
-                                        "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2",
-                                      attrs: { rows: "6" },
-                                      domProps: { value: _vm.form.create.body },
-                                      on: {
-                                        input: function ($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.form.create,
-                                            "body",
-                                            $event.target.value
-                                          )
-                                        },
-                                      },
-                                    }),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "p",
-                                    {
-                                      staticClass: "mt-2 text-sm text-gray-500",
-                                    },
-                                    [_vm._v("Schrijf hier je nieuwe post.")]
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _vm._m(0),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "px-6" }, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                      attrs: { type: "button" },
-                                      on: {
-                                        click: function ($event) {
-                                          $event.preventDefault()
-                                          return _vm.createPost.apply(
-                                            null,
-                                            arguments
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Aanmaken\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                ]),
-                              ]
-                            ),
-                          ]
-                        ),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.views.edit
-                    ? _c("div", { staticClass: "w-screen max-w-2xl" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll",
-                          },
-                          [
-                            _c("div", { staticClass: "px-6 mb-6" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex items-start justify-between",
-                                },
-                                [
-                                  _c(
-                                    "h2",
-                                    {
-                                      staticClass:
-                                        "text-lg font-medium text-gray-900",
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Nieuwe Post\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "ml-3 h-7 flex items-center",
-                                    },
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                          attrs: { type: "button" },
-                                          on: { click: _vm.hideSlide },
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("Close panel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "svg",
-                                            {
-                                              staticClass: "h-6 w-6",
-                                              attrs: {
-                                                xmlns:
-                                                  "http://www.w3.org/2000/svg",
-                                                fill: "none",
-                                                viewBox: "0 0 24 24",
-                                                stroke: "currentColor",
-                                                "aria-hidden": "true",
-                                              },
-                                            },
-                                            [
-                                              _c("path", {
-                                                attrs: {
-                                                  "stroke-linecap": "round",
-                                                  "stroke-linejoin": "round",
-                                                  "stroke-width": "2",
-                                                  d: "M6 18L18 6M6 6l12 12",
-                                                },
-                                              }),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "form",
-                              {
-                                attrs: {
-                                  method: "post",
-                                  enctype: "multipart/form-data",
-                                },
-                              },
-                              [
-                                _c("div", { staticClass: "px-6 mb-6" }, [
-                                  _c("div", { staticClass: "sm:col-span-3" }, [
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass:
-                                          "block text-sm font-medium text-gray-700",
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Titel\n                                    "
-                                        ),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-1" }, [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.editPost.title,
-                                            expression: "editPost.title",
-                                          },
-                                        ],
-                                        staticClass:
-                                          "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-                                        attrs: { type: "text", required: "" },
-                                        domProps: { value: _vm.editPost.title },
-                                        on: {
-                                          input: function ($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.editPost,
-                                              "title",
-                                              $event.target.value
-                                            )
-                                          },
-                                        },
-                                      }),
-                                    ]),
-                                  ]),
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "px-6 mb-6" }, [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass:
-                                        "block text-sm font-medium text-gray-700",
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Body\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "mt-1" }, [
-                                    _c("textarea", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.editPost.body,
-                                          expression: "editPost.body",
-                                        },
-                                      ],
-                                      staticClass:
-                                        "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2",
-                                      attrs: { rows: "6" },
-                                      domProps: { value: _vm.editPost.body },
-                                      on: {
-                                        input: function ($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.editPost,
-                                            "body",
-                                            $event.target.value
-                                          )
-                                        },
-                                      },
-                                    }),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "p",
-                                    {
-                                      staticClass: "mt-2 text-sm text-gray-500",
-                                    },
-                                    [_vm._v("Schrijf hier je nieuwe post.")]
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _vm._m(1),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "px-6" }, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                      attrs: { type: "button" },
-                                      on: {
-                                        click: function ($event) {
-                                          $event.preventDefault()
-                                          return _vm.updatePost(_vm.editPost.id)
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Bijwerken\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                ]),
-                              ]
-                            ),
-                          ]
-                        ),
-                      ])
-                    : _vm._e(),
-                ]
-              ),
-            ]
-          ),
-        ]
-      ),
-    ]
-  )
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-6 mb-6" }, [
-      _c("div", { staticClass: "sm:col-span-3" }, [
-        _c(
-          "label",
+  return _c("transition", { attrs: { name: "slide-fade" } }, [
+    _vm.show
+      ? _c(
+          "div",
           {
-            staticClass: "block text-sm font-medium text-gray-700",
-            attrs: { for: "first-name" },
+            staticClass: "fixed inset-0 overflow-hidden z-50",
+            attrs: {
+              "aria-labelledby": "slide-over-title",
+              role: "dialog",
+              "aria-modal": "true",
+            },
           },
           [
-            _vm._v(
-              "\n                                        Image\n                                    "
+            _c(
+              "div",
+              {
+                staticClass:
+                  "absolute inset-0 overflow-hidden bg-gray-500 bg-opacity-75 transition-opacity",
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "absolute inset-0",
+                    attrs: { "aria-hidden": "true" },
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "fixed inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16",
+                      },
+                      [
+                        _vm.show
+                          ? _c("div", { staticClass: "w-screen max-w-2xl" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll",
+                                },
+                                [
+                                  _c("div", { staticClass: "px-6 mb-6" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "flex items-start justify-between",
+                                      },
+                                      [
+                                        _c(
+                                          "h2",
+                                          {
+                                            staticClass:
+                                              "text-lg font-medium text-gray-900",
+                                            attrs: { id: "slide-over-title" },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        " +
+                                                _vm._s(
+                                                  _vm.views.create
+                                                    ? "Nieuwe Post "
+                                                    : "Post Bewerken"
+                                                ) +
+                                                "\n                                    "
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "ml-3 h-7 flex items-center",
+                                          },
+                                          [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+                                                attrs: { type: "button" },
+                                                on: { click: _vm.hideSlide },
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "sr-only" },
+                                                  [_vm._v("Close panel")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "svg",
+                                                  {
+                                                    staticClass: "h-6 w-6",
+                                                    attrs: {
+                                                      xmlns:
+                                                        "http://www.w3.org/2000/svg",
+                                                      fill: "none",
+                                                      viewBox: "0 0 24 24",
+                                                      stroke: "currentColor",
+                                                    },
+                                                  },
+                                                  [
+                                                    _c("path", {
+                                                      attrs: {
+                                                        "stroke-linecap":
+                                                          "round",
+                                                        "stroke-linejoin":
+                                                          "round",
+                                                        "stroke-width": "2",
+                                                        d: "M6 18L18 6M6 6l12 12",
+                                                      },
+                                                    }),
+                                                  ]
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm.views.create
+                                    ? _c(
+                                        "form",
+                                        {
+                                          attrs: {
+                                            method: "post",
+                                            enctype: "multipart/form-data",
+                                          },
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "px-6 mb-6" },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "sm:col-span-3",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                            Titel\n                                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "mt-1" },
+                                                    [
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.form.create
+                                                                .title,
+                                                            expression:
+                                                              "form.create.title",
+                                                          },
+                                                        ],
+                                                        staticClass:
+                                                          "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                                        attrs: {
+                                                          type: "text",
+                                                          required: "",
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.form.create
+                                                              .title,
+                                                        },
+                                                        on: {
+                                                          input: function (
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.$set(
+                                                              _vm.form.create,
+                                                              "title",
+                                                              $event.target
+                                                                .value
+                                                            )
+                                                          },
+                                                        },
+                                                      }),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "px-6 mb-6" },
+                                            [
+                                              _c(
+                                                "label",
+                                                {
+                                                  staticClass:
+                                                    "block text-sm font-medium text-gray-700",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Body\n                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "mt-1" },
+                                                [
+                                                  _c("textarea", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.form.create.body,
+                                                        expression:
+                                                          "form.create.body",
+                                                      },
+                                                    ],
+                                                    staticClass:
+                                                      "shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2",
+                                                    attrs: { rows: "6" },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.form.create.body,
+                                                    },
+                                                    on: {
+                                                      input: function ($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.form.create,
+                                                          "body",
+                                                          $event.target.value
+                                                        )
+                                                      },
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticClass:
+                                                    "mt-2 text-sm text-gray-500",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "Schrijf hier je nieuwe post."
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "px-6 mb-6" },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "sm:col-span-3",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                            Image\n                                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "mt-1" },
+                                                    [
+                                                      _c("input", {
+                                                        attrs: {
+                                                          type: "file",
+                                                          id: "image_create",
+                                                          name: "image",
+                                                          accept:
+                                                            "image/png, image/jpeg",
+                                                        },
+                                                      }),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "px-6" }, [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+                                                attrs: { type: "button" },
+                                                on: {
+                                                  click: function ($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.createPost.apply(
+                                                      null,
+                                                      arguments
+                                                    )
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        Aanmaken\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                          ]),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.views.edit
+                                    ? _c(
+                                        "form",
+                                        {
+                                          attrs: {
+                                            method: "post",
+                                            enctype: "multipart/form-data",
+                                          },
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "px-6 mb-6" },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "sm:col-span-3",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                            Titel\n                                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "mt-1" },
+                                                    [
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.editPost
+                                                                .title,
+                                                            expression:
+                                                              "editPost.title",
+                                                          },
+                                                        ],
+                                                        staticClass:
+                                                          "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                                        attrs: {
+                                                          type: "text",
+                                                          required: "",
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.editPost.title,
+                                                        },
+                                                        on: {
+                                                          input: function (
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.$set(
+                                                              _vm.editPost,
+                                                              "title",
+                                                              $event.target
+                                                                .value
+                                                            )
+                                                          },
+                                                        },
+                                                      }),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "px-6 mb-6" },
+                                            [
+                                              _c(
+                                                "label",
+                                                {
+                                                  staticClass:
+                                                    "block text-sm font-medium text-gray-700",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Body\n                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "mt-1" },
+                                                [
+                                                  _c("textarea", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.editPost.body,
+                                                        expression:
+                                                          "editPost.body",
+                                                      },
+                                                    ],
+                                                    staticClass:
+                                                      "shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2",
+                                                    attrs: { rows: "6" },
+                                                    domProps: {
+                                                      value: _vm.editPost.body,
+                                                    },
+                                                    on: {
+                                                      input: function ($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.editPost,
+                                                          "body",
+                                                          $event.target.value
+                                                        )
+                                                      },
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticClass:
+                                                    "mt-2 text-sm text-gray-500",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "Schrijf hier je nieuwe post."
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "px-6 mb-6" },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "sm:col-span-3",
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                            Image\n                                        "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "mt-1" },
+                                                    [
+                                                      _c("input", {
+                                                        attrs: {
+                                                          type: "file",
+                                                          name: "image_edit",
+                                                          accept:
+                                                            "image/png, image/jpeg",
+                                                          id: "image_edit",
+                                                        },
+                                                      }),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "px-6" }, [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+                                                attrs: { type: "button" },
+                                                on: {
+                                                  click: function ($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.updatePost(
+                                                      _vm.editPost.id
+                                                    )
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        Bijwerken\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                          ]),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                ]
+                              ),
+                            ])
+                          : _vm._e(),
+                      ]
+                    ),
+                  ]
+                ),
+              ]
             ),
           ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "mt-1" }, [
-          _c("input", {
-            attrs: {
-              type: "file",
-              id: "image_create",
-              name: "image",
-              accept: "image/png, image/jpeg",
-            },
-          }),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-6 mb-6" }, [
-      _c("div", { staticClass: "sm:col-span-3" }, [
-        _c(
-          "label",
-          { staticClass: "block text-sm font-medium text-gray-700" },
-          [
-            _vm._v(
-              "\n                                        Image\n                                    "
-            ),
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "mt-1" }, [
-          _c("input", {
-            attrs: {
-              type: "file",
-              name: "image_edit",
-              accept: "image/png, image/jpeg",
-              id: "image_edit",
-            },
-          }),
-        ]),
-      ]),
-    ])
-  },
-]
+        )
+      : _vm._e(),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41149,7 +41172,10 @@ var render = function () {
                               _vm._v(" "),
                               _c(
                                 "p",
-                                { staticClass: "mt-3 text-base text-gray-500" },
+                                {
+                                  staticClass:
+                                    "mt-3 text-base text-gray-500 truncate",
+                                },
                                 [
                                   _vm._v(
                                     "\n                                        " +
@@ -41194,15 +41220,11 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("SlidePost", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.slide.show,
-            expression: "slide.show",
-          },
-        ],
-        attrs: { views: _vm.slide.views, editPost: _vm.editPost },
+        attrs: {
+          show: _vm.slide.show,
+          views: _vm.slide.views,
+          editPost: _vm.editPost,
+        },
         on: {
           refresh: _vm.getPosts,
           hide: function ($event) {

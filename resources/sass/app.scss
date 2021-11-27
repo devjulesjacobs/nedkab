@@ -19,6 +19,11 @@
 @import '../js/app/views/views';
 @import '../js/cms/views/views';
 
+// Transitions
+@import "transititions";
+
+// Classes
+@import "classes";
 
 body {
     background-color: #fafbfe !important;
@@ -54,4 +59,3 @@ body {
         border-color: rgb(80, 0, 80);
     }
 }
-

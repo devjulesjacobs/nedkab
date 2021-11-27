@@ -32106,6 +32106,28 @@ video {
   background: #21407a;
 }
 
+.slide-fade-enter-active {
+  transition: all 0.25s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+.truncate-2-lines {
+  max-height: 3.6em;
+  /* double the size of line-height */
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
 body {
   background-color: #fafbfe !important;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
