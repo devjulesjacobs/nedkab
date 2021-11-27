@@ -13,6 +13,12 @@ class PostController extends Controller
         return Post::orderBy('created_at', 'desc')->get();
     }
 
+    protected function getLatest() {
+        $posts = Post::orderBy('created_at', 'desc')->take(10)->get();
+
+        return $posts;
+    }
+
     protected function store(Request $request) {
         $validator = Validator::make($request->all(),[
             'title' => 'required|string|max:255',

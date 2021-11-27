@@ -24,6 +24,7 @@ Route::post('/cms/login', [App\Http\Controllers\AuthController::class, 'login'])
 // Posts
 Route::post('/posts', [App\Http\Controllers\PostController::class, 'store']);
 Route::get('/posts', [\App\Http\Controllers\PostController::class, 'getAll']);
+Route::get('/posts/latest', [\App\Http\Controllers\PostController::class, 'getLatest']);
 Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, 'show']);
 Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update']);
 Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy']);

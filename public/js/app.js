@@ -2366,16 +2366,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NewsFeed",
   data: function data() {
@@ -2386,8 +2376,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     fetchPosts: function fetchPosts() {
-      axios.get('/api/posts').then(function (res) {
-        console.log(res);
+      var _this = this;
+
+      axios.get('/api/posts/latest').then(function (res) {
+        _this.posts = res.data;
       })["catch"](function (e) {
         console.log('Error:', e);
       });
@@ -40246,79 +40238,61 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "news-feed mb-5 py-5 pl-5" }, [
-      _c("div", { staticClass: "news-feed-scroll" }, [
-        _c("div", { staticClass: "news-item", on: { click: _vm.showDetail } }, [
-          _c("img", {
-            attrs: {
-              src: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-              alt: "News-1",
+      _c(
+        "div",
+        { staticClass: "news-feed-scroll" },
+        _vm._l(_vm.posts, function (post) {
+          return _c(
+            "div",
+            {
+              key: post.id,
+              staticClass: "news-item",
+              on: { click: _vm.showDetail },
             },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "image-overlay" }),
-          _vm._v(" "),
-          _vm._m(0),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "news-item", on: { click: _vm.showDetail } }, [
-          _c("img", {
-            attrs: {
-              src: "https://images.pexels.com/photos/955405/pexels-photo-955405.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-              alt: "News-2",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "image-overlay" }),
-          _vm._v(" "),
-          _vm._m(1),
-        ]),
-      ]),
+            [
+              _c("img", {
+                attrs: {
+                  src: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                  alt: "News-1",
+                },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "image-overlay" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "news-header" }, [
+                _c("h1", { staticClass: "news-title" }, [
+                  _vm._v(_vm._s(post.title)),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "details-row" }, [
+                  _c(
+                    "span",
+                    { staticClass: "details-icon material-icons-outlined" },
+                    [_vm._v("calendar_today")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "details-text" }, [
+                    _vm._v(_vm._s(post.created_at)),
+                  ]),
+                ]),
+              ]),
+            ]
+          )
+        }),
+        0
+      ),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "news-feed-detail" }, [
       _c("div", { staticClass: "detail-header mb-3" }, [
-        _c("div", { on: { click: _vm.closeNewsDetail } }, [_vm._m(2)]),
+        _c("div", { on: { click: _vm.closeNewsDetail } }, [_vm._m(0)]),
       ]),
       _vm._v(" "),
-      _vm._m(3),
+      _vm._m(1),
     ]),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "news-header" }, [
-      _c("h1", { staticClass: "news-title" }, [
-        _vm._v("Voorbeeld titel voor een news post!"),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "details-row" }, [
-        _c("span", { staticClass: "details-icon material-icons-outlined" }, [
-          _vm._v("calendar_today"),
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "details-text" }, [_vm._v("24 november")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "news-header" }, [
-      _c("h1", { staticClass: "news-title" }, [_vm._v("Voorbeeld titel")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "details-row" }, [
-        _c("span", { staticClass: "details-icon material-icons-outlined" }, [
-          _vm._v("calendar_today"),
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "details-text" }, [_vm._v("24 november")]),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

@@ -29,21 +29,28 @@ body {
     background-color: #fafbfe !important;
     font-family: $font-family-apple !important;
 
-    .router-link-exact-active {
-        background-color: $theme_blue;
-        color: #fff;
-
-        svg {
+    .state-cms {
+        .router-link-exact-active {
+            background-color: $theme_blue;
             color: #fff;
-        }
-
-        &:hover {
-            background-color: $theme_blue !important;
-            color: #fff !important;
 
             svg {
-                color: #fff !important;
+                color: #fff;
             }
+
+            &:hover {
+                background-color: $theme_blue !important;
+                color: #fff !important;
+
+                svg {
+                    color: #fff !important;
+                }
+            }
+        }
+    }
+    .state-app {
+        .router-link-exact-active {
+            color: $theme_blue !important;
         }
     }
 }
