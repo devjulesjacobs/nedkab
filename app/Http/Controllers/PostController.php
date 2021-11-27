@@ -115,4 +115,13 @@ class PostController extends Controller
             ], 404);
         }
     }
+
+    protected function destroy($id) {
+        $post = Post::find($id);
+        $post->delete();
+
+        return response()->json([
+            'message' => 'Post removed.'
+        ], 201);
+    }
 }

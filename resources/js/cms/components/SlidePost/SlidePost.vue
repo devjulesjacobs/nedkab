@@ -104,6 +104,9 @@
                                                 class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                             Bijwerken
                                         </button>
+                                        <button @click.prevent="deletePost(editPost.id)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-sm shadow-sm font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 border-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                            Button text
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -171,6 +174,14 @@ export default {
                     this.$emit('refresh');
                     this.$emit('hide');
                 }).catch((err) => { console.log(err) })
+        },
+
+        deletePost(id) {
+            axios.delete('/api/post/'+id)
+            .then((res) => {
+                this.$emit('refresh');
+                this.$emit('hide');
+            })
         },
 
         hideSlide: function () {

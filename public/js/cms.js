@@ -2383,6 +2383,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SlidePost",
   data: function data() {
@@ -2437,6 +2440,15 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$emit('hide');
       })["catch"](function (err) {
         console.log(err);
+      });
+    },
+    deletePost: function deletePost(id) {
+      var _this3 = this;
+
+      axios["delete"]('/api/post/' + id).then(function (res) {
+        _this3.$emit('refresh');
+
+        _this3.$emit('hide');
       });
     },
     hideSlide: function hideSlide() {
@@ -40666,6 +40678,28 @@ var render = function () {
                                               [
                                                 _vm._v(
                                                   "\n                                        Bijwerken\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "inline-flex items-center px-2.5 py-1.5 border border-transparent text-sm shadow-sm font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 border-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500",
+                                                attrs: { type: "button" },
+                                                on: {
+                                                  click: function ($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.deletePost(
+                                                      _vm.editPost.id
+                                                    )
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        Button text\n                                    "
                                                 ),
                                               ]
                                             ),

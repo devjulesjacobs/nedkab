@@ -26,3 +26,4 @@ Route::post('/posts', [App\Http\Controllers\PostController::class, 'store']);
 Route::get('/posts', [\App\Http\Controllers\PostController::class, 'getAll']);
 Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, 'show']);
 Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update']);
+Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy']);
