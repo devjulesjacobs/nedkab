@@ -12,7 +12,7 @@ store.dispatch("auth/setValuesUser").then(() => {
         if (to.matched.some((record) => record.meta.requiresAuth)) {
 
             if (!store.getters['auth/authenticated']) {
-                next({ path: 'Signin' });
+                next({ name: 'Signin' });
             } else {
                 next();
             }

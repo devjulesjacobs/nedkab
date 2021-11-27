@@ -5,7 +5,7 @@
             <div class="news-feed-scroll">
 
                 <div v-for="post in posts" :key="post.id" class="news-item" @click="showDetail">
-                    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="News-1">
+                    <img :src="'/img/posts/'+post.image" :alt="post.title">
                     <div class="image-overlay"></div>
                     <div class="news-header">
                         <h1 class="news-title">{{ post.title }}</h1>
@@ -96,6 +96,7 @@ export default {
     },
 
     mounted() {
+        this.fetchPosts()
     },
 
     methods: {

@@ -10,7 +10,7 @@
         <h1 class="text-3xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-5">Posts</h1>
 
 
-        <div>
+        <div class="mt-20">
             <h1 class="text-2xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-3">Recent toegevoegd</h1>
             <!-- This example requires Tailwind CSS v2.0+ -->
             <div class="relative">
