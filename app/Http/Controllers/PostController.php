@@ -27,13 +27,16 @@ class PostController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 500);
         }
 
         switch($_FILES['image']['type']) {
             case 'image/png': $extension = '.png'; break;
             case 'image/jpeg': $extension = '.jpg'; break;
-            default: return response()->json(['message' => 'No image found or not the right filetype.'], 404);
+
+            default: return response()->json([
+                'image' => ['Not the right filetype, choose .png or .jpg']
+            ], 404);
         }
 
         $img = Image::make($request->file('image'));
@@ -80,7 +83,10 @@ class PostController extends Controller
             switch($_FILES['image']['type']) {
                 case 'image/png': $extension = '.png'; break;
                 case 'image/jpeg': $extension = '.jpg'; break;
-                default: return response()->json(['message' => 'No image found or not the right filetype.'], 404);
+
+                default: return response()->json([
+                    'image' => ['Not the right filetype, choose .png or .jpg']
+                ], 404);
             }
 
             $img = Image::make($request->file('image'));

@@ -31885,8 +31885,13 @@ video {
   position: fixed;
   top: 15px;
   right: 15px;
-  margin-right: 10px;
-  z-index: 999999;
+  z-index: 9999999999;
+}
+
+@media screen and (max-width: 640px) {
+  .notifications-list {
+    left: 15px;
+  }
 }
 
 .BottomNav {
@@ -32147,6 +32152,10 @@ video {
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
+}
+
+.rs {
+  color: red;
 }
 
 body {

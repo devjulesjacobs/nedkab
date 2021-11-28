@@ -15,6 +15,12 @@ import { mapGetters } from "vuex"
 
 export default {
     name: "NotificationsList",
+    data() {
+        return {
+            errors: null
+        }
+    },
+
     components: {
         NotificationMessage
     },

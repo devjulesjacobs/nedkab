@@ -32,32 +32,34 @@
                                     <div class="px-6 mb-6">
                                         <div class="sm:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">
-                                                Titel
+                                                Titel <span class="rs">*</span>
                                             </label>
-                                            <div class="mt-1">
+                                            <div class="my-1">
                                                 <input v-model="form.create.title" type="text" required
                                                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                             </div>
+                                            <p v-if="errors.title" v-for="error in errors.title" class="text-xs text-red-700 mt-1" >{{ error }}</p>
                                         </div>
                                     </div>
                                     <div class="px-6 mb-6">
                                         <label class="block text-sm font-medium text-gray-700">
-                                            Body
+                                            Body <span class="rs">*</span>
                                         </label>
                                         <div class="mt-1">
                                         <textarea v-model="form.create.body" rows="6"
                                                   class="shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"></textarea>
                                         </div>
-                                        <p class="mt-2 text-sm text-gray-500">Schrijf hier je nieuwe post.</p>
+                                        <p v-if="errors.body" v-for="error in errors.body" class="text-xs text-red-700 mt-1" >{{ error }}</p>
                                     </div>
                                     <div class="px-6 mb-6">
                                         <div class="sm:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">
-                                                Image
+                                                Image <span class="rs">*</span>
                                             </label>
                                             <div class="mt-1">
                                                 <input type="file" id="image_create" name="image" accept="image/png, image/jpeg" />
                                             </div>
+                                            <p v-if="errors.image" v-for="error in errors.image" class="text-xs text-red-700 mt-1" >{{ error }}</p>
                                         </div>
                                     </div>
                                     <div class="px-6">
@@ -77,6 +79,7 @@
                                                 <input v-model="editPost.title" type="text" required
                                                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                             </div>
+                                        <p v-for="error in errors.title" class="text-xs text-red-700 mt-1" >{{ error }}</p>
                                         </div>
                                     </div>
                                     <div class="px-6 mb-6">
@@ -87,7 +90,7 @@
                                         <textarea v-model="editPost.body" rows="6"
                                                   class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"></textarea>
                                         </div>
-                                        <p class="mt-2 text-sm text-gray-500">Schrijf hier je nieuwe post.</p>
+                                        <p v-for="error in errors.body" class="text-xs text-red-700 mt-1" >{{ error }}</p>
                                     </div>
                                     <div class="px-6 mb-6">
                                         <div class="sm:col-span-3">
@@ -97,6 +100,7 @@
                                             <div class="mt-1">
                                                 <input type="file" name="image_edit" accept="image/png, image/jpeg" id="image_edit" />
                                             </div>
+                                        <p v-for="error in errors.image" class="text-xs text-red-700 mt-1" >{{ error }}</p>
                                         </div>
                                     </div>
                                     <div class="px-6">
@@ -126,12 +130,13 @@ export default {
         return {
             form: {
                 create: {
-                    title: null,
-                    body: null,
-                    image: null
+                    title: '',
+                    body: '',
+                    image: ''
                 }
             },
-            currentPost: []
+            currentPost: [],
+            errors: []
         }
     },
     mounted() {
@@ -139,12 +144,12 @@ export default {
     methods: {
 
         createPost() {
-            let imagefile = document.querySelector('#image_create');
+            let imagefile = document.querySelector('#image_create')
 
             let formData = new FormData;
-            formData.append('title', this.form.create.title);
-            formData.append('body', this.form.create.body);
-            formData.append("image", imagefile.files[0]);
+            formData.append('title', this.form.create.title)
+            formData.append('body', this.form.create.body)
+            formData.append("image", imagefile.files[0])
 
             axios.post('/api/posts', formData, {
                 headers: {
@@ -154,16 +159,27 @@ export default {
                 .then((res) => {
                     this.$emit('refresh');
                     this.$emit('hide');
-                }).catch((err) => { console.log(err) })
+                    this.$store.dispatch( 'cms/addNotification', {
+                        type: 'success',
+                        title: res.data.message
+                    });
+                }).catch((err) => {
+                    this.errors = err.response.data
+                    this.$store.dispatch('cms/addNotification', {
+                        type: 'error',
+                        title: 'Something went wrong ...',
+                        message: 'Something went wrong uploading your files!',
+                    })
+                })
         },
 
         updatePost(id) {
-            let imagefile = document.querySelector('#image_edit');
+            let imagefile = document.querySelector('#image_edit')
 
             let formData = new FormData;
-            formData.append('title', this.editPost.title);
-            formData.append('body', this.editPost.body);
-            formData.append("image", imagefile.files[0]);
+            formData.append('title', this.editPost.title)
+            formData.append('body', this.editPost.body)
+            formData.append("image", imagefile.files[0])
 
             axios.post('/api/post/'+id, formData, {
                 headers: {
@@ -171,21 +187,36 @@ export default {
                 }
             })
                 .then((res) => {
-                    this.$emit('refresh');
-                    this.$emit('hide');
-                }).catch((err) => { console.log(err) })
+                    this.$emit('refresh')
+                    this.$emit('hide')
+                    this.$store.dispatch( 'cms/addNotification', {
+                        type: 'success',
+                        title: res.data.message
+                    })
+                }).catch((err) => {
+                this.errors = err.response.data
+                    this.$store.dispatch('cms/addNotification', {
+                        type: 'error',
+                        title: 'Failed to update',
+                        message: 'Please check the form for errors!',
+                    })
+                })
         },
 
         deletePost(id) {
             axios.delete('/api/post/'+id)
             .then((res) => {
-                this.$emit('refresh');
-                this.$emit('hide');
+                this.$emit('refresh')
+                this.$emit('hide')
+                this.$store.dispatch( 'cms/addNotification', {
+                    type: 'success',
+                    title: res.data.message
+                })
             })
         },
 
         hideSlide: function () {
-            this.$emit('hide');
+            this.$emit('hide')
         },
     },
     props: {
@@ -194,9 +225,9 @@ export default {
             edit: false
         },
         editPost: {
-            title: null,
-            body: null,
-            image: null
+            title: '',
+            body: '',
+            image: ''
         },
         show: false
     }

@@ -90,6 +90,12 @@ export default {
         async submit() {
             await this.login(this.form);
 
+            this.$store.dispatch('cms/addNotification', {
+                type: 'success',
+                title: 'Logged in successfully!',
+                timer: 3000
+            });
+
             this.$router.replace({ name: "Dashboard" });
         }
     }

@@ -19,28 +19,29 @@ export default {
     name: "Dashboard",
 
     mounted() {
-        let app = this;
-
-        setTimeout(function (){
-            app.$store.dispatch( 'cms/addNotification', {
-                type: 'success',
-                message: 'Updated',
-            })
-        }, 2000);
-
-        setTimeout(function (){
-            app.$store.dispatch( 'cms/addNotification', {
-                type: 'success',
-                message: 'Updated',
-            })
-        }, 3500);
-
-        setTimeout(function (){
-            app.$store.dispatch( 'cms/addNotification', {
-                type: 'success',
-                message: 'Updated',
-            })
-        }, 4000);
+        // this.$store.dispatch('cms/addNotification', {
+        //     type: 'success',
+        //     title: 'Succesfully did shit!',
+        //     message: 'This is just some simple message put under the title element!',
+        // });
+        //
+        // this.$store.dispatch('cms/addNotification', {
+        //     type: 'error',
+        //     title: 'Error something!',
+        //     message: 'This is just some simple message put under the title element!',
+        // });
+        //
+        // this.$store.dispatch('cms/addNotification', {
+        //     type: 'warning',
+        //     title: 'Warning something really dangerous!',
+        //     message: 'This is just some simple message put under the title element!',
+        // });
+        //
+        // this.$store.dispatch('cms/addNotification', {
+        //     type: 'info',
+        //     title: 'Just some information that can get to you ...',
+        //     message: 'This is just some simple message put under the title element!',
+        // });
     },
 
     methods: {
@@ -50,7 +51,10 @@ export default {
 
         async signOut() {
             await this.logout();
-
+            await this.$store.dispatch('cms/addNotification', {
+                type: 'success',
+                title: 'Logged out successfully.',
+            });
             this.$router.replace({ name: "Signin" });
         },
     },

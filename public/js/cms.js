@@ -1956,13 +1956,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotificationMessage",
   props: ['notification'],
-  mounted: function mounted() {
-    console.log('aa');
-  },
   data: function data() {
     return {
       timeout: null
@@ -1971,16 +1981,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var _this = this;
 
+    var timer = this.notification.timer ? this.notification.timer : 3000;
     this.timeout = setTimeout(function () {
       _this.removeNotification(_this.notification);
-    }, 3000);
+    }, timer);
   },
   beforeDestroy: function beforeDestroy() {
     clearTimeout(this.timeout);
   },
   computed: {
-    typeClass: function typeClass() {
-      return "alert-".concat(this.notification.type);
+    notificationType: function notificationType() {
+      switch (this.notification.type) {
+        case 'success':
+          return {
+            bg: 'bg-green-50',
+            colorTitle: 'text-green-800',
+            colorMessage: 'text-green-700',
+            icon: this.notification.type
+          };
+
+        case 'error':
+          return {
+            bg: 'bg-red-50',
+            colorTitle: 'text-red-800',
+            colorMessage: 'text-red-700',
+            icon: this.notification.type
+          };
+
+        case 'warning':
+          return {
+            bg: 'bg-yellow-50',
+            colorTitle: 'text-yellow-800',
+            colorMessage: 'text-yellow-700',
+            icon: this.notification.type
+          };
+
+        case 'info':
+          return {
+            bg: 'bg-blue-50',
+            colorTitle: 'text-blue-800',
+            colorMessage: 'text-blue-700',
+            icon: this.notification.type
+          };
+      }
     }
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
@@ -2016,6 +2059,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotificationsList",
+  data: function data() {
+    return {
+      errors: null
+    };
+  },
   components: {
     NotificationMessage: _NotificationMessage_NotificationMessage__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2498,18 +2546,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SlidePost",
   data: function data() {
     return {
       form: {
         create: {
-          title: null,
-          body: null,
-          image: null
+          title: '',
+          body: '',
+          image: ''
         }
       },
-      currentPost: []
+      currentPost: [],
+      errors: []
     };
   },
   mounted: function mounted() {},
@@ -2530,8 +2583,19 @@ __webpack_require__.r(__webpack_exports__);
         _this.$emit('refresh');
 
         _this.$emit('hide');
+
+        _this.$store.dispatch('cms/addNotification', {
+          type: 'success',
+          title: res.data.message
+        });
       })["catch"](function (err) {
-        console.log(err);
+        _this.errors = err.response.data;
+
+        _this.$store.dispatch('cms/addNotification', {
+          type: 'error',
+          title: 'Something went wrong ...',
+          message: 'Something went wrong uploading your files!'
+        });
       });
     },
     updatePost: function updatePost(id) {
@@ -2550,8 +2614,19 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$emit('refresh');
 
         _this2.$emit('hide');
+
+        _this2.$store.dispatch('cms/addNotification', {
+          type: 'success',
+          title: res.data.message
+        });
       })["catch"](function (err) {
-        console.log(err);
+        _this2.errors = err.response.data;
+
+        _this2.$store.dispatch('cms/addNotification', {
+          type: 'error',
+          title: 'Failed to update',
+          message: 'Please check the form for errors!'
+        });
       });
     },
     deletePost: function deletePost(id) {
@@ -2561,6 +2636,11 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$emit('refresh');
 
         _this3.$emit('hide');
+
+        _this3.$store.dispatch('cms/addNotification', {
+          type: 'success',
+          title: res.data.message
+        });
       });
     },
     hideSlide: function hideSlide() {
@@ -2573,9 +2653,9 @@ __webpack_require__.r(__webpack_exports__);
       edit: false
     },
     editPost: {
-      title: null,
-      body: null,
-      image: null
+      title: '',
+      body: '',
+      image: ''
     },
     show: false
   }
@@ -2704,11 +2784,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this.login(_this.form);
 
               case 2:
+                _this.$store.dispatch('cms/addNotification', {
+                  type: 'success',
+                  title: 'Logged in successfully!',
+                  timer: 3000
+                });
+
                 _this.$router.replace({
                   name: "Dashboard"
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -2762,26 +2848,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
-  mounted: function mounted() {
-    var app = this;
-    setTimeout(function () {
-      app.$store.dispatch('cms/addNotification', {
-        type: 'success',
-        message: 'Updated'
-      });
-    }, 2000);
-    setTimeout(function () {
-      app.$store.dispatch('cms/addNotification', {
-        type: 'success',
-        message: 'Updated'
-      });
-    }, 3500);
-    setTimeout(function () {
-      app.$store.dispatch('cms/addNotification', {
-        type: 'success',
-        message: 'Updated'
-      });
-    }, 4000);
+  mounted: function mounted() {// this.$store.dispatch('cms/addNotification', {
+    //     type: 'success',
+    //     title: 'Succesfully did shit!',
+    //     message: 'This is just some simple message put under the title element!',
+    // });
+    //
+    // this.$store.dispatch('cms/addNotification', {
+    //     type: 'error',
+    //     title: 'Error something!',
+    //     message: 'This is just some simple message put under the title element!',
+    // });
+    //
+    // this.$store.dispatch('cms/addNotification', {
+    //     type: 'warning',
+    //     title: 'Warning something really dangerous!',
+    //     message: 'This is just some simple message put under the title element!',
+    // });
+    //
+    // this.$store.dispatch('cms/addNotification', {
+    //     type: 'info',
+    //     title: 'Just some information that can get to you ...',
+    //     message: 'This is just some simple message put under the title element!',
+    // });
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])({
     logout: "cms/logout"
@@ -2798,11 +2887,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this.logout();
 
               case 2:
+                _context.next = 4;
+                return _this.$store.dispatch('cms/addNotification', {
+                  type: 'success',
+                  title: 'Logged out successfully.'
+                });
+
+              case 4:
                 _this.$router.replace({
                   name: "Signin"
                 });
 
-              case 3:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -39337,85 +39433,183 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "rounded-md bg-green-50 p-4", class: _vm.typeClass },
+    {
+      staticClass: "rounded-md p-4 shadow-lg mb-3",
+      class: _vm.notificationType.bg,
+    },
     [
       _c("div", { staticClass: "flex" }, [
         _c("div", { staticClass: "flex-shrink-0" }, [
-          _c(
-            "svg",
-            {
-              staticClass: "h-5 w-5 text-green-400",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 20 20",
-                fill: "currentColor",
-                "aria-hidden": "true",
-              },
-            },
-            [
-              _c("path", {
-                attrs: {
-                  "fill-rule": "evenodd",
-                  d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z",
-                  "clip-rule": "evenodd",
+          _vm.notificationType.icon === "success"
+            ? _c(
+                "svg",
+                {
+                  staticClass: "h-5 w-5 text-green-400",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20",
+                    fill: "currentColor",
+                    "aria-hidden": "true",
+                  },
                 },
-              }),
-            ]
-          ),
+                [
+                  _c("path", {
+                    attrs: {
+                      "fill-rule": "evenodd",
+                      d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z",
+                      "clip-rule": "evenodd",
+                    },
+                  }),
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.notificationType.icon === "error"
+            ? _c(
+                "svg",
+                {
+                  staticClass: "h-5 w-5 text-red-400",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20",
+                    fill: "currentColor",
+                    "aria-hidden": "true",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      "fill-rule": "evenodd",
+                      d: "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z",
+                      "clip-rule": "evenodd",
+                    },
+                  }),
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.notificationType.icon === "warning"
+            ? _c(
+                "svg",
+                {
+                  staticClass: "h-5 w-5 text-yellow-400",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20",
+                    fill: "currentColor",
+                    "aria-hidden": "true",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      "fill-rule": "evenodd",
+                      d: "M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z",
+                      "clip-rule": "evenodd",
+                    },
+                  }),
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.notificationType.icon === "info"
+            ? _c(
+                "svg",
+                {
+                  staticClass: "h-5 w-5 text-blue-400",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20",
+                    fill: "currentColor",
+                    "aria-hidden": "true",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      "fill-rule": "evenodd",
+                      d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z",
+                      "clip-rule": "evenodd",
+                    },
+                  }),
+                ]
+              )
+            : _vm._e(),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "ml-3" }, [
-          _c("p", { staticClass: "text-sm font-medium text-green-800" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.notification.message) +
-                "\n            "
-            ),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "ml-auto pl-3" }, [
-          _c("div", { staticClass: "-mx-1.5 -my-1.5" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "inline-flex bg-green-50 rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600",
-                attrs: { type: "button" },
-              },
-              [
-                _c("span", { staticClass: "sr-only" }, [_vm._v("Dismiss")]),
-                _vm._v(" "),
-                _c(
-                  "svg",
-                  {
-                    staticClass: "h-5 w-5",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      viewBox: "0 0 20 20",
-                      fill: "currentColor",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "fill-rule": "evenodd",
-                        d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",
-                        "clip-rule": "evenodd",
-                      },
-                    }),
-                  ]
-                ),
-              ]
-            ),
-          ]),
+          _vm.notification.title
+            ? _c(
+                "h3",
+                {
+                  staticClass: "text-sm font-medium text-green-800",
+                  class: _vm.notificationType.colorTitle,
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.notification.title) +
+                      "\n            "
+                  ),
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.notification.message
+            ? _c(
+                "div",
+                {
+                  staticClass: "mt-2 text-sm text-green-700",
+                  class: _vm.notificationType.colorMessage,
+                },
+                [
+                  _c("p", [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.notification.message) +
+                        "\n                "
+                    ),
+                  ]),
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.notification.buttons
+            ? _c("div", { staticClass: "mt-4" }, [_vm._m(0)])
+            : _vm._e(),
         ]),
       ]),
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "-mx-2 -my-1.5 flex" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "bg-green-50 px-2 py-1.5 rounded-md text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600",
+          attrs: { type: "button" },
+        },
+        [_vm._v("\n                        View status\n                    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "ml-3 bg-green-50 px-2 py-1.5 rounded-md text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600",
+          attrs: { type: "button" },
+        },
+        [_vm._v("\n                        Dismiss\n                    ")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -40548,14 +40742,19 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "\n                                            Titel\n                                        "
+                                                          "\n                                            Titel "
+                                                        ),
+                                                        _c(
+                                                          "span",
+                                                          { staticClass: "rs" },
+                                                          [_vm._v("*")]
                                                         ),
                                                       ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c(
                                                       "div",
-                                                      { staticClass: "mt-1" },
+                                                      { staticClass: "my-1" },
                                                       [
                                                         _c("input", {
                                                           directives: [
@@ -40602,7 +40801,28 @@ var render = function () {
                                                         }),
                                                       ]
                                                     ),
-                                                  ]
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.errors.title,
+                                                      function (error) {
+                                                        return _vm.errors.title
+                                                          ? _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "text-xs text-red-700 mt-1",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(error)
+                                                                ),
+                                                              ]
+                                                            )
+                                                          : _vm._e()
+                                                      }
+                                                    ),
+                                                  ],
+                                                  2
                                                 ),
                                               ]
                                             ),
@@ -40619,7 +40839,12 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                        Body\n                                    "
+                                                      "\n                                        Body "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      { staticClass: "rs" },
+                                                      [_vm._v("*")]
                                                     ),
                                                   ]
                                                 ),
@@ -40668,19 +40893,27 @@ var render = function () {
                                                   ]
                                                 ),
                                                 _vm._v(" "),
-                                                _c(
-                                                  "p",
-                                                  {
-                                                    staticClass:
-                                                      "mt-2 text-sm text-gray-500",
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "Schrijf hier je nieuwe post."
-                                                    ),
-                                                  ]
+                                                _vm._l(
+                                                  _vm.errors.body,
+                                                  function (error) {
+                                                    return _vm.errors.body
+                                                      ? _c(
+                                                          "p",
+                                                          {
+                                                            staticClass:
+                                                              "text-xs text-red-700 mt-1",
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(error)
+                                                            ),
+                                                          ]
+                                                        )
+                                                      : _vm._e()
+                                                  }
                                                 ),
-                                              ]
+                                              ],
+                                              2
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -40702,7 +40935,12 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "\n                                            Image\n                                        "
+                                                          "\n                                            Image "
+                                                        ),
+                                                        _c(
+                                                          "span",
+                                                          { staticClass: "rs" },
+                                                          [_vm._v("*")]
                                                         ),
                                                       ]
                                                     ),
@@ -40722,7 +40960,28 @@ var render = function () {
                                                         }),
                                                       ]
                                                     ),
-                                                  ]
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.errors.image,
+                                                      function (error) {
+                                                        return _vm.errors.image
+                                                          ? _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "text-xs text-red-700 mt-1",
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(error)
+                                                                ),
+                                                              ]
+                                                            )
+                                                          : _vm._e()
+                                                      }
+                                                    ),
+                                                  ],
+                                                  2
                                                 ),
                                               ]
                                             ),
@@ -40838,7 +41097,26 @@ var render = function () {
                                                         }),
                                                       ]
                                                     ),
-                                                  ]
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.errors.title,
+                                                      function (error) {
+                                                        return _c(
+                                                          "p",
+                                                          {
+                                                            staticClass:
+                                                              "text-xs text-red-700 mt-1",
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(error)
+                                                            ),
+                                                          ]
+                                                        )
+                                                      }
+                                                    ),
+                                                  ],
+                                                  2
                                                 ),
                                               ]
                                             ),
@@ -40903,19 +41181,21 @@ var render = function () {
                                                   ]
                                                 ),
                                                 _vm._v(" "),
-                                                _c(
-                                                  "p",
-                                                  {
-                                                    staticClass:
-                                                      "mt-2 text-sm text-gray-500",
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "Schrijf hier je nieuwe post."
-                                                    ),
-                                                  ]
+                                                _vm._l(
+                                                  _vm.errors.body,
+                                                  function (error) {
+                                                    return _c(
+                                                      "p",
+                                                      {
+                                                        staticClass:
+                                                          "text-xs text-red-700 mt-1",
+                                                      },
+                                                      [_vm._v(_vm._s(error))]
+                                                    )
+                                                  }
                                                 ),
-                                              ]
+                                              ],
+                                              2
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -40957,7 +41237,26 @@ var render = function () {
                                                         }),
                                                       ]
                                                     ),
-                                                  ]
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.errors.image,
+                                                      function (error) {
+                                                        return _c(
+                                                          "p",
+                                                          {
+                                                            staticClass:
+                                                              "text-xs text-red-700 mt-1",
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(error)
+                                                            ),
+                                                          ]
+                                                        )
+                                                      }
+                                                    ),
+                                                  ],
+                                                  2
                                                 ),
                                               ]
                                             ),
