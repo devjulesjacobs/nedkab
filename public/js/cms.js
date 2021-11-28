@@ -41301,7 +41301,7 @@ var render = function () {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                        Button text\n                                    "
+                                                    "\n                                        Verwijderen\n                                    "
                                                   ),
                                                 ]
                                               ),
