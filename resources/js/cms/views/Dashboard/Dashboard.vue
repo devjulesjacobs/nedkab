@@ -18,6 +18,31 @@ import {mapActions} from "vuex";
 export default {
     name: "Dashboard",
 
+    mounted() {
+        let app = this;
+
+        setTimeout(function (){
+            app.$store.dispatch( 'cms/addNotification', {
+                type: 'success',
+                message: 'Updated',
+            })
+        }, 2000);
+
+        setTimeout(function (){
+            app.$store.dispatch( 'cms/addNotification', {
+                type: 'success',
+                message: 'Updated',
+            })
+        }, 3500);
+
+        setTimeout(function (){
+            app.$store.dispatch( 'cms/addNotification', {
+                type: 'success',
+                message: 'Updated',
+            })
+        }, 4000);
+    },
+
     methods: {
         ...mapActions({
             logout: "cms/logout",

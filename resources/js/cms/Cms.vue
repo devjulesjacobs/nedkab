@@ -252,15 +252,20 @@
                 </div>
             </main>
         </div>
+        <!-- Notifications -->
+        <notifications-list />
     </div>
 </template>
 
 <script>
+import NotificationsList from "../_components/NotificationsList/NotificationsList";
 import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "Cms",
-    components: {},
+    components: {
+        NotificationsList
+    },
     data() {
         return {
             views: {
@@ -296,6 +301,6 @@ export default {
         toggleMobileNav() {
             this.views.mobileNav = !this.views.mobileNav;
         }
-    },
+    }
 };
 </script>

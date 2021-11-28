@@ -135,9 +135,9 @@ export default {
         }
     },
     mounted() {
-
     },
     methods: {
+
         createPost() {
             let imagefile = document.querySelector('#image_create');
 
