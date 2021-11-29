@@ -2043,30 +2043,19 @@ __webpack_require__.r(__webpack_exports__);
       this.installation.show = false;
     },
     setDeviceType: function setDeviceType() {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera; // Disables popup
-
+      // Disables popup
       this.installation.screens.popup = false;
+      var userAgent = navigator.userAgent.toLowerCase();
 
-      if (/windows phone/i.test(userAgent)) {
+      if (userAgent.search("iphone") > -1 || userAgent.search("ipad") > -1 || userAgent.search("ipod") > -1) {
         this.installation.screens.iOS = true;
-        return "Windows Phone";
-      }
-
-      if (/android/i.test(userAgent)) {
+        return "iOS";
+      } else {
         this.installation.screens.Android = true;
         this.installation.show = false; // Todo: TEMP REMOVE LATER WHEN SCREENS ARE ADDED
 
         return "Android";
       }
-
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        this.installation.screens.Windows = true;
-        this.installation.show = false; // Todo: TEMP REMOVE LATER WHEN SCREENS ARE ADDED
-
-        return "iOS";
-      }
-
-      return false;
     }
   }
 });
