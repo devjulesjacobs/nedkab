@@ -31894,6 +31894,53 @@ video {
   }
 }
 
+.state-install .pre-installation .wrapper {
+  position: relative;
+}
+
+.state-install .pre-installation .wrapper .popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.state-install .pre-installation .installation.iOS {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.state-install .pre-installation .installation.iOS .installation-box {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+}
+
+.state-install .pre-installation .installation.iOS .installation-box:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #374151;
+}
+
+.state-install .pre-installation .installation.iOS .installation-box .footer-box img {
+  width: 15px;
+  margin-top: -3px;
+}
+
 .BottomNav {
   position: fixed;
   bottom: 0;
@@ -32145,6 +32192,19 @@ video {
   opacity: 0;
 }
 
+.slide-fade-up-enter-active {
+  transition: all 0.25s ease;
+}
+
+.slide-fade-up-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-up-enter, .slide-fade-up-leave-to {
+  transform: translateY(100px);
+  opacity: 0;
+}
+
 .truncate-2-lines {
   max-height: 3.6em;
   /* double the size of line-height */
@@ -32156,6 +32216,10 @@ video {
 
 .rs {
   color: red;
+}
+
+.bg-blue-theme {
+  background: #2C55A2;
 }
 
 body {

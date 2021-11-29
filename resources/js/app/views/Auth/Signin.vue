@@ -58,7 +58,7 @@
             </div>
         </div>
 
-
+        <installation v-if="!installation" />
         <!--        <installation-screen></installation-screen>-->
     </div>
 </template>
@@ -68,6 +68,7 @@ import Login from "../../components/Auth/Login.vue";
 import Register from "../../components/Auth/Register.vue";
 import ResetPassword from "../../components/Auth/ResetPassword.vue";
 import InstallationScreen from "../../components/InstallationScreen/InstallationScreen";
+import Installation from "../../../_components/Installation/Installation";
 
 import axios from "axios";
 import {mapActions} from "vuex";
@@ -85,24 +86,22 @@ export default {
                 Register: false,
                 ResetPassword: false,
             },
+            installation: false
         }
     },
     mounted() {
-        this.checkInstallationStatus();
+        this.checkInstallationState();
     },
     components: {
         Login,
         Register,
         ResetPassword,
-        InstallationScreen
+        InstallationScreen,
+        Installation
     },
     methods: {
-        checkInstallationStatus() {
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                return true
-            } else {
-                return false;
-            }
+        checkInstallationState() {
+            window.matchMedia('(display-mode: standalone)').matches ? this.installation = true : this.installation = false;
         }
     }
 };

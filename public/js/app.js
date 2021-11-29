@@ -1941,6 +1941,138 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/_components/Installation/Installation.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/_components/Installation/Installation.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Installation",
+  data: function data() {
+    return {
+      installation: {
+        show: true,
+        screens: {
+          popup: true,
+          iOS: false,
+          Android: false,
+          Windows: false
+        }
+      }
+    };
+  },
+  methods: {
+    hideInstallation: function hideInstallation() {
+      this.installation.show = false;
+    },
+    setDeviceType: function setDeviceType() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera; // Disables popup
+
+      this.installation.screens.popup = false;
+
+      if (/windows phone/i.test(userAgent)) {
+        this.installation.screens.iOS = true;
+        return "Windows Phone";
+      }
+
+      if (/android/i.test(userAgent)) {
+        this.installation.screens.Android = true;
+        this.installation.show = false; // Todo: TEMP REMOVE LATER WHEN SCREENS ARE ADDED
+
+        return "Android";
+      }
+
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        this.installation.screens.Windows = true;
+        this.installation.show = false; // Todo: TEMP REMOVE LATER WHEN SCREENS ARE ADDED
+
+        return "iOS";
+      }
+
+      return false;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/App.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/App.vue?vue&type=script&lang=js& ***!
@@ -2652,9 +2784,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Auth/Register.vue */ "./resources/js/app/components/Auth/Register.vue");
 /* harmony import */ var _components_Auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Auth/ResetPassword.vue */ "./resources/js/app/components/Auth/ResetPassword.vue");
 /* harmony import */ var _components_InstallationScreen_InstallationScreen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/InstallationScreen/InstallationScreen */ "./resources/js/app/components/InstallationScreen/InstallationScreen.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_Installation_Installation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../_components/Installation/Installation */ "./resources/js/_components/Installation/Installation.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2720,6 +2853,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -2738,25 +2872,23 @@ __webpack_require__.r(__webpack_exports__);
         Login: true,
         Register: false,
         ResetPassword: false
-      }
+      },
+      installation: false
     };
   },
   mounted: function mounted() {
-    this.checkInstallationStatus();
+    this.checkInstallationState();
   },
   components: {
     Login: _components_Auth_Login_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Register: _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     ResetPassword: _components_Auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    InstallationScreen: _components_InstallationScreen_InstallationScreen__WEBPACK_IMPORTED_MODULE_3__["default"]
+    InstallationScreen: _components_InstallationScreen_InstallationScreen__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Installation: _components_Installation_Installation__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   methods: {
-    checkInstallationStatus: function checkInstallationStatus() {
-      if (window.matchMedia('(display-mode: standalone)').matches) {
-        return true;
-      } else {
-        return false;
-      }
+    checkInstallationState: function checkInstallationState() {
+      window.matchMedia('(display-mode: standalone)').matches ? this.installation = true : this.installation = false;
     }
   }
 });
@@ -39832,6 +39964,273 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/_components/Installation/Installation.vue?vue&type=template&id=2a0c1df2&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/_components/Installation/Installation.vue?vue&type=template&id=2a0c1df2&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "slide-fade" } }, [
+    _vm.installation.show
+      ? _c("div", { staticClass: "state-install" }, [
+          _c("div", { staticClass: "pre-installation" }, [
+            _c(
+              "div",
+              {
+                staticClass: "fixed z-50 inset-0 overflow-y-auto",
+                attrs: {
+                  "aria-labelledby": "modal-title",
+                  role: "dialog",
+                  "aria-modal": "true",
+                },
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "wrapper w-full h-full pb-20" },
+                  [
+                    _c("div", {
+                      staticClass:
+                        "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity",
+                      attrs: { "aria-hidden": "true" },
+                    }),
+                    _vm._v(" "),
+                    _c("transition", { attrs: { name: "slide-fade-up" } }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.installation.screens.popup,
+                              expression: "installation.screens.popup",
+                            },
+                          ],
+                          staticClass: "popup w-full px-4",
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all",
+                            },
+                            [
+                              _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100",
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "h-6 w-6 text-green-600",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          fill: "none",
+                                          viewBox: "0 0 24 24",
+                                          stroke: "currentColor",
+                                          "aria-hidden": "true",
+                                        },
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round",
+                                            "stroke-width": "2",
+                                            d: "M5 13l4 4L19 7",
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "mt-3 text-center sm:mt-5" },
+                                  [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass:
+                                          "text-lg leading-6 font-medium text-gray-900",
+                                        attrs: { id: "modal-title" },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                    Wilt u de app installeren?\n                                                "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "text-sm text-gray-500",
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                        Voeg deze app makkelijk aan je beginscherm toe! Druk op de knop "
+                                          ),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "text-blue-800",
+                                              on: { click: _vm.setDeviceType },
+                                            },
+                                            [_vm._v("Installeren")]
+                                          ),
+                                          _vm._v(
+                                            "' en volg de stappen.\n                                                    "
+                                          ),
+                                        ]
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense flex-right",
+                                },
+                                [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "mt-3 w-50 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm",
+                                      attrs: { type: "button" },
+                                      on: { click: _vm.hideInstallation },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                Later\n                                            "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "w-50 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-theme text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm",
+                                      attrs: { type: "button" },
+                                      on: { click: _vm.setDeviceType },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                Installeren\n                                            "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("transition", { attrs: { name: "slide-fade-up" } }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.installation.screens.iOS,
+                              expression: "installation.screens.iOS",
+                            },
+                          ],
+                        },
+                        [
+                          _c("div", { staticClass: "installation iOS" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "installation-box bg-white rounded-lg shadow-lg",
+                              },
+                              [
+                                _c("div", { staticClass: "header-box p-4" }, [
+                                  _c("h1", { staticClass: "font-bold" }, [
+                                    _vm._v("Installatie"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "text-xs text-gray-700" },
+                                    [
+                                      _vm._v(
+                                        "\n                                                    Om deze app te installeren dien je deze website te bezoeken via Safari.\n                                                "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "footer-box p-4 bg-gray-700 rounded-b-lg text-white text-sm",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Klik op\n                                                "
+                                    ),
+                                    _c("img", {
+                                      staticClass: "inline-block",
+                                      attrs: {
+                                        src: "/img/installation/apple-share-button.png",
+                                        alt: "",
+                                      },
+                                    }),
+                                    _vm._v(" en dan installeren"),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ],
+                  1
+                ),
+              ]
+            ),
+          ]),
+        ])
+      : _vm._e(),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/App.vue?vue&type=template&id=245d94f6&":
 /*!***********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/App.vue?vue&type=template&id=245d94f6& ***!
@@ -41040,88 +41439,95 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "SignIn" } }, [
-    _c("div", { staticClass: "min-h-screen flex bg-white" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24",
-        },
-        [
-          _c("div", { staticClass: "mx-auto w-full max-w-sm lg:w-96" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "mt-8" }, [
-              _c("div", { staticClass: "mt-6" }, [_c("Login")], 1),
+  return _c(
+    "div",
+    { attrs: { id: "SignIn" } },
+    [
+      _c("div", { staticClass: "min-h-screen flex bg-white" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24",
+          },
+          [
+            _c("div", { staticClass: "mx-auto w-full max-w-sm lg:w-96" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "mt-8" }, [
+                _c("div", { staticClass: "mt-6" }, [_c("Login")], 1),
+              ]),
             ]),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _vm.views.Register ? _c("Register") : _vm._e(),
-          _vm._v(" "),
-          _vm.views.ResetPassword ? _c("ResetPassword") : _vm._e(),
-        ],
-        1
-      ),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-6" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6",
-        },
-        [
-          _c("div", [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100",
-              },
-              [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "h-6 w-6 text-green-600",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      fill: "none",
-                      viewBox: "0 0 24 24",
-                      stroke: "currentColor",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round",
-                        "stroke-width": "2",
-                        d: "M5 13l4 4L19 7",
-                      },
-                    }),
-                  ]
-                ),
-              ]
-            ),
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          [
+            _vm.views.Register ? _c("Register") : _vm._e(),
             _vm._v(" "),
-            _vm._m(2),
-          ]),
-          _vm._v(" "),
-          _vm._m(3),
-        ]
-      ),
-    ]),
-  ])
+            _vm.views.ResetPassword ? _c("ResetPassword") : _vm._e(),
+          ],
+          1
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-6" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6",
+          },
+          [
+            _c("div", [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100",
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "h-6 w-6 text-green-600",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        fill: "none",
+                        viewBox: "0 0 24 24",
+                        stroke: "currentColor",
+                        "aria-hidden": "true",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                          "stroke-width": "2",
+                          d: "M5 13l4 4L19 7",
+                        },
+                      }),
+                    ]
+                  ),
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(2),
+            ]),
+            _vm._v(" "),
+            _vm._m(3),
+          ]
+        ),
+      ]),
+      _vm._v(" "),
+      !_vm.installation ? _c("installation") : _vm._e(),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -58014,6 +58420,75 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+
+/***/ "./resources/js/_components/Installation/Installation.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/_components/Installation/Installation.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Installation_vue_vue_type_template_id_2a0c1df2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Installation.vue?vue&type=template&id=2a0c1df2&scoped=true& */ "./resources/js/_components/Installation/Installation.vue?vue&type=template&id=2a0c1df2&scoped=true&");
+/* harmony import */ var _Installation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Installation.vue?vue&type=script&lang=js& */ "./resources/js/_components/Installation/Installation.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Installation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Installation_vue_vue_type_template_id_2a0c1df2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Installation_vue_vue_type_template_id_2a0c1df2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "2a0c1df2",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/_components/Installation/Installation.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/_components/Installation/Installation.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/_components/Installation/Installation.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Installation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Installation.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/_components/Installation/Installation.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Installation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/_components/Installation/Installation.vue?vue&type=template&id=2a0c1df2&scoped=true&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/_components/Installation/Installation.vue?vue&type=template&id=2a0c1df2&scoped=true& ***!
+  \***********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Installation_vue_vue_type_template_id_2a0c1df2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Installation.vue?vue&type=template&id=2a0c1df2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/_components/Installation/Installation.vue?vue&type=template&id=2a0c1df2&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Installation_vue_vue_type_template_id_2a0c1df2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Installation_vue_vue_type_template_id_2a0c1df2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
 
 
 /***/ }),
