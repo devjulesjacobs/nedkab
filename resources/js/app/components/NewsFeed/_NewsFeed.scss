@@ -13,11 +13,13 @@
             position: relative;
             height: 350px;
             width: 75vw;
+            max-width: 475px;
             background: white;
             border-radius: 7px;
             overflow: hidden;
             margin-right: 20px;
             box-shadow: 0 10px 20px rgb(0, 0, 0, 19%), 0 6px 6px rgb(0, 0, 0, 23%);
+
 
             img {
                 height: 100%;

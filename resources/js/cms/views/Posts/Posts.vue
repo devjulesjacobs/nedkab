@@ -102,6 +102,9 @@ export default {
             axios.get('/api/post/'+id)
                 .then((res) => {
                     this.editPost = res.data;
+                    console.log(this.editPost);
+                    this.editPost.image = '/img/posts/'+this.editPost.image;
+                    console.log(this.editPost);
                     this.showSlide('edit');
                 })
         },

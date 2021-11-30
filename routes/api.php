@@ -22,9 +22,9 @@ Route::post('/cms/register', [App\Http\Controllers\AuthController::class, 'regis
 Route::post('/cms/login', [App\Http\Controllers\AuthController::class, 'login']);
 
 // Posts
-Route::post('/posts', [App\Http\Controllers\PostController::class, 'store']);
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'getAll']);
-Route::get('/posts/latest', [\App\Http\Controllers\PostController::class, 'getLatest']);
-Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, 'show']);
-Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update']);
-Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy']);
+Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->middleware(['auth:sanctum']);
+Route::get('/posts', [\App\Http\Controllers\PostController::class, 'getAll'])->middleware(['auth:sanctum']);
+Route::get('/posts/latest', [\App\Http\Controllers\PostController::class, 'getLatest'])->middleware(['auth:sanctum']);
+Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, 'show'])->middleware(['auth:sanctum']);
+Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update'])->middleware(['auth:sanctum']);
+Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->middleware(['auth:sanctum']);
