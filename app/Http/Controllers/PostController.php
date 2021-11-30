@@ -68,8 +68,8 @@ class PostController extends Controller
 
     protected function update(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'title' => 'nullable|string|max:255',
-            'body' => 'nullable',
+            'title' => 'required|string|max:255',
+            'body' => 'required',
             'image' => 'nullable'
         ]);
 

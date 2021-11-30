@@ -211,7 +211,8 @@ export default {
         },
 
         hideSlide: function () {
-            this.$emit('hide')
+            this.$emit('hide');
+            this.errors = [];
         },
 
         getImage(e, type) {

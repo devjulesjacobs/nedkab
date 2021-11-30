@@ -2643,6 +2643,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     hideSlide: function hideSlide() {
       this.$emit('hide');
+      this.errors = [];
     },
     getImage: function getImage(e, type) {
       var _this4 = this;
