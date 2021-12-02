@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <!-- News Feed -->
+    <div class="state-news-feed">
+            <!-- News Feed -->
         <div class="news-feed mb-5 py-5 pl-5">
             <div class="news-feed-scroll">
 
-                <div v-for="post in posts" :key="post.id" class="news-item" @click="showDetail">
+                <div v-for="post in posts" :key="post.id" class="news-item" @click="showPost(post)">
                     <img :src="'/img/posts/'+post.image" :alt="post.title">
                     <div class="image-overlay"></div>
                     <div class="news-header">
@@ -19,79 +19,24 @@
             </div>
         </div>
 
-        <!-- News Feed Details Page -->
-        <div class="news-feed-detail">
-
-            <div class="detail-header mb-3">
-<!--                <span class="font-bold text-blue-800">News</span>-->
-                <div @click="closeNewsDetail">
-                    <span class="float-right">
-                    <span class="material-icons-outlined">close</span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none news-post">
-                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
-                    <div class="flex-shrink-0">
-                        <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt="">
-                    </div>
-                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
-                        <div class="flex-1">
-                            <p class="text-sm font-medium text-indigo-600">
-                                <a href="#" class="hover:underline">
-                                    Article
-                                </a>
-                            </p>
-                            <a href="#" class="block mt-2">
-                                <p class="text-xl font-semibold text-gray-900">
-                                    Boost your conversion rate
-                                </p>
-                                <p class="mt-3 text-base text-gray-500">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.
-                                </p>
-                            </a>
-                        </div>
-                        <div class="mt-6 flex items-center">
-                            <div class="flex-shrink-0">
-                                <a href="#">
-                                    <span class="sr-only">Roel Aufderehar</span>
-                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                                </a>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">
-                                    <a href="#" class="hover:underline">
-                                        Roel Aufderehar
-                                    </a>
-                                </p>
-                                <div class="flex space-x-1 text-sm text-gray-500">
-                                    <time datetime="2020-03-16">
-                                        Mar 16, 2020
-                                    </time>
-                                    <span aria-hidden="true">
-                                          &middot;
-                                        </span>
-                                    <span>
-                                          6 min read
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <post-slide :show="views.SlidePost"
+                    :post="post"
+                    @hide="hidePost" />
     </div>
 </template>
 
 <script>
+import PostSlide from "../PostSlide/PostSlide";
+
 export default {
     name: "NewsFeed",
     data() {
         return {
-            posts: []
+            posts: [],
+            post: [],
+            views: {
+                SlidePost: false,
+            }
         }
     },
 
@@ -106,13 +51,17 @@ export default {
                 .catch((e) => { console.log('Error:', e) })
         },
 
-        showDetail() {
-            $('.news-feed-detail').addClass('show');
+        showPost(post) {
+            this.post = post;
+            this.views.SlidePost = true
         },
 
-        closeNewsDetail() {
-            $('.news-feed-detail').removeClass('show');
+        hidePost() {
+            this.views.SlidePost = false
         }
+    },
+    components: {
+        PostSlide
     }
 }
 </script>
