@@ -67,12 +67,10 @@
                                             </label>
                                             <div class="mt-1">
                                                 <label v-if="!form.create.image && views.create" for="image_create" class="relative block cursor-pointer w-full border-2 border-gray-300 border-dashed rounded-lg p-20 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                    <svg class="mx-auto h-12 w-12 text-gray-400"
-                                                         xmlns="http://www.w3.org/2000/svg" stroke="currentColor"
-                                                         fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6"/>
+                                                    <svg class="mx-auto h-12 w-12 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                                     </svg>
-                                                    <span class="mt-2 block text-sm font-medium text-gray-900">
+                                                    <span class="mt-2 block text-sm font-medium text-gray-500">
                                                         Upload een header foto
                                                     </span>
                                                 </label>
