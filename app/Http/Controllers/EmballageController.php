@@ -14,7 +14,9 @@ class EmballageController extends Controller
      */
     public function index()
     {
-        //
+        $emballages = Emballage::all();
+
+        return $emballages;
     }
 
     /**

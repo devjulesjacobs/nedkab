@@ -2938,8 +2938,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Emballage"
+  name: "Emballage",
+  data: function data() {
+    return {
+      emballages: []
+    };
+  },
+  mounted: function mounted() {
+    this.getEmballages();
+  },
+  methods: {
+    getEmballages: function getEmballages() {
+      var _this = this;
+
+      axios.get('/api/emballage').then(function (res) {
+        _this.emballages = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -41555,23 +41642,253 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "Emballage" } }, [
+    _c(
+      "h1",
+      {
+        staticClass:
+          "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-8",
+      },
+      [_vm._v("Emballage")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex flex-col" }, [
+      _c("div", { staticClass: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8",
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg",
+              },
+              [
+                _c(
+                  "table",
+                  { staticClass: "min-w-full divide-y divide-gray-200" },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      { staticClass: "bg-white divide-y divide-gray-200" },
+                      _vm._l(_vm.emballages, function (e) {
+                        return _c("tr", { key: e.id }, [
+                          _c(
+                            "td",
+                            { staticClass: "px-6 py-4 whitespace-nowrap" },
+                            [
+                              _c("div", { staticClass: "flex items-center" }, [
+                                _vm._m(1, true),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "ml-4" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "text-sm font-medium text-gray-900",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(e.customer_fullname) +
+                                          "\n                                        "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "text-sm text-gray-500" },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(e.contact_email) +
+                                          "\n                                        "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(2, true),
+                          _vm._v(" "),
+                          _vm._m(3, true),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Admin\n                            "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(4, true),
+                        ])
+                      }),
+                      0
+                    ),
+                  ]
+                ),
+              ]
+            ),
+          ]
+        ),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "Emballage" } }, [
+    return _c("thead", { staticClass: "bg-gray-50" }, [
+      _c("tr", [
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+            attrs: { scope: "col" },
+          },
+          [
+            _vm._v(
+              "\n                                Name\n                            "
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+            attrs: { scope: "col" },
+          },
+          [
+            _vm._v(
+              "\n                                Title\n                            "
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+            attrs: { scope: "col" },
+          },
+          [
+            _vm._v(
+              "\n                                Status\n                            "
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+            attrs: { scope: "col" },
+          },
+          [
+            _vm._v(
+              "\n                                Role\n                            "
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "relative px-6 py-3", attrs: { scope: "col" } },
+          [_c("span", { staticClass: "sr-only" }, [_vm._v("Edit")])]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-shrink-0 h-10 w-10" }, [
+      _c("img", {
+        staticClass: "h-10 w-10 rounded-full",
+        attrs: {
+          src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+          alt: "",
+        },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "px-6 py-4 whitespace-nowrap" }, [
+      _c("div", { staticClass: "text-sm text-gray-900" }, [
+        _vm._v("Regional Paradigm Technician"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-sm text-gray-500" }, [
+        _vm._v("Optimization"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "px-6 py-4 whitespace-nowrap" }, [
       _c(
-        "h1",
+        "span",
         {
           staticClass:
-            "text-3xl page-title leading-8 font-bold tracking-tight text-gray-900",
+            "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800",
         },
-        [_vm._v("Emballage")]
+        [
+          _vm._v(
+            "\n                                  Active\n                                "
+          ),
+        ]
       ),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "td",
+      {
+        staticClass:
+          "px-6 py-4 whitespace-nowrap text-right text-sm font-medium",
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "text-indigo-600 hover:text-indigo-900",
+            attrs: { href: "#" },
+          },
+          [_vm._v("Edit")]
+        ),
+      ]
+    )
   },
 ]
 render._withStripped = true

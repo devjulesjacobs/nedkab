@@ -28,3 +28,6 @@ Route::get('/posts/latest', [\App\Http\Controllers\PostController::class, 'getLa
 Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, 'show'])->middleware(['auth:sanctum']);
 Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update'])->middleware(['auth:sanctum']);
 Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->middleware(['auth:sanctum']);
+
+// Emballage
+Route::get('/emballage', [\App\Http\Controllers\EmballageController::class, 'index']);
