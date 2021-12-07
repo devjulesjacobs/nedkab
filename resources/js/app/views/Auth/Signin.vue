@@ -1,12 +1,12 @@
 <template>
     <div id="SignIn">
         <div class="min-h-screen flex bg-white">
-            <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+            <div class="flex-1 flex flex-col justify-center py-12 px-12 sm:px-8 lg:flex-none lg:px-20 xl:px-24">
                 <div class="mx-auto w-full max-w-sm lg:w-96">
                     <div>
                         <img class="h-12 w-auto" src="/img/system/company-logo.png" alt="Workflow"/>
-                        <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-                        <p class="mt-2 text-sm text-gray-600">Or <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">sign up now!</a>
+                        <h2 class="mt-6 text-3xl font-bold text-gray-900">Sign in to your account</h2>
+                        <p class="mt-2 text-sm text-gray-600">Or <a href="#" class="font-medium text-blue-600 hover:text-blue-500">sign up now!</a>
                         </p>
                     </div>
                     <div class="mt-8">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="mt-5 sm:mt-6">
-                    <a href="/cms" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
+                    <a href="/cms" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm">
                         Go to dashboard
                     </a>
                 </div>

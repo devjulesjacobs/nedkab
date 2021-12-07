@@ -11,6 +11,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    public function emballages()
+    {
+        return $this->hasMany(Emballage::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

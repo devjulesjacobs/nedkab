@@ -40331,7 +40331,7 @@ var render = function () {
               },
             ],
             staticClass:
-              "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+              "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
             attrs: {
               id: "email",
               name: "email",
@@ -40373,7 +40373,7 @@ var render = function () {
               },
             ],
             staticClass:
-              "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+              "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
             attrs: {
               id: "password",
               name: "password",
@@ -40409,7 +40409,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "flex items-center" }, [
         _c("input", {
           staticClass:
-            "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded",
+            "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded",
           attrs: { id: "remember-me", name: "remember-me", type: "checkbox" },
         }),
         _vm._v(" "),
@@ -40427,7 +40427,7 @@ var staticRenderFns = [
         _c(
           "a",
           {
-            staticClass: "font-medium text-indigo-600 hover:text-indigo-500",
+            staticClass: "font-medium text-blue-600 hover:text-blue-500",
             attrs: { href: "#" },
           },
           [_vm._v("Forgot your password?")]
@@ -40444,7 +40444,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass:
-            "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+            "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
           attrs: { type: "submit" },
         },
         [_vm._v("Sign in")]
@@ -41498,7 +41498,7 @@ var render = function () {
           "div",
           {
             staticClass:
-              "flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24",
+              "flex-1 flex flex-col justify-center py-12 px-12 sm:px-8 lg:flex-none lg:px-20 xl:px-24",
           },
           [
             _c("div", { staticClass: "mx-auto w-full max-w-sm lg:w-96" }, [
@@ -41590,7 +41590,7 @@ var staticRenderFns = [
         attrs: { src: "/img/system/company-logo.png", alt: "Workflow" },
       }),
       _vm._v(" "),
-      _c("h2", { staticClass: "mt-6 text-3xl font-extrabold text-gray-900" }, [
+      _c("h2", { staticClass: "mt-6 text-3xl font-bold text-gray-900" }, [
         _vm._v("Sign in to your account"),
       ]),
       _vm._v(" "),
@@ -41599,7 +41599,7 @@ var staticRenderFns = [
         _c(
           "a",
           {
-            staticClass: "font-medium text-indigo-600 hover:text-indigo-500",
+            staticClass: "font-medium text-blue-600 hover:text-blue-500",
             attrs: { href: "#" },
           },
           [_vm._v("sign up now!")]
@@ -41654,7 +41654,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass:
-            "inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm",
+            "inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm",
           attrs: { href: "/cms", type: "button" },
         },
         [_vm._v("\n                    Go to dashboard\n                ")]
