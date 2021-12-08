@@ -1,12 +1,12 @@
 <template>
     <div id="SignIn">
         <div class="min-h-screen flex bg-white">
-            <div class="flex-1 flex flex-col justify-center py-12 px-12 sm:px-8 lg:flex-none lg:px-20 xl:px-24">
+            <div class="flex-1 flex flex-col justify-center py-12 px-6 sm:px-8 lg:flex-none lg:px-20 xl:px-">
                 <div class="mx-auto w-full max-w-sm lg:w-96">
                     <div>
                         <img class="h-12 w-auto" src="/img/system/company-logo.png" alt="Workflow"/>
-                        <h2 class="mt-6 text-3xl font-bold text-gray-900">Sign in to your account</h2>
-                        <p class="mt-2 text-sm text-gray-600">Or <a href="#" class="font-medium text-blue-600 hover:text-blue-500">sign up now!</a>
+                        <h2 class="mt-6 text-3xl font-bold text-gray-900">Inloggen</h2>
+                        <p class="mt-2 text-sm text-gray-600">Of <a href="#" class="font-medium text-blue-600 hover:text-blue-500">registreer je nu</a>
                         </p>
                     </div>
                     <div class="mt-8">

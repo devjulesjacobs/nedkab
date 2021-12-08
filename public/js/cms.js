@@ -2849,14 +2849,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
@@ -2932,6 +2924,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -40069,7 +40063,7 @@ var render = function () {
                                       "a",
                                       {
                                         staticClass:
-                                          "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                                          "text-red-600 hover:bg-red-200 hover:text-red-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                                         on: { click: _vm.signOut },
                                       },
                                       [
@@ -40077,7 +40071,7 @@ var render = function () {
                                           "svg",
                                           {
                                             staticClass:
-                                              "text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6",
+                                              "text-red-400 group-hover:text-red-500 mr-3 flex-shrink-0 h-6 w-6",
                                             attrs: {
                                               xmlns:
                                                 "http://www.w3.org/2000/svg",
@@ -40296,7 +40290,7 @@ var render = function () {
                                 "a",
                                 {
                                   staticClass:
-                                    "text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                                    "text-red-600 hover:bg-red-200 cursor-pointer hover:text-red-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                                   on: { click: _vm.signOut },
                                 },
                                 [
@@ -40304,7 +40298,7 @@ var render = function () {
                                     "svg",
                                     {
                                       staticClass:
-                                        "text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6",
+                                        "text-red-500 group-hover:text-red-500 mr-3 flex-shrink-0 h-6 w-6",
                                       attrs: {
                                         xmlns: "http://www.w3.org/2000/svg",
                                         fill: "none",
@@ -41584,9 +41578,14 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
       _c(
         "h1",
         {
@@ -41595,32 +41594,9 @@ var render = function () {
         },
         [_vm._v("Dashboard")]
       ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass:
-            "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-          attrs: { type: "button" },
-          on: { click: _vm.signOut },
-        },
-        [_vm._v("\n        Logout\n    ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        {
-          staticClass:
-            "mt-3 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-          attrs: { to: { name: "Signin" } },
-        },
-        [_vm._v("\n        Login page\n    ")]
-      ),
-    ],
-    1
-  )
-}
-var staticRenderFns = []
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -41653,7 +41629,7 @@ var render = function () {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "flex flex-col" }, [
-      _c("div", { staticClass: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" }, [
+      _c("div", { staticClass: "overflow-x-auto -ml-8 -mr-6" }, [
         _c(
           "div",
           {
@@ -41748,6 +41724,8 @@ var render = function () {
         ),
       ]),
     ]),
+    _vm._v(" "),
+    _c("pre", [_vm._v(_vm._s(_vm.emballages))]),
   ])
 }
 var staticRenderFns = [
