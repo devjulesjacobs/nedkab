@@ -37,7 +37,7 @@ class CreateEmballagesTable extends Migration
             $table->integer('diameter-180')->default(0);
             $table->integer('diameter-200')->default(0);
             $table->timestamps();
-        });a
+        });
     }
 
     /**
