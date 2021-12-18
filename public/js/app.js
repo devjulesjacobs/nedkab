@@ -2944,8 +2944,1012 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Cpr"
+  name: "Cpr",
+  data: function data() {
+    return {
+      form: {
+        gebruiksfunctie: null,
+        grenswaarden: null,
+        vrijgesteld: null
+      },
+      result: null,
+      views: {
+        result: false
+      }
+    };
+  },
+  methods: {
+    calculateCpr: function calculateCpr(valGrenswaarde, valVrijgesteld, valGebruiksfunctie) {
+      var grenswaarde;
+      var brandklasse = "E",
+          rookklasse = "s3";
+      var binnenlucht_extra = 0,
+          binnenlucht_normaal = 1,
+          binnenlucht_overig = 2,
+          buitenlucht_extra = 3,
+          buitenlucht_normaal = 4,
+          buitenlucht_overig = 5,
+          bovenzijde_extra = 6,
+          bovenzijde_normaal = 7,
+          bovenzijde_overig = 8;
+
+      switch (valGrenswaarde) {
+        case 'g1':
+          grenswaarde = binnenlucht_extra;
+          break;
+
+        case 'g2':
+          grenswaarde = binnenlucht_normaal;
+          break;
+
+        case 'g3':
+          grenswaarde = binnenlucht_overig;
+          break;
+
+        case 'g4':
+          grenswaarde = buitenlucht_extra;
+          break;
+
+        case 'g5':
+          grenswaarde = buitenlucht_normaal;
+          break;
+
+        case 'g6':
+          grenswaarde = buitenlucht_overig;
+          break;
+
+        case 'g7':
+          grenswaarde = bovenzijde_extra;
+          break;
+
+        case 'g8':
+          grenswaarde = bovenzijde_normaal;
+          break;
+
+        case 'g9':
+          grenswaarde = bovenzijde_overig;
+          break;
+      } //Rookklasse binnenlucht: Artikel 2.67. Binnenoppervlak
+
+
+      if (grenswaarde >= binnenlucht_extra && grenswaarde <= binnenlucht_overig) {
+        if (grenswaarde >= binnenlucht_extra && grenswaarde <= binnenlucht_normaal) {
+          rookklasse = "s2";
+        }
+      } //rookklasse buitenlucht Artikel 2.68. Buitenoppervlak
+
+
+      if (grenswaarde >= buitenlucht_extra && grenswaarde <= buitenlucht_overig) rookklasse = "s3"; //Rookklasse elektrische leidingen: Artikel 2.69a.  Elektrische leidingen en pijpisolatie
+
+      if (grenswaarde >= binnenlucht_extra && grenswaarde <= binnenlucht_overig) {
+        //afwijking op 2.67
+        // lid 1
+        rookklasse = "s2";
+        if (grenswaarde === binnenlucht_extra) rookklasse = 's1';
+      }
+
+      switch (valVrijgesteld) {
+        case 'minderdan5':
+          rookklasse = "s3";
+          brandklasse = "E";
+          break;
+
+        case 'minderdan10':
+          if (grenswaarde === binnenlucht_overig || grenswaarde === buitenlucht_overig || grenswaarde === bovenzijde_overig) {
+            if (rookklasse === 's2') {
+              if (grenswaarde >= binnenlucht_extra && grenswaarde <= binnenlucht_overig) {
+                rookklasse = "s3";
+                brandklasse = "E";
+              }
+            }
+          }
+
+          break;
+
+        case 'indegrond':
+          rookklasse = "s3";
+          brandklasse = "F";
+          break;
+
+        case 'functiebehoud':
+          rookklasse = "s3";
+          brandklasse = "nvt";
+          break;
+
+        case 'vastekonnektoren':
+          rookklasse = "s3";
+          brandklasse = "nvt";
+          break;
+
+        default:
+          switch (valGebruiksfunctie) {
+            case '1a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "C";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "C";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '1b':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "B";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "C";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '1c':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '2a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "B";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '2b':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '3a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "C";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "B";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "C";
+                  break;
+
+                case 'g9':
+                  brandklasse = "C";
+                  break;
+              }
+
+              break;
+
+            case '4a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "B";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '4b':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '5a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "B";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '5b':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '6a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '7a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "B";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '8a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '9a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '10a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '11a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "D";
+                  break;
+
+                case 'g3':
+                  brandklasse = "D";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '12a':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "B";
+                  break;
+
+                case 'g2':
+                  brandklasse = "B";
+                  break;
+
+                case 'g3':
+                  brandklasse = "B";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+
+            case '12B':
+              switch (valGrenswaarde) {
+                case 'g1':
+                  brandklasse = "-";
+                  break;
+
+                case 'g2':
+                  brandklasse = "-";
+                  break;
+
+                case 'g3':
+                  brandklasse = "-";
+                  break;
+
+                case 'g4':
+                  brandklasse = "B";
+                  break;
+
+                case 'g5':
+                  brandklasse = "D";
+                  break;
+
+                case 'g6':
+                  brandklasse = "D";
+                  break;
+
+                case 'g7':
+                  brandklasse = "C";
+                  break;
+
+                case 'g8':
+                  brandklasse = "D";
+                  break;
+
+                case 'g9':
+                  brandklasse = "D";
+                  break;
+              }
+
+              break;
+          }
+
+          break;
+      }
+
+      var result;
+
+      switch (brandklasse) {
+        case 'B':
+          result = ['B2ca', rookklasse, 'd1', 'a1'];
+          break;
+
+        case 'C':
+          result = ['Cca', rookklasse, 'd2', 'a1'];
+          break;
+
+        case 'D':
+          result = ['Dca', rookklasse, 'd2', 'a3'];
+          break;
+
+        case 'E':
+          result = ['Eca'];
+          break;
+
+        case 'F':
+          result = ['Fca'];
+          break;
+
+        case 'nvt':
+          result = ['Niet van toepassing.'];
+          break;
+      }
+
+      var printText;
+
+      if (result.length >= 4) {
+        printText = result[0] + ', ' + result[1] + ', ' + result[2] + ', ' + result[3];
+      } else {
+        printText = result[0];
+      }
+
+      this.result = printText;
+      this.switchScreen();
+      return result;
+    },
+    switchScreen: function switchScreen() {
+      this.views.result = !this.views.result;
+    },
+    calculateCprButton: function calculateCprButton() {
+      if (this.form.gebruiksfunctie && this.form.grenswaarden && this.form.vrijgesteld) {
+        console.log('Result: ', this.calculateCpr(this.form.grenswaarden, this.form.vrijgesteld, this.form.gebruiksfunctie));
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -41739,18 +42743,418 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h1", { staticClass: "page-title text-3xl font-bold px-5 pt-5" }, [
+      _vm._v("CPR"),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "cpr-page" }, [
+      _c("div", { staticClass: "container px-5" }, [
+        _c("div", { staticClass: "cpr-wrapper" }, [
+          _c("div", { staticClass: "cpr-box" }, [
+            _c(
+              "div",
+              { staticClass: "mt-4 mb-6 p-5 bg-gray-200 rounded text-sm" },
+              [
+                _vm._v(
+                  "\n                        De gewenste CPR voor uw kabel berekenen.\n                    "
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            !_vm.views.result
+              ? _c("form", { staticClass: "section-calculation" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "section section-1" }, [
+                    _c("div", { staticClass: "selection-row" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.gebruiksfunctie,
+                              expression: "form.gebruiksfunctie",
+                            },
+                          ],
+                          staticClass:
+                            "shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md",
+                          attrs: { name: "gebruiksfunctie" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "gebruiksfunctie",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { value: "", selected: "", disabled: "" },
+                            },
+                            [_vm._v("Selecteer een gebruiksfunctie")]
+                          ),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "1a" } }, [
+                            _vm._v("Woonfunctie, in een wooongebouw"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "1b" } }, [
+                            _vm._v("Woonfunctie, g.o. > 500 m2"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "1c" } }, [
+                            _vm._v("Andere woonfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2a" } }, [
+                            _vm._v("Bijeenkomstfunctie, kinderen <4 jaar"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2b" } }, [
+                            _vm._v("Andere bijeenkomstfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "3a" } }, [
+                            _vm._v("Celfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "4a" } }, [
+                            _vm._v("Gezondheidszorg met bedgebied"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "4b" } }, [
+                            _vm._v("Met andere Gezondheidszorgfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "5a" } }, [
+                            _vm._v("Lichte industrie, dieren"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "5b" } }, [
+                            _vm._v("Andere Industriefunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "6a" } }, [
+                            _vm._v("Kantoorfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "7a" } }, [
+                            _vm._v("Logiesfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "8a" } }, [
+                            _vm._v("Onderwijsfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "9a" } }, [
+                            _vm._v("Sportfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "10a" } }, [
+                            _vm._v("Winkelfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "11a" } }, [
+                            _vm._v("Overige gebruiksfunctie"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "12a" } }, [
+                            _vm._v("Tunnel"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "12b" } }, [
+                            _vm._v("Ander bouwwerk geen gebouw zijnde"),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "section section-2" }, [
+                    _c("div", { staticClass: "selection-row" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.grenswaarden,
+                              expression: "form.grenswaarden",
+                            },
+                          ],
+                          staticClass:
+                            "shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md",
+                          attrs: { name: "grenswaarden" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "grenswaarden",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { value: "", selected: "", disabled: "" },
+                            },
+                            [_vm._v("Selecteer de grenswaarden")]
+                          ),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g1" } }, [
+                            _vm._v("binnen, extra beschermende vluchtr"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g2" } }, [
+                            _vm._v("binnenlucht, beschermende vluchtr"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g3" } }, [
+                            _vm._v("binnenlucht, overig"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g4" } }, [
+                            _vm._v("buitenlucht, extra beschermde vluchtr"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g5" } }, [
+                            _vm._v("buitenlucht, beschermde vluchtr"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g6" } }, [
+                            _vm._v("Buitenlucht, overig"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g7" } }, [
+                            _vm._v("Bovenzijde, extra bescherm.vluchtr"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g8" } }, [
+                            _vm._v("Bovenzijde, beschermende vluchtr"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "g9" } }, [
+                            _vm._v("Bovenzijde, overig"),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "section section-3" }, [
+                    _c("div", { staticClass: "selection-row" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.vrijgesteld,
+                              expression: "form.vrijgesteld",
+                            },
+                          ],
+                          staticClass:
+                            "shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md",
+                          attrs: { name: "vrijgesteld" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "vrijgesteld",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { value: "", selected: "", disabled: "" },
+                            },
+                            [_vm._v("Selecteer vrijgesteld")]
+                          ),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "minderdan5" } }, [
+                            _vm._v("Oppervlak < 5%"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "minderdan10" } }, [
+                            _vm._v("Oppervlak < 10%"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "meerdan10" } }, [
+                            _vm._v("Oppervlak > 10%"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "indegrond" } }, [
+                            _vm._v("In de grond"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "functiebehoud" } }, [
+                            _vm._v("Heeft functiebehoud"),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            { attrs: { value: "vastekonnektoren" } },
+                            [_vm._v("Leiding met vaste connectoren")]
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "calculation-wrapper" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "mt-1 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                        attrs: { type: "button" },
+                        on: { click: _vm.calculateCprButton },
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Berekenen\n                            "
+                        ),
+                      ]
+                    ),
+                  ]),
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.views.result
+              ? _c("div", { staticClass: "section-result" }, [
+                  _vm._v(
+                    "\n                        Brandklasse en rookklasse voor uw kabel:\n                        "
+                  ),
+                  _c("div", { attrs: { id: "result" } }, [
+                    _vm._v(_vm._s(_vm.result)),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "back-to-calculation" }, [
+                    _c(
+                      "span",
+                      {
+                        attrs: { id: "back-to-calculation" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.switchScreen("calculation")
+                          },
+                        },
+                      },
+                      [_vm._v("Terug naar berekening")]
+                    ),
+                  ]),
+                ])
+              : _vm._e(),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", { staticClass: "page-title text-3xl font-bold px-5 pt-5" }, [
-        _vm._v("CPR"),
-      ]),
-    ])
+    return _c(
+      "div",
+      { staticClass: "block text-sm font-medium text-gray-700 mt-3" },
+      [
+        _c("span", { staticClass: "theme-color" }, [_vm._v("1.")]),
+        _vm._v(" Gebruiksfunctie"),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "block text-sm font-medium text-gray-700 mt-3" },
+      [
+        _c("span", { staticClass: "theme-color" }, [_vm._v("2.")]),
+        _vm._v(" Grenswaarden"),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "block text-sm font-medium text-gray-700 mt-3" },
+      [
+        _c("span", { staticClass: "theme-color" }, [_vm._v("3.")]),
+        _vm._v(" Vrijgesteld"),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "block text-sm font-medium text-gray-700 mt-3" },
+      [
+        _c("span", { staticClass: "theme-color" }, [_vm._v("4.")]),
+        _vm._v(" Berekenen"),
+      ]
+    )
   },
 ]
 render._withStripped = true
