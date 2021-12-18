@@ -15,7 +15,8 @@
     <!-- IOS PWA -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#2C55A2">
 
     <link rel="apple-touch-icon" href="{{ asset('img/pwa/icon-192x192.png') }}">
     <!-- iPhone Xs Max (1242px x 2688px) -->

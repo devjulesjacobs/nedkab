@@ -27,7 +27,7 @@
 @import "classes";
 
 body {
-    background-color: #fafbfe !important;
+    background-color: $theme_blue !important;
     font-family: $font-family-apple !important;
 
     .state-cms {
@@ -50,6 +50,8 @@ body {
         }
     }
     .state-app {
+        background-color: #fafbfe !important;
+        min-height: 100vh;
         .router-link-exact-active {
             color: $theme_blue !important;
         }
