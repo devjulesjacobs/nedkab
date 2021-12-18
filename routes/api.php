@@ -31,3 +31,6 @@ Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destro
 
 // Emballage
 Route::get('/emballage', [\App\Http\Controllers\EmballageController::class, 'index']);
+
+// Cables
+Route::get('/cables/search', [\App\Http\Controllers\CableController::class, 'search']);

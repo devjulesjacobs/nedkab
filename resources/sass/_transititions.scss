@@ -23,7 +23,6 @@
 }
 
 // Slide up
-
 .slide-fade-up-enter-active {
     transition: all .25s ease;
 }
@@ -32,6 +31,17 @@
 }
 .slide-fade-up-enter, .slide-fade-up-leave-to {
     transform: translateY(100px);
+    opacity: 0;
+}
+
+// fade search screen
+.fade-enter-active {
+    transition: all .25s ease;
+}
+.fade-leave-active {
+    transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fade-enter, .fade-leave-to {
     opacity: 0;
 }
 
