@@ -1,0 +1,15 @@
+.state-emballage {
+    .form-title {
+        position: relative;
+        padding-left: 10px;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            width: 2px;
+            height: 100%;
+            background-color: $theme_blue;
+        }
+    }
+}

@@ -45,3 +45,16 @@
     opacity: 0;
 }
 
+// Pulse
+.jj-animate-pulse {
+    animation: pulseSkeleton 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulseSkeleton {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
+

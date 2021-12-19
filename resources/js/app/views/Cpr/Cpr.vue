@@ -10,86 +10,92 @@
                 <div class="cpr-wrapper">
                     <div class="cpr-box">
 
-                        <div class="mt-4 mb-6 p-5 bg-gray-200 rounded text-sm">
+                        <div v-if="!views.result"  class="mt-4 mb-6 p-5 bg-gray-200 rounded text-sm">
                             De gewenste CPR voor uw kabel berekenen.
                         </div>
 
                         <form v-if="!views.result" class="section-calculation">
-                            <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">1.</span> Gebruiksfunctie</div>
-                            <div class="section section-1">
-                                <div class="selection-row">
-                                    <select v-model="form.gebruiksfunctie" name="gebruiksfunctie" class="shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                        <option value="" selected disabled>Selecteer een gebruiksfunctie</option>
-                                        <option value="1a">Woonfunctie, in een wooongebouw</option>
-                                        <option value="1b">Woonfunctie, g.o. > 500 m2</option>
-                                        <option value="1c">Andere woonfunctie</option>
-                                        <option value="2a">Bijeenkomstfunctie, kinderen <4 jaar</option>
-                                        <option value="2b">Andere bijeenkomstfunctie</option>
-                                        <option value="3a">Celfunctie</option>
-                                        <option value="4a">Gezondheidszorg met bedgebied</option>
-                                        <option value="4b">Met andere Gezondheidszorgfunctie</option>
-                                        <option value="5a">Lichte industrie, dieren</option>
-                                        <option value="5b">Andere Industriefunctie</option>
-                                        <option value="6a">Kantoorfunctie</option>
-                                        <option value="7a">Logiesfunctie</option>
-                                        <option value="8a">Onderwijsfunctie</option>
-                                        <option value="9a">Sportfunctie</option>
-                                        <option value="10a">Winkelfunctie</option>
-                                        <option value="11a">Overige gebruiksfunctie</option>
-                                        <option value="12a">Tunnel</option>
-                                        <option value="12b">Ander bouwwerk geen gebouw zijnde</option>
-                                    </select>
+                                <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">1.</span> Gebruiksfunctie</div>
+                                <div class="section section-1">
+                                    <div class="selection-row">
+                                        <select v-model="form.gebruiksfunctie" name="gebruiksfunctie" class="shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                            <option value="" selected disabled>Selecteer een gebruiksfunctie</option>
+                                            <option value="1a">Woonfunctie, in een wooongebouw</option>
+                                            <option value="1b">Woonfunctie, g.o. > 500 m2</option>
+                                            <option value="1c">Andere woonfunctie</option>
+                                            <option value="2a">Bijeenkomstfunctie, kinderen <4 jaar</option>
+                                            <option value="2b">Andere bijeenkomstfunctie</option>
+                                            <option value="3a">Celfunctie</option>
+                                            <option value="4a">Gezondheidszorg met bedgebied</option>
+                                            <option value="4b">Met andere Gezondheidszorgfunctie</option>
+                                            <option value="5a">Lichte industrie, dieren</option>
+                                            <option value="5b">Andere Industriefunctie</option>
+                                            <option value="6a">Kantoorfunctie</option>
+                                            <option value="7a">Logiesfunctie</option>
+                                            <option value="8a">Onderwijsfunctie</option>
+                                            <option value="9a">Sportfunctie</option>
+                                            <option value="10a">Winkelfunctie</option>
+                                            <option value="11a">Overige gebruiksfunctie</option>
+                                            <option value="12a">Tunnel</option>
+                                            <option value="12b">Ander bouwwerk geen gebouw zijnde</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">2.</span> Grenswaarden</div>
+                                <div class="section section-2">
+                                    <div class="selection-row">
+                                        <select v-model="form.grenswaarden" name="grenswaarden" class="shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                            <option value="" selected disabled>Selecteer de grenswaarden</option>
+                                            <option value="g1">binnen, extra beschermende vluchtr</option>
+                                            <option value="g2">binnenlucht, beschermende vluchtr</option>
+                                            <option value="g3">binnenlucht, overig</option>
+                                            <option value="g4">buitenlucht, extra beschermde vluchtr</option>
+                                            <option value="g5">buitenlucht, beschermde vluchtr</option>
+                                            <option value="g6">Buitenlucht, overig</option>
+                                            <option value="g7">Bovenzijde, extra bescherm.vluchtr</option>
+                                            <option value="g8">Bovenzijde, beschermende vluchtr</option>
+                                            <option value="g9">Bovenzijde, overig</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">3.</span> Vrijgesteld</div>
+                                <div class="section section-3">
+                                    <div class="selection-row">
+                                        <select v-model="form.vrijgesteld" name="vrijgesteld" class="shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                            <option value="" selected disabled>Selecteer vrijgesteld</option>
+                                            <option value="minderdan5">Oppervlak < 5%</option>
+                                            <option value="minderdan10">Oppervlak < 10%</option>
+                                            <option value="meerdan10">Oppervlak > 10%</option>
+                                            <option value="indegrond">In de grond</option>
+                                            <option value="functiebehoud">Heeft functiebehoud</option>
+                                            <option value="vastekonnektoren">Leiding met vaste connectoren</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">4.</span> Berekenen</div>
+                                <div class="calculation-wrapper">
+                                    <button @click="calculateCprButton" type="button" class="mt-1 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Berekenen
+                                    </button>
+                                </div>
+                            </form>
+
+                        <transition name="slide-fade">
+                            <div v-if="views.result" class="section-result mt-5 mb-">
+                                <div class="p-5 mb-4 bg-blue-theme text-white text-center shadow-md font-medium text-2xl rounded-md">
+                                    <p class="text-gray-100 text-sm">Brandklasse en rookklasse voor uw kabel</p>
+                                    {{ result }}
+                                </div>
+                                <div class="back-to-calculation">
+                                    <button @click="switchScreen('calculation')" type="button" class="inline-flex items-center px-5 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Terug
+                                    </button>
                                 </div>
                             </div>
-
-                            <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">2.</span> Grenswaarden</div>
-                            <div class="section section-2">
-                                <div class="selection-row">
-                                    <select v-model="form.grenswaarden" name="grenswaarden" class="shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                        <option value="" selected disabled>Selecteer de grenswaarden</option>
-                                        <option value="g1">binnen, extra beschermende vluchtr</option>
-                                        <option value="g2">binnenlucht, beschermende vluchtr</option>
-                                        <option value="g3">binnenlucht, overig</option>
-                                        <option value="g4">buitenlucht, extra beschermde vluchtr</option>
-                                        <option value="g5">buitenlucht, beschermde vluchtr</option>
-                                        <option value="g6">Buitenlucht, overig</option>
-                                        <option value="g7">Bovenzijde, extra bescherm.vluchtr</option>
-                                        <option value="g8">Bovenzijde, beschermende vluchtr</option>
-                                        <option value="g9">Bovenzijde, overig</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">3.</span> Vrijgesteld</div>
-                            <div class="section section-3">
-                                <div class="selection-row">
-                                    <select v-model="form.vrijgesteld" name="vrijgesteld" class="shadow-md mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                        <option value="" selected disabled>Selecteer vrijgesteld</option>
-                                        <option value="minderdan5">Oppervlak < 5%</option>
-                                        <option value="minderdan10">Oppervlak < 10%</option>
-                                        <option value="meerdan10">Oppervlak > 10%</option>
-                                        <option value="indegrond">In de grond</option>
-                                        <option value="functiebehoud">Heeft functiebehoud</option>
-                                        <option value="vastekonnektoren">Leiding met vaste connectoren</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">4.</span> Berekenen</div>
-                            <div class="calculation-wrapper">
-                                <button @click="calculateCprButton" type="button" class="mt-1 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Berekenen
-                                </button>
-                            </div>
-                        </form>
-
-                        <div v-if="views.result" class="section-result">
-                            Brandklasse en rookklasse voor uw kabel:
-                            <div id="result">{{ result }}</div>
-                            <div class="back-to-calculation">
-                                <span @click="switchScreen('calculation')" id="back-to-calculation">Terug naar berekening</span>
-                            </div>
-                        </div>
+                        </transition>
                     </div>
                 </div>
 

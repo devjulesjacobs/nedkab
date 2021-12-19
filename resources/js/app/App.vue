@@ -4,7 +4,9 @@
         mode="out-in"
         enter-active-class="animate__animated animate__fadeIn animate__faster"
         >
-            <router-view />
+            <div class="content-window">
+                <router-view />
+            </div>
         </transition>
 
         <BottomNav v-if="authenticated"></BottomNav>

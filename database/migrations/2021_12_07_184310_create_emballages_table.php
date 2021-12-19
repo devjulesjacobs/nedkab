@@ -28,14 +28,14 @@ class CreateEmballagesTable extends Migration
             $table->boolean('lifting_equipment')->default(0);
             $table->dateTime('pickup')->nullable();
             $table->text('comments')->nullable();
-            $table->integer('diameter-60')->default(0);
-            $table->integer('diameter-80')->default(0);
-            $table->integer('diameter-100')->default(0);
-            $table->integer('diameter-120')->default(0);
-            $table->integer('diameter-140')->default(0);
-            $table->integer('diameter-160')->default(0);
-            $table->integer('diameter-180')->default(0);
-            $table->integer('diameter-200')->default(0);
+            $table->integer('diameter_60')->default(0);
+            $table->integer('diameter_80')->default(0);
+            $table->integer('diameter_100')->default(0);
+            $table->integer('diameter_120')->default(0);
+            $table->integer('diameter_140')->default(0);
+            $table->integer('diameter_160')->default(0);
+            $table->integer('diameter_180')->default(0);
+            $table->integer('diameter_200')->default(0);
             $table->timestamps();
         });
     }

@@ -32096,6 +32096,63 @@ video {
   font-size: 13px;
 }
 
+.news-feed .skeleton-NewsFeed {
+  display: inline-flex;
+}
+
+.news-feed .skeleton-NewsFeed .news-item {
+  position: relative;
+  height: 350px;
+  width: 75vw;
+  max-width: 475px;
+  background: #eeeff2;
+  border-radius: 7px;
+  overflow: hidden;
+  margin-right: 20px;
+  box-shadow: none !important;
+}
+
+.news-feed .skeleton-NewsFeed .news-item img {
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.news-feed .skeleton-NewsFeed .news-item .image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: #eeeff2;
+}
+
+.news-feed .skeleton-NewsFeed .news-item .news-header {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  color: #fff;
+}
+
+.news-feed .skeleton-NewsFeed .news-item .news-header .news-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.news-feed .skeleton-NewsFeed .news-item .news-header .details-row .details-icon {
+  font-size: 12px;
+  margin-right: 3px;
+}
+
+.news-feed .skeleton-NewsFeed .news-item .news-header .details-row .details-text {
+  font-size: 13px;
+}
+
 .news-feed-detail {
   position: fixed;
   right: 0;
@@ -32165,6 +32222,20 @@ video {
   display: block;
 }
 
+.state-emballage .form-title {
+  position: relative;
+  padding-left: 10px;
+}
+
+.state-emballage .form-title:before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  width: 2px;
+  height: 100%;
+  background-color: #2C55A2;
+}
+
 #Posts button.bg-blue-theme {
   background: #2C55A2;
 }
@@ -32212,6 +32283,43 @@ video {
   opacity: 0;
 }
 
+.fade-enter-active {
+  transition: all 0.25s ease;
+}
+
+.fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.jj-animate-pulse {
+  -webkit-animation: pulseSkeleton 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation: pulseSkeleton 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@-webkit-keyframes pulseSkeleton {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulseSkeleton {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .truncate-2-lines {
   max-height: 3.6em;
   /* double the size of line-height */
@@ -32229,8 +32337,16 @@ video {
   background: #2C55A2;
 }
 
+.text-blue-theme {
+  color: #2C55A2;
+}
+
+.border-blue-theme {
+  border-color: #2C55A2;
+}
+
 body {
-  background-color: #fafbfe !important;
+  background-color: #2C55A2 !important;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
 
@@ -32252,8 +32368,19 @@ body .state-cms .router-link-exact-active:hover svg {
   color: #fff !important;
 }
 
+body .state-app {
+  background-color: #fafbfe !important;
+  min-height: 100vh;
+}
+
 body .state-app .router-link-exact-active {
   color: #2C55A2 !important;
+}
+
+body .state-app .content-window {
+  height: calc(100vh - 85px);
+  padding: 0 0 15px;
+  overflow-y: auto;
 }
 
 .btn-primary {

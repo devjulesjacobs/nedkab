@@ -55,6 +55,12 @@ body {
         .router-link-exact-active {
             color: $theme_blue !important;
         }
+
+        .content-window {
+            height: calc(100vh - 85px);
+            padding: 0 0 15px;
+            overflow-y: auto;
+        }
     }
 }
 
