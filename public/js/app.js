@@ -2202,7 +2202,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       form: {
-        email: "app@gmail.com",
+        email: "example@email.com",
         password: "password"
       }
     };
@@ -2249,6 +2249,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2324,15 +2325,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Register",
-  form: {
-    name: '',
-    email: '',
-    password: ''
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        password: ''
+      },
+      formMeta: {
+        password_confirm: '',
+        password_match: true
+      }
+    };
   },
-  formMeta: {
-    password_confirm: ''
+  methods: {
+    register: function register() {
+      axios.post('/api/register', this.form).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
   }
 });
 
@@ -2870,9 +2914,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-//
-//
-//
 //
 //
 //
@@ -41689,7 +41730,14 @@ var render = function () {
               "animate__animated animate__fadeIn animate__faster",
           },
         },
-        [_c("div", { staticClass: "content-window" }, [_c("router-view")], 1)]
+        [
+          _c(
+            "div",
+            { class: { "content-window": _vm.authenticated } },
+            [_c("router-view")],
+            1
+          ),
+        ]
       ),
       _vm._v(" "),
       _vm.authenticated ? _c("BottomNav") : _vm._e(),
@@ -41917,7 +41965,7 @@ var render = function () {
             staticClass: "block text-sm font-medium text-gray-700",
             attrs: { for: "name" },
           },
-          [_vm._v("Email address")]
+          [_vm._v("Volledige naam")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "mt-1" }, [
@@ -41994,6 +42042,90 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
+      _c("div", [
+        _c(
+          "label",
+          {
+            staticClass: "block text-sm font-medium text-gray-700",
+            attrs: { for: "email" },
+          },
+          [_vm._v("Bedrijf")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-1" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.company,
+                expression: "form.company",
+              },
+            ],
+            staticClass:
+              "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+            attrs: {
+              id: "company",
+              name: "company",
+              type: "text",
+              autocomplete: "company",
+              required: "",
+            },
+            domProps: { value: _vm.form.company },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "company", $event.target.value)
+              },
+            },
+          }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "label",
+          {
+            staticClass: "block text-sm font-medium text-gray-700",
+            attrs: { for: "email" },
+          },
+          [_vm._v("Telefoonnummer")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-1" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.phone,
+                expression: "form.phone",
+              },
+            ],
+            staticClass:
+              "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+            attrs: {
+              id: "phone",
+              name: "phone",
+              type: "number",
+              autocomplete: "phone",
+              required: "",
+            },
+            domProps: { value: _vm.form.phone },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "phone", $event.target.value)
+              },
+            },
+          }),
+        ]),
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "space-y-1" }, [
         _c(
           "label",
@@ -42001,7 +42133,7 @@ var render = function () {
             staticClass: "block text-sm font-medium text-gray-700",
             attrs: { for: "password" },
           },
-          [_vm._v("Password")]
+          [_vm._v("Wachtwoord")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "mt-1" }, [
@@ -42016,11 +42148,11 @@ var render = function () {
             ],
             staticClass:
               "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+            class: { "border-green-600": _vm.formMeta.password_match },
             attrs: {
               id: "password",
               name: "password",
               type: "password",
-              autocomplete: "current-password",
               required: "",
             },
             domProps: { value: _vm.form.password },
@@ -42036,64 +42168,64 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-    ]
-  )
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex items-center justify-between" }, [
-      _c("div", { staticClass: "flex items-center" }, [
-        _c("input", {
-          staticClass:
-            "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded",
-          attrs: { id: "remember-me", name: "remember-me", type: "checkbox" },
-        }),
-        _vm._v(" "),
+      _c("div", { staticClass: "space-y-1" }, [
         _c(
           "label",
           {
-            staticClass: "ml-2 block text-sm text-gray-900",
-            attrs: { for: "remember-me" },
+            staticClass: "block text-sm font-medium text-gray-700",
+            attrs: { for: "password" },
           },
-          [_vm._v("Remember me")]
+          [_vm._v("Nogmaals ter controle")]
         ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-1" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.password,
+                expression: "form.password",
+              },
+            ],
+            staticClass:
+              "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+            class: { "border-green-600": _vm.formMeta.password_match },
+            attrs: {
+              id: "password-check",
+              name: "password-check",
+              type: "password-check",
+              required: "",
+            },
+            domProps: { value: _vm.form.password },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "password", $event.target.value)
+              },
+            },
+          }),
+        ]),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "text-sm" }, [
+      _c("div", [
         _c(
-          "a",
+          "button",
           {
-            staticClass: "font-medium text-blue-600 hover:text-blue-500",
-            attrs: { href: "#" },
+            staticClass:
+              "mb-10 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-theme hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+            attrs: { type: "submit" },
+            on: { click: _vm.register },
           },
-          [_vm._v("Forgot your password?")]
+          [_vm._v("Registreren\n        ")]
         ),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          staticClass:
-            "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-theme hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
-          attrs: { type: "submit" },
-        },
-        [_vm._v("Inloggen\n        ")]
-      ),
-    ])
-  },
-]
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -42934,7 +43066,25 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "px-5 mb-5" }, [
         _c("div", { staticClass: "flex" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "flex-2" }, [
+            _c("span", { staticClass: "inline-block relative" }, [
+              _c("img", {
+                staticClass:
+                  "h-16 w-16 rounded-full object-center object-cover",
+                attrs: {
+                  src: _vm.user.avatar
+                    ? "/img/user/" + _vm.user.avatar
+                    : "/img/user/empty-profile-picture.jpg",
+                  alt: "",
+                },
+              }),
+              _vm._v(" "),
+              _c("span", {
+                staticClass:
+                  "absolute top-0 right-0 block h-4 w-4 rounded-full ring-2 ring-white bg-green-400",
+              }),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex-auto" }, [
             _c("div", [
@@ -42943,7 +43093,7 @@ var render = function () {
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "px-4 text-gray-600 text-sm" }, [
-                _vm._v("J.J. Software Development"),
+                _vm._v(_vm._s(_vm.user.company)),
               ]),
             ]),
           ]),
@@ -42971,29 +43121,7 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex-2" }, [
-      _c("span", { staticClass: "inline-block relative" }, [
-        _c("img", {
-          staticClass: "h-16 w-16 rounded-full",
-          attrs: {
-            src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-            alt: "",
-          },
-        }),
-        _vm._v(" "),
-        _c("span", {
-          staticClass:
-            "absolute top-0 right-0 block h-4 w-4 rounded-full ring-2 ring-white bg-green-400",
-        }),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43086,7 +43214,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Log in")]
+                        [_vm._v("Log in met een bestaand account")]
                       ),
                     ])
                   : _vm._e(),
@@ -43112,11 +43240,7 @@ var render = function () {
         _vm._v(" "),
         _c(
           "div",
-          [
-            _vm.views.Register ? _c("Register") : _vm._e(),
-            _vm._v(" "),
-            _vm.views.ResetPassword ? _c("ResetPassword") : _vm._e(),
-          ],
+          [_vm.views.ResetPassword ? _c("ResetPassword") : _vm._e()],
           1
         ),
       ]),

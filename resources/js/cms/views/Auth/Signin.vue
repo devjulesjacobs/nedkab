@@ -73,7 +73,7 @@ export default {
     data() {
         return {
             form: {
-                email: "admin@gmail.com",
+                email: "admin@email.com",
                 password: "password",
             }
         }

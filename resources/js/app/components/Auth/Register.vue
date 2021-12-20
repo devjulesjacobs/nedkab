@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit" method="POST" class="space-y-6">
         <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">Email address</label>
+            <label for="name" class="block text-sm font-medium text-gray-700">Volledige naam</label>
             <div class="mt-1">
                 <input
                     v-model="form.name"
@@ -28,61 +28,105 @@
                 />
             </div>
         </div>
-
-        <div class="space-y-1">
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Bedrijf</label>
             <div class="mt-1">
                 <input
-                    v-model="form.password"
-                    id="password"
-                    name="password"
-                    type="password"
-                    autocomplete="current-password"
+                    v-model="form.company"
+                    id="company"
+                    name="company"
+                    type="text"
+                    autocomplete="company"
                     required
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
             </div>
         </div>
 
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Telefoonnummer</label>
+            <div class="mt-1">
                 <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    v-model="form.phone"
+                    id="phone"
+                    name="phone"
+                    type="number"
+                    autocomplete="phone"
+                    required
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
-                <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
             </div>
+        </div>
 
-            <div class="text-sm">
-                <a
-                    href="#"
-                    class="font-medium text-blue-600 hover:text-blue-500"
-                >Forgot your password?</a>
+        <div class="space-y-1">
+            <label for="password" class="block text-sm font-medium text-gray-700">Wachtwoord</label>
+            <div class="mt-1">
+                <input
+                    v-model="form.password"
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    :class="{ 'border-green-600': formMeta.password_match }"
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+            </div>
+        </div>
+
+        <div class="space-y-1">
+            <label for="password" class="block text-sm font-medium text-gray-700">Nogmaals ter controle</label>
+            <div class="mt-1">
+                <input
+                    v-model="form.password"
+                    id="password-check"
+                    name="password-check"
+                    type="password-check"
+                    required
+                    :class="{ 'border-green-600': formMeta.password_match }"
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
             </div>
         </div>
 
         <div>
             <button
+                @click="register"
                 type="submit"
-                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-theme hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >Inloggen
+                class="mb-10 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-theme hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >Registreren
             </button>
         </div>
     </form>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     name: "Register",
-    form: {
-        name: '',
-        email: '',
-        password: '',
+    data() {
+        return {
+            form: {
+                name: '',
+                email: '',
+                phone: '',
+                company: '',
+                password: '',
+            },
+            formMeta: {
+                password_confirm: '',
+                password_match: true,
+            }
+        }
     },
-    formMeta: {
-        password_confirm: '',
+    methods: {
+        register() {
+            axios.post('/api/register', this.form)
+                .then(res => {
+                    console.log(res) })
+                .catch(err => {
+                console.log(err)})
+        }
     }
 }
 </script>

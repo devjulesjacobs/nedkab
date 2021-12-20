@@ -4,7 +4,7 @@
         mode="out-in"
         enter-active-class="animate__animated animate__fadeIn animate__faster"
         >
-            <div class="content-window">
+            <div :class="{ 'content-window': authenticated }">
                 <router-view />
             </div>
         </transition>

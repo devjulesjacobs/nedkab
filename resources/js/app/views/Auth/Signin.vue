@@ -8,7 +8,7 @@
                         <h2 v-if="state === 'login'" class="mt-6 text-3xl font-bold text-gray-900">Inloggen</h2>
                         <h2 v-if="state === 'register'" class="mt-6 text-3xl font-bold text-gray-900">Registreren</h2>
                         <p v-if="state === 'login'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'register'" class="font-medium text-blue-600 hover:text-blue-500">registreer je nu</a></p>
-                        <p v-if="state === 'register'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'login'" class="font-medium text-blue-600 hover:text-blue-500">Log in</a></p>
+                        <p v-if="state === 'register'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'login'" class="font-medium text-blue-600 hover:text-blue-500">Log in met een bestaand account</a></p>
                     </div>
                     <div class="mt-8">
                         <div class="mt-6">
@@ -25,8 +25,6 @@
                     alt />
             </div>
             <div>
-                <!-- <Login v-if="views.Login"></Login> -->
-                <Register v-if="views.Register"></Register>
                 <ResetPassword v-if="views.ResetPassword"></ResetPassword>
             </div>
         </div>
@@ -61,7 +59,6 @@
         </div>
 
         <installation v-if="!installation" />
-        <!--        <installation-screen></installation-screen>-->
     </div>
 </template>
 

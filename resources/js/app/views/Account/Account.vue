@@ -6,8 +6,8 @@
             <div class="flex">
                 <div class="flex-2">
                     <span class="inline-block relative">
-                      <img class="h-16 w-16 rounded-full"
-                           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      <img class="h-16 w-16 rounded-full object-center object-cover"
+                           :src="user.avatar ? '/img/user/'+user.avatar : '/img/user/empty-profile-picture.jpg'"
                            alt="">
                       <span class="absolute top-0 right-0 block h-4 w-4 rounded-full ring-2 ring-white bg-green-400"></span>
                     </span>
@@ -15,7 +15,7 @@
                 <div class="flex-auto">
                     <div>
                         <p class="px-4 text-2xl font-bold">{{ user.name }}</p>
-                        <p class="px-4 text-gray-600 text-sm">J.J. Software Development</p>
+                        <p class="px-4 text-gray-600 text-sm">{{ user.company }}</p>
                     </div>
                 </div>
             </div>
