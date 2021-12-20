@@ -5,13 +5,15 @@
                 <div class="mx-auto w-full max-w-sm lg:w-96">
                     <div>
                         <img class="h-12 w-auto" src="/img/system/company-logo.png" alt="Workflow"/>
-                        <h2 class="mt-6 text-3xl font-bold text-gray-900">Inloggen</h2>
-                        <p class="mt-2 text-sm text-gray-600">Of <a href="#" class="font-medium text-blue-600 hover:text-blue-500">registreer je nu</a>
-                        </p>
+                        <h2 v-if="state === 'login'" class="mt-6 text-3xl font-bold text-gray-900">Inloggen</h2>
+                        <h2 v-if="state === 'register'" class="mt-6 text-3xl font-bold text-gray-900">Registreren</h2>
+                        <p v-if="state === 'login'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'register'" class="font-medium text-blue-600 hover:text-blue-500">registreer je nu</a></p>
+                        <p v-if="state === 'register'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'login'" class="font-medium text-blue-600 hover:text-blue-500">Log in</a></p>
                     </div>
                     <div class="mt-8">
                         <div class="mt-6">
-                            <Login></Login>
+                            <Login v-if="state === 'login'"></Login>
+                            <Register v-if="state === 'register'" ></Register>
                         </div>
                     </div>
                 </div>
@@ -86,7 +88,8 @@ export default {
                 Register: false,
                 ResetPassword: false,
             },
-            installation: false
+            installation: false,
+            state: 'login'
         }
     },
     mounted() {
