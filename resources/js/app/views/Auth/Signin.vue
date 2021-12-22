@@ -4,7 +4,9 @@
             <div class="flex-1 flex flex-col justify-center py-12 px-6 sm:px-8 lg:flex-none lg:px-20 xl:px-">
                 <div class="mx-auto w-full max-w-sm lg:w-96">
                     <div>
-                        <img class="h-12 w-auto" src="/img/system/company-logo.png" alt="Workflow"/>
+                        <a href="/cms">
+                            <img class="h-12 w-auto" src="/img/system/company-logo.png" alt="Workflow"/>
+                        </a>
                         <h2 v-if="state === 'login'" class="mt-6 text-3xl font-bold text-gray-900">Inloggen</h2>
                         <h2 v-if="state === 'register'" class="mt-6 text-3xl font-bold text-gray-900">Registreren</h2>
                         <p v-if="state === 'login'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'register'" class="font-medium text-blue-600 hover:text-blue-500">registreer je nu</a></p>
@@ -12,8 +14,11 @@
                     </div>
                     <div class="mt-8">
                         <div class="mt-6">
-                            <Login v-if="state === 'login'"></Login>
-                            <Register v-if="state === 'register'" ></Register>
+                            <login v-if="state === 'login'"
+                                        :email="email" />
+                            <register v-if="state === 'register'"
+                                        @setState="setState"
+                                        @setEmail="setEmail"/>
                         </div>
                     </div>
                 </div>
@@ -29,36 +34,7 @@
             </div>
         </div>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-        <div class="p-6">
-            <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
-                <div>
-                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                        <!-- Heroicon name: outline/check -->
-                        <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <div class="mt-3 text-center sm:mt-5">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                            App loaded succesfully
-                        </h3>
-                        <div class="mt-2">
-                            <p class="text-sm text-gray-500">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-5 sm:mt-6">
-                    <a href="/cms" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm">
-                        Go to dashboard
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <installation v-if="!installation" />
+        <installation v-if="!installed" />
     </div>
 </template>
 
@@ -76,16 +52,13 @@ export default {
     name: "SignIn",
     data() {
         return {
-            form: {
-                email: "jules@gmail.com",
-                password: "password",
-            },
+            email: '',
             views: {
                 Login: true,
                 Register: false,
                 ResetPassword: false,
             },
-            installation: false,
+            installed: true,
             state: 'login'
         }
     },
@@ -101,7 +74,13 @@ export default {
     },
     methods: {
         checkInstallationState() {
-            window.matchMedia('(display-mode: standalone)').matches ? this.installation = true : this.installation = false;
+            window.matchMedia('(display-mode: standalone)').matches ? this.installed = true : this.installed = false;
+        },
+        setState(state) {
+            this.state = state;
+        },
+        setEmail(email) {
+            this.email = email;
         }
     }
 };

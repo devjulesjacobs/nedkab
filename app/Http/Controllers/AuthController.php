@@ -66,6 +66,30 @@ class AuthController extends Controller
 
     }
 
+    public function loginApp(Request $request)
+    {
+        $tempUser = User::where('email', $request['email'])->first();
+
+        if(!empty($tempUser)) {
+
+            if (!Auth::attempt($request->only('email', 'password'))) {
+                return response()
+                    ->json(['message' => 'Unauthorized'], 401);
+            }
+
+            $user = User::where('email', $request['email'])->firstOrFail();
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()
+                ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
+        } else {
+            return response()
+                ->json(['message' => 'Unauthorized'], 401);
+        }
+
+    }
+
     // method for user logout and delete token
     public function logout()
     {

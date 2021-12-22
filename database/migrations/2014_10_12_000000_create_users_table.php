@@ -20,6 +20,16 @@ class CreateUsersTable extends Migration
             $table->string('company')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
+            $table->string('customer_fullname')->nullable();
+            $table->string('customer_contact')->nullable();
+            $table->string('customer_contact_phone')->nullable();
+            $table->string('street')->nullable();
+            $table->string('house_number')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('city')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('contact_phone')->nullable();
+            $table->string('contact_email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('type')->default('app');

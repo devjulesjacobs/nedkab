@@ -3,8 +3,10 @@
         <div class="min-h-full flex items-center justify-center py-6 px-4 sm:px-2 lg:px-2">
             <div class="max-w-md w-full space-y-8">
                 <div>
-                    <img class="mx-auto h-12 w-auto" src="/img/system/company-logo.png"
-                         alt="Workflow">
+                    <a href="/">
+                        <img class="mx-auto h-12 w-auto" src="/img/system/company-logo.png"
+                             alt="Workflow">
+                    </a>
                     <h2 class="mt-6 text-center text-3xl font-bold text-gray-900">
                         CMS Dashboard
                     </h2>

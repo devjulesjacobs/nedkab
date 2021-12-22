@@ -1,7 +1,7 @@
 <template>
-    <form @submit.prevent="submit" method="POST" class="space-y-6">
+    <form @submit.prevent="register" method="post" class="space-y-4">
         <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">Volledige naam</label>
+            <label for="name" class="block text-sm font-medium text-gray-700">Volledige naam <span class="text-red-500">*</span></label>
             <div class="mt-1">
                 <input
                     v-model="form.name"
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email address <span class="text-red-500">*</span></label>
             <div class="mt-1">
                 <input
                     v-model="form.email"
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Bedrijf</label>
+            <label for="email" class="block text-sm font-medium text-gray-700">Bedrijf <span class="text-red-500">*</span></label>
             <div class="mt-1">
                 <input
                     v-model="form.company"
@@ -44,7 +44,7 @@
         </div>
 
         <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Telefoonnummer</label>
+            <label for="email" class="block text-sm font-medium text-gray-700">Telefoonnummer <span class="text-red-500">*</span></label>
             <div class="mt-1">
                 <input
                     v-model="form.phone"
@@ -58,8 +58,10 @@
             </div>
         </div>
 
+        <hr>
+
         <div class="space-y-1">
-            <label for="password" class="block text-sm font-medium text-gray-700">Wachtwoord</label>
+            <label for="password" class="block text-sm font-medium text-gray-700">Wachtwoord <span class="text-red-500">*</span></label>
             <div class="mt-1">
                 <input
                     v-model="form.password"
@@ -67,6 +69,7 @@
                     name="password"
                     type="password"
                     required
+                    @keyup="checkPassword"
                     :class="{ 'border-green-600': formMeta.password_match }"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
@@ -74,15 +77,16 @@
         </div>
 
         <div class="space-y-1">
-            <label for="password" class="block text-sm font-medium text-gray-700">Nogmaals ter controle</label>
+            <label for="password" class="block text-sm font-medium text-gray-700">Nogmaals ter controle <span class="text-red-500">*</span></label>
             <div class="mt-1">
                 <input
-                    v-model="form.password"
+                    v-model="formMeta.password_confirm"
                     id="password-check"
                     name="password-check"
-                    type="password-check"
+                    type="password"
                     required
                     :class="{ 'border-green-600': formMeta.password_match }"
+                    @keyup="checkPassword"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
             </div>
@@ -90,7 +94,6 @@
 
         <div>
             <button
-                @click="register"
                 type="submit"
                 class="mb-10 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-theme hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >Registreren
@@ -115,17 +118,37 @@ export default {
             },
             formMeta: {
                 password_confirm: '',
-                password_match: true,
+                password_match: false,
             }
         }
     },
     methods: {
+        checkPassword() {
+            this.formMeta.password_match = this.form.password === this.formMeta.password_confirm
+        },
+
         register() {
-            axios.post('/api/register', this.form)
-                .then(res => {
-                    console.log(res) })
-                .catch(err => {
-                console.log(err)})
+            if(this.formMeta.password_match) {
+                axios.post('/api/register', this.form)
+                    .then(res => {
+                        this.$store.dispatch('auth/addNotification', {
+                            type: 'success',
+                            title: 'Succesvol geregistreed, je kunt nu inloggen.',
+                            timer: 3000
+                        });
+                        this.$emit("setState", 'login');
+                        this.$emit("setEmail", this.form.email);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            } else {
+                this.$store.dispatch('auth/addNotification', {
+                    type: 'warning',
+                    title: 'Het wachtwoord wat je hebt ingevuld komt niet overeen.',
+                    timer: 3000
+                });
+            }
         }
     }
 }

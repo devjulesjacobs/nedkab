@@ -21,6 +21,14 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('password')
             ],
             [
+                'name' => 'Jules Jacobs',
+                'email' => 'jules.j.jacobs@gmail.com',
+                'company' => 'Nedkab',
+                'phone' => '+31 6 12345678',
+                'type' => 'admin',
+                'password' => bcrypt('12345678')
+            ],
+            [
                 'name' => 'Administrator',
                 'email' => 'admin@email.com',
                 'company' => 'Nedkab',

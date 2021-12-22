@@ -68,8 +68,8 @@ export default {
     data() {
         return {
             form: {
-                email: "example@email.com",
-                password: "password",
+                email: this.email,
+                password: '',
             },
         };
     },
@@ -86,5 +86,7 @@ export default {
             this.$router.replace({name: "Home"});
         },
     },
+
+    props: ['email']
 };
 </script>

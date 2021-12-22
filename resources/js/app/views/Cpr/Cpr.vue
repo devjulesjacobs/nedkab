@@ -11,7 +11,7 @@
                     <div class="cpr-box">
 
                         <div v-if="!views.result"  class="mt-4 mb-6 p-5 bg-gray-200 rounded text-sm">
-                            De gewenste CPR voor uw kabel berekenen.
+                            De gewenste CPR voor uw kabel bepalen.
                         </div>
 
                         <form v-if="!views.result" class="section-calculation">
@@ -75,10 +75,10 @@
                                     </div>
                                 </div>
 
-                                <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">4.</span> Berekenen</div>
+                                <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">4.</span> Bevestigen</div>
                                 <div class="calculation-wrapper">
                                     <button @click="calculateCprButton" type="button" class="mt-1 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Berekenen
+                                        CPR Bepalen
                                     </button>
                                 </div>
                             </form>

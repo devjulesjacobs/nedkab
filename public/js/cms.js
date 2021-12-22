@@ -2767,6 +2767,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -41502,10 +41504,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("img", {
-        staticClass: "mx-auto h-12 w-auto",
-        attrs: { src: "/img/system/company-logo.png", alt: "Workflow" },
-      }),
+      _c("a", { attrs: { href: "/" } }, [
+        _c("img", {
+          staticClass: "mx-auto h-12 w-auto",
+          attrs: { src: "/img/system/company-logo.png", alt: "Workflow" },
+        }),
+      ]),
       _vm._v(" "),
       _c(
         "h2",

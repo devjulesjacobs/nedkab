@@ -57,6 +57,37 @@
                                 </div>
                             </transition>
 
+                            <transition name="slide-fade-up">
+                                <div v-show="installation.screens.Android" class="popup w-full px-4">
+                                    <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all">
+                                        <div>
+                                            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100">
+                                                <!-- Heroicon name: outline/check -->
+                                                <img src="/img/pwa/icon-192x192.png" alt="icon" class="shadow-xl rounded-md border border-gray-200">
+                                            </div>
+                                            <div class="mt-3 text-center sm:mt-5">
+                                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                                    Wilt u de app installeren?
+                                                </h3>
+                                                <div class="mt-2">
+                                                    <p class="text-sm text-gray-500">
+                                                        Voeg deze app makkelijk aan je beginscherm toe! Druk op de knop <span class="text-blue-800" @click="setDeviceType">Installeren</span>' en volg de stappen.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense flex-right">
+                                            <button type="button" class="mt-3 w-50 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm">
+                                                Annuleren
+                                            </button>
+                                            <button type="button" class="w-50 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-theme text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">
+                                                Installeren Android
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition>
+
 <!--                            <div v-if="installation.screens.Android"></div>-->
 
 <!--                            <div v-if="installation.screens.Windows"></div>-->
@@ -82,7 +113,7 @@ export default {
                     Android: false,
                     Windows: false,
                 }
-            }
+            },
         }
     },
 

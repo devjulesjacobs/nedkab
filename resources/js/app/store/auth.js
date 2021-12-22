@@ -6,6 +6,7 @@ export default {
     state: {
         authenticated: false,
         user: null,
+        notifications: []
     },
 
     getters: {
@@ -15,6 +16,10 @@ export default {
 
         user(state) {
             return state.user;
+        },
+
+        getNotifications(state) {
+            return state.notifications
         }
     },
 
@@ -26,20 +31,41 @@ export default {
         SET_USER(state, value) {
             state.user = value;
         },
+
+        PUSH_NOTIFICATION(state, notification) {
+            state.notifications.push({
+                ...notification,
+                id: (Math.random().toString(36)+Date.now().toString(36)).substr(2)
+            })
+        },
+
+        REMOVE_NOTIFICATION(state, notificationToRemove) {
+            state.notifications = state.notifications.filter(notification => {
+                return notification.id != notificationToRemove.id;
+            })
+        }
     },
 
     actions: {
         async login({ dispatch }, credentials) {
             await axios.get("/sanctum/csrf-cookie");
-            await axios.post("/login", credentials);
+            try {
+                await axios.post("/api/app/login", credentials)
+            } catch {
+                dispatch('addNotification', {
+                    type: 'error',
+                    title: 'Fout bij inloggen',
+                    message: 'Emailadres en/of wachtwoord is onjuist.',
+                    timer: 3000
+                })
+            }
 
-            return dispatch("setValuesUser");
+            return dispatch("setValues");
         },
-
         async logout({ dispatch }) {
             await axios.post("/logout");
 
-            return dispatch("setValuesUser");
+            return dispatch("setValues");
         },
 
         setValuesUser({ commit }) {
@@ -72,5 +98,11 @@ export default {
                         commit("SET_USER", null);
                     });
         },
+        addNotification({ commit }, notification) {
+            commit('PUSH_NOTIFICATION', notification);
+        },
+        removeNotification({ commit }, notification) {
+            commit('REMOVE_NOTIFICATION', notification);
+        }
     },
 };
