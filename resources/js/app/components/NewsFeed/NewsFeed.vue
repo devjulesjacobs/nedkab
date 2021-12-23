@@ -1,7 +1,7 @@
 <template>
     <div class="state-news-feed">
             <!-- News Feed -->
-        <div class="news-feed mb-5 py-5 pl-5">
+        <div class="news-feed mb-3 py-5 pl-5">
             <div class="news-feed-scroll">
                 <div v-if="!posts.length" class="skeleton-NewsFeed">
                     <div class="news-item">
@@ -20,6 +20,8 @@
                     </div>
                 </div>
             </div>
+
+            <h1 class="text-md font-medium mb-3">Nieuws</h1>
             <transition-group name="slide-fade" class="news-feed-scroll">
                 <div v-if="posts.length" v-for="post in posts" :key="post.id" class="news-item" @click="showPost(post)">
                     <img :src="'/img/posts/'+post.image" :alt="post.title">
@@ -28,7 +30,7 @@
                         <h1 class="news-title">{{ post.title }}</h1>
                         <div class="details-row">
                             <span class="details-icon material-icons-outlined">calendar_today</span>
-                            <span class="details-text">{{ post.created_at }}</span>
+                            <span class="details-text">{{ post.created_at | moment('DD MMMM YYYY') }}</span>
                         </div>
                     </div>
                 </div>

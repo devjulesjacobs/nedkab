@@ -24,20 +24,29 @@
                                 <div class="mt-2 relative flex-1">
                                     <div class="absolute inset-0">
 
-                                        <div class="flex p-4">
-                                            <div class="flex-2">
-                                                <span class="inline-block relative mt-1">
-                                                  <img class="h-16 w-16 rounded-full object-center object-cover border-2 border-dashed"
-                                                       :src="user.avatar ? '/img/user/'+user.avatar : '/img/user/empty-profile-picture.jpg'"
-                                                       alt="">
+                                        <div class="flex pt-4 pb-2">
+                                            <div class="flex-2 pl-4">
+                                                <span class="block relative mt-1">
+                                                    <label for="avatar">
+                                                        <img v-if="!avatar" class="h-20 w-20 rounded-full object-center object-cover border-2 border-dashed"
+                                                           :src="user.avatar ? '/img/user/'+user.avatar : '/img/user/empty-profile-picture.jpg'">
+
+                                                        <img v-if="avatar" class="h-20 w-20 rounded-full object-center object-cover border-2 border-dashed"
+                                                           :src="avatar">
+                                                        <div class="text-center text-xs text-blue-600 mt-\">wijzigen</div>
+                                                    </label>
                                                 </span>
                                             </div>
                                             <div class="flex-auto">
-                                                <div class="pt-2">
+                                                <div class="pt-5">
                                                     <p class="px-4 text-2xl font-bold">{{ user.name }}</p>
                                                     <p class="px-4 text-gray-600 text-sm">{{ form.company }}</p>
                                                 </div>
                                             </div>
+
+                                            <form method="post" enctype="multipart/form-data">
+                                                <input @change="getImage($event)" type="file" id="avatar" name="image" class="hidden" accept="image/png, image/jpeg"/>
+                                            </form>
                                         </div>
 
                                         <div class="bg-gray-100 p-4 mb-4 font-medium">Persoonlijke gegevens</div>
@@ -124,6 +133,7 @@ export default {
     data() {
         return {
             form: {},
+            avatar: null,
         }
     },
     mounted() {
@@ -141,6 +151,46 @@ export default {
             })
             .catch(err => {
                 console.log(err);
+            })
+        },
+
+        getImage(e) {
+            let image = e.target.files[0],
+                reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onload = e => {
+                this.avatar = e.target.result
+            }
+
+            this.changeAvatar();
+        },
+
+        changeAvatar() {
+            let imagefile = document.querySelector('#avatar');
+
+            let formData = new FormData;
+            formData.append("image", imagefile.files[0])
+
+            let config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            axios.post('/api/user/avatar/'+this.user.id, formData, config)
+                .then((res) => {
+                    this.$emit('refresh', res.data.image)
+                    this.$store.dispatch('auth/addNotification', {
+                        type: 'success',
+                        title: res.data.message
+                    });
+                }).catch((err) => {
+                this.errors = err.response.data
+                this.$store.dispatch('auth/addNotification', {
+                    type: 'error',
+                    title: 'Something went wrong ...',
+                    message: 'Something went wrong uploading your files!',
+                })
             })
         }
     },

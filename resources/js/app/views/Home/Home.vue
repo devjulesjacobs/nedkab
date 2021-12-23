@@ -5,7 +5,7 @@
 
         <news-feed></news-feed>
 
-        <submitted-emballages class="px-5"></submitted-emballages>
+        <emballage-overview class="px-5" />
     </div>
 </template>
 
@@ -13,11 +13,12 @@
 import { mapGetters, mapActions } from "vuex";
 import NewsFeed from "../../components/NewsFeed/NewsFeed";
 import SubmittedEmballages from "../../components/SubmittedEmballages/SubmittedEmballages";
+import EmballageOverview from "../../components/EmballageOverview/EmballageOverview";
 
 export default {
     name: 'Home',
 
-    components:{SubmittedEmballages, NewsFeed},
+    components:{EmballageOverview, SubmittedEmballages, NewsFeed},
 
     mounted() {
         window.LoadingScreen('hide');

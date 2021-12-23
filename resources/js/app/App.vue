@@ -1,10 +1,10 @@
 <template>
     <div class="state-app">
-        <transition mode="out-in" enter-active-class="animate__animated animate__fadeIn animate__faster">
             <div :class="{ 'content-window': authenticated }">
-                <router-view />
+                <transition mode="out-in" enter-active-class="animate__animated animate__fadeIn animate__faster">
+                    <router-view />
+                </transition>
             </div>
-        </transition>
 
         <BottomNav v-if="authenticated"></BottomNav>
         <notifications-list-app />

@@ -93,7 +93,9 @@ class PostController extends Controller
             $img->fit( 500, 300);
 
             $old_image = public_path('img/posts/').$post->image;
-            if(file_exists($old_image)) {
+
+            if (file_exists($old_image)) {
+                chmod($old_image, 0644);
                 unlink($old_image);
             }
 

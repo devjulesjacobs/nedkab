@@ -3,10 +3,13 @@
         <h1 class="page-title text-3xl font-bold px-5 py-5">Account</h1>
 
         <div class="px-5 mb-5">
-            <div class="flex bg-white px-5 py-4 rounded-md shadow-md">
+            <div class="flex bg-white px-5 py-4 rounded-md shadow-md cursor-pointer" @click="slide.show = true">
                 <div class="flex-2">
                     <span class="inline-block relative mt-1">
-                      <img class="h-16 w-16 rounded-full object-center object-cover"
+                      <img v-if="tempAvatar" class="h-16 w-16 rounded-full object-center object-cover shadow-md"
+                           :src="'/img/user/'+tempAvatar"
+                           alt="">
+                      <img v-else class="h-16 w-16 rounded-full object-center object-cover shadow-md"
                            :src="user.avatar ? '/img/user/'+user.avatar : '/img/user/empty-profile-picture.jpg'"
                            alt="">
                       <span class="absolute top-0 right-0 block h-4 w-4 rounded-full ring-2 ring-white bg-green-400"></span>
@@ -56,16 +59,17 @@
 
         <div class="px-5 pb-6 mt-3">
             <button @click="signOut" type="button"
-                    class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    class="inline-block items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Uitloggen
             </button>
-            <a href="/cms" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <a href="/cms" type="button" class="inline-block items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 CMS openen
             </a>
         </div>
 
         <profile-slide :user="user"
                        :show="slide.show"
+                       @refresh="setAvatar"
                        @hide="hideProfileSlide"/>
 
     </div>
@@ -80,7 +84,8 @@ export default {
         return {
             slide: {
                 show: false,
-            }
+            },
+            tempAvatar: null,
         }
     },
     computed: {
@@ -100,9 +105,14 @@ export default {
             this.$router.replace({name: "Signin"});
         },
 
+        setAvatar(filename) {
+            this.tempAvatar = filename;
+            this.$store.dispatch('auth/setValuesUser');
+        },
+
         hideProfileSlide() {
             this.slide.show = false;
-        }
+        },
     },
     components: {
         ProfileSlide

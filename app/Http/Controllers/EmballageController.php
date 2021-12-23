@@ -21,6 +21,20 @@ class EmballageController extends Controller
         return $emballages;
     }
 
+    public function getSubmitted()
+    {
+        $emballages = Emballage::where('status', 'ingediend');
+
+        return $emballages;
+    }
+
+    public function userEmballage()
+    {
+        $emballages = Emballage::where('user', auth()->user()->id)->orderBy('created_at', 'DESC')->take(20)->get();
+
+        return $emballages;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

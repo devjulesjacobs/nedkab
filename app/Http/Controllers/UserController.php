@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -89,6 +90,46 @@ class UserController extends Controller
                 'message' => 'Gebruiker niet gevonden.'
             ], 404);
         }
+    }
+
+    public function avatar(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        switch($_FILES['image']['type']) {
+            case 'image/png': $extension = '.png'; break;
+            case 'image/jpeg': $extension = '.jpg'; break;
+
+            default: return response()->json([
+                'message' => 'Dit type foto is niet toegestaan. U kunt .png en .jpg/.jpeg gebruiken.'
+            ], 404);
+        }
+
+        if(!empty($user->avatar)) {
+            $old_image = public_path('img/user/').$user->avatar;
+
+            if (file_exists($old_image)) {
+                chmod($old_image, 0644);
+                unlink($old_image);
+            }
+        }
+
+        $img = Image::make($request->file('image'));
+        $img->fit( 500, 500);
+
+        $path = public_path("img/user/");
+        $filename = 'U'.$user->id.'T'.time().$extension;
+
+        $img->save($path.$filename);
+
+        $user->update([
+            'avatar' => $filename
+        ]);
+
+        return response()->json([
+            'message' => 'Profielfoto bijgewerkt.',
+            'image' => $filename
+        ], 201);
     }
 
     /**
