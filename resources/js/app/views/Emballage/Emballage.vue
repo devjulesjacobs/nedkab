@@ -22,321 +22,459 @@
                         <div class="bg-white rounded-md shadow-md">
                             <h1 class="text-md font-medium px-5 pt-5 mb-2">{{ section }}</h1>
                             <p v-show="section === 'Klantgegevens' || section === 'Ophaaladres'" class="text-xs px-5 mb-5 text-gray-500">De ingevulde gegevens worden automatisch opgeslagen voor de volgende keer.</p>
-                            <section v-show="section === 'Klantgegevens' || section === 'Overzicht'">
-                                <div class="px-5">
-                                    <div class="mb-3">
-                                        <label class="text-sm font-medium text-gray-600 mb-1">Klantnaam</label>
-                                        <input v-model="form.customer_fullname" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <label class="text-sm font-medium text-gray-600 mb-1">Contactpersoon klant</label>
-                                        <input v-model="form.customer_contact" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="text-sm font-medium text-gray-600 mb-1">Telefoonnummer contactpersoon</label>
-                                        <input v-model="form.customer_contact_phone" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-                                </div>
-
-                                <div class="bg-gray-100 px-5 py-4 mt-8">
-                                    <button @click="section = 'Ophaaladres'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Volgende
-                                    </button>
-                                </div>
-                            </section>
-
-                            <section v-show="section === 'Ophaaladres' || section === 'Overzicht'">
-                                <div class="px-5">
-                                    <div class="flex mb-3">
-                                        <div class="w-3/4">
-                                            <label class="text-md font-medium text-gray-600 mb-1">Straatnaam</label>
-                                            <input v-model="form.street" type="text" class="w-full appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <transition name="slide-fade">
+                                <section v-show="section === 'Klantgegevens' || section === 'Overzicht'">
+                                    <div class="px-5">
+                                        <div class="mb-3">
+                                            <label class="text-sm font-medium text-gray-600 mb-1">Klantnaam</label>
+                                            <input v-model="form.customer_fullname" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
-                                        <div class="w-1/4">
-                                            <label class="text-md font-medium text-gray-600 mb-1 ml-2">Huisnr.</label>
-                                            <input v-model="form.house_number" type="text" class="ml-2 text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+
+                                        <div class="mb-3">
+                                            <label class="text-sm font-medium text-gray-600 mb-1">Contactpersoon klant</label>
+                                            <input v-model="form.customer_contact" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="text-sm font-medium text-gray-600 mb-1">Telefoonnummer contactpersoon</label>
+                                            <input v-model="form.customer_contact_phone" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                     </div>
 
-                                    <div class="flex mb-3">
-                                        <div class="w-1/3">
-                                            <label class="text-md font-medium text-gray-600 mb-1">Postcode</label>
-                                            <input v-model="form.postcode" type="text" maxlength="6" class="text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <div class="bg-gray-100 px-5 py-4 mt-8">
+                                        <button @click="section = 'Ophaaladres'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Volgende
+                                        </button>
+                                    </div>
+                                </section>
+                            </transition>
+
+                            <transition name="slide-fade">
+                                <section v-show="section === 'Ophaaladres' || section === 'Overzicht'">
+                                    <div class="px-5">
+                                        <div class="flex mb-3">
+                                            <div class="w-3/4">
+                                                <label class="text-md font-medium text-gray-600 mb-1">Straatnaam</label>
+                                                <input v-model="form.street" type="text" class="w-full appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            </div>
+                                            <div class="w-1/4">
+                                                <label class="text-md font-medium text-gray-600 mb-1 ml-2">Huisnr.</label>
+                                                <input v-model="form.house_number" type="text" class="ml-2 text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            </div>
                                         </div>
-                                        <div class="w-2/3">
-                                            <label class="text-md font-medium text-gray-600 mb-1 ml-2">Plaats</label>
-                                            <input v-model="form.city" type="text" class="ml-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+
+                                        <div class="flex mb-3">
+                                            <div class="w-1/3">
+                                                <label class="text-md font-medium text-gray-600 mb-1">Postcode</label>
+                                                <input v-model="form.postcode" type="text" maxlength="6" class="text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            </div>
+                                            <div class="w-2/3">
+                                                <label class="text-md font-medium text-gray-600 mb-1 ml-2">Plaats</label>
+                                                <input v-model="form.city" type="text" class="ml-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="text-md font-medium text-gray-600 mb-1">Contactpersoon</label>
-                                        <input v-model="form.contact" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="text-md font-medium text-gray-600 mb-1">Telefoonnummer contactpersoon</label>
-                                        <input v-model="form.contact_phone" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="text-md font-medium text-gray-600 mb-1">Emailadres contactpersoon</label>
-                                        <input v-model="form.contact_email" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-                                </div>
-
-                                <div class="bg-gray-100 px-5 py-4 mt-8">
-                                    <button @click="section = 'Klantgegevens'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Terug
-                                    </button>
-                                    <button @click="section = 'Haspels en afronden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Volgende
-                                    </button>
-                                </div>
-                            </section>
-
-                            <section v-show="section === 'Haspels en afronden' || section === 'Overzicht'">
-                                <div class="px-5">
-                                    <div class="mb-3">
-                                        <h1 class="text-md font-medium mt-5 mb-1">Afhaaltijd</h1>
-                                        <input v-model="form.pickup" type="time" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-
-                                    <h1 class="text-md font-medium mt-5 mb-1">Is er een hefinstallatie nodig?</h1>
-                                    <div class="relative flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input v-model="form.lifting_equipment" id="lifting_equipment" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                        <div class="mb-3">
+                                            <label class="text-md font-medium text-gray-600 mb-1">Contactpersoon</label>
+                                            <input v-model="form.contact" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
-                                        <div class="ml-1.5 text-sm">
-                                            <label for="lifting_equipment" class="font-medium text-gray-700">Ja, <span id="comments-description" class="font-normal text-gray-500">er is een hefinstallatie nodig.</span></label>
 
+                                        <div class="mb-3">
+                                            <label class="text-md font-medium text-gray-600 mb-1">Telefoonnummer contactpersoon</label>
+                                            <input v-model="form.contact_phone" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="text-md font-medium text-gray-600 mb-1">Emailadres contactpersoon</label>
+                                            <input v-model="form.contact_email" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                     </div>
 
-                                    <h1 class="text-md font-medium mt-5">Haspels</h1>
-                                    <p class="text-xs mb-3 text-gray-500">Selecteer de haspel(s) die u wilt retourneren.</p>
+                                    <div class="bg-gray-100 px-5 py-4 mt-8">
+                                        <button @click="section = 'Klantgegevens'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Terug
+                                        </button>
+                                        <button @click="section = 'Haspels en afronden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Volgende
+                                        </button>
+                                    </div>
+                                </section>
+                            </transition>
 
-                                    <div class="mb-3">
+                            <transition name="slide-fade">
+                                <section v-show="section === 'Haspels en afronden' || section === 'Overzicht'">
+                                    <div class="px-5">
+                                        <div class="mb-3">
+                                            <h1 class="text-md font-medium mt-5 mb-1">Afhaaltijd</h1>
+                                            <input v-model="form.pickup" type="time" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
 
-                                        <div class="relative flex items-start mb-2">
+                                        <h1 class="text-md font-medium mt-5 mb-1">Is er een hefinstallatie nodig?</h1>
+                                        <div class="relative flex items-start">
                                             <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_60" id="diameter_60" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                <input v-model="form.lifting_equipment" true-value=1 false-value=0 id="lifting_equipment" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
                                             </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_60" class="font-medium text-gray-700">60<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                            <div class="ml-1.5 text-sm">
+                                                <label for="lifting_equipment" class="font-medium text-gray-700">Ja, <span id="comments-description" class="font-normal text-gray-500">er is een hefinstallatie nodig.</span></label>
+
                                             </div>
                                         </div>
-                                        <select v-if="formMeta.haspels.diameter_60" v-model="form.diameter_60" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
 
-                                        <div class="relative flex items-start mb-2">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_80" id="diameter_80" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                        <h1 class="text-md font-medium mt-5">Haspels</h1>
+                                        <p class="text-xs mb-3 text-gray-500">Selecteer de haspel(s) die u wilt retourneren.</p>
+
+                                        <div class="mb-3">
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_60" id="diameter_60" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_60" class="font-medium text-gray-700">60<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
                                             </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_80" class="font-medium text-gray-700">80<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                            <select v-if="formMeta.haspels.diameter_60" v-model="form.diameter_60" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_80" id="diameter_80" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_80" class="font-medium text-gray-700">80<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
                                             </div>
+                                            <select v-if="formMeta.haspels.diameter_80" v-model="form.diameter_80" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_100" id="diameter_100" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_100" class="font-medium text-gray-700">100<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
+                                            </div>
+                                            <select v-if="formMeta.haspels.diameter_100" v-model="form.diameter_100" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_120" id="diameter_120" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_120" class="font-medium text-gray-700">120<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
+                                            </div>
+                                            <select v-if="formMeta.haspels.diameter_120" v-model="form.diameter_120" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_140" id="diameter_140" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_140" class="font-medium text-gray-700">140<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
+                                            </div>
+                                            <select v-if="formMeta.haspels.diameter_140" v-model="form.diameter_140" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_160" id="diameter_160" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_160" class="font-medium text-gray-700">160<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
+                                            </div>
+                                            <select v-if="formMeta.haspels.diameter_160" v-model="form.diameter_160" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_180" id="diameter_180" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_180" class="font-medium text-gray-700">180<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
+                                            </div>
+                                            <select v-if="formMeta.haspels.diameter_180" v-model="form.diameter_180" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
+
+                                            <div class="relative flex items-start mb-2">
+                                                <div class="flex items-center h-5">
+                                                    <input v-model="formMeta.haspels.diameter_200" id="diameter_200" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                                </div>
+                                                <div class="ml-2 text-sm">
+                                                    <label for="diameter_200" class="font-medium text-gray-700">200<span class="text-xs text-gray-400">cm</span> Diameter</label>
+                                                </div>
+                                            </div>
+                                            <select v-if="formMeta.haspels.diameter_200" v-model="form.diameter_200" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Selecteer aantal</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+
                                         </div>
-                                        <select v-if="formMeta.haspels.diameter_80" v-model="form.diameter_80" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
 
-
-                                        <div class="relative flex items-start mb-2">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_100" id="diameter_100" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
-                                            </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_100" class="font-medium text-gray-700">100<span class="text-xs text-gray-400">cm</span> Diameter</label>
-                                            </div>
-                                        </div>
-                                        <select v-if="formMeta.haspels.diameter_100" v-model="form.diameter_100" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
-
-
-                                        <div class="relative flex items-start mb-2">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_120" id="diameter_120" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
-                                            </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_120" class="font-medium text-gray-700">120<span class="text-xs text-gray-400">cm</span> Diameter</label>
-                                            </div>
-                                        </div>
-                                        <select v-if="formMeta.haspels.diameter_120" v-model="form.diameter_120" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
-
-
-                                        <div class="relative flex items-start mb-2">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_140" id="diameter_140" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
-                                            </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_140" class="font-medium text-gray-700">140<span class="text-xs text-gray-400">cm</span> Diameter</label>
-                                            </div>
-                                        </div>
-                                        <select v-if="formMeta.haspels.diameter_140" v-model="form.diameter_140" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
-
-
-                                        <div class="relative flex items-start mb-2">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_160" id="diameter_160" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
-                                            </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_160" class="font-medium text-gray-700">160<span class="text-xs text-gray-400">cm</span> Diameter</label>
-                                            </div>
-                                        </div>
-                                        <select v-if="formMeta.haspels.diameter_160" v-model="form.diameter_160" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
-
-
-                                        <div class="relative flex items-start mb-2">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_180" id="diameter_180" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
-                                            </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_180" class="font-medium text-gray-700">180<span class="text-xs text-gray-400">cm</span> Diameter</label>
-                                            </div>
-                                        </div>
-                                        <select v-if="formMeta.haspels.diameter_180" v-model="form.diameter_180" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
-
-
-                                        <div class="relative flex items-start mb-2">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="formMeta.haspels.diameter_200" id="diameter_200" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
-                                            </div>
-                                            <div class="ml-2 text-sm">
-                                                <label for="diameter_200" class="font-medium text-gray-700">200<span class="text-xs text-gray-400">cm</span> Diameter</label>
-                                            </div>
-                                        </div>
-                                        <select v-if="formMeta.haspels.diameter_200" v-model="form.diameter_200" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                            <option value="0" disabled>Selecteer aantal</option>
-                                            <option value="1">1 haspel</option>
-                                            <option value="2">2 haspels</option>
-                                            <option value="3">3 haspels</option>
-                                            <option value="4">4 haspels</option>
-                                            <option value="5">5 haspels</option>
-                                            <option value="6">6 haspels</option>
-                                            <option value="7">7 haspels</option>
-                                            <option value="8">8 haspels</option>
-                                            <option value="9">9 haspels</option>
-                                            <option value="10">10 haspels</option>
-                                        </select>
+                                        <h1 class="text-md font-medium mt-5 mb-1">Opmerkingen</h1>
+                                        <textarea v-model="form.comments" rows="6"
+                                                  class="shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"></textarea>
 
                                     </div>
 
-                                    <h1 class="text-md font-medium mt-5 mb-1">Opmerkingen</h1>
-                                    <textarea v-model="form.comments" rows="6"
-                                              class="shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"></textarea>
+                                    <div class="bg-gray-100 px-5 py-4 mt-8">
+                                        <button @click="section = 'Ophaaladres'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Terug
+                                        </button>
+                                        <button @click="section = 'Afronden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Volgende
+                                        </button>
+                                    </div>
+                                </section>
+                            </transition>
 
-                                </div>
-
-                                <div class="bg-gray-100 px-5 py-4 mt-8">
-                                    <button @click="section = 'Ophaaladres'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Terug
-                                    </button>
-                                    <button @click="section = 'Afronden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Volgende
-                                    </button>
-                                </div>
-                            </section>
-
-                            <section v-show="section === 'Afronden'" class="px-5">
-                                <div>
-                                    <h1 class="font-medium text-md mb-1">Uw gegevens</h1>
+                            <transition name="slide-fade">
+                                <section v-show="section === 'Afronden'">
+                                    <div class="mb-3">
+                                        <h1 class="px-5 text-xs font-medium uppercase text-gray-600">Emballage</h1>
+                                        <h1 class="px-5 text-md font-bold">{{ user.company }}</h1>
+                                    </div>
                                     <div>
-                                        <h5 class="text-gray-900 font-medium">Naam</h5>
-                                        <p class="text-gray-700 text-sm">{{ user.name }}</p>
-                                    </div>
-                                </div>
+                                        <h1 class="font-medium text-md px-5">Retourneerbaar</h1>
+                                        <div class="px-5">
+                                            <ul>
+                                                <li v-if="parseInt(form.diameter_60) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>60cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_60 }}x</span>
+                                                </li>
+                                                <li v-if="parseInt(form.diameter_80) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>80cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_80 }}x</span>
+                                                </li>
+                                                <li v-if="parseInt(form.diameter_100) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>100cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_100 }}x</span>
+                                                </li>
+                                                <li v-if="parseInt(form.diameter_120) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>120cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_120 }}x</span>
+                                                </li>
+                                                <li v-if="parseInt(form.diameter_140) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>140cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_140 }}x</span>
+                                                </li>
+                                                <li v-if="parseInt(form.diameter_160) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>160cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_160 }}x</span>
+                                                </li>
+                                                <li v-if="parseInt(form.diameter_180) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>180cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_180 }}x</span>
+                                                </li>
+                                                <li v-if="parseInt(form.diameter_200) > 0" class="text-sm">
+                                                    Haspel van <span class="text-gray-400">Ø</span>200cm
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mb-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    <span class="font-medium">{{ form.diameter_200 }}x</span>
+                                                </li>
+                                            </ul>
+                                        </div>
 
-                                <div class="bg-gray-100 px-5 py-4 mt-8">
-                                    <button @click="section = 'Haspels en afronden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Terug
-                                    </button>
-                                    <button @click="sendEmballage" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Indienen
-                                    </button>
-                                </div>
-                            </section>
+                                        <h1 class="font-medium text-md mt-5 px-5">Klantgegevens</h1>
+                                        <div class="space-y-2">
+                                            <dl>
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Klantnaam</dt>
+                                                    <dd class="text-gray-900">{{ form.customer_fullname }}</dd>
+                                                </div>
+
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Contactpersoon</dt>
+                                                    <dd class="text-gray-900">{{ form.customer_contact }}</dd>
+                                                </div>
+
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Telefoonnummer</dt>
+                                                    <dd class="text-gray-900">{{ form.customer_contact_phone }}</dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+
+                                        <h1 class="font-medium text-md mt-5 px-5">Ophaaladres</h1>
+                                        <div class="space-y-2">
+                                            <dl>
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Straat en huisnummer</dt>
+                                                    <dd class="text-gray-900">{{ form.street + ' ' + form.house_number }}</dd>
+                                                </div>
+
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Plaats en postcode</dt>
+                                                    <dd class="text-gray-900">{{ form.city  + ' ' + form.postcode }}</dd>
+                                                </div>
+
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Ophalen vanaf</dt>
+                                                    <dd class="text-gray-900">{{ form.pickup }}</dd>
+                                                </div>
+
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Hefinstallatie benodigd</dt>
+                                                    <dd class="text-gray-900">{{ parseInt(form.lifting_equipment) === 1 ? 'Ja' : 'Nee' }}</dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+
+                                        <h1 class="font-medium text-md mt-5 px-5">Contact (op locatie)</h1>
+                                        <div class="space-y-2">
+                                            <dl>
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Contactpersoon</dt>
+                                                    <dd class="text-gray-900">{{ form.contact }}</dd>
+                                                </div>
+
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Telefoonnummer</dt>
+                                                    <dd class="text-gray-900">{{ form.contact_phone }}</dd>
+                                                </div>
+
+                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
+                                                    <dt class="text-gray-500">Emailadres</dt>
+                                                    <dd class="text-gray-900">{{ form.contact_email }}</dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+
+                                        <h1 class="font-medium text-md mt-5 px-5">Opmerkingen</h1>
+                                        <p v-if="form.comments.length" class="px-5 text-sm">{{ form.comments }}</p>
+                                        <p v-else class="px-5 text-sm text-gray-500 italic">Geen opmerkingen</p>
+                                    </div>
+
+                                    <div class="bg-gray-100 px-5 py-4 mt-8">
+                                        <button @click="section = 'Haspels en afronden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Terug
+                                        </button>
+                                        <button @click="sendEmballage" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Indienen
+                                        </button>
+                                    </div>
+                                </section>
+                            </transition>
 
                         </div>
                     </form>
@@ -356,7 +494,7 @@ export default {
     name: "Emballage",
     data() {
         return {
-            state: 'create',
+            state: 'overview',
             form: {
                 customer_fullname: '',
                 customer_contact: '',
@@ -394,7 +532,7 @@ export default {
                     diameter_200: false,
                 }
             },
-            section: 'Afronden'
+            section: 'Klantgegevens'
         }
     },
     mounted() {

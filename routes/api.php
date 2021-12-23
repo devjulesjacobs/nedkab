@@ -31,6 +31,7 @@ Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update']
 Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->middleware(['auth:sanctum']);
 
 // Emballage
+Route::get('/cms/emballage', [\App\Http\Controllers\EmballageController::class, 'index'])->middleware(['auth:sanctum']);
 Route::get('/app/emballage', [\App\Http\Controllers\EmballageController::class, 'userEmballage'])->middleware(['auth:sanctum']);
 Route::post('/emballage', [\App\Http\Controllers\EmballageController::class, 'create'])->middleware(['auth:sanctum']);
 

@@ -3016,7 +3016,8 @@ __webpack_require__.r(__webpack_exports__);
     getEmballages: function getEmballages() {
       var _this = this;
 
-      axios.get('/api/emballage').then(function (res) {
+      axios.get('/api/cms/emballage').then(function (res) {
+        console.log(res);
         _this.emballages = res.data;
       })["catch"](function (err) {
         console.log(err);
@@ -41809,11 +41810,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "flex-shrink-0 h-10 w-10" }, [
       _c("img", {
-        staticClass: "h-10 w-10 rounded-full",
-        attrs: {
-          src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-          alt: "",
-        },
+        staticClass: "h-10 w-10 rounded-full object-cover object-center",
+        attrs: { src: "/img/user/empty-profile-picture.jpg", alt: "" },
       }),
     ])
   },

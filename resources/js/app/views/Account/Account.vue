@@ -30,31 +30,31 @@
 
                 <div>
                     <div class="space-y-6">
-                    <div>
-                        <dl class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-                            <div class="py-3 flex justify-between text-sm font-medium">
-                                <dt class="text-gray-500">Emailadres</dt>
-                                <dd class="text-gray-900">{{ user.email }}</dd>
-                            </div>
+                        <div>
+                            <dl class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
+                                <div class="py-3 flex justify-between text-sm font-medium">
+                                    <dt class="text-gray-500">Emailadres</dt>
+                                    <dd class="text-gray-900">{{ user.email }}</dd>
+                                </div>
 
-                            <div class="py-3 flex justify-between text-sm font-medium">
-                                <dt class="text-gray-500">Telefoonnummer</dt>
-                                <dd class="text-gray-900">{{ user.phone }}</dd>
-                            </div>
+                                <div class="py-3 flex justify-between text-sm font-medium">
+                                    <dt class="text-gray-500">Telefoonnummer</dt>
+                                    <dd class="text-gray-900">{{ user.phone }}</dd>
+                                </div>
 
-                            <div class="py-3 flex justify-between text-sm font-medium">
-                                <dt class="text-gray-500">Bedrijf</dt>
-                                <dd class="text-gray-900">{{ user.company }}</dd>
-                            </div>
-                        </dl>
+                                <div class="py-3 flex justify-between text-sm font-medium">
+                                    <dt class="text-gray-500">Bedrijf</dt>
+                                    <dd class="text-gray-900">{{ user.company }}</dd>
+                                </div>
+                            </dl>
 
-                        <div class="mt-2">
-                            <a @click="slide.show = true;" class="text-blue-600 text-sm">Gegevens wijzigen</a>
+                            <div class="mt-2">
+                                <a @click="slide.show = true;" class="text-blue-600 text-sm">Gegevens wijzigen</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
 
         <div class="px-5 pb-6 mt-3">

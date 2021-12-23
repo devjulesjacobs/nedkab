@@ -32,7 +32,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
-                                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                                            <img class="h-10 w-10 rounded-full object-cover object-center" src="/img/user/empty-profile-picture.jpg" alt="">
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -89,8 +89,9 @@ export default {
 
     methods: {
         getEmballages() {
-            axios.get('/api/emballage')
+            axios.get('/api/cms/emballage')
             .then((res) => {
+                console.log(res)
                 this.emballages = res.data
             })
             .catch((err) => { console.log(err) })
