@@ -11,9 +11,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
-    public function emballages()
-    {
-        return $this->hasMany(Emballage::class);
+    public function emballage() {
+        return $this->hasMany('App\Emballage');
     }
 
     /**

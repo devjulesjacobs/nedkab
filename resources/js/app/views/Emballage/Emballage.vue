@@ -13,8 +13,9 @@
                 </button>
             </div>
 
+<!--            <submitted-emballages v-if="state === 'overview'" class="mt-5"/>-->
+            <emballage-overview v-if="state === 'overview'" />
 
-            <submitted-emballages v-if="state === 'overview'" class="mt-5"/>
             <transition name="slide-fade">
                 <div v-if="state === 'create'">
                     <form>
@@ -51,21 +52,21 @@
                                     <div class="flex mb-3">
                                         <div class="w-3/4">
                                             <label class="text-md font-medium text-gray-600 mb-1">Straatnaam</label>
-                                            <input v-model="form.street" type="text" class="m-0 appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <input v-model="form.street" type="text" class="w-full appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                         <div class="w-1/4">
-                                            <label class="text-md font-medium text-gray-600 mb-1">Huisnr.</label>
-                                            <input v-model="form.house_number" type="text" class="text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <label class="text-md font-medium text-gray-600 mb-1 ml-2">Huisnr.</label>
+                                            <input v-model="form.house_number" type="text" class="ml-2 text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                     </div>
 
                                     <div class="flex mb-3">
                                         <div class="w-1/3">
                                             <label class="text-md font-medium text-gray-600 mb-1">Postcode</label>
-                                            <input v-model="form.postcode" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <input v-model="form.postcode" type="text" maxlength="6" class="text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                         <div class="w-2/3">
-                                            <label class="text-md font-medium text-gray-600 mb-1">Plaats</label>
+                                            <label class="text-md font-medium text-gray-600 mb-1 ml-2">Plaats</label>
                                             <input v-model="form.city" type="text" class="ml-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                         </div>
                                     </div>
@@ -103,8 +104,9 @@
                                     </div>
 
                                     <h1 class="text-md font-medium mb-2 mt-5">Haspels</h1>
-                                    <div class="mb-3">
+                                    <p class="text-xs mb-5 text-gray-500">Selecteer de haspel(s) die u wilt retourneren</p>
 
+                                    <div class="mb-3">
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -114,6 +116,19 @@
                                                 <label for="diameter_60" class="font-medium text-gray-700">60<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_60" v-model="form.diameter_60" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -123,6 +138,20 @@
                                                 <label for="diameter_80" class="font-medium text-gray-700">80<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_80" v-model="form.diameter_80" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
+
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -132,6 +161,20 @@
                                                 <label for="diameter_100" class="font-medium text-gray-700">100<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_100" v-model="form.diameter_100" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
+
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -141,6 +184,20 @@
                                                 <label for="diameter_120" class="font-medium text-gray-700">120<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_120" v-model="form.diameter_120" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
+
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -150,6 +207,20 @@
                                                 <label for="diameter_140" class="font-medium text-gray-700">140<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_140" v-model="form.diameter_140" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
+
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -159,6 +230,20 @@
                                                 <label for="diameter_160" class="font-medium text-gray-700">160<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_160" v-model="form.diameter_160" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
+
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -168,6 +253,20 @@
                                                 <label for="diameter_180" class="font-medium text-gray-700">180<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_180" v-model="form.diameter_180" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
+
 
                                         <div class="relative flex items-start mb-2">
                                             <div class="flex items-center h-5">
@@ -177,6 +276,19 @@
                                                 <label for="diameter_200" class="font-medium text-gray-700">200<span class="text-xs text-gray-400">cm</span> Diameter</label>
                                             </div>
                                         </div>
+                                        <select v-if="formMeta.haspels.diameter_200" v-model="form.diameter_200" class="px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                            <option value="0" disabled>Geen haspel</option>
+                                            <option value="1">1 haspel</option>
+                                            <option value="2">2 haspels</option>
+                                            <option value="3">3 haspels</option>
+                                            <option value="4">4 haspels</option>
+                                            <option value="5">5 haspels</option>
+                                            <option value="6">6 haspels</option>
+                                            <option value="7">7 haspels</option>
+                                            <option value="8">8 haspels</option>
+                                            <option value="9">9 haspels</option>
+                                            <option value="10">10 haspels</option>
+                                        </select>
 
                                     </div>
                                 </div>
@@ -185,53 +297,173 @@
                                     <button @click="section = 'Ophaaladres'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Terug
                                     </button>
-                                    <button @click="section = 'Foto uploaden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Volgende
+                                    <button @click="sendEmballage" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Afronden
                                     </button>
                                 </div>
                             </section>
 
                             <section v-show="section === 'Foto uploaden' || section === 'Overzicht'">
                                 <div>
+
                                     <div v-show="formMeta.haspels.diameter_60">
                                         <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">60cm</span></div>
-
                                         <div class="px-5">
-                                            <label for="location" class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">60cm</span> diameter</label>
-                                            <select v-model="form.diameter_60" id="location" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">60cm</span> diameter</label>
+                                            <select v-model="form.diameter_60" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Geen haspel</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
                                             </select>
-
-                                            <label for="location" class="lock text-sm font-medium text-gray-700">Foto's uploaden</label>
-                                            <p class="text-xs text-gray-500">Upload duidelijke foto(s) van de betreffende haspel(s).</p>
-
-                                            <input type="file" id="files_60" name="files_60" class="mt-2" multiple>
-
-                                            <button @click="sendEmballage" type="button" class="mt-10 mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                Versturen
-                                            </button>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!--                            <div class="bg-gray-100 px-5 py-4 mt-8">-->
-                                <!--                                <button @click="section = 'Haspels'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
-                                <!--                                    Terug-->
-                                <!--                                </button>-->
-                                <!--                                <button @click="section = '&#45;&#45;&#45;&#45;'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
-                                <!--                                    Volgende-->
-                                <!--                                </button>-->
-                                <!--                            </div>-->
+                                    <div v-show="formMeta.haspels.diameter_80">
+                                        <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">80cm</span></div>
+                                        <div class="px-5">
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">80cm</span> diameter</label>
+                                            <select v-model="form.diameter_80" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Geen haspel</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div v-show="formMeta.haspels.diameter_100">
+                                        <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">100cm</span></div>
+                                        <div class="px-5">
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">100cm</span> diameter</label>
+                                            <select v-model="form.diameter_100" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Geen haspel</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div v-show="formMeta.haspels.diameter_120">
+                                        <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">120cm</span></div>
+                                        <div class="px-5">
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">120cm</span> diameter</label>
+                                            <select v-model="form.diameter_120" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Geen haspel</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div v-show="formMeta.haspels.diameter_140">
+                                        <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">140cm</span></div>
+                                        <div class="px-5">
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">140cm</span> diameter</label>
+                                            <select v-model="form.diameter_140" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Geen haspel</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div v-show="formMeta.haspels.diameter_160">
+                                        <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">160cm</span></div>
+                                        <div class="px-5">
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">160cm</span> diameter</label>
+                                            <select v-model="form.diameter_160" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Geen haspel</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div v-show="formMeta.haspels.diameter_180">
+                                        <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">180cm</span></div>
+                                        <div class="px-5">
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">180cm</span> diameter</label>
+                                            <select v-model="form.diameter_180" class="px-3 mb-5 appearance-none block w-full py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                <option value="0" disabled>Geen haspel</option>
+                                                <option value="1">1 haspel</option>
+                                                <option value="2">2 haspels</option>
+                                                <option value="3">3 haspels</option>
+                                                <option value="4">4 haspels</option>
+                                                <option value="5">5 haspels</option>
+                                                <option value="6">6 haspels</option>
+                                                <option value="7">7 haspels</option>
+                                                <option value="8">8 haspels</option>
+                                                <option value="9">9 haspels</option>
+                                                <option value="10">10 haspels</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div v-show="formMeta.haspels.diameter_200">
+                                        <div class="bg-gray-100 px-5 py-3 font-medium text-gray-700 mb-4">Diameter <span class="text-gray-800">200cm</span></div>
+                                        <div class="px-5">
+                                            <label class="lock text-sm font-medium text-gray-700">Aantal haspels van <span class="font-bold">200cm</span> diameter</label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="px-5">
+                                        <button @click="section = 'Haspels'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Terug
+                                        </button>
+                                        <button @click="sendEmballage" type="button" class="mt-10 mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Versturen
+                                        </button>
+                                    </div>
+
+                                </div>
                             </section>
                         </div>
                     </form>
@@ -243,8 +475,9 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import SubmittedEmballages from "../../components/SubmittedEmballages/SubmittedEmballages";
+import EmballageOverview from "../../components/EmballageOverview/EmballageOverview";
 
 export default {
     name: "Emballage",
@@ -272,11 +505,13 @@ export default {
                 diameter_140: 0,
                 diameter_160: 0,
                 diameter_180: 0,
-                diameter_200: 0
+                diameter_200: 0,
+                user: null,
+                picture: ''
             },
             formMeta: {
                 haspels: {
-                    diameter_60: true,
+                    diameter_60: false,
                     diameter_80: false,
                     diameter_100: false,
                     diameter_120: false,
@@ -293,12 +528,34 @@ export default {
         this.fillForm()
     },
     methods: {
+        ...mapActions({
+            setValuesUser: 'auth/setValuesUser'
+        }),
         sendEmballage() {
-
+            axios.post('/api/emballage', this.form)
+            .then(res => {
+                this.state = 'overview'
+                this.$store.dispatch('auth/addNotification', {
+                    type: 'success',
+                    title: 'Emballage ingediend',
+                    message: res.data.message,
+                });
+                this.setValuesUser();
+            })
+            .catch(err => {
+                this.$store.dispatch('auth/addNotification', {
+                    type: 'error',
+                    title: 'Emballage niet ingediend',
+                    message: err.data.message,
+                });
+            })
         },
 
         fillForm: function () {
-            this.form.customer_fullname        = this.user.customer_fullname;
+            let today = new Date(),
+            time = today.getHours() + ":" + '00';
+
+            this.form.customer_fullname         = this.user.customer_fullname;
             this.form.customer_contact          = this.user.customer_contact;
             this.form.customer_contact_phone    = this.user.customer_contact_phone;
             this.form.street                    = this.user.street;
@@ -308,6 +565,8 @@ export default {
             this.form.contact                   = this.user.contact;
             this.form.contact_phone             = this.user.contact_phone;
             this.form.contact_email             = this.user.contact_email;
+            this.form.pickup                    = time;
+            this.form.user                      = this.user.id
         }
     },
     computed: {
@@ -316,6 +575,7 @@ export default {
         }),
     },
     components: {
+        EmballageOverview,
         SubmittedEmballages
     }
 }

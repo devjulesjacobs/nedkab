@@ -3,9 +3,7 @@
             <!-- News Feed -->
         <div class="news-feed mb-5 py-5 pl-5">
             <div class="news-feed-scroll">
-
                 <div v-if="!posts.length" class="skeleton-NewsFeed">
-
                     <div class="news-item">
                         <div class="image-overlay"></div>
                         <div class="news-header">
@@ -16,14 +14,14 @@
                                     <div class="h-2 bg-gray-300 rounded col-span-1"></div>
                                 </div>
                                 <div class="h-2 w-1/3 bg-gray-300 rounded"></div>
-
                                 <div class="h-2 w-3/5 bg-gray-300 rounded"></div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div v-else v-for="post in posts" :key="post.id" class="news-item" @click="showPost(post)">
+            </div>
+            <transition-group name="slide-fade" class="news-feed-scroll">
+                <div v-if="posts.length" v-for="post in posts" :key="post.id" class="news-item" @click="showPost(post)">
                     <img :src="'/img/posts/'+post.image" :alt="post.title">
                     <div class="image-overlay"></div>
                     <div class="news-header">
@@ -34,8 +32,7 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
+            </transition-group>
         </div>
 
         <post-slide :show="views.SlidePost"
@@ -55,7 +52,7 @@ export default {
             post: [],
             views: {
                 SlidePost: false,
-            }
+            },
         }
     },
 

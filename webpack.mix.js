@@ -13,7 +13,7 @@ require('laravel-mix-tailwind')
  |
  */
 
-mix.js('resources/js/app/app.js', 'public/js')
+mix.js('resources/js/app/app.js', 'public/js/app.js')
     .js('resources/js/cms/cms.js', 'public/js/cms.js')
     .sass('resources/sass/app.scss', 'public/css')
     .tailwind();

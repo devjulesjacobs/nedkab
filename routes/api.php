@@ -31,7 +31,8 @@ Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update']
 Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->middleware(['auth:sanctum']);
 
 // Emballage
-Route::get('/emballage', [\App\Http\Controllers\EmballageController::class, 'index']);
+Route::get('/app/emballage', [\App\Http\Controllers\EmballageController::class, 'index']);
+Route::post('/emballage', [\App\Http\Controllers\EmballageController::class, 'create'])->middleware(['auth:sanctum']);
 
 // Cables
 Route::get('/cables/search', [\App\Http\Controllers\CableController::class, 'search']);

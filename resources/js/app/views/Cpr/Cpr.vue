@@ -85,9 +85,9 @@
 
                         <transition name="slide-fade">
                             <div v-if="views.result" class="section-result mt-5 mb-">
-                                <div class="p-5 mb-4 bg-blue-theme text-white text-center shadow-md font-medium text-2xl rounded-md">
-                                    <p class="text-gray-100 text-sm">Brandklasse en rookklasse voor uw kabel</p>
-                                    {{ result }}
+                                <div class="px-5 py-20 mb-4 bg-gray-200 text-center shadow-md font-medium text-2xl rounded-md">
+                                    <p class="text-gray-500 text-sm mb-2">Brandklasse en rookklasse voor uw kabel</p>
+                                    <h4 class="font-medium">{{ result }}</h4>
                                 </div>
                                 <div class="back-to-calculation">
                                     <button @click="switchScreen('calculation')" type="button" class="inline-flex items-center px-5 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

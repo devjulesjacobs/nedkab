@@ -6,6 +6,8 @@ import 'animate.css';
 
 Vue.component("App", require("./App.vue").default);
 
+Vue.use(require('vue-moment'));
+
 store.dispatch("auth/setValuesUser").then(() => {
 
     router.beforeEach((to, from, next) => {

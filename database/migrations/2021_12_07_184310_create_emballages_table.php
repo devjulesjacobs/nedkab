@@ -26,7 +26,7 @@ class CreateEmballagesTable extends Migration
             $table->string('contact_phone')->nullable();
             $table->string('contact_email')->nullable();
             $table->boolean('lifting_equipment')->default(0);
-            $table->dateTime('pickup')->nullable();
+            $table->string('pickup')->nullable();
             $table->text('comments')->nullable();
             $table->integer('diameter_60')->default(0);
             $table->integer('diameter_80')->default(0);
@@ -36,6 +36,9 @@ class CreateEmballagesTable extends Migration
             $table->integer('diameter_160')->default(0);
             $table->integer('diameter_180')->default(0);
             $table->integer('diameter_200')->default(0);
+            $table->integer('user');
+            $table->string('status')->default('ingediend');
+            $table->string('picture')->nullable();
             $table->timestamps();
         });
     }
