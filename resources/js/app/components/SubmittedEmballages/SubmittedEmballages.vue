@@ -14,7 +14,7 @@
                     </div>
                     <div class="ml-4 flex-shrink-0">
                         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                            Download
+                            Openen
                         </a>
                     </div>
                 </li>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="ml-4 flex-shrink-0">
                         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                            Download
+                            Openen
                         </a>
                     </div>
                 </li>

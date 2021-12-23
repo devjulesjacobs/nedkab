@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "Register",
@@ -123,6 +123,16 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            login: "auth/login",
+        }),
+
+        async signin(credentials) {
+            await this.login(credentials);
+
+            this.$router.replace({name: "Home"});
+        },
+
         checkPassword() {
             this.formMeta.password_match = this.form.password === this.formMeta.password_confirm
         },
@@ -133,11 +143,20 @@ export default {
                     .then(res => {
                         this.$store.dispatch('auth/addNotification', {
                             type: 'success',
-                            title: 'Succesvol geregistreed, je kunt nu inloggen.',
-                            timer: 3000
+                            title: 'Welkom '+this.form.name,
+                            message: 'Uw account is succesvol geregistreerd!',
+                            timer: 6000
                         });
-                        this.$emit("setState", 'login');
-                        this.$emit("setEmail", this.form.email);
+                        console.log('1')
+                        let credentials = {
+                            email: this.form.email,
+                            password: this.form.password
+                        }
+
+                        console.log('2')
+                        this.signin(credentials);
+
+                        console.log('3')
                     })
                     .catch(err => {
                         console.log(err)

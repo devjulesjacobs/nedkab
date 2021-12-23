@@ -4,19 +4,23 @@
 
         <div class="px-5">
 
-            <div v-if="state === 'overview'">
-                <button @click="state = 'create'" type="button" class="right-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-theme hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <div v-if="state === 'overview'" class="absolute right-4 bottom-24 pb-2">
+                <button @click="state = 'create'" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-blue-theme hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-200">
                     Aanmaken
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 -mr-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
                 </button>
             </div>
 
+
+            <submitted-emballages v-if="state === 'overview'" class="mt-5"/>
             <transition name="slide-fade">
                 <div v-if="state === 'create'">
                     <form>
                         <div class="bg-white rounded-md shadow-md">
                             <h1 class="text-md font-medium px-5 pt-5 mb-2">{{ section }}</h1>
                             <p v-show="section === 'Klantgegevens' || section === 'Ophaaladres'" class="text-xs px-5 mb-5 text-gray-500">De ingevulde gegevens worden automatisch opgeslagen voor de volgende keer.</p>
-                            <p v-show="section === 'Foto uploaden' || section === 'Ophaaladres'" class="text-xs px-5 mb-5 text-gray-500">Selecteer het aantal haspels per diameter type. Upload vervolgens bijbehorende duidelijke foto(s) van de haspel(s)</p>
                             <section v-show="section === 'Klantgegevens' || section === 'Overzicht'">
                                 <div class="px-5">
                                     <div class="mb-3">
@@ -44,26 +48,27 @@
 
                             <section v-show="section === 'Ophaaladres' || section === 'Overzicht'">
                                 <div class="px-5">
-                                    <div class="mb-3">
-                                        <label class="text-md font-medium text-gray-600 mb-1">Straatnaam</label>
-                                        <input v-model="form.street" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <div class="flex mb-3">
+                                        <div class="w-3/4">
+                                            <label class="text-md font-medium text-gray-600 mb-1">Straatnaam</label>
+                                            <input v-model="form.street" type="text" class="m-0 appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
+                                        <div class="w-1/4">
+                                            <label class="text-md font-medium text-gray-600 mb-1">Huisnr.</label>
+                                            <input v-model="form.house_number" type="text" class="text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="text-md font-medium text-gray-600 mb-1">Huisnummer</label>
-                                        <input v-model="form.house_number" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <div class="flex mb-3">
+                                        <div class="w-1/3">
+                                            <label class="text-md font-medium text-gray-600 mb-1">Postcode</label>
+                                            <input v-model="form.postcode" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
+                                        <div class="w-2/3">
+                                            <label class="text-md font-medium text-gray-600 mb-1">Plaats</label>
+                                            <input v-model="form.city" type="text" class="ml-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
                                     </div>
-
-                                    <div class="mb-3">
-                                        <label class="text-md font-medium text-gray-600 mb-1">Postcode</label>
-                                        <input v-model="form.postcode" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="text-md font-medium text-gray-600 mb-1">Plaats</label>
-                                        <input v-model="form.city" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                    </div>
-
                                     <div class="mb-3">
                                         <label class="text-md font-medium text-gray-600 mb-1">Contactpersoon</label>
                                         <input v-model="form.contact" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
@@ -94,7 +99,7 @@
                                 <div class="px-5">
                                     <div class="mb-3">
                                         <label class="text-md font-medium text-gray-600 mb-1">Afhaaltijd</label>
-                                        <input v-model="form.pickup" type="datetime-local" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        <input v-model="form.pickup" type="time" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                     </div>
 
                                     <h1 class="text-md font-medium mb-2 mt-5">Haspels</h1>
@@ -239,6 +244,7 @@
 
 <script>
 import {mapGetters} from "vuex";
+import SubmittedEmballages from "../../components/SubmittedEmballages/SubmittedEmballages";
 
 export default {
     name: "Emballage",
@@ -292,16 +298,25 @@ export default {
         },
 
         fillForm: function () {
-            this.form.customer_fullname = this.user.name;
-            this.form.customer_contact = this.user.name;
-            this.form.contact = this.user.name;
-            this.form.contact_email = this.user.email;
+            this.form.customer_fullname        = this.user.customer_fullname;
+            this.form.customer_contact          = this.user.customer_contact;
+            this.form.customer_contact_phone    = this.user.customer_contact_phone;
+            this.form.street                    = this.user.street;
+            this.form.house_number              = this.user.house_number;
+            this.form.postcode                  = this.user.postcode;
+            this.form.city                      = this.user.city;
+            this.form.contact                   = this.user.contact;
+            this.form.contact_phone             = this.user.contact_phone;
+            this.form.contact_email             = this.user.contact_email;
         }
     },
     computed: {
         ...mapGetters({
             user: "auth/user",
         }),
+    },
+    components: {
+        SubmittedEmballages
     }
 }
 </script>

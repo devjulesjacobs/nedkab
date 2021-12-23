@@ -45,8 +45,8 @@
                                 </div>
                             </dl>
 
-                            <div>
-                                <p @click="slide.show = true;" class="text-blue-600 text-sm mt-2">Gegevens wijzigen</p>
+                            <div class="mt-2">
+                                <a @click="slide.show = true;" class="text-blue-600 text-sm">Gegevens wijzigen</a>
                             </div>
                         </div>
                 </div>
@@ -59,6 +59,9 @@
                     class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Uitloggen
             </button>
+            <a href="/cms" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                CMS openen
+            </a>
         </div>
 
         <profile-slide :user="user"
@@ -76,7 +79,7 @@ export default {
     data() {
         return {
             slide: {
-                show: true,
+                show: false,
             }
         }
     },

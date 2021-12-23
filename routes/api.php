@@ -35,3 +35,6 @@ Route::get('/emballage', [\App\Http\Controllers\EmballageController::class, 'ind
 
 // Cables
 Route::get('/cables/search', [\App\Http\Controllers\CableController::class, 'search']);
+
+// User
+Route::post('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])->middleware(['auth:sanctum']);

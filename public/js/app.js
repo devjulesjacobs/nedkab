@@ -2465,7 +2465,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2588,24 +2602,58 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])({
+    login: "auth/login"
+  })), {}, {
+    signin: function signin(credentials) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.login(credentials);
+
+              case 2:
+                _this.$router.replace({
+                  name: "Home"
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
     checkPassword: function checkPassword() {
       this.formMeta.password_match = this.form.password === this.formMeta.password_confirm;
     },
     register: function register() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.formMeta.password_match) {
         axios.post('/api/register', this.form).then(function (res) {
-          _this.$store.dispatch('auth/addNotification', {
+          _this2.$store.dispatch('auth/addNotification', {
             type: 'success',
-            title: 'Succesvol geregistreed, je kunt nu inloggen.',
-            timer: 3000
+            title: 'Welkom ' + _this2.form.name,
+            message: 'Uw account is succesvol geregistreerd!',
+            timer: 6000
           });
 
-          _this.$emit("setState", 'login');
+          console.log('1');
+          var credentials = {
+            email: _this2.form.email,
+            password: _this2.form.password
+          };
+          console.log('2');
 
-          _this.$emit("setEmail", _this.form.email);
+          _this2.signin(credentials);
+
+          console.log('3');
         })["catch"](function (err) {
           console.log(err);
         });
@@ -2617,7 +2665,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     }
-  }
+  })
 });
 
 /***/ }),
@@ -3018,10 +3066,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "ProfileSlide",
   data: function data() {
     return {
-      form: {
-        email: null,
-        company: null
-      }
+      form: {}
     };
   },
   mounted: function mounted() {
@@ -3029,8 +3074,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     saveAccountDetails: function saveAccountDetails() {
-      axios.post('/api/account/' + this.form.id).then(function (res) {
-        console.log(res);
+      var _this = this;
+
+      axios.post('/api/user/' + this.form.id, this.form).then(function (res) {
+        _this.$emit('hide');
+
+        _this.$store.dispatch('auth/addNotification', {
+          type: 'success',
+          title: res.data.message
+        });
       })["catch"](function (err) {
         console.log(err);
       });
@@ -3190,13 +3242,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       slide: {
-        show: true
+        show: false
       }
     };
   },
@@ -3354,6 +3409,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4460,6 +4524,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_SubmittedEmballages_SubmittedEmballages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/SubmittedEmballages/SubmittedEmballages */ "./resources/js/app/components/SubmittedEmballages/SubmittedEmballages.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4705,6 +4770,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Emballage",
@@ -4755,15 +4826,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     sendEmballage: function sendEmballage() {},
     fillForm: function fillForm() {
-      this.form.customer_fullname = this.user.name;
-      this.form.customer_contact = this.user.name;
-      this.form.contact = this.user.name;
-      this.form.contact_email = this.user.email;
+      this.form.customer_fullname = this.user.customer_fullname;
+      this.form.customer_contact = this.user.customer_contact;
+      this.form.customer_contact_phone = this.user.customer_contact_phone;
+      this.form.street = this.user.street;
+      this.form.house_number = this.user.house_number;
+      this.form.postcode = this.user.postcode;
+      this.form.city = this.user.city;
+      this.form.contact = this.user.contact;
+      this.form.contact_phone = this.user.contact_phone;
+      this.form.contact_email = this.user.contact_email;
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     user: "auth/user"
-  }))
+  })),
+  components: {
+    SubmittedEmballages: _components_SubmittedEmballages_SubmittedEmballages__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
 });
 
 /***/ }),
@@ -4786,12 +4866,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -43632,7 +43706,7 @@ var render = function () {
                                           "span",
                                           {
                                             staticClass:
-                                              "text-xs text-gray-400 font-thin",
+                                              "text-xs text-gray-600 font-thin",
                                           },
                                           [_vm._v("niet aanpasbaar")]
                                         ),
@@ -44305,7 +44379,7 @@ var staticRenderFns = [
           staticClass: "font-medium text-indigo-600 hover:text-indigo-500",
           attrs: { href: "#" },
         },
-        [_vm._v("\n                        Download\n                    ")]
+        [_vm._v("\n                        Openen\n                    ")]
       ),
     ])
   },
@@ -44320,7 +44394,7 @@ var staticRenderFns = [
           staticClass: "font-medium text-indigo-600 hover:text-indigo-500",
           attrs: { href: "#" },
         },
-        [_vm._v("\n                        Download\n                    ")]
+        [_vm._v("\n                        Openen\n                    ")]
       ),
     ])
   },
@@ -44465,11 +44539,11 @@ var render = function () {
                   ]
                 ),
                 _vm._v(" "),
-                _c("div", [
+                _c("div", { staticClass: "mt-2" }, [
                   _c(
-                    "p",
+                    "a",
                     {
-                      staticClass: "text-blue-600 text-sm mt-2",
+                      staticClass: "text-blue-600 text-sm",
                       on: {
                         click: function ($event) {
                           _vm.slide.show = true
@@ -44495,6 +44569,16 @@ var render = function () {
             on: { click: _vm.signOut },
           },
           [_vm._v("\n            Uitloggen\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+            attrs: { href: "/cms", type: "button" },
+          },
+          [_vm._v("\n            CMS openen\n        ")]
         ),
       ]),
       _vm._v(" "),
@@ -44703,6 +44787,7 @@ var render = function () {
               expression: "input",
             },
           ],
+          ref: "searchInput",
           staticClass:
             "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
           attrs: { type: "text", required: "" },
@@ -44774,6 +44859,45 @@ var render = function () {
             ],
           },
           [_vm._m(0)]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "absolute right-4 bottom-24 pb-2" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "inline-flex items-center px-4 py-2 border opacity-30 border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200",
+            attrs: { type: "button" },
+            on: {
+              click: function ($event) {
+                return _vm.$refs.searchInput.focus()
+              },
+            },
+          },
+          [
+            _vm._v("\n                Zoeken\n                "),
+            _c(
+              "svg",
+              {
+                staticClass: "ml-2 -mr-1 h-5 w-5",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  viewBox: "0 0 20 20",
+                  fill: "currentColor",
+                },
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    "fill-rule": "evenodd",
+                    d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z",
+                    "clip-rule": "evenodd",
+                  },
+                }),
+              ]
+            ),
+          ]
         ),
       ]),
     ]),
@@ -45144,14 +45268,12 @@ var render = function () {
                       ]),
                     ]),
                     _vm._v(" "),
-                    _vm._m(3),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "calculation-wrapper" }, [
+                    _c("div", { staticClass: "calculation-wrapper mt-5" }, [
                       _c(
                         "button",
                         {
                           staticClass:
-                            "mt-1 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                            "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200",
                           attrs: { type: "button" },
                           on: { click: _vm.calculateCprButton },
                         },
@@ -45257,19 +45379,6 @@ var staticRenderFns = [
       ]
     )
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "block text-sm font-medium text-gray-700 mt-3" },
-      [
-        _c("span", { staticClass: "theme-color" }, [_vm._v("4.")]),
-        _vm._v(" Bevestigen"),
-      ]
-    )
-  },
 ]
 render._withStripped = true
 
@@ -45302,12 +45411,12 @@ var render = function () {
       { staticClass: "px-5" },
       [
         _vm.state === "overview"
-          ? _c("div", [
+          ? _c("div", { staticClass: "absolute right-4 bottom-24 pb-2" }, [
               _c(
                 "button",
                 {
                   staticClass:
-                    "right-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-theme hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+                    "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-blue-theme hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-200",
                   attrs: { type: "button" },
                   on: {
                     click: function ($event) {
@@ -45315,9 +45424,35 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("\n                Aanmaken\n            ")]
+                [
+                  _vm._v("\n                Aanmaken\n                "),
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "ml-2 -mr-1 h-5 w-5",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 20 20",
+                        fill: "currentColor",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d: "M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z",
+                          "clip-rule": "evenodd",
+                        },
+                      }),
+                    ]
+                  ),
+                ]
               ),
             ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.state === "overview"
+          ? _c("submitted-emballages", { staticClass: "mt-5" })
           : _vm._e(),
         _vm._v(" "),
         _c("transition", { attrs: { name: "slide-fade" } }, [
@@ -45350,29 +45485,6 @@ var render = function () {
                       [
                         _vm._v(
                           "De ingevulde gegevens worden automatisch opgeslagen voor de volgende keer."
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value:
-                              _vm.section === "Foto uploaden" ||
-                              _vm.section === "Ophaaladres",
-                            expression:
-                              "section === 'Foto uploaden' || section === 'Ophaaladres'",
-                          },
-                        ],
-                        staticClass: "text-xs px-5 mb-5 text-gray-500",
-                      },
-                      [
-                        _vm._v(
-                          "Selecteer het aantal haspels per diameter type. Upload vervolgens bijbehorende duidelijke foto(s) van de haspel(s)"
                         ),
                       ]
                     ),
@@ -45555,156 +45667,160 @@ var render = function () {
                       },
                       [
                         _c("div", { staticClass: "px-5" }, [
-                          _c("div", { staticClass: "mb-3" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "text-md font-medium text-gray-600 mb-1",
-                              },
-                              [_vm._v("Straatnaam")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
+                          _c("div", { staticClass: "flex mb-3" }, [
+                            _c("div", { staticClass: "w-3/4" }, [
+                              _c(
+                                "label",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.street,
-                                  expression: "form.street",
+                                  staticClass:
+                                    "text-md font-medium text-gray-600 mb-1",
                                 },
-                              ],
-                              staticClass:
-                                "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.form.street },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "street",
-                                    $event.target.value
-                                  )
+                                [_vm._v("Straatnaam")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.street,
+                                    expression: "form.street",
+                                  },
+                                ],
+                                staticClass:
+                                  "m-0 appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.form.street },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "street",
+                                      $event.target.value
+                                    )
+                                  },
                                 },
-                              },
-                            }),
+                              }),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "w-1/4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "text-md font-medium text-gray-600 mb-1",
+                                },
+                                [_vm._v("Huisnr.")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.house_number,
+                                    expression: "form.house_number",
+                                  },
+                                ],
+                                staticClass:
+                                  "text-center appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.form.house_number },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "house_number",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "mb-3" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "text-md font-medium text-gray-600 mb-1",
-                              },
-                              [_vm._v("Huisnummer")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
+                          _c("div", { staticClass: "flex mb-3" }, [
+                            _c("div", { staticClass: "w-1/3" }, [
+                              _c(
+                                "label",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.house_number,
-                                  expression: "form.house_number",
+                                  staticClass:
+                                    "text-md font-medium text-gray-600 mb-1",
                                 },
-                              ],
-                              staticClass:
-                                "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.form.house_number },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "house_number",
-                                    $event.target.value
-                                  )
-                                },
-                              },
-                            }),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-3" }, [
-                            _c(
-                              "label",
-                              {
+                                [_vm._v("Postcode")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.postcode,
+                                    expression: "form.postcode",
+                                  },
+                                ],
                                 staticClass:
-                                  "text-md font-medium text-gray-600 mb-1",
-                              },
-                              [_vm._v("Postcode")]
-                            ),
+                                  "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.form.postcode },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "postcode",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                            ]),
                             _vm._v(" "),
-                            _c("input", {
-                              directives: [
+                            _c("div", { staticClass: "w-2/3" }, [
+                              _c(
+                                "label",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.postcode,
-                                  expression: "form.postcode",
+                                  staticClass:
+                                    "text-md font-medium text-gray-600 mb-1",
                                 },
-                              ],
-                              staticClass:
-                                "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.form.postcode },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "postcode",
-                                    $event.target.value
-                                  )
-                                },
-                              },
-                            }),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-3" }, [
-                            _c(
-                              "label",
-                              {
+                                [_vm._v("Plaats")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.city,
+                                    expression: "form.city",
+                                  },
+                                ],
                                 staticClass:
-                                  "text-md font-medium text-gray-600 mb-1",
-                              },
-                              [_vm._v("Plaats")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.city,
-                                  expression: "form.city",
+                                  "ml-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.form.city },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "city",
+                                      $event.target.value
+                                    )
+                                  },
                                 },
-                              ],
-                              staticClass:
-                                "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.form.city },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "city",
-                                    $event.target.value
-                                  )
-                                },
-                              },
-                            }),
+                              }),
+                            ]),
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "mb-3" }, [
@@ -45906,7 +46022,7 @@ var render = function () {
                               ],
                               staticClass:
                                 "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                              attrs: { type: "datetime-local" },
+                              attrs: { type: "time" },
                               domProps: { value: _vm.form.pickup },
                               on: {
                                 input: function ($event) {
@@ -47024,30 +47140,11 @@ var render = function () {
       _c("news-feed"),
       _vm._v(" "),
       _c("submitted-emballages", { staticClass: "px-5" }),
-      _vm._v(" "),
-      _vm._m(0),
     ],
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-5" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-          attrs: { href: "/cms", type: "button" },
-        },
-        [_vm._v("\n            Go to CMS\n        ")]
-      ),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

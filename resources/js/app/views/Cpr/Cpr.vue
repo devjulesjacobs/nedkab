@@ -75,9 +75,9 @@
                                     </div>
                                 </div>
 
-                                <div class="block text-sm font-medium text-gray-700 mt-3"><span class="theme-color">4.</span> Bevestigen</div>
-                                <div class="calculation-wrapper">
-                                    <button @click="calculateCprButton" type="button" class="mt-1 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <div class="calculation-wrapper mt-5">
+                                    <button @click="calculateCprButton" type="button"
+                                            class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200">
                                         CPR Bepalen
                                     </button>
                                 </div>

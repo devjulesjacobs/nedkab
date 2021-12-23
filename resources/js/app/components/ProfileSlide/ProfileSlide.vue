@@ -44,7 +44,7 @@
 
                                         <div class="space-y-3 px-4">
                                             <div>
-                                                <h3 class="text-sm font-medium mb-1">Emailadres <span class="text-xs text-gray-400 font-thin">niet aanpasbaar</span></h3>
+                                                <h3 class="text-sm font-medium mb-1">Emailadres <span class="text-xs text-gray-600 font-thin">niet aanpasbaar</span></h3>
                                                 <input v-model="form.email" type="text" disabled class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                             </div>
                                             <div>
@@ -123,11 +123,7 @@ export default {
     name: "ProfileSlide",
     data() {
         return {
-            form: {
-                email: null,
-                company: null,
-
-            },
+            form: {},
         }
     },
     mounted() {
@@ -135,9 +131,13 @@ export default {
     },
     methods: {
         saveAccountDetails() {
-            axios.post('/api/account/'+this.form.id)
+            axios.post('/api/user/'+this.form.id, this.form)
             .then(res => {
-                console.log(res)
+                this.$emit('hide');
+                this.$store.dispatch('auth/addNotification', {
+                    type: 'success',
+                    title: res.data.message,
+                });
             })
             .catch(err => {
                 console.log(err);
