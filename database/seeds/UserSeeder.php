@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'email' => 'jules.j.jacobs@gmail.com',
                 'company' => 'Nedkab',
                 'phone' => '+31 6 12345678',
-                'type' => 'admin',
+                'type' => 'app',
                 'password' => bcrypt('12345678')
             ],
             [
