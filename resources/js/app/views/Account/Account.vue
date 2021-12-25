@@ -62,6 +62,10 @@
                     class="inline-block items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Uitloggen
             </button>
+            <button @click="sendMail" type="button"
+                    class="inline-block items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Mail test
+            </button>
             <a href="/cms" type="button" class="inline-block items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 CMS openen
             </a>
@@ -98,6 +102,10 @@ export default {
         ...mapActions({
             logout: "auth/logout",
         }),
+
+        sendMail() {
+            axios.post('/api/mail/test')
+        },
 
         async signOut() {
             await this.logout();

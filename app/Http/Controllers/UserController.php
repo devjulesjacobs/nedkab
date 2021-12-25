@@ -14,9 +14,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAll()
     {
-        //
+        $users = User::where('type', 'app')->take(100)->get();
+
+        return $users;
+    }
+
+    public function getAllCount()
+    {
+        $count = User::where('type', 'app')->count();
+
+        return $count;
     }
 
     /**

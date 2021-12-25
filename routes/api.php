@@ -31,7 +31,7 @@ Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update']
 Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->middleware(['auth:sanctum']);
 
 // Emballage
-Route::get('/cms/emballage', [\App\Http\Controllers\EmballageController::class, 'index'])->middleware(['auth:sanctum']);
+Route::get('/cms/emballage', [\App\Http\Controllers\EmballageController::class, 'getSubmitted'])->middleware(['auth:sanctum']);
 Route::get('/app/emballage', [\App\Http\Controllers\EmballageController::class, 'userEmballage'])->middleware(['auth:sanctum']);
 Route::post('/emballage', [\App\Http\Controllers\EmballageController::class, 'create'])->middleware(['auth:sanctum']);
 
@@ -39,5 +39,17 @@ Route::post('/emballage', [\App\Http\Controllers\EmballageController::class, 'cr
 Route::get('/cables/search', [\App\Http\Controllers\CableController::class, 'search']);
 
 // User
+Route::get('/users/all', [App\Http\Controllers\UserController::class, 'getAll'])->middleware(['auth:sanctum']);
 Route::post('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])->middleware(['auth:sanctum']);
 Route::post('/user/avatar/{id}', [App\Http\Controllers\UserController::class, 'avatar'])->middleware(['auth:sanctum']);
+// User CMS
+Route::post('/cms/users/all', [App\Http\Controllers\UserController::class, 'getAll'])->middleware(['auth:sanctum']);
+
+// Mail
+Route::post('/mail/test', [App\Http\Controllers\MailController::class, 'sendMail']);
+
+
+// STATS
+Route::get('/cms/users/count', [App\Http\Controllers\UserController::class, 'getAllCount'])->middleware(['auth:sanctum']);
+Route::get('/cms/emballage/count', [App\Http\Controllers\EmballageController::class, 'getEmballageCount'])->middleware(['auth:sanctum']);
+

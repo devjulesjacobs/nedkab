@@ -21,9 +21,16 @@ class EmballageController extends Controller
         return $emballages;
     }
 
+    public function getEmballageCount()
+    {
+        $count = Emballage::count();
+
+        return $count;
+    }
+
     public function getSubmitted()
     {
-        $emballages = Emballage::where('status', 'ingediend');
+        $emballages = Emballage::all();
 
         return $emballages;
     }
