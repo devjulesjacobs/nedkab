@@ -28,6 +28,13 @@ class UserController extends Controller
         return $count;
     }
 
+    public function getEmployees()
+    {
+        $employees = User::where('type', 'admin')->get();
+
+        return $employees;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -145,10 +152,31 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if($user && $user->id !== auth()->user()->id) {
+            if(!empty($user->avatar)) {
+                $old_image = public_path('img/user/').$user->avatar;
+
+                if (file_exists($old_image)) {
+                    chmod($old_image, 0644);
+                    unlink($old_image);
+                }
+            }
+
+            $user->delete();
+
+            return response()->json([
+                'message' => 'Account succesvol verwijderd.'
+            ], 201);
+        } else {
+            return response()->json([
+                'message' => 'Kan deze admin niet verwijderen.'
+            ], 404);
+        }
     }
 }

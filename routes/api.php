@@ -40,6 +40,8 @@ Route::get('/cables/search', [\App\Http\Controllers\CableController::class, 'sea
 
 // User
 Route::get('/users/all', [App\Http\Controllers\UserController::class, 'getAll'])->middleware(['auth:sanctum']);
+Route::get('/cms/employees', [App\Http\Controllers\UserController::class, 'getEmployees'])->middleware(['auth:sanctum']);
+Route::post('/cms/employee/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware(['auth:sanctum']);
 Route::post('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])->middleware(['auth:sanctum']);
 Route::post('/user/avatar/{id}', [App\Http\Controllers\UserController::class, 'avatar'])->middleware(['auth:sanctum']);
 // User CMS

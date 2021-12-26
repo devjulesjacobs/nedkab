@@ -1,10 +1,13 @@
 .notifications-list {
     position: fixed;
-    top: 15px;
+    top: 80px;
     right: 15px;
+    width: 400px;
     z-index: 9999999999;
 
     @media screen and (max-width: 640px) {
         left: 15px;
+        max-width: 375px;
+        width: inherit;
     }
 }

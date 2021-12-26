@@ -5,7 +5,7 @@ import Dashboard from './views/Dashboard/Dashboard'
 import Signin from './views/Auth/Signin'
 import Posts from "./views/Posts/Posts"
 import Emballage from "./views/Emballage/Emballage"
-import Team from "./views/Team/Team"
+import Users from "./views/Users/Users"
 
 Vue.use(VueRouter)
 
@@ -34,9 +34,9 @@ const routes = [
         meta: { requiresAdmin: true }
     },
     {
-        path: '/cms/team',
-        name: 'Team',
-        component: Team,
+        path: '/cms/users',
+        name: 'Users',
+        component: Users,
         meta: { requiresAdmin: true }
     },
 ]

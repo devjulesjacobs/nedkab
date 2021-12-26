@@ -85,8 +85,8 @@ export default {
     data() {
         return {
             stats: {
-                totalUsers: '',
-                totalEmballage: '',
+                totalUsers: 0,
+                totalEmballage: 0,
             },
             users: []
         }

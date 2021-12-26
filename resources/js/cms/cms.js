@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 
 Vue.component("Cms", require("./Cms.vue").default);
+Vue.use(require('vue-moment'));
 
 store.dispatch("cms/setValues").then(() => {
 

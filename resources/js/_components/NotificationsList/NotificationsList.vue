@@ -2,8 +2,8 @@
     <div class="notifications-list">
         <transition-group name="slide-fade">
             <notification-message v-for="notification in notifications"
-                                  :key="notification.id"
-                                  :notification="notification"
+                                      :key="notification.id"
+                                      :notification="notification"
             />
         </transition-group>
     </div>
@@ -14,7 +14,7 @@ import NotificationMessage from "../NotificationMessage/NotificationMessage";
 import { mapGetters } from "vuex"
 
 export default {
-    name: "NotificationsList",
+    name: "NotificationsListApp",
     data() {
         return {
             errors: null
@@ -26,8 +26,8 @@ export default {
     },
 
     computed: mapGetters({
-            notifications: 'cms/getNotifications'
-        })
+        notifications: 'cms/getNotifications'
+    })
 
 }
 </script>
