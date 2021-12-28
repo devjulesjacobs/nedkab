@@ -33,6 +33,7 @@ Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destro
 // Emballage
 Route::get('/cms/emballage', [\App\Http\Controllers\EmballageController::class, 'getSubmitted'])->middleware(['auth:sanctum']);
 Route::get('/app/emballage', [\App\Http\Controllers\EmballageController::class, 'userEmballage'])->middleware(['auth:sanctum']);
+Route::get('/app/emballage/{id}', [\App\Http\Controllers\EmballageController::class, 'getEmballage'])->middleware(['auth:sanctum']);
 Route::post('/emballage', [\App\Http\Controllers\EmballageController::class, 'create'])->middleware(['auth:sanctum']);
 
 // Cables

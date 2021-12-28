@@ -532,7 +532,10 @@ export default {
                     diameter_200: false,
                 }
             },
-            section: 'Klantgegevens'
+            section: 'Klantgegevens',
+            slide: {
+                show: false
+            }
         }
     },
     mounted() {

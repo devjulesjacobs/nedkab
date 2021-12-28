@@ -1,7 +1,7 @@
 <template>
     <div class="state-news-feed">
             <!-- News Feed -->
-        <div class="news-feed mb-3 py-5 pl-5">
+        <div class="news-feed mb-3 pb-5 pl-5">
             <div class="news-feed-scroll">
                 <div v-if="!posts.length" class="skeleton-NewsFeed">
                     <div class="news-item">

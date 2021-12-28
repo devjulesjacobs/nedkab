@@ -30,10 +30,13 @@
                                             </div>
                                         </div>
                                         <div class="body">
-                                            <h1 class="text-2xl font-bold">{{ post.title }}</h1>
-                                            <p>
-                                                {{ post.body }}
-                                            </p>
+                                            <h1 class="text-2xl font-bold pb-4 mb-4 border-b border-gray-100">{{ post.title }}</h1>
+                                            <p v-html="post.body" class="whitespace-pre-line post-body"></p>
+                                        </div>
+                                        <div class="footer mt-6 py-3 border-t border-gray-100 text-xs text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-500 inline-block mr-1 -mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg> Gepost op {{ post.created_at | moment('D MMMM YYYY') }}
                                         </div>
                                     </div>
                                 </div>
@@ -59,5 +62,7 @@ export default {
 </script>
 
 <style scoped>
+.post-body {
 
+}
 </style>

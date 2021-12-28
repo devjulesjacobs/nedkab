@@ -18,6 +18,13 @@ import NotificationsListApp from "../_components/NotificationsListApp/Notificati
 
 export default {
     name: "App",
+    data() {
+        return {
+        }
+    },
+    created() {
+
+    },
     components: {
         BottomNav,
         NotificationsListApp

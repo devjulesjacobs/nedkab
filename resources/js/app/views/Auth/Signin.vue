@@ -1,7 +1,7 @@
 <template>
     <div id="SignIn">
         <div class="min-h-screen flex bg-white">
-            <div class="flex-1 flex flex-col justify-center py-12 px-6 sm:px-8 lg:flex-none lg:px-20 xl:px-">
+            <div class="flex-1 flex flex-col justify-center py-6 px-6 sm:px-8 lg:flex-none lg:px-20 xl:px-">
                 <div class="mx-auto w-full max-w-sm lg:w-96">
                     <div>
                         <a href="/cms">

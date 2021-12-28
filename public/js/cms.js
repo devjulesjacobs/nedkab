@@ -2967,19 +2967,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //     title: 'Succesfully did shit!',
     //     message: 'This is just some simple message put under the title element!',
     // });
-    //
     // this.$store.dispatch('cms/addNotification', {
     //     type: 'error',
     //     title: 'Error something!',
     //     message: 'This is just some simple message put under the title element!',
     // });
-    //
     // this.$store.dispatch('cms/addNotification', {
     //     type: 'warning',
     //     title: 'Warning something really dangerous!',
     //     message: 'This is just some simple message put under the title element!',
     // });
-    //
     // this.$store.dispatch('cms/addNotification', {
     //     type: 'info',
     //     title: 'Just some information that can get to you ...',

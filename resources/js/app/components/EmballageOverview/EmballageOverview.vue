@@ -4,7 +4,7 @@
 
         <p v-if="!emballages.length" class="text-sm text-gray-700">{{ emptyText }}</p>
 
-        <a v-for="e in emballages" :key="e.id" class="block border bg-white shadow-md border-gray-100 rounded-md mb-3 p-4">
+        <a v-for="e in emballages" :key="e.id" @click="getEmballage(e.id)" class="block border bg-white shadow-md border-gray-100 rounded-md mb-3 p-4">
             <div>
                 <h5 class="uppercase font-medium text-gray-500 text-xs">
                     Emballage
@@ -18,11 +18,14 @@
                 <p class="font-normal text-xs text-green-600 mt-3">Ingediend</p>
             </div>
         </a>
+
+        <emballage-slide :show="slide.show" :emballage="emballage" @hide="slide.show = false; emballage = null" />
     </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import EmballageSlide from "../EmballageSlide/EmballageSlide";
 
 export default {
     name: "EmballageOverview",
@@ -30,6 +33,10 @@ export default {
         return {
             emballages: [],
             emptyText: '',
+            slide: {
+                show: false
+            },
+            emballage: null
         }
     },
     mounted() {
@@ -46,11 +53,26 @@ export default {
                     console.log(err)
                 })
         },
+
+        getEmballage(id) {
+            this.slide.show = true;
+            axios.get('/api/app/emballage/'+id)
+                .then(res => {
+                    console.log(res.data);
+                    this.emballage = res.data
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
     },
     computed: {
         ...mapGetters({
             user: "auth/user",
         }),
+    },
+    components: {
+        EmballageSlide
     }
 }
 </script>

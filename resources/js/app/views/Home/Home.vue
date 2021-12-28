@@ -1,7 +1,7 @@
 <template>
     <div class="state-home">
         <h1 class="page-title text-3xl font-bold px-5 pt-5">Home</h1>
-        <p class="px-5 text-gray-400">Welcome, {{ user.name }}</p>
+        <p class="px-5 text-gray-400">Welkom, {{ user.name }}</p>
 
         <news-feed></news-feed>
 

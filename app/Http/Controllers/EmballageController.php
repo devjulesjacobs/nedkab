@@ -35,6 +35,13 @@ class EmballageController extends Controller
         return $emballages;
     }
 
+    public function getEmballage($id)
+    {
+        $emballage = Emballage::where('id', $id)->first();
+
+        return $emballage;
+    }
+
     public function userEmballage()
     {
         $emballages = Emballage::where('user', auth()->user()->id)->orderBy('created_at', 'DESC')->take(20)->get();
