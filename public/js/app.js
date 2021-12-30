@@ -5534,8 +5534,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -5550,21 +5548,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     window.LoadingScreen('hide');
   },
-  methods: {
-    testFunction: function testFunction() {
-      var _this = this;
-
-      axios.get('/api/test').then(function (res) {
-        console.log(res.data);
-      })["catch"](function (err) {
-        _this.$store.dispatch('auth/addNotification', {
-          type: 'error',
-          title: 'No access',
-          message: err.response.data.message
-        });
-      });
-    }
-  },
+  methods: {},
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     authenticated: "auth/authenticated",
     user: "auth/user"
@@ -51025,11 +51009,9 @@ var render = function () {
         _vm._v("Home"),
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "px-5 text-gray-400" }, [
+      _c("p", { staticClass: "px-5 text-gray-400 mb-4" }, [
         _vm._v("Welkom, " + _vm._s(_vm.user.name)),
       ]),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.testFunction } }, [_vm._v("Test")]),
       _vm._v(" "),
       _c("news-feed"),
       _vm._v(" "),

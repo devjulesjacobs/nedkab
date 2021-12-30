@@ -18,10 +18,7 @@ class CheckAdmin
         if(auth()->user()->type === 'admin') {
             return $next($request);
         } else {
-            return response()->json([
-                'message' => ['Unauthorized']
-            ], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
     }
-
 }

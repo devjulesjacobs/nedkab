@@ -1,9 +1,7 @@
 <template>
     <div class="state-home">
         <h1 class="page-title text-3xl font-bold px-5 pt-5">Home</h1>
-        <p class="px-5 text-gray-400">Welkom, {{ user.name }}</p>
-
-        <button @click="testFunction">Test</button>
+        <p class="px-5 text-gray-400 mb-4">Welkom, {{ user.name }}</p>
 
         <news-feed></news-feed>
 
@@ -26,20 +24,7 @@ export default {
         window.LoadingScreen('hide');
     },
 
-    methods: {
-        testFunction() {
-            axios.get('/api/test')
-                .then(res => { console.log(res.data) })
-                .catch(err => {
-                    this.$store.dispatch('auth/addNotification', {
-                        type: 'error',
-                        title: 'No access',
-                        message: err.response.data.message,
-                    });
-                })
-        },
-
-    },
+    methods: {},
 
     computed: {
         ...mapGetters({
