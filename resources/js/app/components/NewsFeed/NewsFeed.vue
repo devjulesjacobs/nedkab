@@ -2,8 +2,10 @@
     <div class="state-news-feed">
             <!-- News Feed -->
         <div class="news-feed mb-3 pb-5 pl-5">
+            <h1 class="text-md font-medium mb-3">Nieuws</h1>
+
             <div class="news-feed-scroll">
-                <div v-if="!posts.length" class="skeleton-NewsFeed">
+                <div v-if="!posts.length" class="skeleton-NewsFeed my-4">
                     <div class="news-item">
                         <div class="image-overlay"></div>
                         <div class="news-header">
@@ -21,7 +23,6 @@
                 </div>
             </div>
 
-            <h1 class="text-md font-medium mb-3">Nieuws</h1>
             <transition-group name="slide-fade" class="news-feed-scroll">
                 <div v-if="posts.length" v-for="post in posts" :key="post.id" class="news-item" @click="showPost(post)">
                     <img :src="'/img/posts/'+post.image" :alt="post.title">

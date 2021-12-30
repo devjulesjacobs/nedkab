@@ -3134,6 +3134,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NewsFeed",
@@ -5533,6 +5534,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -5546,6 +5549,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     window.LoadingScreen('hide');
+  },
+  methods: {
+    testFunction: function testFunction() {
+      var _this = this;
+
+      axios.get('/api/test').then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        _this.$store.dispatch('auth/addNotification', {
+          type: 'error',
+          title: 'No access',
+          message: err.response.data.message
+        });
+      });
+    }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     authenticated: "auth/authenticated",
@@ -9953,7 +9971,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".post-body[data-v-54088546] {\n}\n", ""]);
+exports.push([module.i, ".post-body[data-v-54088546] {\n}\r\n", ""]);
 
 // exports
 
@@ -45181,9 +45199,13 @@ var render = function () {
         "div",
         { staticClass: "news-feed mb-3 pb-5 pl-5" },
         [
+          _c("h1", { staticClass: "text-md font-medium mb-3" }, [
+            _vm._v("Nieuws"),
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "news-feed-scroll" }, [
             !_vm.posts.length
-              ? _c("div", { staticClass: "skeleton-NewsFeed" }, [
+              ? _c("div", { staticClass: "skeleton-NewsFeed my-4" }, [
                   _c("div", { staticClass: "news-item" }, [
                     _c("div", { staticClass: "image-overlay" }),
                     _vm._v(" "),
@@ -45197,10 +45219,6 @@ var render = function () {
                   ]),
                 ])
               : _vm._e(),
-          ]),
-          _vm._v(" "),
-          _c("h1", { staticClass: "text-md font-medium mb-3" }, [
-            _vm._v("Nieuws"),
           ]),
           _vm._v(" "),
           _c(
@@ -51010,6 +51028,8 @@ var render = function () {
       _c("p", { staticClass: "px-5 text-gray-400" }, [
         _vm._v("Welkom, " + _vm._s(_vm.user.name)),
       ]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.testFunction } }, [_vm._v("Test")]),
       _vm._v(" "),
       _c("news-feed"),
       _vm._v(" "),
@@ -74308,8 +74328,8 @@ window.LoadingScreen = function (set) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\development\app-nedkab\resources\js\app\app.js */"./resources/js/app/app.js");
-module.exports = __webpack_require__(/*! D:\development\app-nedkab\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\projects\app-nedkab\resources\js\app\app.js */"./resources/js/app/app.js");
+module.exports = __webpack_require__(/*! C:\projects\app-nedkab\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

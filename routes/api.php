@@ -18,6 +18,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['middleware' => 'check.admin'], function () {
+
+    Route::get('/test', function (Request $request) {
+        return response()->json([
+            'message' => 'Confirmed.',
+        ], 201);
+    });
+
+});
+
 Route::post('/register', [App\Http\Controllers\AuthController::class, 'register']);
 Route::post('/cms/login', [App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/app/login', [App\Http\Controllers\AuthController::class, 'loginApp']);

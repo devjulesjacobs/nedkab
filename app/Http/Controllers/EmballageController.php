@@ -30,7 +30,7 @@ class EmballageController extends Controller
 
     public function getSubmitted()
     {
-        $emballages = Emballage::all();
+        $emballages = Emballage::query()->with('user')->get();
 
         return $emballages;
     }

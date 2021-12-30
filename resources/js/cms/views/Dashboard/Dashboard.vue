@@ -2,6 +2,10 @@
     <div>
         <h1 class="text-3xl page-title leading-8 font-bold tracking-tight text-gray-900">Dashboard</h1>
 
+        <div>
+            <button @click="testFunction">Test</button>
+        </div>
+
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div>
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -71,7 +75,6 @@
                 </div>
             </div>
 
-            <!-- More people... -->
         </div>
 
     </div>
@@ -124,6 +127,18 @@ export default {
         ...mapActions({
             logout: "cms/logout",
         }),
+
+        testFunction() {
+            axios.get('/api/test')
+                .then(res => { console.log(res.data) })
+                .catch(err => {
+                    this.$store.dispatch('cms/addNotification', {
+                        type: 'info',
+                        title: 'No access',
+                        message: err.response.data,
+                    });
+                })
+        },
 
         async signOut() {
             await this.logout();
