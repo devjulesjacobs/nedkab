@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="flex-shrink-0 flex items-center px-4">
-                        <img class="h-8 w-auto" src="/img/system/company-logo.png" alt="Company logo">
+                        <img class="h-8 w-auto" src="/img/system/company-logo.jpg" alt="Company logo">
                     </div>
                     <div class="mt-5 flex-1 h-0 overflow-y-auto">
                         <nav class="px-2 space-y-1">
@@ -124,7 +124,7 @@
                 <!-- Sidebar component, swap this element with another sidebar if you like -->
                 <div class="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
                     <div class="flex items-center flex-shrink-0 px-4">
-                        <img class="h-8 w-auto" src="/img/system/company-logo.png" alt="Workflow">
+                        <img class="h-8 w-auto" src="/img/system/company-logo.jpg" alt="Workflow">
                     </div>
                     <div class="mt-5 flex-grow flex flex-col">
                         <nav class="flex-1 px-2 pb-4 space-y-1">

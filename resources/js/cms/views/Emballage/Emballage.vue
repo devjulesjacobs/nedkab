@@ -5,7 +5,7 @@
         <div class="grid grid-cols-2 gap-4">
             <div class="">
                 <h1 class="text-xl font-medium mb-3">Ingediend</h1>
-                <a v-for="emballage in emballages" @click="getEmballage(emballage.id)" :key="emballage.id" class="bg-white p-5 rounded-md shadow-md block mb-2 cursor-pointer">
+                <a v-for="emballage in emballages" @click="getEmballage(emballage.id)" :key="emballage.id" class="bg-white p-5 rounded-md shadow-md block mb-2 cursor-pointer hover:bg-gray-50">
                     <h1 class="font-bold text-2xl">Emballage #{{ emballage.id }}</h1>
                 </a>
             </div>
@@ -23,9 +23,10 @@
 
 <script>
 import EmballageSlide from "../../components/EmballageSlide/EmballageSlide";
+
 export default {
     name: "Emballage",
-    components: {EmballageSlide},
+    components: { EmballageSlide },
     data() {
         return {
             emballages: [],
@@ -51,16 +52,16 @@ export default {
         },
 
         getEmballage(id) {
-            this.slide.show = true;
             axios.get('/api/app/emballage/'+id)
                 .then(res => {
                     this.emballage = res.data
+                    this.slide.show = true;
                 })
                 .catch(err => console.log(err.response.data))
         },
 
         hideSlide() {
-
+            this.slide.show = false;
         }
     }
 }

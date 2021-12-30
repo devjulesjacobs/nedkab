@@ -37,7 +37,7 @@ class EmballageController extends Controller
 
     public function getEmballage($id)
     {
-        $emballage = Emballage::where('id', $id)->first();
+        $emballage = Emballage::where('id', $id)->with('user')->first();
 
         return $emballage;
     }

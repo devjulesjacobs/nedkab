@@ -5,7 +5,7 @@
                 <div class="mx-auto w-full max-w-sm lg:w-96">
                     <div>
                         <a href="/cms">
-                            <img class="h-12 w-auto" src="/img/system/company-logo.png" alt="Workflow"/>
+                            <img class="h-12 w-auto" src="/img/system/company-logo.jpg" alt="Workflow"/>
                         </a>
                         <h2 v-if="state === 'login'" class="mt-6 text-3xl font-bold text-gray-900">Inloggen</h2>
                         <h2 v-if="state === 'register'" class="mt-6 text-3xl font-bold text-gray-900">Registreren</h2>
@@ -20,6 +20,7 @@
                                         @setState="setState"
                                         @setEmail="setEmail"/>
                         </div>
+
                     </div>
                 </div>
             </div>
