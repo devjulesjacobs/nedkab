@@ -1,4 +1,4 @@
-<template>
+\<template>
     <div class="state-cms"><!--
   This example requires Tailwind CSS v2.0+
 
@@ -89,12 +89,18 @@
                                 Posts
                             </router-link>
 
-
                             <router-link @click.native="toggleMobileNav" :to="{ name: 'Emballage' }" class="text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
-                                Emballages
+                                Emballage
+                            </router-link>
+
+                            <router-link @click.native="toggleMobileNav" :to="{ name: 'Cables' }" class="text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                </svg>
+                                Kabels
                             </router-link>
 
                             <router-link @click.native="toggleMobileNav" :to="{ name: 'Users' }" class="text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
@@ -148,12 +154,18 @@
                                 Posts
                             </router-link>
 
-
                             <router-link :to="{ name: 'Emballage' }" class="text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
-                                Emballages
+                                Emballage
+                            </router-link>
+
+                            <router-link :to="{ name: 'Cables' }" class="text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                </svg>
+                                Kabels
                             </router-link>
 
                             <router-link :to="{ name: 'Users' }" class="text-gray-600 hover:bg-gray-200 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
@@ -228,12 +240,7 @@
                                 -->
                                 <transition name="slide-fade">
                                     <div v-show="views.miniMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                        <!-- Active: "bg-gray-100", Not Active: "" -->
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-
-                                        <button @click="signOut" type="button" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
+                                        <button @click="signOut" type="button" class="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Uitloggen</button>
                                     </div>
                                 </transition>
                             </div>

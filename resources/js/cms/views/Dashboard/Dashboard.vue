@@ -58,7 +58,7 @@
 
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-4">
-            <div v-for="user in users" :key="user.id" class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+            <div v-for="user in users" :key="user.id" @click="showUser(user.id)" class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                 <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full object-position-center object-cover" :src="'/img/user/' + (user.avatar ? user.avatar : 'empty-profile-picture.jpg')" alt="Profile pic">
                 </div>
@@ -77,21 +77,29 @@
 
         </div>
 
+        <slide-user :show="slide.show" :user="user" @hide="hideSlide" />
+
     </div>
 </template>
 
 <script>
 import {mapActions} from "vuex";
+import SlideUser from "../../components/SlideUser/SlideUser";
 
 export default {
     name: "Dashboard",
+    components: {SlideUser},
     data() {
         return {
             stats: {
                 totalUsers: 0,
                 totalEmballage: 0,
             },
-            users: []
+            users: [],
+            user: undefined,
+            slide: {
+                show: false
+            }
         }
     },
 
@@ -159,6 +167,16 @@ export default {
 
         getUsers() {
             axios.get('/api/users/all').then(res => { this.users = res.data })
+        },
+
+        hideSlide() {
+            this.slide.show = false;
+        },
+
+        showUser(id) {
+            // Get user info by id
+
+            this.slide.show = true;
         }
     },
 }

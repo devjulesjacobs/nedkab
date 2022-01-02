@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="createAdmin()"  type="button" class="-mt-1 float-right mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 bg-blue-theme">
+        <button @click="createAdmin"  type="button" class="-mt-1 float-right mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 bg-blue-theme">
             Admin aanmaken
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
@@ -62,15 +62,21 @@
             </ul>
         </div>
 
+        <slide-employee :show="slide.show" @hide="hideSlide" />
     </div>
 </template>
 
 <script>
+import SlideEmployee from "../../components/SlideEmployee/SlideEmployee";
 export default {
     name: "Users",
+    components: { SlideEmployee },
     data() {
         return {
-            users: []
+            users: [],
+            slide: {
+                show: false
+            }
         }
     },
     mounted() {
@@ -105,9 +111,13 @@ export default {
         },
 
         createAdmin() {
+            this.slide.show = true;
+        },
 
+        hideSlide() {
+            this.slide.show = false;
         }
-    }
+    },
 }
 </script>
 

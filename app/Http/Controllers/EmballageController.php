@@ -6,6 +6,7 @@ use App\Emballage;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class EmballageController extends Controller
 {
@@ -56,8 +57,7 @@ class EmballageController extends Controller
      */
     public function create(Request $request)
     {
-        $emballage = Emballage::create($request->all());
-
+        $data = $request->all();
         $user = User::find(auth()->user()->id);
 
         $user->update([
@@ -72,8 +72,31 @@ class EmballageController extends Controller
             'contact_phone' => $request->contact_phone,
             'contact_email' => $request->contact_email,
             'user' => $request->user,
-            'picture' => $request->picture,
+            'picture' => $request->picture, // ToDo: Check if it can be deleted
         ]);
+
+        if($data['picture']) {
+            switch($_FILES['picture']['type']) {
+                case 'image/png': $extension = '.png'; break;
+                case 'image/jpeg': $extension = '.jpg'; break;
+
+                default: return response()->json([
+                    'image' => ['Not the right filetype, choose .png or .jpg']
+                ], 404);
+            }
+
+            $img = Image::make($request->file('picture'));
+            $img->fit( 1280, 720);
+
+            $path = public_path("img/emballage/"); // set your own directory name there
+            $filename = time().'-emballage'.$extension; // get your own filename here
+
+            $img->save($path.$filename);
+
+            $data['picture'] = $filename;
+        }
+
+        $emballage = Emballage::create($data);
 
         if($emballage->save()) {
             return response()->json([

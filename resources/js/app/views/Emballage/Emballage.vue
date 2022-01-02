@@ -18,7 +18,7 @@
 
             <transition name="slide-fade">
                 <div v-if="state === 'create'">
-                    <form>
+                    <form @submit.prevent="storeEmballage" method="post" enctype="multipart/form-data">
                         <div class="bg-white rounded-md shadow-md">
                             <h1 class="text-md font-medium px-5 pt-5 mb-2">{{ section }}</h1>
                             <p v-show="section === 'Klantgegevens' || section === 'Ophaaladres'" class="text-xs px-5 mb-5 text-gray-500">De ingevulde gegevens worden automatisch opgeslagen voor de volgende keer.</p>
@@ -309,10 +309,13 @@
 
                                         </div>
 
-                                        <h1 class="text-md font-medium mt-5 mb-1">Opmerkingen</h1>
-                                        <textarea v-model="form.comments" rows="6"
-                                                  class="shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"></textarea>
+                                        <div>
+                                            <h1 class="text-md font-medium mt-5">Situatieschets <span class="text-xs font-normal text-gray-500">niet verplicht</span></h1>
+                                            <input @change="getImage($event)" type="file" id="picture" name="image" class="" accept="image/png, image/jpeg"/>
+                                        </div>
 
+                                        <h1 class="text-md font-medium mt-5 mb-1">Opmerkingen</h1>
+                                        <textarea v-model="form.comments" rows="6" class="shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"></textarea>
                                     </div>
 
                                     <div class="bg-gray-100 px-5 py-4 mt-8">
@@ -469,7 +472,7 @@
                                         <button @click="section = 'Haspels en afronden'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             Terug
                                         </button>
-                                        <button @click="sendEmballage" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             Indienen
                                         </button>
                                     </div>
@@ -581,6 +584,74 @@ export default {
             this.form.contact_email             = this.user.contact_email;
             this.form.pickup                    = time;
             this.form.user                      = this.user.id
+        },
+
+
+        getImage(e) {
+            let image = e.target.files[0],
+                reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onload = e => {
+                this.form.picture = e.target.result
+            }
+
+            // this.changeAvatar();
+        },
+
+        storeEmballage() {
+            let imagefile = document.querySelector('#picture')
+
+            let formData = new FormData
+
+            formData.append("customer_fullname", this.form.customer_fullname)
+            formData.append("customer_contact", this.form.customer_contact)
+            formData.append("customer_contact_phone", this.form.customer_contact_phone)
+            formData.append("street", this.form.street)
+            formData.append("house_number", this.form.house_number)
+            formData.append("postcode", this.form.postcode)
+            formData.append("city", this.form.city)
+            formData.append("contact", this.form.contact)
+            formData.append("contact_phone", this.form.contact_phone)
+            formData.append("contact_email", this.form.contact_email)
+            formData.append("lifting_equipment", this.form.lifting_equipment)
+            formData.append("pickup", this.form.pickup)
+            formData.append("comments", this.form.comments)
+            formData.append("diameter_60", this.form.diameter_60)
+            formData.append("diameter_80", this.form.diameter_80)
+            formData.append("diameter_100", this.form.diameter_100)
+            formData.append("diameter_120", this.form.diameter_120)
+            formData.append("diameter_140", this.form.diameter_140)
+            formData.append("diameter_160", this.form.diameter_160)
+            formData.append("diameter_180", this.form.diameter_180)
+            formData.append("diameter_200", this.form.diameter_200)
+            formData.append("user", this.form.user)
+
+            imagefile.files[0] ? formData.append("picture", imagefile.files[0]) : formData.append("picture", '');
+
+
+            let config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            axios.post('/api/emballage', formData, config)
+                .then(res => {
+                    this.state = 'overview'
+                    this.$store.dispatch('auth/addNotification', {
+                        type: 'success',
+                        title: 'Emballage ingediend',
+                        message: res.data.message,
+                    });
+                    this.setValuesUser();
+                })
+                .catch(err => {
+                    this.$store.dispatch('auth/addNotification', {
+                        type: 'error',
+                        title: 'Emballage niet ingediend',
+                        message: err.data.message,
+                    });
+                })
         }
     },
     computed: {

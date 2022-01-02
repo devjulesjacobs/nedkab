@@ -27,6 +27,10 @@
                                 <div class="mt-6 relative flex-1">
                                     <div class="absolute inset-0 px-4 sm:px-6">
 
+                                        <div class="mb-4 -mx-6">
+                                            <img v-if="emballage.picture" :src="'/img/emballage/'+emballage.picture" alt="Picture">
+                                        </div>
+
                                         <div class="mb-4">
                                             <h1 class="font-bold">Geselecteerde haspels</h1>
                                             <div class="text-sm">
