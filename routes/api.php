@@ -35,6 +35,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) { re
         /* Emballage */
         Route::get('/cms/emballage', [\App\Http\Controllers\EmballageController::class, 'getSubmitted']);
 
+        /* Cables */
+        Route::post('/cms/cables/import', [\App\Http\Controllers\CableController::class, 'create']);
+
         /* User */
         Route::get('/cms/employees', [App\Http\Controllers\UserController::class, 'getEmployees'])->middleware(['auth:sanctum']);
         Route::post('/cms/employee/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware(['auth:sanctum']);
@@ -42,7 +45,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) { re
 
         /* Mail */
         Route::post('/mail/test', [App\Http\Controllers\MailController::class, 'sendMail']);
-
 
         /* Statistics */
         Route::get('/cms/users/count', [App\Http\Controllers\UserController::class, 'getAllCount'])->middleware(['auth:sanctum']);

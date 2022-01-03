@@ -5,6 +5,8 @@
         <form @submit.prevent="importCables" method="post" enctype="multipart/form-data">
             <label for="fileSelect" class="block mb-3">Excel bestand uploaden om te importeren</label>
             <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+
+            <button type="submit">Importeren</button>
         </form>
     </div>
 </template>
@@ -15,7 +17,19 @@
 
         methods: {
             importCables() {
-                // Do stuff
+                let excelFile = document.querySelector('#fileSelect');
+                let formData = new FormData;
+
+                console.log(excelFile.files[0]);
+
+                formData.append("fileToImport", excelFile.files[0])
+
+                axios.post('/api/cms/cables/import', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(res => { console.log(res) }).catch(err => { console.log(err) })
+
             }
         }
     }

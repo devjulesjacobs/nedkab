@@ -31,9 +31,11 @@ class CableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if($request->hasFile('fileToImport')){
+            return $request->fileToImport;
+        }
     }
 
     /**

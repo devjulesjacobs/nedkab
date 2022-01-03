@@ -3158,10 +3158,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Cables",
   methods: {
-    importCables: function importCables() {// Do stuff
+    importCables: function importCables() {
+      var excelFile = document.querySelector('#fileSelect');
+      var formData = new FormData();
+      console.log(excelFile.files[0]);
+      formData.append("fileToImport", excelFile.files[0]);
+      axios.post('/api/cms/cables/import', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -43821,6 +43836,8 @@ var render = function () {
               ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
           },
         }),
+        _vm._v(" "),
+        _c("button", { attrs: { type: "submit" } }, [_vm._v("Importeren")]),
       ]
     ),
   ])
