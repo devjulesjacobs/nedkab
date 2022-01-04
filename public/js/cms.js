@@ -2555,12 +2555,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EmballageSlide",
   data: function data() {
     return {
-      form: {}
+      form: {
+        status: '',
+        pickup_date: undefined
+      }
     };
+  },
+  mounted: function mounted() {
+    this.fillForm();
   },
   methods: {
     copyAdres: function copyAdres() {
@@ -2571,12 +2603,40 @@ __webpack_require__.r(__webpack_exports__);
         title: 'Adres gekopieerd'
       });
     },
-    saveEmballage: function saveEmballage() {
-      this.$store.dispatch('cms/addNotification', {
-        type: 'info',
-        title: 'Functie niet beschikbaar',
-        message: 'Deze functie is nog niet beschikbaar.'
-      });
+    fillForm: function fillForm() {
+      this.form.status = this.emballage.status;
+      this.form.pickup_date = this.emballage.pickup_date;
+    },
+    setStatus: function setStatus() {
+      var _this = this;
+
+      console.log(123);
+
+      switch (this.form.status) {
+        case 'ingediend':
+          if (this.emballage.status !== 'ingediend') {// axios post ingediend > emballage controller
+          } else {
+            this.$store.dispatch('cms/addNotification', {
+              type: 'info',
+              title: 'Gegevens waren al up-to-date.'
+            });
+          }
+
+          break;
+
+        case 'geaccepteerd':
+          axios.post('/api/cms/emballage/setApproved/' + this.emballage.id, this.form).then(function (res) {
+            _this.$store.dispatch('cms/addNotification', {
+              type: 'success',
+              title: 'Emballage status gewijzigd naar Geaccepteerd',
+              message: 'De status is succesvol gewijzigd. Er is een automatische mail verzonden met de ophaaldetails.',
+              timer: 11000
+            });
+
+            _this.$emit('hide');
+          });
+          break;
+      }
     }
   },
   props: ['emballage', 'show']
@@ -3446,6 +3506,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Emballage",
@@ -3469,7 +3532,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/cms/emballage').then(function (res) {
-        console.log(res);
         _this.emballages = res.data;
       })["catch"](function (err) {
         console.log(err);
@@ -3479,7 +3541,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/api/app/emballage/' + id).then(function (res) {
-        _this2.emballage = res.data;
+        _this2.emballage = res.data; // $refs.emballageSlide.fillForm();
+
         _this2.slide.show = true;
       })["catch"](function (err) {
         return console.log(err.response.data);
@@ -41981,580 +42044,710 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "slide-fade" } }, [
-    _vm.show
-      ? _c(
+  return _c(
+    "div",
+    {
+      staticClass: "fixed inset-0 z-50 overflow-hidden state-slide-post",
+      attrs: {
+        "aria-labelledby": "slide-over-title",
+        role: "dialog",
+        "aria-modal": "true",
+      },
+    },
+    [
+      _c("div", { staticClass: "absolute inset-0 overflow-hidden" }, [
+        _c(
           "div",
-          {
-            staticClass: "fixed inset-0 z-50 overflow-hidden state-slide-post",
-            attrs: {
-              "aria-labelledby": "slide-over-title",
-              role: "dialog",
-              "aria-modal": "true",
-            },
-          },
+          { staticClass: "absolute inset-0", attrs: { "aria-hidden": "true" } },
           [
-            _c("div", { staticClass: "absolute inset-0 overflow-hidden" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "absolute inset-0",
-                  attrs: { "aria-hidden": "true" },
-                },
-                [
+            _c(
+              "div",
+              { staticClass: "fixed inset-y-0 right-0 max-w-full flex" },
+              [
+                _c("div", { staticClass: "w-screen max-w-lg" }, [
                   _c(
                     "div",
-                    { staticClass: "fixed inset-y-0 right-0 max-w-full flex" },
+                    {
+                      staticClass:
+                        "h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll",
+                    },
                     [
-                      _c("div", { staticClass: "w-screen max-w-md" }, [
+                      _c("div", { staticClass: "px-4 sm:px-6" }, [
                         _c(
                           "div",
-                          {
-                            staticClass:
-                              "h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll",
-                          },
+                          { staticClass: "flex items-start justify-between" },
                           [
-                            _c("div", { staticClass: "px-4 sm:px-6" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex items-start justify-between",
-                                },
-                                [
-                                  _c(
-                                    "h2",
-                                    {
-                                      staticClass:
-                                        "text-lg font-medium text-gray-900",
-                                      attrs: { id: "slide-over-title" },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                        Emballage\n                                        "
-                                      ),
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800",
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                          #" +
-                                              _vm._s(_vm.emballage.id) +
-                                              "\n                                        "
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "ml-3 h-7 flex items-center",
-                                    },
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                          attrs: { type: "button" },
-                                          on: {
-                                            click: function ($event) {
-                                              return _vm.$emit("hide")
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("Close panel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "svg",
-                                            {
-                                              staticClass: "h-6 w-6",
-                                              attrs: {
-                                                xmlns:
-                                                  "http://www.w3.org/2000/svg",
-                                                fill: "none",
-                                                viewBox: "0 0 24 24",
-                                                stroke: "currentColor",
-                                                "aria-hidden": "true",
-                                              },
-                                            },
-                                            [
-                                              _c("path", {
-                                                attrs: {
-                                                  "stroke-linecap": "round",
-                                                  "stroke-linejoin": "round",
-                                                  "stroke-width": "2",
-                                                  d: "M6 18L18 6M6 6l12 12",
-                                                },
-                                              }),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
+                            _c(
+                              "h2",
+                              {
+                                staticClass:
+                                  "text-lg font-medium text-gray-900",
+                                attrs: { id: "slide-over-title" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        Emballage\n                                        "
+                                ),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                          #" +
+                                        _vm._s(_vm.emballage.id) +
+                                        "\n                                        "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "mt-6 relative flex-1" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "absolute inset-0 px-4 sm:px-6",
-                                },
-                                [
-                                  _c("div", { staticClass: "mb-4 -mx-6" }, [
-                                    _vm.emballage.picture
-                                      ? _c("img", {
-                                          attrs: {
-                                            src:
-                                              "/img/emballage/" +
-                                              _vm.emballage.picture,
-                                            alt: "Picture",
-                                          },
-                                        })
-                                      : _vm._e(),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "mb-4" }, [
-                                    _c("h1", { staticClass: "font-bold" }, [
-                                      _vm._v("Geselecteerde haspels"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "text-sm" }, [
-                                      _vm.emballage.diameter_60
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_60
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("60cm "),
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.emballage.diameter_80
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_80
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("80cm "),
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.emballage.diameter_100
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_100
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("100cm "),
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.emballage.diameter_120
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_120
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("120cm "),
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.emballage.diameter_140
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_140
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("140cm "),
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.emballage.diameter_160
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_160
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("160cm "),
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.emballage.diameter_180
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_180
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("280cm "),
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.emballage.diameter_200
-                                        ? _c("p", [
-                                            _c(
-                                              "span",
-                                              { staticClass: "font-bold" },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.emballage.diameter_200
-                                                  ) + "x"
-                                                ),
-                                              ]
-                                            ),
-                                            _vm._v(" haspel "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "text-gray-400" },
-                                              [_vm._v("Ø")]
-                                            ),
-                                            _vm._v("200cm "),
-                                          ])
-                                        : _vm._e(),
-                                    ]),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "mb-4" }, [
-                                    _c("h1", { staticClass: "font-bold" }, [
-                                      _vm._v("Ophaaladres"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "text-sm" }, [
-                                      _vm._v(
-                                        _vm._s(_vm.emballage.user.company)
-                                      ),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "text-sm" }, [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.emballage.street +
-                                            " " +
-                                            _vm.emballage.house_number
-                                        )
-                                      ),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "text-sm -mb-1" }, [
-                                      _c("span", { staticClass: "uppercase" }, [
-                                        _vm._v(_vm._s(_vm.emballage.postcode)),
-                                      ]),
-                                      _vm._v(" " + _vm._s(_vm.emballage.city)),
+                            _c(
+                              "div",
+                              { staticClass: "ml-3 h-7 flex items-center" },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.$emit("hide")
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("span", { staticClass: "sr-only" }, [
+                                      _vm._v("Close panel"),
                                     ]),
                                     _vm._v(" "),
                                     _c(
-                                      "a",
+                                      "svg",
+                                      {
+                                        staticClass: "h-6 w-6",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          fill: "none",
+                                          viewBox: "0 0 24 24",
+                                          stroke: "currentColor",
+                                          "aria-hidden": "true",
+                                        },
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round",
+                                            "stroke-width": "2",
+                                            d: "M6 18L18 6M6 6l12 12",
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-6 relative flex-1" }, [
+                        _c(
+                          "div",
+                          { staticClass: "absolute inset-0 px-4 sm:px-6" },
+                          [
+                            _vm.emballage.picture
+                              ? _c("div", { staticClass: "mb-4 -mx-6" }, [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "/img/emballage/" +
+                                        _vm.emballage.picture,
+                                      alt: "Picture",
+                                    },
+                                  }),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.emballage.pickup_date
+                              ? _c("div", { staticClass: "mb-4" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "rounded-md bg-blue-50 p-4",
+                                    },
+                                    [
+                                      _c("div", { staticClass: "flex" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "flex-shrink-0" },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                staticClass:
+                                                  "h-5 w-5 text-blue-400",
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 20 20",
+                                                  fill: "currentColor",
+                                                  "aria-hidden": "true",
+                                                },
+                                              },
+                                              [
+                                                _c("path", {
+                                                  attrs: {
+                                                    "fill-rule": "evenodd",
+                                                    d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z",
+                                                    "clip-rule": "evenodd",
+                                                  },
+                                                }),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "ml-3 text-sm text-blue-700",
+                                          },
+                                          [
+                                            _c(
+                                              "h1",
+                                              {
+                                                staticClass:
+                                                  "text-md font-bold mb-2",
+                                              },
+                                              [_vm._v("Afspraak informatie")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("p", [
+                                              _vm._v(
+                                                "\n                                                        Op "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "font-medium" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm._f("moment")(
+                                                        _vm.emballage
+                                                          .pickup_date,
+                                                        "DD MMM YYYY"
+                                                      )
+                                                    )
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(" vanaf "),
+                                              _c(
+                                                "span",
+                                                { staticClass: "font-medium" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(_vm.emballage.pickup)
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(
+                                                ".\n                                                    "
+                                              ),
+                                            ]),
+                                          ]
+                                        ),
+                                      ]),
+                                    ]
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-4" }, [
+                              _c("h1", { staticClass: "font-bold" }, [
+                                _vm._v("Geselecteerde haspels"),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "text-sm" }, [
+                                _vm.emballage.diameter_60
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_60) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("60cm "),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.emballage.diameter_80
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_80) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("80cm "),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.emballage.diameter_100
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_100) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("100cm "),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.emballage.diameter_120
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_120) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("120cm "),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.emballage.diameter_140
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_140) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("140cm "),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.emballage.diameter_160
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_160) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("160cm "),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.emballage.diameter_180
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_180) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("280cm "),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.emballage.diameter_200
+                                  ? _c("p", [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.emballage.diameter_200) +
+                                            "x"
+                                        ),
+                                      ]),
+                                      _vm._v(" haspel "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "text-gray-400" },
+                                        [_vm._v("Ø")]
+                                      ),
+                                      _vm._v("200cm "),
+                                    ])
+                                  : _vm._e(),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-4" }, [
+                              _c("h1", { staticClass: "font-bold" }, [
+                                _vm._v("Ophaaladres"),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-sm" }, [
+                                _vm._v(_vm._s(_vm.emballage.user.company)),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-sm" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.emballage.street +
+                                      " " +
+                                      _vm.emballage.house_number
+                                  )
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-sm -mb-1" }, [
+                                _c("span", { staticClass: "uppercase" }, [
+                                  _vm._v(_vm._s(_vm.emballage.postcode)),
+                                ]),
+                                _vm._v(" " + _vm._s(_vm.emballage.city)),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "text-xs text-gray-500 cursor-pointer",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.copyAdres.apply(
+                                        null,
+                                        arguments
+                                      )
+                                    },
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "h-3 w-3 -mt-1 inline-block",
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        fill: "none",
+                                        viewBox: "0 0 24 24",
+                                        stroke: "currentColor",
+                                      },
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          "stroke-linecap": "round",
+                                          "stroke-linejoin": "round",
+                                          "stroke-width": "2",
+                                          d: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+                                        },
+                                      }),
+                                    ]
+                                  ),
+                                  _vm._v(
+                                    "\n                                            kopiëren\n                                        "
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                ref: "adres",
+                                staticClass: "opacity-0 h-0.5 w-0.5",
+                                attrs: { type: "text" },
+                                domProps: {
+                                  value:
+                                    _vm.emballage.street +
+                                    " " +
+                                    _vm.emballage.house_number +
+                                    ", " +
+                                    _vm.emballage.postcode +
+                                    " " +
+                                    _vm.emballage.city,
+                                },
+                                on: {
+                                  focus: function ($event) {
+                                    return $event.target.select()
+                                  },
+                                },
+                              }),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-4" }, [
+                              _c("h1", { staticClass: "font-bold" }, [
+                                _vm._v("Informatie"),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-sm" }, [
+                                _vm._v("Vanaf: "),
+                                _c("span", { staticClass: "font-bold" }, [
+                                  _vm._v(_vm._s(_vm.emballage.pickup)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-sm" }, [
+                                _vm._v("Hefinstallatie: "),
+                                _c("span", { staticClass: "font-bold" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.emballage.lifting_equipment
+                                        ? "Ja"
+                                        : "Nee"
+                                    )
+                                  ),
+                                ]),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-4" }, [
+                              _c("h1", { staticClass: "font-bold" }, [
+                                _vm._v("Opmerkingen"),
+                              ]),
+                              _vm._v(" "),
+                              _vm.emballage.comments
+                                ? _c("p", { staticClass: " text-sm" }, [
+                                    _vm._v(_vm._s(_vm.emballage.comments)),
+                                  ])
+                                : _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        " text-sm text-gray-500 italic",
+                                    },
+                                    [_vm._v("Geen opmerkingen")]
+                                  ),
+                            ]),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "rounded-md bg-gray-100 shadow-md p-5 mt-4",
+                              },
+                              [
+                                _c(
+                                  "h1",
+                                  { staticClass: "text-xl font-bold mb-4" },
+                                  [_vm._v("Beheer")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: { method: "post" },
+                                    on: {
+                                      submit: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.setStatus()
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c(
+                                      "label",
                                       {
                                         staticClass:
-                                          "text-xs text-gray-500 cursor-pointer",
+                                          "block text-sm font-medium text-gray-700",
+                                        attrs: { for: "status" },
+                                      },
+                                      [_vm._v("Status wijzigen")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.status,
+                                            expression: "form.status",
+                                          },
+                                        ],
+                                        staticClass:
+                                          "mb-3 cursor-pointer mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
+                                        attrs: { id: "status" },
                                         on: {
-                                          click: function ($event) {
-                                            $event.preventDefault()
-                                            return _vm.copyAdres.apply(
-                                              null,
-                                              arguments
+                                          change: function ($event) {
+                                            var $$selectedVal =
+                                              Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function (o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function (o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                            _vm.$set(
+                                              _vm.form,
+                                              "status",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
                                             )
                                           },
                                         },
                                       },
                                       [
                                         _c(
-                                          "svg",
+                                          "option",
                                           {
-                                            staticClass:
-                                              "h-3 w-3 -mt-1 inline-block",
-                                            attrs: {
-                                              xmlns:
-                                                "http://www.w3.org/2000/svg",
-                                              fill: "none",
-                                              viewBox: "0 0 24 24",
-                                              stroke: "currentColor",
-                                            },
+                                            attrs: { value: "", disabled: "" },
                                           },
-                                          [
-                                            _c("path", {
-                                              attrs: {
-                                                "stroke-linecap": "round",
-                                                "stroke-linejoin": "round",
-                                                "stroke-width": "2",
-                                                d: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
-                                              },
-                                            }),
-                                          ]
+                                          [_vm._v("Selecteer een status")]
                                         ),
-                                        _vm._v(
-                                          "\n                                            kopiëren\n                                        "
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "ingediend" } },
+                                          [_vm._v("Ingediend")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "geaccepteerd" } },
+                                          [_vm._v("Geaccepteerd")]
                                         ),
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _c("input", {
-                                      ref: "adres",
-                                      staticClass: "opacity-0 h-0.5 w-0.5",
-                                      attrs: { type: "text" },
-                                      domProps: {
-                                        value:
-                                          _vm.emballage.street +
-                                          " " +
-                                          _vm.emballage.house_number +
-                                          ", " +
-                                          _vm.emballage.postcode +
-                                          " " +
-                                          _vm.emballage.city,
+                                    _c(
+                                      "div",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value:
+                                              _vm.form.status ===
+                                              "geaccepteerd",
+                                            expression:
+                                              "form.status === 'geaccepteerd'",
+                                          },
+                                        ],
                                       },
-                                      on: {
-                                        focus: function ($event) {
-                                          return $event.target.select()
-                                        },
-                                      },
-                                    }),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "mb-4" }, [
-                                    _c("h1", { staticClass: "font-bold" }, [
-                                      _vm._v("Informatie"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "text-sm" }, [
-                                      _vm._v("Vanaf: "),
-                                      _c("span", { staticClass: "font-bold" }, [
-                                        _vm._v(_vm._s(_vm.emballage.pickup)),
-                                      ]),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "text-sm" }, [
-                                      _vm._v("Hefinstallatie: "),
-                                      _c("span", { staticClass: "font-bold" }, [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.emballage.lifting_equipment
-                                              ? "Ja"
-                                              : "Nee"
-                                          )
-                                        ),
-                                      ]),
-                                    ]),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "mb-4" }, [
-                                    _c("h1", { staticClass: "font-bold" }, [
-                                      _vm._v("Opmerkingen"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm.emballage.comments
-                                      ? _c("p", { staticClass: " text-sm" }, [
-                                          _vm._v(
-                                            _vm._s(_vm.emballage.comments)
-                                          ),
-                                        ])
-                                      : _c(
-                                          "p",
+                                      [
+                                        _c(
+                                          "label",
                                           {
                                             staticClass:
-                                              " text-sm text-gray-500 italic",
+                                              "block text-sm font-medium text-gray-700",
+                                            attrs: { for: "status" },
                                           },
-                                          [_vm._v("Geen opmerkingen")]
+                                          [_vm._v("Ophaaldatum")]
                                         ),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("hr"),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "rounded-md bg-gray-100 shadow-md p-5 mt-4",
-                                    },
-                                    [
-                                      _c(
-                                        "h1",
-                                        {
-                                          staticClass: "text-xl font-bold mb-4",
-                                        },
-                                        [_vm._v("Beheer")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "block text-sm font-medium text-gray-700",
-                                          attrs: { for: "status" },
-                                        },
-                                        [_vm._v("Status")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "select",
-                                        {
-                                          staticClass:
-                                            "cursor-pointer mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
-                                          attrs: { id: "status" },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
                                             {
-                                              attrs: {
-                                                value: "",
-                                                disabled: "",
-                                              },
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.pickup_date,
+                                              expression: "form.pickup_date",
                                             },
-                                            [_vm._v("Selecteer een status")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "ingediend" } },
-                                            [_vm._v("Ingediend")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: { value: "geaccepteerd" },
-                                            },
-                                            [_vm._v("Geaccepteerd")]
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "button",
-                                        {
+                                          ],
                                           staticClass:
-                                            "mt-2 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                          attrs: { type: "button" },
-                                          on: { click: _vm.saveEmballage },
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                            Opslaan\n                                        "
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
+                                            "cursor-pointer mt-1 block w-full px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
+                                          attrs: { type: "date" },
+                                          domProps: {
+                                            value: _vm.form.pickup_date,
+                                          },
+                                          on: {
+                                            input: function ($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "pickup_date",
+                                                $event.target.value
+                                              )
+                                            },
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "mt-2 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                        attrs: { type: "submit" },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Opslaan\n                                            "
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
                           ]
                         ),
                       ]),
                     ]
                   ),
-                ]
-              ),
-            ]),
+                ]),
+              ]
+            ),
           ]
-        )
-      : _vm._e(),
-  ])
+        ),
+      ]),
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44238,10 +44431,20 @@ var render = function () {
         _vm._m(0),
       ]),
       _vm._v(" "),
-      _c("emballage-slide", {
-        attrs: { show: _vm.slide.show, emballage: _vm.emballage },
-        on: { hide: _vm.hideSlide },
-      }),
+      _c(
+        "transition",
+        { attrs: { name: "slide-fade" } },
+        [
+          _vm.slide.show
+            ? _c("emballage-slide", {
+                ref: "emballageSlide",
+                attrs: { emballage: _vm.emballage },
+                on: { hide: _vm.hideSlide },
+              })
+            : _vm._e(),
+        ],
+        1
+      ),
     ],
     1
   )

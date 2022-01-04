@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) { re
 
         /* Emballage */
         Route::get('/cms/emballage', [\App\Http\Controllers\EmballageController::class, 'getSubmitted']);
+        Route::post('/cms/emballage/setApproved/{id}', [\App\Http\Controllers\EmballageController::class, 'setApproved']);
 
         /* Cables */
         Route::post('/cms/cables/import', [\App\Http\Controllers\CableController::class, 'create']);

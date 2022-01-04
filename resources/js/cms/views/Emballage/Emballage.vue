@@ -14,9 +14,12 @@
             </div>
         </div>
 
-        <emballage-slide :show="slide.show"
-                         :emballage="emballage"
-                         @hide="hideSlide" />
+        <transition name="slide-fade">
+            <emballage-slide v-if="slide.show"
+                             :emballage="emballage"
+                             @hide="hideSlide"
+                             ref="emballageSlide"/>
+        </transition>
 
     </div>
 </template>
@@ -45,7 +48,6 @@ export default {
         getEmballages() {
             axios.get('/api/cms/emballage')
             .then((res) => {
-                console.log(res)
                 this.emballages = res.data
             })
             .catch((err) => { console.log(err) })
@@ -55,6 +57,7 @@ export default {
             axios.get('/api/app/emballage/'+id)
                 .then(res => {
                     this.emballage = res.data
+                    // $refs.emballageSlide.fillForm();
                     this.slide.show = true;
                 })
                 .catch(err => console.log(err.response.data))

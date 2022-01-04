@@ -1,10 +1,9 @@
 <template>
-    <transition name="slide-fade">
-        <div v-if="show" class="fixed inset-0 z-50 overflow-hidden state-slide-post" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 z-50 overflow-hidden state-slide-post" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute inset-0" aria-hidden="true">
                     <div class="fixed inset-y-0 right-0 max-w-full flex">
-                        <div class="w-screen max-w-md">
+                        <div class="w-screen max-w-lg">
                             <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
                                 <div class="px-4 sm:px-6">
                                     <div class="flex items-start justify-between">
@@ -27,8 +26,26 @@
                                 <div class="mt-6 relative flex-1">
                                     <div class="absolute inset-0 px-4 sm:px-6">
 
-                                        <div class="mb-4 -mx-6">
-                                            <img v-if="emballage.picture" :src="'/img/emballage/'+emballage.picture" alt="Picture">
+                                        <div v-if="emballage.picture" class="mb-4 -mx-6">
+                                            <img :src="'/img/emballage/'+emballage.picture" alt="Picture">
+                                        </div>
+
+                                        <div v-if="emballage.pickup_date" class="mb-4">
+                                            <div class="rounded-md bg-blue-50 p-4">
+                                                <div class="flex">
+                                                    <div class="flex-shrink-0">
+                                                        <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="ml-3 text-sm text-blue-700">
+                                                        <h1 class="text-md font-bold mb-2">Afspraak informatie</h1>
+                                                        <p>
+                                                            Op <span class="font-medium">{{ emballage.pickup_date | moment('DD MMM YYYY') }}</span> vanaf <span class="font-medium">{{ emballage.pickup }}</span>.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="mb-4">
@@ -75,15 +92,25 @@
 
                                         <div class="rounded-md bg-gray-100 shadow-md p-5 mt-4">
                                             <h1 class="text-xl font-bold mb-4">Beheer</h1>
-                                            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                            <select id="status" class="cursor-pointer mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                                                <option value="" disabled>Selecteer een status</option>
-                                                <option value="ingediend">Ingediend</option>
-                                                <option value="geaccepteerd">Geaccepteerd</option>
-                                            </select>
-                                            <button @click="saveEmballage" type="button" class="mt-2 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                Opslaan
-                                            </button>
+
+                                            <form @submit.prevent="setStatus()" method="post">
+                                                <label for="status" class="block text-sm font-medium text-gray-700">Status wijzigen</label>
+                                                <select v-model="form.status" id="status" class="mb-3 cursor-pointer mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                                    <option value="" disabled>Selecteer een status</option>
+                                                    <option value="ingediend">Ingediend</option>
+                                                    <option value="geaccepteerd">Geaccepteerd</option>
+                                                </select>
+
+                                                <div v-show="form.status === 'geaccepteerd'">
+                                                    <label for="status" class="block text-sm font-medium text-gray-700">Ophaaldatum</label>
+                                                    <input v-model="form.pickup_date" type="date" class="cursor-pointer mt-1 block w-full px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                                </div>
+
+                                                <button type="submit" class="mt-2 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                    Opslaan
+                                                </button>
+
+                                            </form>
                                         </div>
 
                                     </div>
@@ -94,7 +121,6 @@
                 </div>
             </div>
         </div>
-    </transition>
 </template>
 
 <script>
@@ -103,9 +129,13 @@ export default {
     data() {
         return {
             form: {
-
+                status: '',
+                pickup_date: undefined
             }
         }
+    },
+    mounted() {
+        this.fillForm()
     },
     methods: {
         copyAdres() {
@@ -117,12 +147,39 @@ export default {
             });
         },
 
-        saveEmballage() {
-            this.$store.dispatch('cms/addNotification', {
-                type: 'info',
-                title: 'Functie niet beschikbaar',
-                message: 'Deze functie is nog niet beschikbaar.',
-            });
+        fillForm() {
+            this.form.status = this.emballage.status;
+            this.form.pickup_date = this.emballage.pickup_date;
+        },
+
+        setStatus() {
+            console.log(123)
+            switch(this.form.status) {
+                case 'ingediend':
+                    if(this.emballage.status !== 'ingediend') {
+                        // axios post ingediend > emballage controller
+                    } else {
+                        this.$store.dispatch('cms/addNotification', {
+                            type: 'info',
+                            title: 'Gegevens waren al up-to-date.',
+                        });
+                    }
+                    break;
+                case 'geaccepteerd':
+                    axios.post('/api/cms/emballage/setApproved/'+this.emballage.id, this.form)
+                        .then(res => {
+                            this.$store.dispatch('cms/addNotification', {
+                                type: 'success',
+                                title: 'Emballage status gewijzigd naar Geaccepteerd',
+                                message: 'De status is succesvol gewijzigd. Er is een automatische mail verzonden met de ophaaldetails.',
+                                timer: 11000
+                            });
+
+                            this.$emit('hide');
+                        })
+                    break;
+            }
+
         }
     },
     props: ['emballage', 'show']

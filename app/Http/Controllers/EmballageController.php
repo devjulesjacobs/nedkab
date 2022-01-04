@@ -50,9 +50,9 @@ class EmballageController extends Controller
         return $emballages;
     }
 
-    public function setApproved(Request $request)
+    public function setApproved(Request $request, $id)
     {
-        $emballage = Emballage::where('id', $request->id)->first();
+        $emballage = Emballage::where('id', $id)->first();
 
         $emballage->update([
             'pickup_date' => $request->pickup_date,
