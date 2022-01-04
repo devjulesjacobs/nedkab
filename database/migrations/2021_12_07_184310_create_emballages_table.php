@@ -27,6 +27,7 @@ class CreateEmballagesTable extends Migration
             $table->string('contact_email')->nullable();
             $table->boolean('lifting_equipment')->default(0);
             $table->string('pickup')->nullable();
+            $table->string('pickup_date')->nullable();
             $table->text('comments')->nullable();
             $table->integer('diameter_60')->default(0);
             $table->integer('diameter_80')->default(0);

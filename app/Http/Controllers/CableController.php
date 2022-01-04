@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cable;
+use App\Imports\CablesImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class CableController extends Controller
@@ -33,9 +35,16 @@ class CableController extends Controller
      */
     public function create(Request $request)
     {
+
+        return $request->fileToImport;
+
         if($request->hasFile('fileToImport')){
-            return $request->fileToImport;
+            Excel::import(new CablesImport, $request->fileToImport);
+
+            return true;
         }
+
+        return false;
     }
 
     /**

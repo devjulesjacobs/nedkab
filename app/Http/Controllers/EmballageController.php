@@ -50,6 +50,18 @@ class EmballageController extends Controller
         return $emballages;
     }
 
+    public function setApproved(Request $request)
+    {
+        $emballage = Emballage::where('id', $request->id)->first();
+
+        $emballage->update([
+            'pickup_date' => $request->pickup_date,
+            'status' => $request->status
+        ]);
+
+        // Send mail
+    }
+
     /**
      * Show the form for creating a new resource.
      *
