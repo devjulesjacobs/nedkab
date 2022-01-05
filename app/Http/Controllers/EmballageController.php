@@ -55,7 +55,6 @@ class EmballageController extends Controller
         $emballage = Emballage::where('id', $id)->first();
 
         $emballage->update([
-            'pickup_date' => $request->pickup_date,
             'status' => $request->status
         ]);
 
@@ -67,7 +66,6 @@ class EmballageController extends Controller
         $emballage = Emballage::where('id', $id)->first();
 
         $emballage->update([
-            'pickup_date' => '',
             'status' => $request->status
         ]);
     }

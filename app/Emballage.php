@@ -21,8 +21,6 @@ class Emballage extends Model
         'contact_phone',
         'contact_email',
         'lifting_equipment',
-        'pickup',
-        'pickup_date',
         'comments',
         'diameter_60',
         'diameter_80',
