@@ -30,24 +30,6 @@
                                             <img :src="'/img/emballage/'+emballage.picture" alt="Picture">
                                         </div>
 
-                                        <div v-if="emballage.pickup_date" class="mb-4">
-                                            <div class="rounded-md bg-blue-50 p-4">
-                                                <div class="flex">
-                                                    <div class="flex-shrink-0">
-                                                        <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                                                        </svg>
-                                                    </div>
-                                                    <div class="ml-3 text-sm text-blue-700">
-                                                        <h1 class="text-md font-bold mb-2">Afspraak informatie</h1>
-                                                        <p>
-                                                            Op <span class="font-medium">{{ emballage.pickup_date | moment('DD MMM YYYY') }}</span> vanaf <span class="font-medium">{{ emballage.pickup }}</span>.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="mb-4">
                                             <h1 class="font-bold">Geselecteerde haspels</h1>
                                             <div class="text-sm">
@@ -78,7 +60,6 @@
 
                                         <div class="mb-4">
                                             <h1 class="font-bold">Informatie</h1>
-                                            <p class="text-sm">Vanaf: <span class="font-bold">{{ emballage.pickup }}</span></p>
                                             <p class="text-sm">Hefinstallatie: <span class="font-bold">{{ emballage.lifting_equipment ? 'Ja' : 'Nee' }}</span></p>
                                         </div>
 
@@ -100,11 +81,6 @@
                                                     <option value="ingediend">Ingediend</option>
                                                     <option value="geaccepteerd">Geaccepteerd</option>
                                                 </select>
-
-                                                <div v-show="form.status === 'geaccepteerd'">
-                                                    <label for="status" class="block text-sm font-medium text-gray-700">Ophaaldatum</label>
-                                                    <input v-model="form.pickup_date" type="date" class="cursor-pointer mt-1 block w-full px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                                                </div>
 
                                                 <button type="submit" class="mt-2 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                                     Opslaan
@@ -129,8 +105,7 @@ export default {
     data() {
         return {
             form: {
-                status: '',
-                pickup_date: undefined
+                status: ''
             }
         }
     },
@@ -149,7 +124,6 @@ export default {
 
         fillForm() {
             this.form.status = this.emballage.status;
-            this.form.pickup_date = this.emballage.pickup_date;
         },
 
         setStatus() {

@@ -62,6 +62,16 @@ class EmballageController extends Controller
         // Send mail
     }
 
+    public function setSubmitted(Request $request, $id)
+    {
+        $emballage = Emballage::where('id', $id)->first();
+
+        $emballage->update([
+            'pickup_date' => '',
+            'status' => $request->status
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -125,11 +125,6 @@
                                                         </div>
 
                                                         <div class="mb-1  flex justify-between text-sm font-medium">
-                                                            <dt class="text-gray-500">Ophalen vanaf</dt>
-                                                            <dd class="text-gray-900">{{ emballage.pickup }}</dd>
-                                                        </div>
-
-                                                        <div class="mb-1  flex justify-between text-sm font-medium">
                                                             <dt class="text-gray-500">Hefinstallatie benodigd</dt>
                                                             <dd class="text-gray-900">{{ parseInt(emballage.lifting_equipment) === 1 ? 'Ja' : 'Nee' }}</dd>
                                                         </div>

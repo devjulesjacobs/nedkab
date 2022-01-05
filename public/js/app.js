@@ -3028,11 +3028,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EmballageSlide",
@@ -5392,16 +5387,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5422,7 +5407,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         contact_phone: '',
         contact_email: '',
         lifting_equipment: 0,
-        pickup: null,
         comments: '',
         diameter_60: 0,
         diameter_80: 0,
@@ -5481,8 +5465,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     fillForm: function fillForm() {
-      var today = new Date(),
-          time = today.getHours() + ":" + '00';
       this.form.customer_fullname = this.user.customer_fullname;
       this.form.customer_contact = this.user.customer_contact;
       this.form.customer_contact_phone = this.user.customer_contact_phone;
@@ -5493,7 +5475,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.contact = this.user.contact;
       this.form.contact_phone = this.user.contact_phone;
       this.form.contact_email = this.user.contact_email;
-      this.form.pickup = time;
       this.form.user = this.user.id;
     },
     getImage: function getImage(e) {
@@ -5524,7 +5505,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append("contact_phone", this.form.contact_phone);
       formData.append("contact_email", this.form.contact_email);
       formData.append("lifting_equipment", this.form.lifting_equipment);
-      formData.append("pickup", this.form.pickup);
       formData.append("comments", this.form.comments);
       formData.append("diameter_60", this.form.diameter_60);
       formData.append("diameter_80", this.form.diameter_80);
@@ -44904,39 +44884,6 @@ var render = function () {
                                                       staticClass:
                                                         "text-gray-500",
                                                     },
-                                                    [_vm._v("Ophalen vanaf")]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "dd",
-                                                    {
-                                                      staticClass:
-                                                        "text-gray-900",
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm.emballage.pickup
-                                                        )
-                                                      ),
-                                                    ]
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "mb-1  flex justify-between text-sm font-medium",
-                                                },
-                                                [
-                                                  _c(
-                                                    "dt",
-                                                    {
-                                                      staticClass:
-                                                        "text-gray-500",
-                                                    },
                                                     [
                                                       _vm._v(
                                                         "Hefinstallatie benodigd"
@@ -48197,171 +48144,6 @@ var render = function () {
                             },
                             [
                               _c("div", { staticClass: "px-5" }, [
-                                _c("div", { staticClass: "mb-3" }, [
-                                  _c(
-                                    "h1",
-                                    {
-                                      staticClass:
-                                        "text-md font-medium mt-5 mb-1",
-                                    },
-                                    [_vm._v("Afhaaltijd")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.pickup,
-                                        expression: "form.pickup",
-                                      },
-                                    ],
-                                    staticClass:
-                                      "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                    attrs: { type: "time" },
-                                    domProps: { value: _vm.form.pickup },
-                                    on: {
-                                      input: function ($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.form,
-                                          "pickup",
-                                          $event.target.value
-                                        )
-                                      },
-                                    },
-                                  }),
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "h1",
-                                  {
-                                    staticClass:
-                                      "text-md font-medium mt-5 mb-1",
-                                  },
-                                  [_vm._v("Is er een hefinstallatie nodig?")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "relative flex items-start" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "flex items-center h-5" },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.lifting_equipment,
-                                              expression:
-                                                "form.lifting_equipment",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                          attrs: {
-                                            "true-value": "1",
-                                            "false-value": "0",
-                                            id: "lifting_equipment",
-                                            "aria-describedby":
-                                              "comments-description",
-                                            name: "comments",
-                                            type: "checkbox",
-                                          },
-                                          domProps: {
-                                            checked: Array.isArray(
-                                              _vm.form.lifting_equipment
-                                            )
-                                              ? _vm._i(
-                                                  _vm.form.lifting_equipment,
-                                                  null
-                                                ) > -1
-                                              : _vm._q(
-                                                  _vm.form.lifting_equipment,
-                                                  "1"
-                                                ),
-                                          },
-                                          on: {
-                                            change: function ($event) {
-                                              var $$a =
-                                                  _vm.form.lifting_equipment,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked ? "1" : "0"
-                                              if (Array.isArray($$a)) {
-                                                var $$v = null,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      _vm.form,
-                                                      "lifting_equipment",
-                                                      $$a.concat([$$v])
-                                                    )
-                                                } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      _vm.form,
-                                                      "lifting_equipment",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
-                                                }
-                                              } else {
-                                                _vm.$set(
-                                                  _vm.form,
-                                                  "lifting_equipment",
-                                                  $$c
-                                                )
-                                              }
-                                            },
-                                          },
-                                        }),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "ml-1.5 text-sm" },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "font-medium text-gray-700",
-                                            attrs: { for: "lifting_equipment" },
-                                          },
-                                          [
-                                            _vm._v("Ja, "),
-                                            _c(
-                                              "span",
-                                              {
-                                                staticClass:
-                                                  "font-normal text-gray-500",
-                                                attrs: {
-                                                  id: "comments-description",
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "er is een hefinstallatie nodig."
-                                                ),
-                                              ]
-                                            ),
-                                          ]
-                                        ),
-                                      ]
-                                    ),
-                                  ]
-                                ),
-                                _vm._v(" "),
                                 _c(
                                   "h1",
                                   { staticClass: "text-md font-medium mt-5" },
@@ -50266,6 +50048,133 @@ var render = function () {
                                     : _vm._e(),
                                 ]),
                                 _vm._v(" "),
+                                _c(
+                                  "h1",
+                                  {
+                                    staticClass:
+                                      "text-md font-medium mt-5 mb-1",
+                                  },
+                                  [_vm._v("Is er een hefinstallatie nodig?")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "relative flex items-start" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex items-center h-5" },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.lifting_equipment,
+                                              expression:
+                                                "form.lifting_equipment",
+                                            },
+                                          ],
+                                          staticClass:
+                                            "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                          attrs: {
+                                            "true-value": "1",
+                                            "false-value": "0",
+                                            id: "lifting_equipment",
+                                            "aria-describedby":
+                                              "comments-description",
+                                            name: "comments",
+                                            type: "checkbox",
+                                          },
+                                          domProps: {
+                                            checked: Array.isArray(
+                                              _vm.form.lifting_equipment
+                                            )
+                                              ? _vm._i(
+                                                  _vm.form.lifting_equipment,
+                                                  null
+                                                ) > -1
+                                              : _vm._q(
+                                                  _vm.form.lifting_equipment,
+                                                  "1"
+                                                ),
+                                          },
+                                          on: {
+                                            change: function ($event) {
+                                              var $$a =
+                                                  _vm.form.lifting_equipment,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked ? "1" : "0"
+                                              if (Array.isArray($$a)) {
+                                                var $$v = null,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "lifting_equipment",
+                                                      $$a.concat([$$v])
+                                                    )
+                                                } else {
+                                                  $$i > -1 &&
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "lifting_equipment",
+                                                      $$a
+                                                        .slice(0, $$i)
+                                                        .concat(
+                                                          $$a.slice($$i + 1)
+                                                        )
+                                                    )
+                                                }
+                                              } else {
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "lifting_equipment",
+                                                  $$c
+                                                )
+                                              }
+                                            },
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "ml-1.5 text-sm" },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "font-medium text-gray-700",
+                                            attrs: { for: "lifting_equipment" },
+                                          },
+                                          [
+                                            _vm._v("Ja, "),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass:
+                                                  "font-normal text-gray-500",
+                                                attrs: {
+                                                  id: "comments-description",
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "er is een hefinstallatie nodig."
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
                                 _c("div", [
                                   _c(
                                     "h1",
@@ -50971,27 +50880,6 @@ var render = function () {
                                               )
                                             ),
                                           ]
-                                        ),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "mb-1 px-5 flex justify-between text-sm font-medium",
-                                      },
-                                      [
-                                        _c(
-                                          "dt",
-                                          { staticClass: "text-gray-500" },
-                                          [_vm._v("Ophalen vanaf")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "dd",
-                                          { staticClass: "text-gray-900" },
-                                          [_vm._v(_vm._s(_vm.form.pickup))]
                                         ),
                                       ]
                                     ),

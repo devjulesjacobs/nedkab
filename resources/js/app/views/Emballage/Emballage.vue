@@ -104,22 +104,6 @@
                             <transition name="slide-fade">
                                 <section v-show="section === 'Haspels en afronden' || section === 'Overzicht'">
                                     <div class="px-5">
-                                        <div class="mb-3">
-                                            <h1 class="text-md font-medium mt-5 mb-1">Afhaaltijd</h1>
-                                            <input v-model="form.pickup" type="time" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                        </div>
-
-                                        <h1 class="text-md font-medium mt-5 mb-1">Is er een hefinstallatie nodig?</h1>
-                                        <div class="relative flex items-start">
-                                            <div class="flex items-center h-5">
-                                                <input v-model="form.lifting_equipment" true-value=1 false-value=0 id="lifting_equipment" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
-                                            </div>
-                                            <div class="ml-1.5 text-sm">
-                                                <label for="lifting_equipment" class="font-medium text-gray-700">Ja, <span id="comments-description" class="font-normal text-gray-500">er is een hefinstallatie nodig.</span></label>
-
-                                            </div>
-                                        </div>
-
                                         <h1 class="text-md font-medium mt-5">Haspels</h1>
                                         <p class="text-xs mb-3 text-gray-500">Selecteer de haspel(s) die u wilt retourneren.</p>
 
@@ -309,6 +293,17 @@
 
                                         </div>
 
+                                        <h1 class="text-md font-medium mt-5 mb-1">Is er een hefinstallatie nodig?</h1>
+                                        <div class="relative flex items-start">
+                                            <div class="flex items-center h-5">
+                                                <input v-model="form.lifting_equipment" true-value=1 false-value=0 id="lifting_equipment" aria-describedby="comments-description" name="comments" type="checkbox" class="focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded">
+                                            </div>
+                                            <div class="ml-1.5 text-sm">
+                                                <label for="lifting_equipment" class="font-medium text-gray-700">Ja, <span id="comments-description" class="font-normal text-gray-500">er is een hefinstallatie nodig.</span></label>
+
+                                            </div>
+                                        </div>
+
                                         <div>
                                             <h1 class="text-md font-medium mt-5">Situatieschets <span class="text-xs font-normal text-gray-500">niet verplicht</span></h1>
                                             <input @change="getImage($event)" type="file" id="picture" name="image" class="" accept="image/png, image/jpeg"/>
@@ -432,11 +427,6 @@
                                                 </div>
 
                                                 <div class="mb-1 px-5 flex justify-between text-sm font-medium">
-                                                    <dt class="text-gray-500">Ophalen vanaf</dt>
-                                                    <dd class="text-gray-900">{{ form.pickup }}</dd>
-                                                </div>
-
-                                                <div class="mb-1 px-5 flex justify-between text-sm font-medium">
                                                     <dt class="text-gray-500">Hefinstallatie benodigd</dt>
                                                     <dd class="text-gray-900">{{ parseInt(form.lifting_equipment) === 1 ? 'Ja' : 'Nee' }}</dd>
                                                 </div>
@@ -510,7 +500,6 @@ export default {
                 contact_phone: '',
                 contact_email: '',
                 lifting_equipment: 0,
-                pickup: null,
                 comments: '',
                 diameter_60: 0,
                 diameter_80: 0,
@@ -569,9 +558,6 @@ export default {
         },
 
         fillForm: function () {
-            let today = new Date(),
-            time = today.getHours() + ":" + '00';
-
             this.form.customer_fullname         = this.user.customer_fullname;
             this.form.customer_contact          = this.user.customer_contact;
             this.form.customer_contact_phone    = this.user.customer_contact_phone;
@@ -582,7 +568,6 @@ export default {
             this.form.contact                   = this.user.contact;
             this.form.contact_phone             = this.user.contact_phone;
             this.form.contact_email             = this.user.contact_email;
-            this.form.pickup                    = time;
             this.form.user                      = this.user.id
         },
 
@@ -614,7 +599,6 @@ export default {
             formData.append("contact_phone", this.form.contact_phone)
             formData.append("contact_email", this.form.contact_email)
             formData.append("lifting_equipment", this.form.lifting_equipment)
-            formData.append("pickup", this.form.pickup)
             formData.append("comments", this.form.comments)
             formData.append("diameter_60", this.form.diameter_60)
             formData.append("diameter_80", this.form.diameter_80)

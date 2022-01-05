@@ -2557,37 +2557,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EmballageSlide",
   data: function data() {
     return {
       form: {
-        status: '',
-        pickup_date: undefined
+        status: ''
       }
     };
   },
@@ -2605,7 +2580,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     fillForm: function fillForm() {
       this.form.status = this.emballage.status;
-      this.form.pickup_date = this.emballage.pickup_date;
     },
     setStatus: function setStatus() {
       var _this = this;
@@ -42175,102 +42149,6 @@ var render = function () {
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.emballage.pickup_date
-                              ? _c("div", { staticClass: "mb-4" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "rounded-md bg-blue-50 p-4",
-                                    },
-                                    [
-                                      _c("div", { staticClass: "flex" }, [
-                                        _c(
-                                          "div",
-                                          { staticClass: "flex-shrink-0" },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
-                                                staticClass:
-                                                  "h-5 w-5 text-blue-400",
-                                                attrs: {
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
-                                                  viewBox: "0 0 20 20",
-                                                  fill: "currentColor",
-                                                  "aria-hidden": "true",
-                                                },
-                                              },
-                                              [
-                                                _c("path", {
-                                                  attrs: {
-                                                    "fill-rule": "evenodd",
-                                                    d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z",
-                                                    "clip-rule": "evenodd",
-                                                  },
-                                                }),
-                                              ]
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "ml-3 text-sm text-blue-700",
-                                          },
-                                          [
-                                            _c(
-                                              "h1",
-                                              {
-                                                staticClass:
-                                                  "text-md font-bold mb-2",
-                                              },
-                                              [_vm._v("Afspraak informatie")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("p", [
-                                              _vm._v(
-                                                "\n                                                        Op "
-                                              ),
-                                              _c(
-                                                "span",
-                                                { staticClass: "font-medium" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm._f("moment")(
-                                                        _vm.emballage
-                                                          .pickup_date,
-                                                        "DD MMM YYYY"
-                                                      )
-                                                    )
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(" vanaf "),
-                                              _c(
-                                                "span",
-                                                { staticClass: "font-medium" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(_vm.emballage.pickup)
-                                                  ),
-                                                ]
-                                              ),
-                                              _vm._v(
-                                                ".\n                                                    "
-                                              ),
-                                            ]),
-                                          ]
-                                        ),
-                                      ]),
-                                    ]
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
                             _c("div", { staticClass: "mb-4" }, [
                               _c("h1", { staticClass: "font-bold" }, [
                                 _vm._v("Geselecteerde haspels"),
@@ -42521,13 +42399,6 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("p", { staticClass: "text-sm" }, [
-                                _vm._v("Vanaf: "),
-                                _c("span", { staticClass: "font-bold" }, [
-                                  _vm._v(_vm._s(_vm.emballage.pickup)),
-                                ]),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-sm" }, [
                                 _vm._v("Hefinstallatie: "),
                                 _c("span", { staticClass: "font-bold" }, [
                                   _vm._v(
@@ -42658,63 +42529,6 @@ var render = function () {
                                           { attrs: { value: "geaccepteerd" } },
                                           [_vm._v("Geaccepteerd")]
                                         ),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "show",
-                                            rawName: "v-show",
-                                            value:
-                                              _vm.form.status ===
-                                              "geaccepteerd",
-                                            expression:
-                                              "form.status === 'geaccepteerd'",
-                                          },
-                                        ],
-                                      },
-                                      [
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass:
-                                              "block text-sm font-medium text-gray-700",
-                                            attrs: { for: "status" },
-                                          },
-                                          [_vm._v("Ophaaldatum")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.pickup_date,
-                                              expression: "form.pickup_date",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "cursor-pointer mt-1 block w-full px-3 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
-                                          attrs: { type: "date" },
-                                          domProps: {
-                                            value: _vm.form.pickup_date,
-                                          },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                _vm.form,
-                                                "pickup_date",
-                                                $event.target.value
-                                              )
-                                            },
-                                          },
-                                        }),
                                       ]
                                     ),
                                     _vm._v(" "),
