@@ -31,9 +31,29 @@
                                 </div>
 
                                 <div class="px-6">
-                                    <p>
-                                        // Formulier met velden voor admin
-                                    </p>
+                                    <form @submit.prevent="createUser" method="post">
+                                        <div class="mb-3">
+                                            <label for="name">Naam</label>
+                                            <input v-model="form.create.name"
+                                                   type="text"
+                                                   id="name"
+                                                   required
+                                                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email">Emailadres</label>
+                                            <input v-model="form.create.email"
+                                                   type="text"
+                                                   id="email"
+                                                   required
+                                                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                Aanmaken
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +72,8 @@ export default {
         return {
             form: {
                 create: {
-
+                    name: '',
+                    email: ''
                 }
             },
             errors: []
@@ -66,6 +87,22 @@ export default {
             this.$emit('hide');
             this.errors = [];
         },
+
+        createUser() {
+            axios.post('/api/cms/employee', this.form.create)
+                .then(res => {
+                    this.$store.dispatch('cms/addNotification', {
+                        type: 'success',
+                        title: 'Admin gebruiker aangemaakt',
+                    });
+                })
+                .catch(err => {
+                    this.$store.dispatch('cms/addNotification', {
+                        type: 'error',
+                        title: 'Kon gebruiker niet aanmaken',
+                    });
+                })
+        }
     },
     props: ['show']
 }

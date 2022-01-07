@@ -23,11 +23,6 @@
                         <p class="text-2xl font-semibold text-gray-900">
                             {{ stats.totalUsers }}
                         </p>
-                        <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
-                            <div class="text-sm">
-                                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> View all<span class="sr-only"> Total Subscribers stats</span></a>
-                            </div>
-                        </div>
                     </dd>
                 </div>
 
@@ -46,7 +41,7 @@
                         </p>
                         <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                             <div class="text-sm">
-                                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> View all<span class="sr-only"> Avg. Open Rate stats</span></a>
+                                <router-link :to="{ name: 'Emballage' }" class="font-medium text-indigo-600 hover:text-indigo-500"> View all<span class="sr-only"> Avg. Open Rate stats</span></router-link>
                             </div>
                         </div>
                     </dd>
@@ -55,6 +50,15 @@
         </div>
 
         <h1 class="text-2xl font-bold mt-5 mb-3">App users</h1>
+
+        <div class="my-4">
+            <label class="block text-sm font-medium text-gray-700">Zoeken</label>
+            <input v-model="form.search" type="text"
+                   @keyup="search"
+                   required
+                   placeholder="Zoeken op naam..."
+                   class="appearance-none mb-3 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        </div>
 
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-4">
@@ -95,6 +99,9 @@ export default {
                 totalUsers: 0,
                 totalEmballage: 0,
             },
+            form: {
+                search: ''
+            },
             users: [],
             user: undefined,
             slide: {
@@ -108,25 +115,7 @@ export default {
         this.getUsers();
         // this.$store.dispatch('cms/addNotification', {
         //     type: 'success',
-        //     title: 'Succesfully did shit!',
-        //     message: 'This is just some simple message put under the title element!',
-        // });
-
-        // this.$store.dispatch('cms/addNotification', {
-        //     type: 'error',
-        //     title: 'Error something!',
-        //     message: 'This is just some simple message put under the title element!',
-        // });
-
-        // this.$store.dispatch('cms/addNotification', {
-        //     type: 'warning',
-        //     title: 'Warning something really dangerous!',
-        //     message: 'This is just some simple message put under the title element!',
-        // });
-
-        // this.$store.dispatch('cms/addNotification', {
-        //     type: 'info',
-        //     title: 'Just some information that can get to you ...',
+        //     title: 'Succesfully did something!',
         //     message: 'This is just some simple message put under the title element!',
         // });
     },
@@ -135,6 +124,25 @@ export default {
         ...mapActions({
             logout: "cms/logout",
         }),
+
+        search() {
+            if(this.form.search.length > 0) {
+                axios.get('/api/cms/users/search', {
+                    params: {
+                        input: this.form.search
+                    }
+                })
+                    .then(res => {
+                        console.log(res);
+                        this.users = res.data
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            } else {
+                this.getUsers()
+            }
+        },
 
         testFunction() {
             axios.get('/api/test')

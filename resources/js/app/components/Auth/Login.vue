@@ -41,12 +41,12 @@
                 <label for="remember-me" class="ml-2 block text-sm text-gray-900">Ingelogd blijven</label>
             </div>
 
-            <div class="text-sm">
-                <a
-                    href="#"
-                    class="font-medium text-blue-600 hover:text-blue-500"
-                >Wachtwoord vergeten?</a>
-            </div>
+<!--            <div class="text-sm">-->
+<!--                <a-->
+<!--                    href="#"-->
+<!--                    class="font-medium text-blue-600 hover:text-blue-500"-->
+<!--                >Wachtwoord vergeten?</a>-->
+<!--            </div>-->
         </div>
 
         <div>
@@ -80,10 +80,13 @@ export default {
         }),
 
         async submit() {
-            window.LoadingScreen('show');
-            await this.login(this.form);
+            await this.login(this.form).then(res => {
+                this.$router.replace({name: "Home"});
+            }).catch(err => {
+                console.log(err);
+            })
 
-            this.$router.replace({name: "Home"});
+
         },
     },
 

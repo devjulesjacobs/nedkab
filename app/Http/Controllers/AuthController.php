@@ -70,18 +70,22 @@ class AuthController extends Controller
         $tempUser = User::where('email', $request['email'])->first();
 
         if(!empty($tempUser)) {
+            if($tempUser->type !== 'admin') {
+                if (!Auth::attempt($request->only('email', 'password'))) {
+                    return response()
+                        ->json(['message' => 'Unauthorized'], 401);
+                }
 
-            if (!Auth::attempt($request->only('email', 'password'))) {
+                $user = User::where('email', $request['email'])->firstOrFail();
+
+                $token = $user->createToken('auth_token')->plainTextToken;
+
                 return response()
-                    ->json(['message' => 'Unauthorized'], 401);
+                    ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
+            } else {
+                return response()
+                    ->json(['message' => 'Het is niet mogelijk om met een admin account in te loggen op de app.'], 401);
             }
-
-            $user = User::where('email', $request['email'])->firstOrFail();
-
-            $token = $user->createToken('auth_token')->plainTextToken;
-
-            return response()
-                ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
         } else {
             return response()
                 ->json(['message' => 'Unauthorized'], 401);

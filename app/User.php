@@ -36,7 +36,8 @@ class User extends Authenticatable
         'city',
         'contact',
         'contact_phone',
-        'contact_email'
+        'contact_email',
+        'type'
     ];
 
     /**

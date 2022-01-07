@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
@@ -35,14 +36,28 @@ class UserController extends Controller
         return $employees;
     }
 
+    public function search(Request $request)
+    {
+        $users = User::where('name', 'LIKE', "%$request->input%")->where('type', 'app')->orderBy('name', 'ASC')->get();
+
+        return $users;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make(12345678),
+            'type' => 'admin'
+        ]);
+
+        $user->save();
     }
 
     /**

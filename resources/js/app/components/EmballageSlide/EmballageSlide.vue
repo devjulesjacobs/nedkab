@@ -1,6 +1,5 @@
 <template>
-    <transition name="slide-fade">
-        <div v-if="show" class="fixed inset-0 z-50 overflow-hidden state-slide-post" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 z-50 overflow-hidden state-slide-post" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute inset-0" aria-hidden="true">
                     <div class="fixed inset-y-0 right-0 max-w-full flex">
@@ -21,6 +20,37 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div v-if="emballage.status === 'geaccepteerd'" class="px-4 mt-6">
+                                    <div class="rounded-md bg-green-50 p-4 shadow-sm">
+                                        <div class="flex">
+                                            <div class="flex-shrink-0">
+                                                <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-3">
+                                                <h3 class="text-sm font-medium text-green-800">
+                                                    Emballage geaccepteerd
+                                                </h3>
+                                                <p class="text-xs text-green-800 font-medium">
+                                                    Geaccepteerd op {{ emballage.updated_at | moment('DD MMM YYYY') }}
+                                                </p>
+                                                <div class="mt-2 text-sm text-green-700">
+                                                    <p>
+                                                        Bedankt voor uw aanvraag, wij komen zo snel mogelijk uw emballage ophalen.
+                                                    </p>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <a :href="'mailto:info@nedkab.nl?subject=Betreft Emballage #'+emballage.id" class="bg-green-50 rounded-md text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">
+                                                        Contact opnemen
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="mt-6 relative flex-1">
                                     <div class="absolute inset-0 px-4">
                                         <section class="p-5 rounded-md border border-gray-200">
@@ -28,6 +58,11 @@
                                                 <h1 class="text-xs font-medium uppercase text-gray-600">Emballage</h1>
                                                 <h1 class="text-md font-bold">{{ user.company }}</h1>
                                             </div>
+
+                                            <div v-if="emballage.picture" class="mb-4 -mx-5">
+                                                <img :src="'/img/emballage/'+emballage.picture" alt="Picture">
+                                            </div>
+
                                             <div>
                                                 <h1 class="font-medium text-md">Retourneerbaar</h1>
                                                 <div>
@@ -173,7 +208,6 @@
                 </div>
             </div>
         </div>
-    </transition>
 </template>
 
 <script>
@@ -191,7 +225,7 @@ export default {
             user: "auth/user",
         })
     },
-    props: ['emballage', 'show']
+    props: ['emballage']
 }
 </script>
 

@@ -33,23 +33,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) { re
         Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy']);
 
         /* Emballage */
-        Route::get('/cms/emballage', [\App\Http\Controllers\EmballageController::class, 'getSubmitted']);
-        Route::post('/cms/emballage/setApproved/{id}', [\App\Http\Controllers\EmballageController::class, 'setApproved']);
+        Route::get('/cms/emballage/search', [\App\Http\Controllers\EmballageController::class, 'searchEmballage']);
+        Route::get('/cms/emballage/count', [App\Http\Controllers\EmballageController::class, 'getEmballageCount']);
+        Route::get('/cms/emballage/{type}', [\App\Http\Controllers\EmballageController::class, 'getEmballageByType']);
+        Route::post('/cms/emballage/status/{id}', [\App\Http\Controllers\EmballageController::class, 'setStatus']);
 
         /* Cables */
         Route::post('/cms/cables/import', [\App\Http\Controllers\CableController::class, 'create']);
 
         /* User */
-        Route::get('/cms/employees', [App\Http\Controllers\UserController::class, 'getEmployees'])->middleware(['auth:sanctum']);
-        Route::post('/cms/employee/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware(['auth:sanctum']);
-        Route::post('/cms/users/all', [App\Http\Controllers\UserController::class, 'getAll'])->middleware(['auth:sanctum']);
+        Route::get('/cms/employees', [App\Http\Controllers\UserController::class, 'getEmployees']);
+        Route::post('/cms/employee', [App\Http\Controllers\UserController::class, 'create']);
+        Route::post('/cms/employee/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
+        Route::post('/cms/users/all', [App\Http\Controllers\UserController::class, 'getAll']);
+        Route::get('/cms/users/search', [\App\Http\Controllers\UserController::class, 'search']);
 
         /* Mail */
         Route::post('/mail/test', [App\Http\Controllers\MailController::class, 'sendMail']);
 
         /* Statistics */
         Route::get('/cms/users/count', [App\Http\Controllers\UserController::class, 'getAllCount'])->middleware(['auth:sanctum']);
-        Route::get('/cms/emballage/count', [App\Http\Controllers\EmballageController::class, 'getEmballageCount'])->middleware(['auth:sanctum']);
     });
 
 ###################
@@ -70,8 +73,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) { re
         Route::get('/cables/search', [\App\Http\Controllers\CableController::class, 'search']);
 
         /* User */
-        Route::get('/users/all', [App\Http\Controllers\UserController::class, 'getAll'])->middleware(['auth:sanctum']);
-        Route::post('/user/{id}', [App\Http\Controllers\UserController::class, 'update'])->middleware(['auth:sanctum']);
-        Route::post('/user/avatar/{id}', [App\Http\Controllers\UserController::class, 'avatar'])->middleware(['auth:sanctum']);
+        Route::get('/users/all', [App\Http\Controllers\UserController::class, 'getAll']);
+        Route::post('/user/{id}', [App\Http\Controllers\UserController::class, 'update']);
+        Route::post('/user/avatar/{id}', [App\Http\Controllers\UserController::class, 'avatar']);
     });
 

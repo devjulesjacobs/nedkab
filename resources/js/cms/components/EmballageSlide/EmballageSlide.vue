@@ -9,7 +9,7 @@
                                     <div class="flex items-start justify-between">
                                         <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
                                             Emballage
-                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                                            <span :class="{ 'bg-green-100': emballage.status === 'geaccepteerd', 'bg-red-100': emballage.status === 'afgewezen' }" class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
                                               #{{ emballage.id }}
                                             </span>
                                         </h2>
@@ -80,6 +80,7 @@
                                                     <option value="" disabled>Selecteer een status</option>
                                                     <option value="ingediend">Ingediend</option>
                                                     <option value="geaccepteerd">Geaccepteerd</option>
+                                                    <option value="afgewezen">Afgewezen</option>
                                                 </select>
 
                                                 <button type="submit" class="mt-2 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -127,36 +128,21 @@ export default {
         },
 
         setStatus() {
-            console.log(123)
-            switch(this.form.status) {
-                case 'ingediend':
-                    if(this.emballage.status !== 'ingediend') {
-                        // axios post ingediend > emballage controller
-                    } else {
-                        this.$store.dispatch('cms/addNotification', {
-                            type: 'info',
-                            title: 'Gegevens waren al up-to-date.',
-                        });
-                    }
-                    break;
-                case 'geaccepteerd':
-                    axios.post('/api/cms/emballage/setApproved/'+this.emballage.id, this.form)
-                        .then(res => {
-                            this.$store.dispatch('cms/addNotification', {
-                                type: 'success',
-                                title: 'Emballage status gewijzigd naar Geaccepteerd',
-                                message: 'De status is succesvol gewijzigd. Er is een automatische mail verzonden met de ophaaldetails.',
-                                timer: 11000
-                            });
+            axios.post('/api/cms/emballage/status/'+this.emballage.id, this.form)
+                .then(res => {
+                    this.$store.dispatch('cms/addNotification', {
+                        type: 'success',
+                        title: 'Emballage status gewijzigd naar Geaccepteerd',
+                        message: 'De status is succesvol gewijzigd. Er is een automatische mail verzonden met de ophaaldetails.',
+                        timer: 11000
+                    });
 
-                            this.$emit('hide');
-                        })
-                    break;
-            }
-
+                    this.$emit('refresh');
+                    this.$emit('hide');
+                })
         }
     },
-    props: ['emballage', 'show']
+    props: ['emballage']
 }
 </script>
 

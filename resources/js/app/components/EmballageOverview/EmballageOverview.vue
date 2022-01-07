@@ -4,7 +4,7 @@
 
         <p v-if="!emballages.length" class="text-sm text-gray-700">{{ emptyText }}</p>
 
-        <a v-for="e in emballages" :key="e.id" @click="getEmballage(e.id)" class="block border bg-white shadow-md border-gray-100 rounded-md mb-3 p-4">
+        <a v-for="e in emballages" :key="e.id" @click="getEmballage(e.id)" class="block border bg-white shadow-md border-gray-100 rounded-md mb-3 p-4" :class="e.status === 'geaccepteerd' ? ['border', 'border-green-600'] : []">
             <div>
                 <h5 class="uppercase font-medium text-gray-500 text-xs">
                     Emballage
@@ -13,13 +13,16 @@
                     </svg>
                     <p class="float-right font-normal text-theme-blue">{{ e.created_at | moment('DD MMM YYYY') }}</p>
                 </h5>
-                <h1 class="font-medium text-md">{{ user.company }}
-                </h1>
-                <p class="font-normal text-xs text-green-600 mt-3">Ingediend</p>
+                <h1 class="font-medium text-md mb-3">{{ e.user.company }}</h1>
+                <p class="text-xs text-gray-500">{{ e.street }} {{ e.house_number }}. {{ e.postcode }} {{ e.city }}</p>
+                <p :class="{ 'text-blue-600': e.status === 'ingediend', 'text-green-600': e.status === 'geaccepteerd' }" class="font-normal text-xs">
+                    {{ e.status }}</p>
             </div>
         </a>
 
-        <emballage-slide :show="slide.show" :emballage="emballage" @hide="slide.show = false; emballage = null" />
+        <transition name="slide-fade">
+            <emballage-slide v-if="slide.show" :emballage="emballage" @hide="slide.show = false; emballage = null" />
+        </transition>
     </div>
 </template>
 
@@ -55,21 +58,15 @@ export default {
         },
 
         getEmballage(id) {
-            this.slide.show = true;
             axios.get('/api/app/emballage/'+id)
                 .then(res => {
-                    console.log(res.data);
                     this.emballage = res.data
+                    this.slide.show = true;
                 })
                 .catch(err => {
                     console.log(err)
                 })
         },
-    },
-    computed: {
-        ...mapGetters({
-            user: "auth/user",
-        }),
     },
     components: {
         EmballageSlide

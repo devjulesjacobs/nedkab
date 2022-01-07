@@ -31,9 +31,14 @@ class EmballageController extends Controller
 
     public function getSubmitted()
     {
-        $emballages = Emballage::query()->with('user')->get();
+        $emballages = Emballage::where('status', 'ingediend')->with('user')->get();
 
         return $emballages;
+    }
+
+    public function getEmballageByType($type)
+    {
+        return Emballage::where('status', $type)->with('user')->take(50)->get();
     }
 
     public function getEmballage($id)
@@ -45,23 +50,12 @@ class EmballageController extends Controller
 
     public function userEmballage()
     {
-        $emballages = Emballage::where('user', auth()->user()->id)->orderBy('created_at', 'DESC')->take(20)->get();
+        $emballages = Emballage::where('user', auth()->user()->id)->orderBy('created_at', 'DESC')->take(30)->with('user')->get();
 
         return $emballages;
     }
 
-    public function setApproved(Request $request, $id)
-    {
-        $emballage = Emballage::where('id', $id)->first();
-
-        $emballage->update([
-            'status' => $request->status
-        ]);
-
-        // Send mail
-    }
-
-    public function setSubmitted(Request $request, $id)
+    public function setStatus(Request $request, $id)
     {
         $emballage = Emballage::where('id', $id)->first();
 
@@ -129,59 +123,10 @@ class EmballageController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function searchEmballage(Request $request)
     {
-        //
-    }
+        $emballages = Emballage::where('city', 'LIKE', "%$request->input%")->where('status', $request->status)->orderBy('created_at', 'DESC')->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Emballage  $emballage
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Emballage $emballage)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Emballage  $emballage
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Emballage $emballage)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Emballage  $emballage
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Emballage $emballage)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Emballage  $emballage
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Emballage $emballage)
-    {
-        //
+        return $emballages;
     }
 }

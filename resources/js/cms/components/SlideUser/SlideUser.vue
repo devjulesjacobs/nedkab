@@ -31,9 +31,7 @@
                                 </div>
 
                                 <div class="px-6">
-                                    <p>
-                                        // User data
-                                    </p>
+                                    user info
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,9 @@
 import axios from "axios";
 
+import router from "../router";
+
+let self = this;
+
 export default {
     namespaced: true,
 
@@ -51,6 +55,7 @@ export default {
             await axios.get("/sanctum/csrf-cookie");
             try {
                 await axios.post("/api/app/login", credentials)
+                return dispatch("setValues");
             } catch {
                 dispatch('addNotification', {
                     type: 'error',
@@ -59,8 +64,6 @@ export default {
                     timer: 3000
                 })
             }
-
-            return dispatch("setValues");
         },
         async logout({ dispatch }) {
             await axios.post("/logout");
