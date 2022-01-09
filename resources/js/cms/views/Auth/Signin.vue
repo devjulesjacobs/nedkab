@@ -8,7 +8,7 @@
                             <img class="h-12 w-auto" src="/img/system/company-logo.jpg" alt="Workflow">
                         </a>
                         <h2 class="mt-6 text-3xl font-bold text-gray-900">
-                            Inloggen
+                            Inloggen CMS
                         </h2>
                     </div>
 
@@ -33,17 +33,17 @@
                                     </div>
                                 </div>
 
-                                <div class="flex items-center justify-between">
-                                    <div class="text-sm">
-                                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                            Forgot your password?
-                                        </a>
-                                    </div>
-                                </div>
+<!--                                <div class="flex items-center justify-between">-->
+<!--                                    <div class="text-sm">-->
+<!--                                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">-->
+<!--                                            Forgot your password?-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
                                 <div>
                                     <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Sign in
+                                        Inloggen
                                     </button>
                                 </div>
                             </form>

@@ -2,10 +2,6 @@
     <div>
         <h1 class="text-3xl page-title leading-8 font-bold tracking-tight text-gray-900">Dashboard</h1>
 
-        <div>
-            <button @click="testFunction">Test</button>
-        </div>
-
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div>
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -81,7 +77,9 @@
 
         </div>
 
-        <slide-user :show="slide.show" :user="user" @hide="hideSlide" />
+        <transition name="slide-fade">
+            <slide-user v-if="slide.show" :user="user" @hide="hideSlide" />
+        </transition>
 
     </div>
 </template>
@@ -144,18 +142,6 @@ export default {
             }
         },
 
-        testFunction() {
-            axios.get('/api/test')
-                .then(res => { console.log(res.data) })
-                .catch(err => {
-                    this.$store.dispatch('cms/addNotification', {
-                        type: 'info',
-                        title: 'No access',
-                        message: err.response.data,
-                    });
-                })
-        },
-
         async signOut() {
             await this.logout();
             await this.$store.dispatch('cms/addNotification', {
@@ -178,13 +164,17 @@ export default {
         },
 
         hideSlide() {
+            this.getUsers();
             this.slide.show = false;
         },
 
         showUser(id) {
-            // Get user info by id
+            axios.get('/api/cms/user/'+id).then(res => {
+                this.user = res.data
+                this.slide.show = true
+            })
 
-            this.slide.show = true;
+
         }
     },
 }

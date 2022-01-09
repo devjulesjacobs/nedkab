@@ -47,6 +47,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) { re
         Route::post('/cms/employee/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
         Route::post('/cms/users/all', [App\Http\Controllers\UserController::class, 'getAll']);
         Route::get('/cms/users/search', [\App\Http\Controllers\UserController::class, 'search']);
+        Route::get('/cms/user/{id}', [\App\Http\Controllers\UserController::class, 'show']);
+        Route::post('/cms/user/delete', [\App\Http\Controllers\UserController::class, 'deleteUser']);
 
         /* Mail */
         Route::post('/mail/test', [App\Http\Controllers\MailController::class, 'sendMail']);
