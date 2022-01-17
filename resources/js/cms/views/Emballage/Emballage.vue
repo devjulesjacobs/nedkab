@@ -3,7 +3,7 @@
         <h1 class="text-3xl page-title leading-8 font-bold tracking-tight text-gray-900 mb-8">Emballage</h1>
 
             <div>
-                <h1 class="text-xl inline-block font-medium mb-3 capitalize bg-gray-100 rounded-md px-5 py-2">{{ form.status }}</h1>
+                <h1 class="text-xl inline-block font-medium mb-3 capitalize bg-gray-100 rounded-md px-5 py-2">{{ form.status === 'geaccepteerd' ? 'Klaar' : form.status }}</h1>
 
                 <div class="grid md:grid-cols-12 sm:grid-cols-1 gap-3">
 
@@ -19,7 +19,7 @@
                         <label for="location" class="block text-sm font-medium text-gray-700">Filter status</label>
                         <select @change="getEmballages" v-model="form.status" id="location" name="location" class="cursor-pointer pr-10 mb-3 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             <option value="ingediend">Ingediend</option>
-                            <option value="geaccepteerd">Geaccepteerd</option>
+                            <option value="geaccepteerd">Klaar</option>
                             <option value="afgewezen">Afgewezen</option>
                         </select>
                     </div>
