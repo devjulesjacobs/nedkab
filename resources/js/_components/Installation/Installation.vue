@@ -42,7 +42,7 @@
                                             <button v-if="!installation.android.installed" @click="hideInstallation" type="button" class="mt-3 w-50 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm">
                                                 Later
                                             </button>
-                                            <button v-if="!installation.android.installed" @click="setDeviceType" type="button" class="w-50 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-theme text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">
+                                            <button id="installButtonAndroid" v-if="!installation.android.installed" @click="setDeviceType" type="button" class="w-50 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-theme text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">
                                                 Installeren
                                             </button>
                                             <button v-if="installation.android.installed" @click="hideInstallation" type="button" class="w-50 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-theme text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">
@@ -100,21 +100,18 @@ export default {
     },
 
     created() {
-        window.addEventListener('beforeinstallprompt', (event) => {
-            event.preventDefault();
-            this.installPromptEvent = event;
-        });
+
     },
 
     methods: {
         hideInstallation() { this.installation.show = false },
 
         installAndroid() {
-            this.installPromptEvent.prompt();
+            window.beforeInstallPrompt.prompt();
 
             let app = this;
 
-            this.installPromptEvent.userChoice
+            window.beforeInstallPrompt.userChoice
                 .then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
                         console.log('accepted')

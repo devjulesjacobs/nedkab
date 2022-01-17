@@ -13,28 +13,12 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Jules Jacobs',
-                'email' => 'example@email.com',
-                'company' => 'Nedkab',
-                'phone' => '+31 6 12345678',
-                'type' => 'app',
-                'password' => bcrypt('password')
-            ],
-            [
-                'name' => 'Jules Jacobs',
-                'email' => 'jules.j.jacobs@gmail.com',
-                'company' => 'Nedkab',
-                'phone' => '+31 6 12345678',
-                'type' => 'app',
-                'password' => bcrypt('12345678')
-            ],
-            [
                 'name' => 'Administrator',
-                'email' => 'admin@email.com',
+                'email' => 'app@nedkab.nl',
                 'company' => 'Nedkab',
-                'phone' => '+31 6 12345678',
+                'phone' => '0412213030',
                 'type' => 'admin',
-                'password' => bcrypt('password')
+                'password' => bcrypt('N3dk@b2022!')
             ]
         ];
 

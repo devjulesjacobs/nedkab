@@ -15,7 +15,7 @@
                 </h5>
                 <h1 class="font-medium text-md mb-3">{{ e.user.company }}</h1>
                 <p class="text-xs text-gray-500">{{ e.street }} {{ e.house_number }}. {{ e.postcode }} {{ e.city }}</p>
-                <p :class="{ 'text-blue-600': e.status === 'ingediend', 'text-green-600': e.status === 'geaccepteerd' }" class="font-normal text-xs">
+                <p :class="{ 'text-blue-600': e.status === 'ingediend', 'text-green-600': e.status === 'geaccepteerd', 'text-red-600': e.status === 'afgewezen' }" class="font-normal text-xs">
                     {{ e.status }}</p>
             </div>
         </a>

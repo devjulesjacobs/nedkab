@@ -15,7 +15,7 @@
                                             Medewerker aanmaken
                                         </h2>
                                         <div class="ml-3 h-7 flex items-center">
-                                            <button @click="hideSlide" type="button"
+                                            <button @click="$emit('hide')" type="button"
                                                     class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                                 <span class="sr-only">Close panel</span>
                                                 <!-- Heroicon name: outline/x -->
@@ -83,11 +83,6 @@ export default {
 
     },
     methods: {
-        hideSlide: function () {
-            this.$emit('hide');
-            this.errors = [];
-        },
-
         createUser() {
             axios.post('/api/cms/employee', this.form.create)
                 .then(res => {
@@ -95,6 +90,8 @@ export default {
                         type: 'success',
                         title: 'Admin gebruiker aangemaakt',
                     });
+
+                    this.$emit('hide');
                 })
                 .catch(err => {
                     this.$store.dispatch('cms/addNotification', {

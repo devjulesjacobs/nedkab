@@ -39,8 +39,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) { re
         Route::post('/cms/emballage/status/{id}', [\App\Http\Controllers\EmballageController::class, 'setStatus']);
 
         /* Cables */
-        Route::post('/cms/cables/import', [\App\Http\Controllers\CableController::class, 'create']);
-
+        Route::get('/cms/cables', [\App\Http\Controllers\CableController::class, 'index']);
+        Route::post('/cms/cables/create', [\App\Http\Controllers\CableController::class, 'create']);
+        Route::post('/cms/cables/delete', [\App\Http\Controllers\CableController::class, 'destroy']);
         /* User */
         Route::get('/cms/employees', [App\Http\Controllers\UserController::class, 'getEmployees']);
         Route::post('/cms/employee', [App\Http\Controllers\UserController::class, 'create']);

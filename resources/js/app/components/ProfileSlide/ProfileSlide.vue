@@ -68,6 +68,8 @@
 
                                         <div class="bg-gray-100 p-4 mt-6 mb-4 font-medium">Emballage gegevens</div>
 
+                                        <p class="text-xs text-gray-600 px-4 mb-4">Onderstaande gegevens worden automatisch ingevuld bij het aanmaken van een Emballage.</p>
+
                                         <div class="space-y-3 px-4">
                                             <div>
                                                 <h3 class="text-sm font-medium mb-1">Klantnaam</h3>

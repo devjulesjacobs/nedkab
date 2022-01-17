@@ -128,7 +128,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.editPost);
+
     },
     methods: {
         createPost() {
@@ -144,73 +144,18 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-                .then((res) => {
-                    this.$emit('refresh');
-                    this.$emit('hide');
-                    this.$store.dispatch('cms/addNotification', {
-                        type: 'success',
-                        title: res.data.message
-                    });
-                    this.form.create = {
-                        title: '',
-                        body: '',
-                        image: ''
-                    }
-                }).catch((err) => {
-                this.errors = err.response.data
+            .then((res) => {
+                this.$emit('hide');
                 this.$store.dispatch('cms/addNotification', {
-                    type: 'error',
-                    title: 'Something went wrong ...',
-                    message: 'Something went wrong uploading your files!',
-                })
-            })
-        },
-
-        updatePost(id) {
-            let imagefile = document.querySelector('#image_edit')
-
-            let formData = new FormData;
-            formData.append('title', this.editPost.title)
-            formData.append('body', this.editPost.body)
-            formData.append("image", imagefile.files[0])
-
-            axios.post('/api/post/' + id, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                    type: 'success',
+                    title: res.data.message
+                });
+                this.form.create = {
+                    title: '',
+                    body: '',
+                    image: ''
                 }
             })
-                .then((res) => {
-                    this.$emit('refresh')
-                    this.$emit('hide')
-                    this.$store.dispatch('cms/addNotification', {
-                        type: 'success',
-                        title: res.data.message
-                    })
-                }).catch((err) => {
-                this.errors = err.response.data
-                this.$store.dispatch('cms/addNotification', {
-                    type: 'error',
-                    title: 'Failed to update',
-                    message: 'Please check the form for errors!',
-                })
-            })
-        },
-
-        deletePost(id) {
-            axios.delete('/api/post/' + id)
-                .then((res) => {
-                    this.$emit('refresh')
-                    this.$emit('hide')
-                    this.$store.dispatch('cms/addNotification', {
-                        type: 'success',
-                        title: res.data.message
-                    })
-                })
-        },
-
-        hideSlide: function () {
-            this.$emit('hide');
-            this.errors = [];
         },
 
         getImage(e, type) {

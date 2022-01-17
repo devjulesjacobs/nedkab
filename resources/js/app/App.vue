@@ -23,7 +23,6 @@ export default {
         }
     },
     created() {
-
     },
     components: {
         BottomNav,

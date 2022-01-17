@@ -53,7 +53,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make(12345678),
+            'password' => Hash::make('NedkabMedewerker2022!'),
             'type' => 'admin'
         ]);
 
@@ -170,7 +170,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($user && $user->id !== auth()->user()->id) {
+        if($user && $user->id !== auth()->user()->id && !$user->super_admin) {
             if(!empty($user->avatar)) {
                 $old_image = public_path('img/user/').$user->avatar;
 

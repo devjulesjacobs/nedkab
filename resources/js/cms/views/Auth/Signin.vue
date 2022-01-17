@@ -20,7 +20,7 @@
                                         Email address
                                     </label>
                                     <div class="mt-1">
-                                        <input v-model="form.email" id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input v-model="form.email" id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                     </div>
                                 </div>
 
@@ -29,20 +29,20 @@
                                         Password
                                     </label>
                                     <div class="mt-1">
-                                        <input v-model="form.password" id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input v-model="form.password" id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                     </div>
                                 </div>
 
 <!--                                <div class="flex items-center justify-between">-->
 <!--                                    <div class="text-sm">-->
-<!--                                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">-->
+<!--                                        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">-->
 <!--                                            Forgot your password?-->
 <!--                                        </a>-->
 <!--                                    </div>-->
 <!--                                </div>-->
 
                                 <div>
-                                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-theme hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                         Inloggen
                                     </button>
                                 </div>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="hidden lg:block relative w-0 flex-1">
-                <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80" alt="">
+                <img class="absolute inset-0 h-full w-full object-cover" src="/img/system/auth-background-cms.jpeg" alt="">
             </div>
         </div>
 
@@ -68,8 +68,8 @@ export default {
     data() {
         return {
             form: {
-                email: "admin@email.com",
-                password: "password",
+                email: "",
+                password: "",
             }
         }
     },
@@ -84,13 +84,6 @@ export default {
 
         async submit() {
             await this.login(this.form);
-
-            this.$store.dispatch('cms/addNotification', {
-                type: 'success',
-                title: 'Logged in successfully!',
-                timer: 3000
-            });
-
             this.$router.replace({ name: "Dashboard" });
         }
     }

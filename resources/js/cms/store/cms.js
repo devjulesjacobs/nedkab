@@ -49,9 +49,17 @@ export default {
     actions: {
         async login({ dispatch }, credentials) {
             await axios.get("/sanctum/csrf-cookie");
-            await axios.post("/api/cms/login", credentials);
-
-            return dispatch("setValues");
+            try {
+                await axios.post("/api/cms/login", credentials);
+                return dispatch("setValues");
+            } catch {
+                dispatch('addNotification', {
+                    type: 'error',
+                    title: 'Fout bij inloggen',
+                    message: 'Emailadres en/of wachtwoord is onjuist.',
+                    timer: 3000
+                })
+            }
         },
         async logout({ dispatch }) {
             await axios.post("/logout");

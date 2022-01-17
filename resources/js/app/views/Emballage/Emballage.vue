@@ -1,5 +1,5 @@
 <template>
-    <div class="state-emballage">
+    <div class="state-emballage overflow-y-hidden">
         <h1 class="page-title text-3xl font-bold px-5 pt-5 mb-5">Emballage</h1>
 
         <div class="px-5">
@@ -102,8 +102,8 @@
                             </transition>
 
                             <transition name="slide-fade">
-                                <section v-show="section === 'Haspels en afronden' || section === 'Overzicht'">
-                                    <div class="px-5">
+                                <section v-show="section === 'Haspels en afronden' || section === 'Overzicht'" class="overflow-y-hidden">
+                                    <div class="px-5 overflow-y-hidden">
                                         <h1 class="text-md font-medium mt-5">Haspels</h1>
                                         <p class="text-xs mb-3 text-gray-500">Selecteer de haspel(s) die u wilt retourneren.</p>
 
@@ -304,9 +304,9 @@
                                             </div>
                                         </div>
 
-                                        <div>
+                                        <div class="overflow-y-hidden">
                                             <h1 class="text-md font-medium mt-5">Situatieschets <span class="text-xs font-normal text-gray-500">niet verplicht</span></h1>
-                                            <input @change="getImage($event)" type="file" id="picture" name="image" class="" accept="image/png, image/jpeg"/>
+                                            <input @change="getImage($event)" type="file" id="picture" name="image" class="overflow-y-hidden" accept="image/png, image/jpeg" />
                                         </div>
 
                                         <h1 class="text-md font-medium mt-5 mb-1">Opmerkingen</h1>

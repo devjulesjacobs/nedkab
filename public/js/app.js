@@ -2049,22 +2049,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  created: function created() {
-    var _this = this;
-
-    window.addEventListener('beforeinstallprompt', function (event) {
-      event.preventDefault();
-      _this.installPromptEvent = event;
-    });
-  },
+  created: function created() {},
   methods: {
     hideInstallation: function hideInstallation() {
       this.installation.show = false;
     },
     installAndroid: function installAndroid() {
-      this.installPromptEvent.prompt();
+      window.beforeInstallPrompt.prompt();
       var app = this;
-      this.installPromptEvent.userChoice.then(function (choiceResult) {
+      window.beforeInstallPrompt.userChoice.then(function (choiceResult) {
         if (choiceResult.outcome === 'accepted') {
           console.log('accepted');
           app.installation.android.installed = true;
@@ -2648,16 +2641,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             timer: 6000
           });
 
-          console.log('1');
           var credentials = {
             email: _this2.form.email,
             password: _this2.form.password
           };
-          console.log('2');
 
           _this2.signin(credentials);
-
-          console.log('3');
         })["catch"](function (err) {
           console.log(err);
         });
@@ -2843,6 +2832,31 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3405,6 +3419,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileSlide",
   data: function data() {
@@ -3773,6 +3789,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.checkInstallationState();
   },
+  created: function created() {},
   components: {
     Login: _components_Auth_Login_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Register: _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -42825,7 +42842,10 @@ var render = function () {
                                         {
                                           staticClass:
                                             "w-50 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-theme text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm",
-                                          attrs: { type: "button" },
+                                          attrs: {
+                                            id: "installButtonAndroid",
+                                            type: "button",
+                                          },
                                           on: { click: _vm.setDeviceType },
                                         },
                                         [
@@ -43967,6 +43987,7 @@ var render = function () {
                   class: {
                     "text-blue-600": e.status === "ingediend",
                     "text-green-600": e.status === "geaccepteerd",
+                    "text-red-600": e.status === "afgewezen",
                   },
                 },
                 [_vm._v("\n                " + _vm._s(e.status))]
@@ -44127,7 +44148,7 @@ var render = function () {
                               "div",
                               {
                                 staticClass:
-                                  "rounded-md bg-green-50 p-4 shadow-sm",
+                                  "rounded-md bg-green-50 p-4 border border-green-200",
                               },
                               [
                                 _c("div", { staticClass: "flex" }, [
@@ -44181,7 +44202,7 @@ var render = function () {
                                             _vm._s(
                                               _vm._f("moment")(
                                                 _vm.emballage.updated_at,
-                                                "DD MMM YYYY"
+                                                "D MMM YYYY | H:mm"
                                               )
                                             ) +
                                             "\n                                            "
@@ -44190,13 +44211,88 @@ var render = function () {
                                     ),
                                     _vm._v(" "),
                                     _vm._m(0),
+                                  ]),
+                                ]),
+                              ]
+                            ),
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.emballage.status === "afgewezen"
+                        ? _c("div", { staticClass: "px-4 mt-6" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "rounded-md bg-red-50 p-4 border border-red-200",
+                              },
+                              [
+                                _c("div", { staticClass: "flex" }, [
+                                  _c("div", { staticClass: "flex-shrink-0" }, [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "h-5 w-5 text-red-400",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 20 20",
+                                          fill: "currentColor",
+                                        },
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d: "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z",
+                                            "clip-rule": "evenodd",
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "ml-3" }, [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass:
+                                          "text-sm font-medium text-red-800",
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Emballage afgewezen\n                                            "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "text-xs text-red-800 font-medium",
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Afgewezen op " +
+                                            _vm._s(
+                                              _vm._f("moment")(
+                                                _vm.emballage.updated_at,
+                                                "D MMM YYYY | H:mm"
+                                              )
+                                            ) +
+                                            "\n                                            "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._m(1),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-4" }, [
                                       _c(
                                         "a",
                                         {
                                           staticClass:
-                                            "bg-green-50 rounded-md text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600",
+                                            "bg-red-50 rounded-md text-sm font-medium text-red-800 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-50 focus:ring-red-600",
                                           attrs: {
                                             href:
                                               "mailto:info@nedkab.nl?subject=Betreft Emballage #" +
@@ -45038,6 +45134,18 @@ var staticRenderFns = [
       ]),
     ])
   },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-2 text-sm text-red-700" }, [
+      _c("p", [
+        _vm._v(
+          "\n                                                    Uw emballage is afgewezen.\n                                                "
+        ),
+      ]),
+    ])
+  },
 ]
 render._withStripped = true
 
@@ -45826,6 +45934,19 @@ var render = function () {
                                       "bg-gray-100 p-4 mt-6 mb-4 font-medium",
                                   },
                                   [_vm._v("Emballage gegevens")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      "text-xs text-gray-600 px-4 mb-4",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Onderstaande gegevens worden automatisch ingevuld bij het aanmaken van een Emballage."
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "space-y-3 px-4" }, [
@@ -46658,7 +46779,7 @@ var render = function () {
                         "a",
                         {
                           staticClass:
-                            "font-medium text-blue-600 hover:text-blue-500",
+                            "font-medium text-blue-600 hover:text-blue-500 cursor-pointer",
                           on: {
                             click: function ($event) {
                               _vm.state = "register"
@@ -46677,7 +46798,7 @@ var render = function () {
                         "a",
                         {
                           staticClass:
-                            "font-medium text-blue-600 hover:text-blue-500",
+                            "font-medium text-blue-600 hover:text-blue-500 cursor-pointer",
                           on: {
                             click: function ($event) {
                               _vm.state = "login"
@@ -47409,7 +47530,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "state-emballage" }, [
+  return _c("div", { staticClass: "state-emballage overflow-y-hidden" }, [
     _c("h1", { staticClass: "page-title text-3xl font-bold px-5 pt-5 mb-5" }, [
       _vm._v("Emballage"),
     ]),
@@ -48032,2108 +48153,2140 @@ var render = function () {
                                     "section === 'Haspels en afronden' || section === 'Overzicht'",
                                 },
                               ],
+                              staticClass: "overflow-y-hidden",
                             },
                             [
-                              _c("div", { staticClass: "px-5" }, [
-                                _c(
-                                  "h1",
-                                  { staticClass: "text-md font-medium mt-5" },
-                                  [_vm._v("Haspels")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "p",
-                                  { staticClass: "text-xs mb-3 text-gray-500" },
-                                  [
-                                    _vm._v(
-                                      "Selecteer de haspel(s) die u wilt retourneren."
-                                    ),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "mb-3" }, [
+                              _c(
+                                "div",
+                                { staticClass: "px-5 overflow-y-hidden" },
+                                [
                                   _c(
-                                    "div",
+                                    "h1",
+                                    { staticClass: "text-md font-medium mt-5" },
+                                    [_vm._v("Haspels")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
                                     {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
+                                      staticClass: "text-xs mb-3 text-gray-500",
                                     },
                                     [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_60,
-                                                expression:
-                                                  "formMeta.haspels.diameter_60",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_60",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels.diameter_60
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_60,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_60,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_60,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_60",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_60",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_60",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_60" },
-                                            },
-                                            [
-                                              _vm._v("60"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
+                                      _vm._v(
+                                        "Selecteer de haspel(s) die u wilt retourneren."
                                       ),
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_60
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_60,
-                                              expression: "form.diameter_60",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_60",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_80,
-                                                expression:
-                                                  "formMeta.haspels.diameter_80",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_80",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels.diameter_80
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_80,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_80,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_80,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_80",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_80",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_80",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_80" },
-                                            },
-                                            [
-                                              _vm._v("80"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_80
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_80,
-                                              expression: "form.diameter_80",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_80",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_100,
-                                                expression:
-                                                  "formMeta.haspels.diameter_100",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_100",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels
-                                                  .diameter_100
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_100,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_100,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_100,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_100",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_100",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_100",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_100" },
-                                            },
-                                            [
-                                              _vm._v("100"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_100
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_100,
-                                              expression: "form.diameter_100",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_100",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_120,
-                                                expression:
-                                                  "formMeta.haspels.diameter_120",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_120",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels
-                                                  .diameter_120
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_120,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_120,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_120,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_120",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_120",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_120",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_120" },
-                                            },
-                                            [
-                                              _vm._v("120"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_120
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_120,
-                                              expression: "form.diameter_120",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_120",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_140,
-                                                expression:
-                                                  "formMeta.haspels.diameter_140",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_140",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels
-                                                  .diameter_140
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_140,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_140,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_140,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_140",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_140",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_140",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_140" },
-                                            },
-                                            [
-                                              _vm._v("140"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_140
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_140,
-                                              expression: "form.diameter_140",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_140",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_160,
-                                                expression:
-                                                  "formMeta.haspels.diameter_160",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_160",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels
-                                                  .diameter_160
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_160,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_160,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_160,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_160",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_160",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_160",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_160" },
-                                            },
-                                            [
-                                              _vm._v("160"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_160
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_160,
-                                              expression: "form.diameter_160",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_160",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_180,
-                                                expression:
-                                                  "formMeta.haspels.diameter_180",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_180",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels
-                                                  .diameter_180
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_180,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_180,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_180,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_180",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_180",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_180",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_180" },
-                                            },
-                                            [
-                                              _vm._v("180"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_180
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_180,
-                                              expression: "form.diameter_180",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_180",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "relative flex items-start mb-2",
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center h-5",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.formMeta.haspels
-                                                    .diameter_200,
-                                                expression:
-                                                  "formMeta.haspels.diameter_200",
-                                              },
-                                            ],
-                                            staticClass:
-                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                            attrs: {
-                                              id: "diameter_200",
-                                              "aria-describedby":
-                                                "comments-description",
-                                              name: "comments",
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              checked: Array.isArray(
-                                                _vm.formMeta.haspels
-                                                  .diameter_200
-                                              )
-                                                ? _vm._i(
-                                                    _vm.formMeta.haspels
-                                                      .diameter_200,
-                                                    null
-                                                  ) > -1
-                                                : _vm.formMeta.haspels
-                                                    .diameter_200,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.formMeta.haspels
-                                                      .diameter_200,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = null,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_200",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.formMeta.haspels,
-                                                        "diameter_200",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.formMeta.haspels,
-                                                    "diameter_200",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "ml-2 text-sm" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass:
-                                                "font-medium text-gray-700",
-                                              attrs: { for: "diameter_200" },
-                                            },
-                                            [
-                                              _vm._v("200"),
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "text-xs text-gray-400",
-                                                },
-                                                [_vm._v("cm")]
-                                              ),
-                                              _vm._v(" Diameter"),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.formMeta.haspels.diameter_200
-                                    ? _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.diameter_200,
-                                              expression: "form.diameter_200",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-                                          on: {
-                                            change: function ($event) {
-                                              var $$selectedVal =
-                                                Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function (o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function (o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "diameter_200",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: {
-                                                value: "0",
-                                                disabled: "",
-                                              },
-                                            },
-                                            [_vm._v("Selecteer aantal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "1" } },
-                                            [_vm._v("1 haspel")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "2" } },
-                                            [_vm._v("2 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "3" } },
-                                            [_vm._v("3 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "4" } },
-                                            [_vm._v("4 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "5" } },
-                                            [_vm._v("5 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "6" } },
-                                            [_vm._v("6 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "7" } },
-                                            [_vm._v("7 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "8" } },
-                                            [_vm._v("8 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "9" } },
-                                            [_vm._v("9 haspels")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "10" } },
-                                            [_vm._v("10 haspels")]
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "h1",
-                                  {
-                                    staticClass:
-                                      "text-md font-medium mt-5 mb-1",
-                                  },
-                                  [_vm._v("Is er een hefinstallatie nodig?")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "relative flex items-start" },
-                                  [
+                                  _c("div", { staticClass: "mb-3" }, [
                                     _c(
                                       "div",
-                                      { staticClass: "flex items-center h-5" },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.lifting_equipment,
-                                              expression:
-                                                "form.lifting_equipment",
-                                            },
-                                          ],
-                                          staticClass:
-                                            "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
-                                          attrs: {
-                                            "true-value": "1",
-                                            "false-value": "0",
-                                            id: "lifting_equipment",
-                                            "aria-describedby":
-                                              "comments-description",
-                                            name: "comments",
-                                            type: "checkbox",
-                                          },
-                                          domProps: {
-                                            checked: Array.isArray(
-                                              _vm.form.lifting_equipment
-                                            )
-                                              ? _vm._i(
-                                                  _vm.form.lifting_equipment,
-                                                  null
-                                                ) > -1
-                                              : _vm._q(
-                                                  _vm.form.lifting_equipment,
-                                                  "1"
-                                                ),
-                                          },
-                                          on: {
-                                            change: function ($event) {
-                                              var $$a =
-                                                  _vm.form.lifting_equipment,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked ? "1" : "0"
-                                              if (Array.isArray($$a)) {
-                                                var $$v = null,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      _vm.form,
-                                                      "lifting_equipment",
-                                                      $$a.concat([$$v])
-                                                    )
-                                                } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      _vm.form,
-                                                      "lifting_equipment",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
-                                                }
-                                              } else {
-                                                _vm.$set(
-                                                  _vm.form,
-                                                  "lifting_equipment",
-                                                  $$c
-                                                )
-                                              }
-                                            },
-                                          },
-                                        }),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "ml-1.5 text-sm" },
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
                                       [
                                         _c(
-                                          "label",
+                                          "div",
                                           {
                                             staticClass:
-                                              "font-medium text-gray-700",
-                                            attrs: { for: "lifting_equipment" },
+                                              "flex items-center h-5",
                                           },
                                           [
-                                            _vm._v("Ja, "),
-                                            _c(
-                                              "span",
-                                              {
-                                                staticClass:
-                                                  "font-normal text-gray-500",
-                                                attrs: {
-                                                  id: "comments-description",
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_60,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_60",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_60",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_60
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_60,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_60,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_60,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_60",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_60",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_60",
+                                                      $$c
+                                                    )
+                                                  }
                                                 },
                                               },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_60" },
+                                              },
                                               [
-                                                _vm._v(
-                                                  "er is een hefinstallatie nodig."
+                                                _vm._v("60"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
                                                 ),
+                                                _vm._v(" Diameter"),
                                               ]
                                             ),
                                           ]
                                         ),
                                       ]
                                     ),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", [
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_60
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_60,
+                                                expression: "form.diameter_60",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_60",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex items-center h-5",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_80,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_80",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_80",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_80
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_80,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_80,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_80,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_80",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_80",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_80",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_80" },
+                                              },
+                                              [
+                                                _vm._v("80"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
+                                                ),
+                                                _vm._v(" Diameter"),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_80
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_80,
+                                                expression: "form.diameter_80",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_80",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex items-center h-5",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_100,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_100",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_100",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_100
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_100,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_100,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_100,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_100",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_100",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_100",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_100" },
+                                              },
+                                              [
+                                                _vm._v("100"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
+                                                ),
+                                                _vm._v(" Diameter"),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_100
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_100,
+                                                expression: "form.diameter_100",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_100",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex items-center h-5",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_120,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_120",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_120",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_120
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_120,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_120,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_120,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_120",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_120",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_120",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_120" },
+                                              },
+                                              [
+                                                _vm._v("120"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
+                                                ),
+                                                _vm._v(" Diameter"),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_120
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_120,
+                                                expression: "form.diameter_120",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_120",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex items-center h-5",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_140,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_140",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_140",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_140
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_140,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_140,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_140,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_140",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_140",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_140",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_140" },
+                                              },
+                                              [
+                                                _vm._v("140"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
+                                                ),
+                                                _vm._v(" Diameter"),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_140
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_140,
+                                                expression: "form.diameter_140",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_140",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex items-center h-5",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_160,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_160",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_160",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_160
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_160,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_160,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_160,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_160",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_160",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_160",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_160" },
+                                              },
+                                              [
+                                                _vm._v("160"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
+                                                ),
+                                                _vm._v(" Diameter"),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_160
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_160,
+                                                expression: "form.diameter_160",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_160",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex items-center h-5",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_180,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_180",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_180",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_180
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_180,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_180,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_180,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_180",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_180",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_180",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_180" },
+                                              },
+                                              [
+                                                _vm._v("180"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
+                                                ),
+                                                _vm._v(" Diameter"),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_180
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_180,
+                                                expression: "form.diameter_180",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_180",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "relative flex items-start mb-2",
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex items-center h-5",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.formMeta.haspels
+                                                      .diameter_200,
+                                                  expression:
+                                                    "formMeta.haspels.diameter_200",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                              attrs: {
+                                                id: "diameter_200",
+                                                "aria-describedby":
+                                                  "comments-description",
+                                                name: "comments",
+                                                type: "checkbox",
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.formMeta.haspels
+                                                    .diameter_200
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.formMeta.haspels
+                                                        .diameter_200,
+                                                      null
+                                                    ) > -1
+                                                  : _vm.formMeta.haspels
+                                                      .diameter_200,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.formMeta.haspels
+                                                        .diameter_200,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = null,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_200",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.formMeta.haspels,
+                                                          "diameter_200",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.formMeta.haspels,
+                                                      "diameter_200",
+                                                      $$c
+                                                    )
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "ml-2 text-sm" },
+                                          [
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass:
+                                                  "font-medium text-gray-700",
+                                                attrs: { for: "diameter_200" },
+                                              },
+                                              [
+                                                _vm._v("200"),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "text-xs text-gray-400",
+                                                  },
+                                                  [_vm._v("cm")]
+                                                ),
+                                                _vm._v(" Diameter"),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.formMeta.haspels.diameter_200
+                                      ? _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.diameter_200,
+                                                expression: "form.diameter_200",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "px-2 mb-5 text-xs appearance-none block w-full py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                                            on: {
+                                              change: function ($event) {
+                                                var $$selectedVal =
+                                                  Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function (o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function (o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "diameter_200",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: {
+                                                  value: "0",
+                                                  disabled: "",
+                                                },
+                                              },
+                                              [_vm._v("Selecteer aantal")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "1" } },
+                                              [_vm._v("1 haspel")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "2" } },
+                                              [_vm._v("2 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "3" } },
+                                              [_vm._v("3 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "4" } },
+                                              [_vm._v("4 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "5" } },
+                                              [_vm._v("5 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "6" } },
+                                              [_vm._v("6 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "7" } },
+                                              [_vm._v("7 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "8" } },
+                                              [_vm._v("8 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "9" } },
+                                              [_vm._v("9 haspels")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "10" } },
+                                              [_vm._v("10 haspels")]
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                  ]),
+                                  _vm._v(" "),
                                   _c(
                                     "h1",
-                                    { staticClass: "text-md font-medium mt-5" },
+                                    {
+                                      staticClass:
+                                        "text-md font-medium mt-5 mb-1",
+                                    },
+                                    [_vm._v("Is er een hefinstallatie nodig?")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "relative flex items-start",
+                                    },
                                     [
-                                      _vm._v("Situatieschets "),
                                       _c(
-                                        "span",
+                                        "div",
                                         {
-                                          staticClass:
-                                            "text-xs font-normal text-gray-500",
+                                          staticClass: "flex items-center h-5",
                                         },
-                                        [_vm._v("niet verplicht")]
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.form.lifting_equipment,
+                                                expression:
+                                                  "form.lifting_equipment",
+                                              },
+                                            ],
+                                            staticClass:
+                                              "focus:ring-indigo-500 h-3 w-3 text-indigo-600 border-gray-300 rounded",
+                                            attrs: {
+                                              "true-value": "1",
+                                              "false-value": "0",
+                                              id: "lifting_equipment",
+                                              "aria-describedby":
+                                                "comments-description",
+                                              name: "comments",
+                                              type: "checkbox",
+                                            },
+                                            domProps: {
+                                              checked: Array.isArray(
+                                                _vm.form.lifting_equipment
+                                              )
+                                                ? _vm._i(
+                                                    _vm.form.lifting_equipment,
+                                                    null
+                                                  ) > -1
+                                                : _vm._q(
+                                                    _vm.form.lifting_equipment,
+                                                    "1"
+                                                  ),
+                                            },
+                                            on: {
+                                              change: function ($event) {
+                                                var $$a =
+                                                    _vm.form.lifting_equipment,
+                                                  $$el = $event.target,
+                                                  $$c = $$el.checked ? "1" : "0"
+                                                if (Array.isArray($$a)) {
+                                                  var $$v = null,
+                                                    $$i = _vm._i($$a, $$v)
+                                                  if ($$el.checked) {
+                                                    $$i < 0 &&
+                                                      _vm.$set(
+                                                        _vm.form,
+                                                        "lifting_equipment",
+                                                        $$a.concat([$$v])
+                                                      )
+                                                  } else {
+                                                    $$i > -1 &&
+                                                      _vm.$set(
+                                                        _vm.form,
+                                                        "lifting_equipment",
+                                                        $$a
+                                                          .slice(0, $$i)
+                                                          .concat(
+                                                            $$a.slice($$i + 1)
+                                                          )
+                                                      )
+                                                  }
+                                                } else {
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "lifting_equipment",
+                                                    $$c
+                                                  )
+                                                }
+                                              },
+                                            },
+                                          }),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "ml-1.5 text-sm" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "font-medium text-gray-700",
+                                              attrs: {
+                                                for: "lifting_equipment",
+                                              },
+                                            },
+                                            [
+                                              _vm._v("Ja, "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "font-normal text-gray-500",
+                                                  attrs: {
+                                                    id: "comments-description",
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "er is een hefinstallatie nodig."
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                        ]
                                       ),
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _c("input", {
-                                    attrs: {
-                                      type: "file",
-                                      id: "picture",
-                                      name: "image",
-                                      accept: "image/png, image/jpeg",
+                                  _c(
+                                    "div",
+                                    { staticClass: "overflow-y-hidden" },
+                                    [
+                                      _c(
+                                        "h1",
+                                        {
+                                          staticClass:
+                                            "text-md font-medium mt-5",
+                                        },
+                                        [
+                                          _vm._v("Situatieschets "),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "text-xs font-normal text-gray-500",
+                                            },
+                                            [_vm._v("niet verplicht")]
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        staticClass: "overflow-y-hidden",
+                                        attrs: {
+                                          type: "file",
+                                          id: "picture",
+                                          name: "image",
+                                          accept: "image/png, image/jpeg",
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.getImage($event)
+                                          },
+                                        },
+                                      }),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h1",
+                                    {
+                                      staticClass:
+                                        "text-md font-medium mt-5 mb-1",
                                     },
+                                    [_vm._v("Opmerkingen")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("textarea", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.comments,
+                                        expression: "form.comments",
+                                      },
+                                    ],
+                                    staticClass:
+                                      "shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2",
+                                    attrs: { rows: "6" },
+                                    domProps: { value: _vm.form.comments },
                                     on: {
-                                      change: function ($event) {
-                                        return _vm.getImage($event)
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "comments",
+                                          $event.target.value
+                                        )
                                       },
                                     },
                                   }),
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "h1",
-                                  {
-                                    staticClass:
-                                      "text-md font-medium mt-5 mb-1",
-                                  },
-                                  [_vm._v("Opmerkingen")]
-                                ),
-                                _vm._v(" "),
-                                _c("textarea", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.comments,
-                                      expression: "form.comments",
-                                    },
-                                  ],
-                                  staticClass:
-                                    "shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2",
-                                  attrs: { rows: "6" },
-                                  domProps: { value: _vm.form.comments },
-                                  on: {
-                                    input: function ($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "comments",
-                                        $event.target.value
-                                      )
-                                    },
-                                  },
-                                }),
-                              ]),
+                                ]
+                              ),
                               _vm._v(" "),
                               _c(
                                 "div",

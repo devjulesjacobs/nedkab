@@ -38,7 +38,7 @@ class EmballageController extends Controller
 
     public function getEmballageByType($type)
     {
-        return Emballage::where('status', $type)->with('user')->take(50)->get();
+        return Emballage::where('status', $type)->with('user')->take(100)->get();
     }
 
     public function getEmballage($id)
@@ -50,7 +50,7 @@ class EmballageController extends Controller
 
     public function userEmballage()
     {
-        $emballages = Emballage::where('user', auth()->user()->id)->orderBy('created_at', 'DESC')->take(30)->with('user')->get();
+        $emballages = Emballage::where('user', auth()->user()->id)->orderBy('created_at', 'DESC')->take(25)->with('user')->get();
 
         return $emballages;
     }

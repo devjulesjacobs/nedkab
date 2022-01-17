@@ -9,8 +9,8 @@
                         </a>
                         <h2 v-if="state === 'login'" class="mt-6 text-3xl font-bold text-gray-900">Inloggen</h2>
                         <h2 v-if="state === 'register'" class="mt-6 text-3xl font-bold text-gray-900">Registreren</h2>
-                        <p v-if="state === 'login'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'register'" class="font-medium text-blue-600 hover:text-blue-500">registreer je nu</a></p>
-                        <p v-if="state === 'register'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'login'" class="font-medium text-blue-600 hover:text-blue-500">Log in met een bestaand account</a></p>
+                        <p v-if="state === 'login'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'register'" class="font-medium text-blue-600 hover:text-blue-500 cursor-pointer">registreer je nu</a></p>
+                        <p v-if="state === 'register'" class="mt-2 text-sm text-gray-600">Of <a @click="state = 'login'" class="font-medium text-blue-600 hover:text-blue-500 cursor-pointer">Log in met een bestaand account</a></p>
                     </div>
                     <div class="mt-8">
                         <div class="mt-6">
@@ -60,11 +60,13 @@ export default {
                 ResetPassword: false,
             },
             installed: true,
-            state: 'login'
+            state: 'login',
         }
     },
     mounted() {
         this.checkInstallationState();
+    },
+    created() {
     },
     components: {
         Login,

@@ -16,7 +16,7 @@ class CableController extends Controller
      */
     public function index()
     {
-        $cables = Cable::all();
+        $cables = Cable::orderBy('created_at', 'DESC')->take(100)->get();
 
         return $cables;
     }
@@ -35,16 +35,9 @@ class CableController extends Controller
      */
     public function create(Request $request)
     {
+        $cable = Cable::create($request->all());
 
-        return $request->fileToImport;
-
-        if($request->hasFile('fileToImport')){
-            Excel::import(new CablesImport, $request->fileToImport);
-
-            return true;
-        }
-
-        return false;
+        $cable->save();
     }
 
     /**
@@ -92,14 +85,9 @@ class CableController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Cable  $cable
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cable $cable)
+    public function destroy(Request $request)
     {
-        //
+        $cable = Cable::find($request->id);
+        $cable->delete();
     }
 }

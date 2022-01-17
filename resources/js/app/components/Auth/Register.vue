@@ -147,16 +147,12 @@ export default {
                             message: 'Uw account is succesvol geregistreerd!',
                             timer: 6000
                         });
-                        console.log('1')
                         let credentials = {
                             email: this.form.email,
                             password: this.form.password
                         }
 
-                        console.log('2')
                         this.signin(credentials);
-
-                        console.log('3')
                     })
                     .catch(err => {
                         console.log(err)

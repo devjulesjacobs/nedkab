@@ -30,6 +30,14 @@
                                             <img :src="'/img/emballage/'+emballage.picture" alt="Picture">
                                         </div>
 
+                                        <div v-if="emballage.status === 'geaccepteerd'" class="bg-green-50 text-green-700 text-xs p-4 rounded-md mb-4">
+                                            Geaccepteerd op {{ emballage.updated_at | moment('D MMM YYYY | H:mm') }}
+                                        </div>
+
+                                        <div v-if="emballage.status === 'afgewezen'" class="bg-red-50 text-red-700 text-xs p-4 rounded-md mb-4">
+                                            Afgewezen op {{ emballage.updated_at | moment('D MMM YYYY | H:mm') }}
+                                        </div>
+
                                         <div class="mb-4">
                                             <h1 class="font-bold">Geselecteerde haspels</h1>
                                             <div class="text-sm">
@@ -61,6 +69,22 @@
                                         <div class="mb-4">
                                             <h1 class="font-bold">Informatie</h1>
                                             <p class="text-sm">Hefinstallatie: <span class="font-bold">{{ emballage.lifting_equipment ? 'Ja' : 'Nee' }}</span></p>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <h1 class="font-bold">Contact</h1>
+                                            <p v-if="emballage.customer_contact" class=" text-sm">
+                                                {{ emballage.customer_contact }}
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">Klant</span>
+                                            </p>
+                                            <a v-if="emballage.customer_contact_phone" :href="'tel:'+emballage.customer_contact_phone" class="text-sm mb-3 block text-blue-600">{{ emballage.customer_contact_phone }}</a>
+
+                                            <p v-if="emballage.contact" class=" text-sm">
+                                                {{ emballage.contact }}
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">Contactpersoon</span>
+                                            </p>
+                                            <a v-if="emballage.contact_phone" :href="'tel:'+emballage.contact_phone" class="text-sm text-blue-600">{{ emballage.contact_phone }}</a>
+                                            <a v-if="emballage.contact_email" :href="'mailto:'+emballage.contact_email+'?subject=Betreft Emballage #'+emballage.id" class="text-sm mb-3 block text-blue-600">{{ emballage.contact_email }}</a>
                                         </div>
 
                                         <div class="mb-4">
@@ -130,11 +154,23 @@ export default {
         setStatus() {
             axios.post('/api/cms/emballage/status/'+this.emballage.id, this.form)
                 .then(res => {
+                    let msg;
+
+                    switch(this.form.status) {
+                        case 'ingediend':
+                            msg = 'De status is succesvol gewijzigd.';
+                            break;
+                        case 'geaccepteerd':
+                            msg = 'Er wordt een automatische mail verzonden met de details.'
+                        case 'afgewezen':
+                            msg = 'Er wordt een automatische mail verzonden met de details.'
+                    }
+
                     this.$store.dispatch('cms/addNotification', {
                         type: 'success',
-                        title: 'Emballage status gewijzigd naar Geaccepteerd',
-                        message: 'De status is succesvol gewijzigd. Er is een automatische mail verzonden met de ophaaldetails.',
-                        timer: 11000
+                        title: 'Emballage status gewijzigd naar \''+this.form.status+'\'',
+                        message: msg,
+                        timer: 8500
                     });
 
                     this.$emit('refresh');

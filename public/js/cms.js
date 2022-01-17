@@ -2558,6 +2558,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EmballageSlide",
   data: function data() {
@@ -2586,11 +2610,25 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/cms/emballage/status/' + this.emballage.id, this.form).then(function (res) {
+        var msg;
+
+        switch (_this.form.status) {
+          case 'ingediend':
+            msg = 'De status is succesvol gewijzigd.';
+            break;
+
+          case 'geaccepteerd':
+            msg = 'Er wordt een automatische mail verzonden met de details.';
+
+          case 'afgewezen':
+            msg = 'Er wordt een automatische mail verzonden met de details.';
+        }
+
         _this.$store.dispatch('cms/addNotification', {
           type: 'success',
-          title: 'Emballage status gewijzigd naar Geaccepteerd',
-          message: 'De status is succesvol gewijzigd. Er is een automatische mail verzonden met de ophaaldetails.',
-          timer: 11000
+          title: 'Emballage status gewijzigd naar \'' + _this.form.status + '\'',
+          message: msg,
+          timer: 8500
         });
 
         _this.$emit('refresh');
@@ -2695,10 +2733,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
-    hideSlide: function hideSlide() {
-      this.$emit('hide');
-      this.errors = [];
-    },
     createUser: function createUser() {
       var _this = this;
 
@@ -2707,6 +2741,8 @@ __webpack_require__.r(__webpack_exports__);
           type: 'success',
           title: 'Admin gebruiker aangemaakt'
         });
+
+        _this.$emit('hide');
       })["catch"](function (err) {
         _this.$store.dispatch('cms/addNotification', {
           type: 'error',
@@ -3251,8 +3287,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       form: {
-        email: "admin@email.com",
-        password: "password"
+        email: "",
+        password: ""
       }
     };
   },
@@ -3273,17 +3309,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this.login(_this.form);
 
               case 2:
-                _this.$store.dispatch('cms/addNotification', {
-                  type: 'success',
-                  title: 'Logged in successfully!',
-                  timer: 3000
-                });
-
                 _this.$router.replace({
                   name: "Dashboard"
                 });
 
-              case 4:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -3318,23 +3348,149 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Cables",
+  data: function data() {
+    return {
+      cables: [],
+      form: {
+        description: '',
+        group: '',
+        url: '',
+        comment: ''
+      },
+      search: ''
+    };
+  },
+  mounted: function mounted() {
+    this.getCables();
+  },
   methods: {
-    importCables: function importCables() {
-      var excelFile = document.querySelector('#fileSelect');
-      var formData = new FormData();
-      console.log(excelFile.files[0]);
-      formData.append("fileToImport", excelFile.files[0]);
-      axios.post('/api/cms/cables/import', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (res) {
-        console.log(res);
+    getCables: function getCables() {
+      var _this = this;
+
+      axios.get('/api/cms/cables').then(function (res) {
+        return _this.cables = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    createCable: function createCable() {
+      var _this2 = this;
+
+      axios.post('/api/cms/cables/create', this.form).then(function (res) {
+        _this2.getCables();
+
+        _this2.$store.dispatch('cms/addNotification', {
+          type: 'success',
+          title: 'Kabel aangemaakt'
+        });
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    deleteCalbe: function deleteCalbe(id) {
+      var _this3 = this;
+
+      if (confirm('Weet je zeker dat je deze kabel wilt verwijderen? Dit kan niet ongedaan gemaakt worden.')) {
+        axios.post('/api/cms/cables/delete', {
+          id: id
+        }).then(function (res) {
+          _this3.getCables();
+
+          _this3.$store.dispatch('cms/addNotification', {
+            type: 'success',
+            title: 'Kabel verwijderd'
+          });
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
+    },
+    searchCable: function searchCable() {
+      var _this4 = this;
+
+      if (this.search.length) {
+        axios.get('/api/cables/search', {
+          params: {
+            input: this.search
+          }
+        }).then(function (res) {
+          _this4.cables = res.data;
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        this.getCables();
+      }
     }
   }
 });
@@ -3961,14 +4117,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Users",
@@ -4021,6 +4169,7 @@ __webpack_require__.r(__webpack_exports__);
       this.slide.show = true;
     },
     hideSlide: function hideSlide() {
+      this.getUsers();
       this.slide.show = false;
     }
   }
@@ -41984,119 +42133,12 @@ var render = function () {
                       "div",
                       { staticClass: "flex-1 px-4 flex justify-between" },
                       [
-                        _c("div", { staticClass: "flex-1 flex" }, [
-                          _c(
-                            "form",
-                            {
-                              staticClass: "w-full flex md:ml-0",
-                              attrs: { action: "#", method: "GET" },
-                            },
-                            [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "sr-only",
-                                  attrs: { for: "search-field" },
-                                },
-                                [_vm._v("Search")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "relative w-full text-gray-400 focus-within:text-gray-600",
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "absolute inset-y-0 left-0 flex items-center pointer-events-none",
-                                    },
-                                    [
-                                      _c(
-                                        "svg",
-                                        {
-                                          staticClass: "h-5 w-5",
-                                          attrs: {
-                                            xmlns: "http://www.w3.org/2000/svg",
-                                            viewBox: "0 0 20 20",
-                                            fill: "currentColor",
-                                            "aria-hidden": "true",
-                                          },
-                                        },
-                                        [
-                                          _c("path", {
-                                            attrs: {
-                                              "fill-rule": "evenodd",
-                                              d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z",
-                                              "clip-rule": "evenodd",
-                                            },
-                                          }),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    staticClass:
-                                      "block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm",
-                                    attrs: {
-                                      id: "search-field",
-                                      placeholder: "Search",
-                                      type: "search",
-                                      name: "search",
-                                    },
-                                  }),
-                                ]
-                              ),
-                            ]
-                          ),
-                        ]),
+                        _vm._m(1),
                         _vm._v(" "),
                         _c(
                           "div",
                           { staticClass: "ml-4 flex items-center md:ml-6" },
                           [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                attrs: { type: "button" },
-                              },
-                              [
-                                _c("span", { staticClass: "sr-only" }, [
-                                  _vm._v("View notifications"),
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "svg",
-                                  {
-                                    staticClass: "h-6 w-6",
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      fill: "none",
-                                      viewBox: "0 0 24 24",
-                                      stroke: "currentColor",
-                                      "aria-hidden": "true",
-                                    },
-                                  },
-                                  [
-                                    _c("path", {
-                                      attrs: {
-                                        "stroke-linecap": "round",
-                                        "stroke-linejoin": "round",
-                                        "stroke-width": "2",
-                                        d: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9",
-                                      },
-                                    }),
-                                  ]
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
                             _c(
                               "div",
                               { staticClass: "ml-3 relative" },
@@ -42225,6 +42267,17 @@ var staticRenderFns = [
       _c("img", {
         staticClass: "h-8 w-auto",
         attrs: { src: "/img/system/company-logo.jpg", alt: "Workflow" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-1 flex" }, [
+      _c("form", {
+        staticClass: "w-full flex md:ml-0",
+        attrs: { action: "#", method: "GET" },
       }),
     ])
   },
@@ -42385,6 +42438,50 @@ var render = function () {
                                     },
                                   }),
                                 ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.emballage.status === "geaccepteerd"
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "bg-green-50 text-green-700 text-xs p-4 rounded-md mb-4",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        Geaccepteerd op " +
+                                        _vm._s(
+                                          _vm._f("moment")(
+                                            _vm.emballage.updated_at,
+                                            "D MMM YYYY | H:mm"
+                                          )
+                                        ) +
+                                        "\n                                    "
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.emballage.status === "afgewezen"
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "bg-red-50 text-red-700 text-xs p-4 rounded-md mb-4",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        Afgewezen op " +
+                                        _vm._s(
+                                          _vm._f("moment")(
+                                            _vm.emballage.updated_at,
+                                            "D MMM YYYY | H:mm"
+                                          )
+                                        ) +
+                                        "\n                                    "
+                                    ),
+                                  ]
+                                )
                               : _vm._e(),
                             _vm._v(" "),
                             _c("div", { staticClass: "mb-4" }, [
@@ -42652,6 +42749,110 @@ var render = function () {
                             _vm._v(" "),
                             _c("div", { staticClass: "mb-4" }, [
                               _c("h1", { staticClass: "font-bold" }, [
+                                _vm._v("Contact"),
+                              ]),
+                              _vm._v(" "),
+                              _vm.emballage.customer_contact
+                                ? _c("p", { staticClass: " text-sm" }, [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(_vm.emballage.customer_contact) +
+                                        "\n                                            "
+                                    ),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800",
+                                      },
+                                      [_vm._v("Klant")]
+                                    ),
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.emballage.customer_contact_phone
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "text-sm mb-3 block text-blue-600",
+                                      attrs: {
+                                        href:
+                                          "tel:" +
+                                          _vm.emballage.customer_contact_phone,
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.emballage.customer_contact_phone
+                                        )
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.emballage.contact
+                                ? _c("p", { staticClass: " text-sm" }, [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(_vm.emballage.contact) +
+                                        "\n                                            "
+                                    ),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800",
+                                      },
+                                      [_vm._v("Contactpersoon")]
+                                    ),
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.emballage.contact_phone
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass: "text-sm text-blue-600",
+                                      attrs: {
+                                        href:
+                                          "tel:" + _vm.emballage.contact_phone,
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.emballage.contact_phone)
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.emballage.contact_email
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "text-sm mb-3 block text-blue-600",
+                                      attrs: {
+                                        href:
+                                          "mailto:" +
+                                          _vm.emballage.contact_email +
+                                          "?subject=Betreft Emballage #" +
+                                          _vm.emballage.id,
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.emballage.contact_email)
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-4" }, [
+                              _c("h1", { staticClass: "font-bold" }, [
                                 _vm._v("Opmerkingen"),
                               ]),
                               _vm._v(" "),
@@ -42909,7 +43110,11 @@ var render = function () {
                                               staticClass:
                                                 "bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
                                               attrs: { type: "button" },
-                                              on: { click: _vm.hideSlide },
+                                              on: {
+                                                click: function ($event) {
+                                                  return _vm.$emit("hide")
+                                                },
+                                              },
                                             },
                                             [
                                               _c(
@@ -44336,7 +44541,7 @@ var render = function () {
                             },
                           ],
                           staticClass:
-                            "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                            "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
                           attrs: {
                             id: "email",
                             name: "email",
@@ -44383,7 +44588,7 @@ var render = function () {
                             },
                           ],
                           staticClass:
-                            "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                            "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
                           attrs: {
                             id: "password",
                             name: "password",
@@ -44450,7 +44655,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass:
-            "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+            "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-theme hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
           attrs: { type: "submit" },
         },
         [
@@ -44468,10 +44673,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "hidden lg:block relative w-0 flex-1" }, [
       _c("img", {
         staticClass: "absolute inset-0 h-full w-full object-cover",
-        attrs: {
-          src: "https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80",
-          alt: "",
-        },
+        attrs: { src: "/img/system/auth-background-cms.jpeg", alt: "" },
       }),
     ])
   },
@@ -44510,36 +44712,375 @@ var render = function () {
     _c(
       "form",
       {
-        attrs: { method: "post", enctype: "multipart/form-data" },
+        attrs: { method: "post" },
         on: {
           submit: function ($event) {
             $event.preventDefault()
-            return _vm.importCables.apply(null, arguments)
+            return _vm.createCable.apply(null, arguments)
           },
         },
       },
       [
-        _c(
-          "label",
-          { staticClass: "block mb-3", attrs: { for: "fileSelect" } },
-          [_vm._v("Excel bestand uploaden om te importeren")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            id: "fileSelect",
-            type: "file",
-            accept:
-              ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
-          },
-        }),
-        _vm._v(" "),
-        _c("button", { attrs: { type: "submit" } }, [_vm._v("Importeren")]),
+        _c("div", { staticClass: "p-4 border border-gray-300 rounded-md" }, [
+          _c("h1", { staticClass: "text-xl font-bold mb-4" }, [
+            _vm._v("Kabel toevoegen"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "grid md:grid-cols-12 sm:grid-cols-1 gap-3" },
+            [
+              _c("div", { staticClass: "md:col-span-3 sm:col-span-12" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.description,
+                      expression: "form.description",
+                    },
+                  ],
+                  staticClass:
+                    "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                  attrs: { type: "text", required: "", placeholder: "" },
+                  domProps: { value: _vm.form.description },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "description", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "md:col-span-3 sm:col-span-12" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.url,
+                      expression: "form.url",
+                    },
+                  ],
+                  staticClass:
+                    "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                  attrs: {
+                    type: "text",
+                    required: "",
+                    placeholder: "https://nedkab.nl/producten/...",
+                  },
+                  domProps: { value: _vm.form.url },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "url", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "md:col-span-3 sm:col-span-12" }, [
+                _c(
+                  "label",
+                  { staticClass: "block text-sm font-medium text-gray-700" },
+                  [_vm._v("Opmerking")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.comment,
+                      expression: "form.comment",
+                    },
+                  ],
+                  staticClass:
+                    "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                  attrs: { type: "text", placeholder: "" },
+                  domProps: { value: _vm.form.comment },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "comment", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "md:col-span-3 sm:col-span-12" }, [
+                _c("div", { staticClass: "flex justify-between gap-3" }, [
+                  _c("div", { staticClass: "flex-1" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.group,
+                            expression: "form.group",
+                          },
+                        ],
+                        staticClass:
+                          "cursor-pointer pr-10 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                        attrs: { required: "", name: "location" },
+                        on: {
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "group",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                        },
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { value: "", disabled: "", selected: "" } },
+                          [_vm._v("Selecteer een groep")]
+                        ),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Installatiekabel" } }, [
+                          _vm._v("Installatiekabel"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Aluminium kabel" } }, [
+                          _vm._v("Aluminium kabel"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Middenspanning" } }, [
+                          _vm._v("Middenspanning"),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "Geharmoniseerde kabel" } },
+                          [_vm._v("Geharmoniseerde kabel")]
+                        ),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Stuurstroomkabel" } }, [
+                          _vm._v("Stuurstroomkabel"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Datakabel" } }, [
+                          _vm._v("Datakabel"),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "Contact materiaal" } },
+                          [_vm._v("Contact materiaal")]
+                        ),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3),
+                ]),
+              ]),
+            ]
+          ),
+        ]),
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "mt-6" },
+      [
+        _c("div", { staticClass: "mb-3" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search",
+              },
+            ],
+            staticClass:
+              "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+            attrs: {
+              type: "text",
+              required: "",
+              placeholder: "Zoeken op artikel omschrijving ...",
+            },
+            domProps: { value: _vm.search },
+            on: {
+              keyup: _vm.searchCable,
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c(
+          "transition-group",
+          { attrs: { name: "slide-fade" } },
+          _vm._l(_vm.cables, function (cable) {
+            return _c(
+              "div",
+              {
+                key: cable.id,
+                staticClass:
+                  "p-4 bg-white rounded-md shadow-sm border border-gray-200 mb-2",
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "inline-flex float-right items-center mt-1.5 px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.deleteCalbe(cable.id)
+                      },
+                    },
+                  },
+                  [
+                    _vm._v(
+                      "\n                    Verwijderen\n                "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "font-medium",
+                    attrs: { href: cable.url, target: "_blank" },
+                  },
+                  [
+                    _vm._v(_vm._s(cable.description) + " "),
+                    _c("span", { staticClass: "text-xs font-normal" }, [
+                      _vm._v(_vm._s(cable.url)),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-gray-500 text-xs" }, [
+                  _vm._v(_vm._s(cable.group)),
+                ]),
+              ]
+            )
+          }),
+          0
+        ),
+      ],
+      1
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "block text-sm font-medium text-gray-700" },
+      [
+        _vm._v("Artikel omschrijving"),
+        _c("span", { staticClass: "text-red-600" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "block text-sm font-medium text-gray-700" },
+      [
+        _vm._v("URL"),
+        _c("span", { staticClass: "text-red-600" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "block text-sm font-medium text-gray-700" },
+      [
+        _vm._v("Groep"),
+        _c("span", { staticClass: "text-red-600" }, [_vm._v("*")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-1" }, [
+      _c("label", { staticClass: "block text-sm font-medium text-gray-700" }, [
+        _vm._v("Afronden"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "inline-flex items-center w-full block px-3 mt-1 py-2.5 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-theme hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+          attrs: { type: "submit" },
+        },
+        [
+          _vm._v(
+            "\n                                Toevoegen\n                            "
+          ),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "block text-sm font-medium text-gray-700" },
+      [
+        _vm._v("Zoeken"),
+        _c("span", { staticClass: "text-red-600" }, [_vm._v("*")]),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -45662,199 +46203,150 @@ var render = function () {
                 _vm._l(_vm.users, function (user) {
                   return _c("li", { key: user.id }, [
                     _c(
-                      "a",
-                      {
-                        staticClass: "block hover:bg-gray-50",
-                        attrs: { href: "#" },
-                      },
+                      "div",
+                      { staticClass: "flex items-center px-4 py-4 sm:px-6" },
                       [
                         _c(
                           "div",
-                          {
-                            staticClass: "flex items-center px-4 py-4 sm:px-6",
-                          },
+                          { staticClass: "min-w-0 flex-1 flex items-center" },
                           [
+                            _c("div", { staticClass: "flex-shrink-0" }, [
+                              _c("img", {
+                                staticClass:
+                                  "h-12 w-12 rounded-full object-cover object-center",
+                                attrs: {
+                                  src: user.avatar
+                                    ? "/img/user/" + user.avatar
+                                    : "/img/user/empty-profile-picture.jpg",
+                                  alt: "Profile picture",
+                                },
+                              }),
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "div",
                               {
-                                staticClass: "min-w-0 flex-1 flex items-center",
+                                staticClass:
+                                  "min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4",
                               },
                               [
-                                _c("div", { staticClass: "flex-shrink-0" }, [
-                                  _c("img", {
-                                    staticClass:
-                                      "h-12 w-12 rounded-full object-cover object-center",
-                                    attrs: {
-                                      src: user.avatar
-                                        ? "/img/user/" + user.avatar
-                                        : "/img/user/empty-profile-picture.jpg",
-                                      alt: "Profile picture",
+                                _c("div", [
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "text-sm font-medium text-indigo-600 truncate",
                                     },
-                                  }),
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4",
-                                  },
-                                  [
-                                    _c("div", [
+                                    [_vm._v(_vm._s(user.name))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "mt-2 flex items-center text-sm text-gray-500",
+                                    },
+                                    [
                                       _c(
-                                        "p",
+                                        "svg",
                                         {
                                           staticClass:
-                                            "text-sm font-medium text-indigo-600 truncate",
-                                        },
-                                        [_vm._v(_vm._s(user.name))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass:
-                                            "mt-2 flex items-center text-sm text-gray-500",
+                                            "flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400",
+                                          attrs: {
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            viewBox: "0 0 20 20",
+                                            fill: "currentColor",
+                                            "aria-hidden": "true",
+                                          },
                                         },
                                         [
-                                          _c(
-                                            "svg",
-                                            {
-                                              staticClass:
-                                                "flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400",
-                                              attrs: {
-                                                xmlns:
-                                                  "http://www.w3.org/2000/svg",
-                                                viewBox: "0 0 20 20",
-                                                fill: "currentColor",
-                                                "aria-hidden": "true",
-                                              },
+                                          _c("path", {
+                                            attrs: {
+                                              d: "M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z",
                                             },
-                                            [
-                                              _c("path", {
-                                                attrs: {
-                                                  d: "M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z",
-                                                },
-                                              }),
-                                              _vm._v(" "),
-                                              _c("path", {
-                                                attrs: {
-                                                  d: "M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z",
-                                                },
-                                              }),
-                                            ]
-                                          ),
+                                          }),
                                           _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            { staticClass: "truncate" },
-                                            [_vm._v(_vm._s(user.email))]
-                                          ),
+                                          _c("path", {
+                                            attrs: {
+                                              d: "M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z",
+                                            },
+                                          }),
                                         ]
                                       ),
-                                    ]),
-                                    _vm._v(" "),
+                                      _vm._v(" "),
+                                      _c("span", { staticClass: "truncate" }, [
+                                        _vm._v(_vm._s(user.email)),
+                                      ]),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "hidden md:block" }, [
+                                  _c("div", [
                                     _c(
-                                      "div",
-                                      { staticClass: "hidden md:block" },
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "mb-2 flex items-center text-sm text-gray-500",
+                                      },
                                       [
-                                        _c("div", [
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "mb-2 flex items-center text-sm text-gray-500",
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass:
+                                              "flex-shrink-0 mr-1.5 h-4 w-4 text-green-400",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              viewBox: "0 0 20 20",
+                                              fill: "currentColor",
+                                              "aria-hidden": "true",
                                             },
-                                            [
-                                              _c(
-                                                "svg",
-                                                {
-                                                  staticClass:
-                                                    "flex-shrink-0 mr-1.5 h-5 w-5 text-green-400",
-                                                  attrs: {
-                                                    xmlns:
-                                                      "http://www.w3.org/2000/svg",
-                                                    viewBox: "0 0 20 20",
-                                                    fill: "currentColor",
-                                                    "aria-hidden": "true",
-                                                  },
-                                                },
-                                                [
-                                                  _c("path", {
-                                                    attrs: {
-                                                      "fill-rule": "evenodd",
-                                                      d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z",
-                                                      "clip-rule": "evenodd",
-                                                    },
-                                                  }),
-                                                ]
-                                              ),
-                                              _vm._v(
-                                                "\n                                                Admin\n                                            "
-                                              ),
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "text-sm text-gray-900",
-                                            },
-                                            [
-                                              _c(
-                                                "button",
-                                                {
-                                                  staticClass:
-                                                    "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-                                                  attrs: { type: "button" },
-                                                  on: {
-                                                    click: function ($event) {
-                                                      return _vm.deleteUser(
-                                                        user.id
-                                                      )
-                                                    },
-                                                  },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                    Delete\n                                                "
-                                                  ),
-                                                ]
-                                              ),
-                                            ]
-                                          ),
-                                        ]),
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                "fill-rule": "evenodd",
+                                                d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z",
+                                                "clip-rule": "evenodd",
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(
+                                          "\n                                                Admin\n                                            "
+                                        ),
                                       ]
                                     ),
-                                  ]
-                                ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticClass: "text-sm text-gray-900" },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.deleteUser(user.id)
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                    Delete\n                                                "
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    ),
+                                  ]),
+                                ]),
                               ]
                             ),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "h-5 w-5 text-gray-400",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 20 20",
-                                    fill: "currentColor",
-                                    "aria-hidden": "true",
-                                  },
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      "fill-rule": "evenodd",
-                                      d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
-                                      "clip-rule": "evenodd",
-                                    },
-                                  }),
-                                ]
-                              ),
-                            ]),
                           ]
                         ),
                       ]
@@ -68065,18 +68557,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/sanctum/csrf-cookie");
 
               case 3:
-                _context.next = 5;
+                _context.prev = 3;
+                _context.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cms/login", credentials);
 
-              case 5:
+              case 6:
                 return _context.abrupt("return", dispatch("setValues"));
 
-              case 6:
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](3);
+                dispatch('addNotification', {
+                  type: 'error',
+                  title: 'Fout bij inloggen',
+                  message: 'Emailadres en/of wachtwoord is onjuist.',
+                  timer: 3000
+                });
+
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[3, 9]]);
       }))();
     },
     logout: function logout(_ref2) {
